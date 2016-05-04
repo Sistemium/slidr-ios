@@ -1,0 +1,9 @@
+xcuserdata
+*.xcbkptlist
+*.lock
+/Pods/*
+*.xcuserstate
+/Crashlytics.framework/*
+/Fabric.framework/*
+
+fabric.sh
