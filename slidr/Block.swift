@@ -15,8 +15,6 @@ class Block: SKSpriteNode {
     
     convenience init(){
         self.init(texture: nil, color: .redColor(), size: CGSize(width: GameSettings.playableAreaSize.width / GameSettings.grid.width, height: GameSettings.playableAreaSize.height / GameSettings.grid.height))
-        randomizeData()
-        position = CGPoint(x: startingPosition.x * size.width + size.width / 2.0, y: startingPosition.y * size.height + size.height / 2.0)
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -33,6 +31,10 @@ class Block: SKSpriteNode {
         self.physicsBody?.dynamic = true
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.affectedByGravity = false
+        randomizeData()
+        position = CGPoint(x: startingPosition.x * size.width + size.width / 2.0, y: startingPosition.y * size.height + size.height / 2.0)
+        self.physicsBody?.contactTestBitMask = GameSettings.blockId
+        GameSettings.blockId += 1
     }
     
     func randomizeData() {
