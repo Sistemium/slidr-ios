@@ -25,7 +25,7 @@ class Block: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
-    func customInit(){
+    private func customInit(){
         self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
         self.physicsBody?.dynamic = true
         self.physicsBody?.allowsRotation = false

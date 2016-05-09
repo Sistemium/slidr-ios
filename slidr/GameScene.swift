@@ -32,13 +32,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let oldTime = self.timeSinceLastUpdate{
             timeToNextBlockPush -= currentTime - oldTime
             if timeToNextBlockPush < 0 {
-                timeToNextBlockPush += GameSettings.pushBlockInterval
-                self.addChild(Block())
+                let block = Block()
+                let testNode = SKSpriteNode()
+                testNode.size = CGSize(width: block.frame.width * 2, height:block.frame.height * 2)
+                testNode.position = block.position
+                var testPassed = true
+                for node in self.children{
+                    if let comparableNode = node as? Block{
+                        if testNode.intersectsNode(comparableNode){
+                            testPassed = false
+                            break
+                        }
+                    }
+                }
+                if testPassed{
+                    timeToNextBlockPush += GameSettings.pushBlockInterval
+                    self.addChild(block)
+                }
             }
+            
         }
         for node in self.children{
             if let block = node as? Block{
                 block.physicsBody?.velocity = block.pushVector
+                if !self.intersectsNode(block){
+                    block.removeFromParent()
+                }
             }
         }
         self.timeSinceLastUpdate = currentTime
