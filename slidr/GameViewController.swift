@@ -16,11 +16,8 @@ class GameViewController: UIViewController {
 
         if let scene = GameScene(fileNamed:"GameScene") {
             let skView = self.view as! SKView
-            GameSettings.playableAreaSize = skView.frame.size
-            GameSettings.grid.height *=  GameSettings.playableAreaSize.height / GameSettings.playableAreaSize.width
-            GameSettings.playableAreaSize.height = CGFloat(Int(GameSettings.grid.height)) / GameSettings.grid.width * GameSettings.playableAreaSize.width
-            GameSettings.grid.height = CGFloat(Int(GameSettings.grid.height))
-            scene.size = GameSettings.playableAreaSize
+            scene.size = UIScreen.mainScreen().bounds.size
+            GameSettings.playableAreaSize = scene.size
             skView.showsFPS = true
             skView.showsNodeCount = true
             skView.ignoresSiblingOrder = true

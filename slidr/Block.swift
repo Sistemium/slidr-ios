@@ -11,10 +11,9 @@ import SpriteKit
 class Block: SKSpriteNode {
     
     var pushVector : CGVector!
-    var startingPosition: CGPoint!
     
     convenience init(){
-        self.init(texture: nil, color: .redColor(), size: CGSize(width: GameSettings.playableAreaSize.width / GameSettings.grid.width, height: GameSettings.playableAreaSize.height / GameSettings.grid.height))
+        self.init(texture: nil, color: .redColor(), size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -32,7 +31,6 @@ class Block: SKSpriteNode {
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.affectedByGravity = false
         randomizeData()
-        position = CGPoint(x: startingPosition.x * size.width + size.width / 2.0, y: startingPosition.y * size.height + size.height / 2.0)
         self.physicsBody?.contactTestBitMask = GameSettings.blockId
         GameSettings.blockId += 1
     }
@@ -41,15 +39,15 @@ class Block: SKSpriteNode {
         pushVector = GameSettings.moveDirections[Int(arc4random_uniform(4))]
         if pushVector.dx == 0{
             if pushVector.dy > 0{
-                startingPosition = CGPointMake(CGFloat(arc4random_uniform(UInt32(GameSettings.grid.width))), -1)
+                position = CGPointMake(CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.width - size.width ))) + size.width/2, -size.height/2)
             }else{
-                startingPosition = CGPointMake(CGFloat(arc4random_uniform(UInt32(GameSettings.grid.width))), GameSettings.grid.height)
+                position = CGPointMake(CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.width - size.width ))) + size.width/2, GameSettings.playableAreaSize.height + size.height/2)
             }
         }else{
             if pushVector.dx > 0 {
-                startingPosition = CGPointMake(-1, CGFloat(arc4random_uniform(UInt32(GameSettings.grid.height))))
+                position = CGPointMake(-size.width/2, CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.height - size.height ))) + size.height/2)
             }else{
-                startingPosition = CGPointMake(GameSettings.grid.width, CGFloat(arc4random_uniform(UInt32(GameSettings.grid.height))))
+                position = CGPointMake(GameSettings.playableAreaSize.width + size.width/2, CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.height - size.height ))) + size.height/2)
             }
         }
     }
