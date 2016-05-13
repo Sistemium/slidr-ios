@@ -18,8 +18,8 @@ class GameViewController: UIViewController {
             let skView = self.view as! SKView
             scene.size = UIScreen.mainScreen().bounds.size
             GameSettings.playableAreaSize = scene.size
-            skView.showsFPS = true
-            skView.showsNodeCount = true
+//            skView.showsFPS = true
+//            skView.showsNodeCount = true
             skView.ignoresSiblingOrder = true
             scene.scaleMode = .AspectFit
             skView.presentScene(scene)
@@ -32,5 +32,13 @@ class GameViewController: UIViewController {
 
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .Portrait
     }
 }

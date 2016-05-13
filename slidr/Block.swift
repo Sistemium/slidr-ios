@@ -10,7 +10,16 @@ import SpriteKit
 
 class Block: SKSpriteNode {
     
-    var pushVector : CGVector!
+    var velocity : CGVector!
+    
+    var pushVector : CGVector!{
+        get{
+            return CGVectorMake(velocity.dx * self.size.height, velocity.dy * self.size.width)
+        }
+        set{
+            self.velocity = CGVectorMake(newValue.dx / self.size.height, newValue.dy / self.size.width)
+        }
+    }
     
     convenience init(){
         self.init(texture: nil, color: .redColor(), size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
