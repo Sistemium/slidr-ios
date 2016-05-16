@@ -12,12 +12,15 @@ class Block: SKSpriteNode {
     
     var velocity : CGVector!
     
+    private var _pushVector:CGVector!
+    
     var pushVector : CGVector!{
         get{
-            return CGVectorMake(velocity.dx * self.size.height, velocity.dy * self.size.width)
+            return _pushVector
         }
         set{
             self.velocity = CGVectorMake(newValue.dx / self.size.height, newValue.dy / self.size.width)
+            _pushVector = newValue
         }
     }
     

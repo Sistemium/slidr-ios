@@ -15,49 +15,49 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var scoreNode : SKSpriteNode!{
         didSet{
             scoreNode.color = UIColor.darkGrayColor()
-            scoreNode.position = CGPoint(x:destroyedLabel.position.x, y: destroyedLabel.position.y - destroyedLabel.frame.size.height / 3 )
+            scoreNode.position = CGPoint(x:scoreLabel.position.x, y: scoreLabel.position.y + 5 )
             scoreNode.zPosition = 2.0
-            scoreNode.size = CGSize(width: max(destroyedLabel.frame.size.width,leftLabel.frame.size.width) + 5 , height: destroyedLabel.frame.size.height + leftLabel.frame.size.height + 5)
+            scoreNode.size = CGSize(width: scoreLabel.frame.size.width + 5 , height: scoreLabel.frame.size.height)
             scoreNode.alpha = 0.5
         }
     }
     
-    private var destroyedLabel : SKLabelNode!{
+    private var scoreLabel : SKLabelNode!{
         didSet{
-            destroyedLabel.text = "Destroyed: \(destroyedCount)"
-            destroyedLabel.position = CGPoint(x: GameSettings.playableAreaSize.width - GameSettings.scoreNodeSize - 15, y: GameSettings.playableAreaSize.height - GameSettings.scoreNodeSize)
-            destroyedLabel.fontSize = GameSettings.scoreNodeSize / 3
-            destroyedLabel.zPosition = 3.0
-            destroyedLabel.alpha = 0.5
-            destroyedLabel.fontColor = .whiteColor()
+            scoreLabel.text = "Score: \(destroyedCount - leftCount)"
+            scoreLabel.position = CGPoint(x: GameSettings.playableAreaSize.width - 60, y: GameSettings.playableAreaSize.height  - 30)
+            scoreLabel.fontSize = GameSettings.scoreNodeSize / 3
+            scoreLabel.zPosition = 3.0
+            scoreLabel.alpha = 0.5
+            scoreLabel.fontColor = .whiteColor()
         }
     }
     
     private var destroyedCount = 0{
         didSet{
             showScore()
-            GameSettings.maxNumberOfBlocks -= 1
-            if GameSettings.maxNumberOfBlocks < 3 {
-                GameSettings.maxNumberOfBlocks = 3
-            }
+//            GameSettings.maxNumberOfBlocks -= 1
+//            if GameSettings.maxNumberOfBlocks < 3 {
+//                GameSettings.maxNumberOfBlocks = 3
+//            }
         }
     }
     
-    private var leftLabel : SKLabelNode!{
-        didSet{
-            leftLabel.text = "Left: \(leftCount)"
-            leftLabel.position = CGPoint(x: GameSettings.playableAreaSize.width - GameSettings.scoreNodeSize - 15, y: destroyedLabel.position.y - destroyedLabel.frame.height)
-            leftLabel.fontSize = GameSettings.scoreNodeSize / 3
-            leftLabel.zPosition = 3.0
-            leftLabel.alpha = 0.5
-            leftLabel.fontColor = .whiteColor()
-        }
-    }
+//    private var leftLabel : SKLabelNode!{
+//        didSet{
+//            leftLabel.text = "Left: \(leftCount)"
+//            leftLabel.position = CGPoint(x: GameSettings.playableAreaSize.width - GameSettings.scoreNodeSize - 15, y: destroyedLabel.position.y - destroyedLabel.frame.height)
+//            leftLabel.fontSize = GameSettings.scoreNodeSize / 3
+//            leftLabel.zPosition = 3.0
+//            leftLabel.alpha = 0.5
+//            leftLabel.fontColor = .whiteColor()
+//        }
+//    }
     
     private var leftCount = 0{
         didSet{
             showScore()
-            GameSettings.maxNumberOfBlocks += 1
+//            GameSettings.maxNumberOfBlocks += 1
         }
     }
     
@@ -68,12 +68,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func showScore(){
-        destroyedLabel?.removeFromParent()
-        destroyedLabel = SKLabelNode(fontNamed:"Chalkduster")
-        self.addChild(destroyedLabel)
-        leftLabel?.removeFromParent()
-        leftLabel = SKLabelNode(fontNamed:"Chalkduster")
-        self.addChild(leftLabel)
+        scoreLabel?.removeFromParent()
+        scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
+        self.addChild(scoreLabel)
         scoreNode?.removeFromParent()
         scoreNode = SKSpriteNode()
         self.addChild(scoreNode)
@@ -92,7 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
-        if self.children.count - 3 < GameSettings.maxNumberOfBlocks{
+        if self.children.count - 2 < GameSettings.maxNumberOfBlocks{
             if let oldTime = self.timeSinceLastUpdate{
                 timeToNextBlockPush -= currentTime - oldTime
                 if timeToNextBlockPush < 0 {
@@ -135,7 +132,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
                     block1.physicsBody = nil
                     block2.physicsBody = nil
-                    destroyedCount += 2
+                    destroyedCount += 1
                     let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
                     block1.runAction(action){
                         block1.removeFromParent()
@@ -144,26 +141,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         block2.removeFromParent()
                     }
                 }else{
-                    let loseOfSpeedOfBlock1:CGFloat
-                    if block1.pushVector.dx != 0{
-                        loseOfSpeedOfBlock1 = block1.pushVector.dx - block1.physicsBody!.velocity.dx
-                    }else{
-                        loseOfSpeedOfBlock1 = block1.pushVector.dy - block1.physicsBody!.velocity.dy
+                    if block1.pushVector.dx == block2.pushVector.dx && block1.pushVector.dy == block2.pushVector.dy{
+                        if block1.velocity.dx + block1.velocity.dy > block2.velocity.dx + block2.velocity.dy{
+                            block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
+                        }else{
+                            block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
+                        }
                     }
-                    let loseOfSpeedOfBlock2:CGFloat
-                    if block2.pushVector.dx != 0{
-                        loseOfSpeedOfBlock2 = block2.pushVector.dx - block2.physicsBody!.velocity.dx
-                    }else{
-                        loseOfSpeedOfBlock2 = block2.pushVector.dy - block2.physicsBody!.velocity.dy
-                    }
-                    if abs(loseOfSpeedOfBlock1) > abs(loseOfSpeedOfBlock2){
-                        block2.pushVector = CGVector(dx: block1.pushVector.dx, dy: block1.pushVector.dy)
-                        block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
-                    }else{
-                        block1.pushVector = CGVector(dx: block2.pushVector.dx, dy: block2.pushVector.dy)
-                        block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)            }
+                    else{
+                        let loseOfSpeedOfBlock1:CGFloat
+                        if block1.pushVector.dx != 0{
+                            loseOfSpeedOfBlock1 = block1.pushVector.dx - block1.physicsBody!.velocity.dx
+                        }else{
+                            loseOfSpeedOfBlock1 = block1.pushVector.dy - block1.physicsBody!.velocity.dy
+                        }
+                        let loseOfSpeedOfBlock2:CGFloat
+                        if block2.pushVector.dx != 0{
+                            loseOfSpeedOfBlock2 = block2.pushVector.dx - block2.physicsBody!.velocity.dx
+                        }else{
+                            loseOfSpeedOfBlock2 = block2.pushVector.dy - block2.physicsBody!.velocity.dy
+                        }
+                        if abs(loseOfSpeedOfBlock1) > abs(loseOfSpeedOfBlock2){
+                            block2.pushVector = CGVector(dx: block1.pushVector.dx, dy: block1.pushVector.dy)
+                            block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
+                        }else{
+                            block1.pushVector = CGVector(dx: block2.pushVector.dx, dy: block2.pushVector.dy)
+                            block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
+                        }
                 }
             }
+        }
         }
     }
     

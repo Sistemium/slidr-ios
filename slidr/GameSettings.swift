@@ -16,10 +16,10 @@ class GameSettings{
     static let fadeOutDuration = 1.0
     static let blockColor = UIColor.redColor()
     
-    static let pushBlockInterval = 0.0
-    static let baseSpeed:CGFloat = 9000
-    static let minBlockSize:UInt32 = 35
-    static let maxBlockSize:UInt32 = 70
-    static let scoreNodeSize: CGFloat = 25
-    static var maxNumberOfBlocks = 3
+    static let pushBlockInterval = 0.4
+    static let baseSpeed:CGFloat = 11000
+    static let minBlockSize:UInt32 = 50
+    static let maxBlockSize:UInt32 = 100
+    static let scoreNodeSize: CGFloat = 60
+    static var maxNumberOfBlocks = 5
 }
