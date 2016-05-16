@@ -114,7 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }else{
                     if block1.pushVector.dx == block2.pushVector.dx && block1.pushVector.dy == block2.pushVector.dy{
-                        if block1.velocity.dx + block1.velocity.dy > block2.velocity.dx + block2.velocity.dy{
+                        if abs(block1.velocity.dx + block1.velocity.dy) > abs(block2.velocity.dx + block2.velocity.dy){
                             block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
                         }else{
                             block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
@@ -123,15 +123,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     else{
                         let loseOfSpeedOfBlock1:CGFloat
                         if block1.pushVector.dx != 0{
-                            loseOfSpeedOfBlock1 = block1.pushVector.dx - block1.physicsBody!.velocity.dx
+                            loseOfSpeedOfBlock1 = block1.velocity.dx / block1.physicsBody!.velocity.dx
                         }else{
-                            loseOfSpeedOfBlock1 = block1.pushVector.dy - block1.physicsBody!.velocity.dy
+                            loseOfSpeedOfBlock1 = block1.velocity.dy / block1.physicsBody!.velocity.dy
                         }
                         let loseOfSpeedOfBlock2:CGFloat
                         if block2.pushVector.dx != 0{
-                            loseOfSpeedOfBlock2 = block2.pushVector.dx - block2.physicsBody!.velocity.dx
+                            loseOfSpeedOfBlock2 = block2.velocity.dx / block2.physicsBody!.velocity.dx
                         }else{
-                            loseOfSpeedOfBlock2 = block2.pushVector.dy - block2.physicsBody!.velocity.dy
+                            loseOfSpeedOfBlock2 = block2.velocity.dy / block2.physicsBody!.velocity.dy
                         }
                         if abs(loseOfSpeedOfBlock1) > abs(loseOfSpeedOfBlock2){
                             block2.pushVector = CGVector(dx: block1.pushVector.dx, dy: block1.pushVector.dy)
@@ -140,9 +140,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             block1.pushVector = CGVector(dx: block2.pushVector.dx, dy: block2.pushVector.dy)
                             block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                         }
+                    }
                 }
             }
-        }
         }
     }
     
