@@ -102,15 +102,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let block1 = contact.bodyA.node as? Block{
             if let block2 = contact.bodyB.node as? Block{
                 if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
-                    block1.physicsBody = nil
-                    block2.physicsBody = nil
-                    destroyedCount += 1
-                    let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
-                    block1.runAction(action){
-                        block1.removeFromParent()
-                    }
-                    block2.runAction(action){
-                        block2.removeFromParent()
+                    if block1.color == block2.color{
+                        block1.physicsBody = nil
+                        block2.physicsBody = nil
+                        destroyedCount += 1
+                        let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
+                        block1.runAction(action){
+                            block1.removeFromParent()
+                        }
+                        block2.runAction(action){
+                            block2.removeFromParent()
+                        }
+                    }else{
+                        block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
+                        block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                     }
                 }else{
                     if block1.pushVector.dx == block2.pushVector.dx && block1.pushVector.dy == block2.pushVector.dy{

@@ -14,7 +14,7 @@ class GameSettings{
     static let moveDirections = [CGVectorMake(0, baseSpeed),CGVectorMake(0, -baseSpeed),CGVectorMake(baseSpeed, 0),CGVectorMake(-baseSpeed, 0)]
     static var blockId:UInt32 = 0
     static let fadeOutDuration = 1.0
-    static let blockColor = UIColor.redColor()
+    static let blockColors = [UIColor.redColor(),UIColor.blueColor()]
     
     static let pushBlockInterval = 0.4
     static let baseSpeed:CGFloat = 11000
