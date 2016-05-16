@@ -13,17 +13,15 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let scene = GameScene(fileNamed:"GameScene") {
-            let skView = self.view as! SKView
-            scene.size = UIScreen.mainScreen().bounds.size
-            GameSettings.playableAreaSize = scene.size
+        let scene = MenuScene()
+        let skView = self.view as! SKView
+        scene.size = UIScreen.mainScreen().bounds.size
+        GameSettings.playableAreaSize = scene.size
 //            skView.showsFPS = true
 //            skView.showsNodeCount = true
-            skView.ignoresSiblingOrder = true
-            scene.scaleMode = .AspectFit
-            skView.presentScene(scene)
-        }
+        skView.ignoresSiblingOrder = true
+        scene.scaleMode = .AspectFit
+        skView.presentScene(scene)
     }
 
     override func didReceiveMemoryWarning() {

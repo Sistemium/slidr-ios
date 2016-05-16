@@ -15,9 +15,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var scoreLabel : SKLabelNode!{
         didSet{
-            scoreLabel.text = "Score: \(destroyedCount - leftCount)"
+            scoreLabel.text = "Score: \(destroyedCount)"
             scoreLabel.position = CGPoint(x: GameSettings.playableAreaSize.width - 60, y: GameSettings.playableAreaSize.height  - 30)
-            scoreLabel.fontSize = GameSettings.scoreNodeSize / 3
+            scoreLabel.fontSize = GameSettings.scoreNodeSize
             scoreLabel.zPosition = 3.0
             scoreLabel.alpha = 0.5
             scoreLabel.fontColor = .whiteColor()
@@ -30,15 +30,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    private var leftCount = 0{
-        didSet{
-            showScore()
-        }
-    }
-    
     override func didMoveToView(view: SKView) {
+        self.backgroundColor = UIColor.lightGrayColor()
         self.physicsWorld.contactDelegate = self
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameScene.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameScene.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
         showScore()
     }
     
@@ -91,7 +86,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 block.physicsBody?.velocity = block.velocity
                 if !self.intersectsNode(block){
                     block.removeFromParent()
-                    leftCount += 1
                 }
             }
         }
@@ -151,20 +145,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func didChangeSize(oldSize: CGSize) {
-        GameSettings.playableAreaSize = UIScreen.mainScreen().bounds.size
-        showScore()
-    }
-    
-    func rotated(){
-        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
-            showScore()
-        }
-        
-        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)){
-            showScore()
-        }
-        
-    }
+//    override func didChangeSize(oldSize: CGSize) {
+//        GameSettings.playableAreaSize = UIScreen.mainScreen().bounds.size
+//        showScore()
+//    }
+//    
+//    func rotated(){
+//        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
+//            showScore()
+//        }
+//        
+//        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)){
+//            showScore()
+//        }
+//        
+//    }
     
 }

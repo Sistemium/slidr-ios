@@ -24,6 +24,8 @@ class Block: SKSpriteNode {
         }
     }
     
+    private static var blockId:UInt32 = 0
+    
     convenience init(){
         self.init(texture: nil, color: GameSettings.blockColors[Int(arc4random_uniform(UInt32(GameSettings.blockColors.count)))], size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
     }
@@ -43,8 +45,8 @@ class Block: SKSpriteNode {
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.affectedByGravity = false
         randomizeData()
-        self.physicsBody?.contactTestBitMask = GameSettings.blockId
-        GameSettings.blockId += 1
+        self.physicsBody?.contactTestBitMask = Block.blockId
+        Block.blockId += 1
     }
     
     func randomizeData() {
