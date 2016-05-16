@@ -12,15 +12,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var timeSinceLastUpdate:CFTimeInterval?
     private var timeToNextBlockPush = GameSettings.pushBlockInterval
-    private var scoreNode : SKSpriteNode!{
-        didSet{
-            scoreNode.color = UIColor.darkGrayColor()
-            scoreNode.position = CGPoint(x:scoreLabel.position.x, y: scoreLabel.position.y + 5 )
-            scoreNode.zPosition = 2.0
-            scoreNode.size = CGSize(width: scoreLabel.frame.size.width + 5 , height: scoreLabel.frame.size.height)
-            scoreNode.alpha = 0.5
-        }
-    }
     
     private var scoreLabel : SKLabelNode!{
         didSet{
@@ -36,28 +27,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var destroyedCount = 0{
         didSet{
             showScore()
-//            GameSettings.maxNumberOfBlocks -= 1
-//            if GameSettings.maxNumberOfBlocks < 3 {
-//                GameSettings.maxNumberOfBlocks = 3
-//            }
         }
     }
-    
-//    private var leftLabel : SKLabelNode!{
-//        didSet{
-//            leftLabel.text = "Left: \(leftCount)"
-//            leftLabel.position = CGPoint(x: GameSettings.playableAreaSize.width - GameSettings.scoreNodeSize - 15, y: destroyedLabel.position.y - destroyedLabel.frame.height)
-//            leftLabel.fontSize = GameSettings.scoreNodeSize / 3
-//            leftLabel.zPosition = 3.0
-//            leftLabel.alpha = 0.5
-//            leftLabel.fontColor = .whiteColor()
-//        }
-//    }
     
     private var leftCount = 0{
         didSet{
             showScore()
-//            GameSettings.maxNumberOfBlocks += 1
         }
     }
     
@@ -71,9 +46,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel?.removeFromParent()
         scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
         self.addChild(scoreLabel)
-        scoreNode?.removeFromParent()
-        scoreNode = SKSpriteNode()
-        self.addChild(scoreNode)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
