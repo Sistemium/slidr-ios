@@ -18,7 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreLabel.text = "Score: \(destroyedCount)"
             scoreLabel.position = CGPoint(x: GameSettings.playableAreaSize.width - 60, y: GameSettings.playableAreaSize.height  - 30)
             scoreLabel.fontSize = GameSettings.scoreNodeSize
-            scoreLabel.zPosition = 3.0
+            scoreLabel.zPosition = -1
             scoreLabel.alpha = 0.5
             scoreLabel.fontColor = .whiteColor()
         }
@@ -35,6 +35,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameScene.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
         showScore()
+        var recognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipe))
+        recognizer.direction = .Down
+        self.view?.addGestureRecognizer(recognizer)
+        recognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipe))
+        recognizer.direction = .Left
+        self.view?.addGestureRecognizer(recognizer)
+        recognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipe))
+        recognizer.direction = .Up
+        self.view?.addGestureRecognizer(recognizer)
+        recognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipe))
+        recognizer.direction = .Right
+        self.view?.addGestureRecognizer(recognizer)
     }
     
     func showScore(){
@@ -45,12 +57,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let location = touches.first!.locationInNode(self)
-        for node in self.children{
-            if node.containsPoint(location){
-                if let block = node as? Block{
-                    block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
-                    return
-                }
+        let node = self.nodeAtPoint(location)
+        if let block = node as? Block{
+            if block.color == UIColor.redColor(){
+                block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
+                return
             }
         }
     }
@@ -140,6 +151,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                         }
                     }
+                }
+            }
+        }
+    }
+    
+    func swipe(sender:UISwipeGestureRecognizer){
+        if (sender.state == .Ended){
+            let touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
+            let touchedNode = self.nodeAtPoint(touchLocation) as? Block
+            if touchedNode?.color == UIColor.blueColor(){
+                switch sender.direction {
+                case UISwipeGestureRecognizerDirection.Up:
+                    touchedNode?.pushVector = GameSettings.moveDirections[0]
+                case UISwipeGestureRecognizerDirection.Down:
+                    touchedNode?.pushVector = GameSettings.moveDirections[1]
+                case UISwipeGestureRecognizerDirection.Right:
+                    touchedNode?.pushVector = GameSettings.moveDirections[2]
+                case UISwipeGestureRecognizerDirection.Left:
+                    touchedNode?.pushVector = GameSettings.moveDirections[3]
+                default:
+                    break
                 }
             }
         }
