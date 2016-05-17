@@ -15,10 +15,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         let scene = MenuScene()
         let skView = self.view as! SKView
-        scene.size = UIScreen.mainScreen().bounds.size
-        GameSettings.playableAreaSize = scene.size
-//            skView.showsFPS = true
-//            skView.showsNodeCount = true
+        GameSettings.playableAreaSize = UIScreen.mainScreen().bounds.size
+        scene.size = GameSettings.playableAreaSize
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .AspectFit
         skView.presentScene(scene)

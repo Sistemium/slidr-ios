@@ -12,21 +12,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var timeSinceLastUpdate:CFTimeInterval?
     private var timeToNextBlockPush = GameSettings.pushBlockInterval
-    
-    private var scoreLabel : SKLabelNode!{
+    private var toolbarNode : ToolbarNode!{
         didSet{
-            scoreLabel.text = "Score: \(destroyedCount)"
-            scoreLabel.position = CGPoint(x: GameSettings.playableAreaSize.width - 60, y: GameSettings.playableAreaSize.height  - 30)
-            scoreLabel.fontSize = GameSettings.scoreNodeSize
-            scoreLabel.zPosition = -1
-            scoreLabel.alpha = 0.5
-            scoreLabel.fontColor = .whiteColor()
+            self.addChild(toolbarNode)
         }
     }
     
     private var destroyedCount = 0{
         didSet{
-            showScore()
+            toolbarNode.text = "Score: \(destroyedCount)"
         }
     }
     
@@ -34,7 +28,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.backgroundColor = UIColor.lightGrayColor()
         self.physicsWorld.contactDelegate = self
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameScene.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
-        showScore()
+        toolbarNode  = ToolbarNode()
+        destroyedCount = 0
         var recognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipe))
         recognizer.direction = .Down
         self.view?.addGestureRecognizer(recognizer)
@@ -47,12 +42,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         recognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipe))
         recognizer.direction = .Right
         self.view?.addGestureRecognizer(recognizer)
-    }
-    
-    func showScore(){
-        scoreLabel?.removeFromParent()
-        scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
-        self.addChild(scoreLabel)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
