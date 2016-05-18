@@ -18,12 +18,14 @@ class ToolbarNode: SKSpriteNode {
         super.init(texture: texture, color: color, size: size)
         self.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height - GameSettings.toolbarHeight/2)
         self.zPosition = 3
-        self.alpha = 0.5
+        self.alpha = 0.9
         scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
+        backButton = SKSpriteNode(texture: SKTexture(imageNamed: "Back"), size: CGSize(width: GameSettings.toolbarHeight, height: GameSettings.toolbarHeight))
         self.addChild(scoreLabel)
+        self.addChild(backButton)
+        backButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 - backButton.size.width/2 - 5, y: 0)
         scoreLabel.fontSize = GameSettings.toolbarHeight / 1.5
         scoreLabel.zPosition = 4
-        scoreLabel.alpha = 0.5
         scoreLabel.fontColor = .whiteColor()
     }
     
@@ -34,10 +36,11 @@ class ToolbarNode: SKSpriteNode {
     var text: String = ""{
         didSet{
             scoreLabel.text = text
-            scoreLabel.position = CGPoint(x: -GameSettings.playableAreaSize.width/3, y: -GameSettings.toolbarHeight/4)
+            scoreLabel.position = CGPoint(x: -GameSettings.playableAreaSize.width/2 + scoreLabel.frame.size.width/2 , y: -GameSettings.toolbarHeight/4)
         }
     }
     
     private var scoreLabel : SKLabelNode!
     
+    var backButton : SKSpriteNode!
 }

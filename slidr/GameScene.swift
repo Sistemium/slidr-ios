@@ -53,6 +53,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 return
             }
         }
+        
+        if node == toolbarNode.backButton{
+            returnToMenu()
+        }
     }
    
     override func update(currentTime: CFTimeInterval) {
@@ -164,6 +168,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+    }
+    
+    func returnToMenu(){
+        let scene = MenuScene()
+        scene.size = GameSettings.playableAreaSize
+        scene.scaleMode = .AspectFit
+        self.view!.presentScene(scene)
     }
     
 //    override func didChangeSize(oldSize: CGSize) {
