@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>blocks</key>
+    <array>
+        <dict>
+            <key>color</key>
+            <string>0.5 0.7 0.3 1.0</string>
+            <key>height</key>
+            <integer>0</integer>
+            <key>width</key>
+            <integer>0</integer>
+            <key>pushVectorX</key>
+            <integer>0</integer>
+            <key>pushVectorY</key>
+            <integer>0</integer>
+            <key>positionX</key>
+            <integer>0</integer>
+            <key>positionY</key>
+            <integer>0</integer>
+            <key>pushTime</key>
+            <integer>0</integer>
+        </dict>
+    </array>
+	<key>timeout</key>
+	<integer>0</integer>
+	<key>priority</key>
+	<integer>3</integer>
+	<key>name</key>
+	<string>Level 3</string>
+</dict>
+</plist>

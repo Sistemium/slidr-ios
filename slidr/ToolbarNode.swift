@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+enum ToolbarNodeAlignment{
+    case Left , Center
+}
+
 class ToolbarNode: SKSpriteNode {
     
     convenience init(){
@@ -18,7 +22,7 @@ class ToolbarNode: SKSpriteNode {
         super.init(texture: texture, color: color, size: size)
         self.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height - GameSettings.toolbarHeight/2)
         self.zPosition = 3
-        self.alpha = 0.9
+        self.alpha = 0.97
         scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
         backButton = SKSpriteNode(texture: SKTexture(imageNamed: "Back"), size: CGSize(width: GameSettings.toolbarHeight, height: GameSettings.toolbarHeight))
         self.addChild(scoreLabel)
@@ -36,9 +40,23 @@ class ToolbarNode: SKSpriteNode {
     var text: String = ""{
         didSet{
             scoreLabel.text = text
-            scoreLabel.position = CGPoint(x: -GameSettings.playableAreaSize.width/2 + scoreLabel.frame.size.width/2 , y: -GameSettings.toolbarHeight/4)
+            scoreLabel.position = textAlignment == .Left ? leftAlignment: centerAlignment
         }
     }
+    
+    private var leftAlignment:CGPoint{
+        get{
+            return CGPoint(x: -GameSettings.playableAreaSize.width/2 + scoreLabel.frame.size.width/2 , y: -GameSettings.toolbarHeight/4)
+        }
+    }
+    
+    private var centerAlignment:CGPoint{
+        get{
+            return CGPoint(x: 0 , y: -GameSettings.toolbarHeight/4)
+        }
+    }
+
+    var textAlignment: ToolbarNodeAlignment = .Left
     
     private var scoreLabel : SKLabelNode!
     

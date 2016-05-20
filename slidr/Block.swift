@@ -10,9 +10,11 @@ import SpriteKit
 
 class Block: SKSpriteNode {
     
-    var velocity : CGVector!
+    private(set) var velocity : CGVector!
     
     private var _pushVector:CGVector!
+    
+    var preferedPushTime:Double?
     
     var pushVector : CGVector!{
         get{
@@ -30,6 +32,13 @@ class Block: SKSpriteNode {
         self.init(texture: nil, color: GameSettings.blockColors[Int(arc4random_uniform(UInt32(GameSettings.blockColors.count)))], size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
     }
     
+    convenience init(blockData:NSDictionary){
+        self.init(texture: nil, color: UIColor(CIColor: CIColor(string:blockData["color"] as! String)), size: CGSize(width: blockData["width"] as! CGFloat, height: blockData["height"] as! CGFloat ))
+        pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat, dy: blockData["pushVectorY"] as! CGFloat)
+        position = CGPoint(x: blockData["positionX"] as! CGFloat * GameSettings.playableAreaSize.width, y: blockData["positionY"] as! CGFloat * GameSettings.playableAreaSize.height)
+        preferedPushTime = blockData["pushTime"] as? Double
+    }
+    
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         customInit()
@@ -44,7 +53,9 @@ class Block: SKSpriteNode {
         self.physicsBody?.dynamic = true
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.affectedByGravity = false
-        randomizeData()
+        if pushVector == nil {
+            randomizeData()
+        }
         self.physicsBody?.contactTestBitMask = Block.blockId
         Block.blockId += 1
     }

@@ -47,6 +47,9 @@ class MenuScene: SKScene {
     }
     
     override func didMoveToView(view: SKView) {
+        for child in self.children{
+            child.removeFromParent()
+        }
         self.backgroundColor = UIColor.lightGrayColor()
         startGameLabel = SKLabelNode(fontNamed:"Chalkduster")
         freeModeLabel = SKLabelNode(fontNamed:"Chalkduster")
@@ -63,12 +66,14 @@ class MenuScene: SKScene {
                         let scene = LevelScene()
                         scene.size = GameSettings.playableAreaSize
                         scene.scaleMode = .AspectFit
+                        scene.previousScene = self
                         self.view!.presentScene(scene)
                         break
                     case freeModeLabel:
                         let scene = GameScene()
                         scene.size = GameSettings.playableAreaSize
                         scene.scaleMode = .AspectFit
+                        scene.previousScene = self
                         self.view!.presentScene(scene)
                     case optionsLabel:
                         break

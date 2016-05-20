@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+private enum GameMode{
+    case Free,Level
+}
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var timeSinceLastUpdate:CFTimeInterval?
@@ -18,9 +22,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    var previousScene:SKScene?
+    
+    var level: Level?{
+        didSet{
+            if (level != nil){
+                gameMode = .Level
+            }else{
+                gameMode = .Free
+            }
+        }
+    }
+    
+    private var gameMode:GameMode = .Free
+    
     private var destroyedCount = 0{
         didSet{
-            toolbarNode.text = "Score: \(destroyedCount)"
+            toolbarNode.text = "Score: \(destroyedCount - leftCount)"
+        }
+    }
+    
+    private var leftCount = 0{
+        didSet{
+            toolbarNode.text = "Score: \(destroyedCount - leftCount)"
         }
     }
     
@@ -30,6 +54,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameScene.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
         toolbarNode  = ToolbarNode()
         destroyedCount = 0
+        leftCount = 0
         var recognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipe))
         recognizer.direction = .Down
         self.view?.addGestureRecognizer(recognizer)
@@ -55,12 +80,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if node == toolbarNode.backButton{
-            returnToMenu()
+            returnToPreviousScene()
         }
     }
    
     override func update(currentTime: CFTimeInterval) {
-        if self.children.count - 2 < GameSettings.maxNumberOfBlocks{
+        if gameMode == .Level {
+            if let oldTime = self.timeSinceLastUpdate{
+                for block in level!.blocks{
+                    block.preferedPushTime! -= currentTime - oldTime
+                    if block.preferedPushTime < 0{
+                        level?.blocks.removeAtIndex((level?.blocks.indexOf(block))!)
+                        self.addChild(block)
+                    }
+                }
+            }
+        }
+        else if self.children.count - 1 < GameSettings.maxNumberOfBlocks{
             if let oldTime = self.timeSinceLastUpdate{
                 timeToNextBlockPush -= currentTime - oldTime
                 if timeToNextBlockPush < 0 {
@@ -90,6 +126,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 block.physicsBody?.velocity = block.velocity
                 if !self.intersectsNode(block){
                     block.removeFromParent()
+                    leftCount+=1
                 }
             }
         }
@@ -170,8 +207,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    func returnToMenu(){
-        let scene = MenuScene()
+    private func returnToPreviousScene(){
+        let scene = previousScene!
         scene.size = GameSettings.playableAreaSize
         scene.scaleMode = .AspectFit
         self.view!.presentScene(scene)
