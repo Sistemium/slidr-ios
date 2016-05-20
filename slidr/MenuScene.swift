@@ -17,7 +17,6 @@ class MenuScene: SKScene {
             startGameLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/1.7)
             startGameLabel.fontSize = GameSettings.labelSize
             startGameLabel.zPosition = 3.0
-            startGameLabel.alpha = 0.5
             startGameLabel.fontColor = .whiteColor()
         }
     }
@@ -29,7 +28,6 @@ class MenuScene: SKScene {
             freeModeLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2)
             freeModeLabel.fontSize = GameSettings.labelSize
             freeModeLabel.zPosition = 3.0
-            freeModeLabel.alpha = 0.5
             freeModeLabel.fontColor = .whiteColor()
         }
     }
@@ -41,7 +39,6 @@ class MenuScene: SKScene {
             optionsLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2.4)
             optionsLabel.fontSize = GameSettings.labelSize
             optionsLabel.zPosition = 3.0
-            optionsLabel.alpha = 0.5
             optionsLabel.fontColor = .whiteColor()
         }
     }

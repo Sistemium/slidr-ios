@@ -8,10 +8,6 @@
 
 import SpriteKit
 
-enum ToolbarNodeAlignment{
-    case Left , Center
-}
-
 class ToolbarNode: SKSpriteNode {
     
     convenience init(){
@@ -24,23 +20,35 @@ class ToolbarNode: SKSpriteNode {
         self.zPosition = 3
         self.alpha = 0.97
         scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
+        timerLabel = SKLabelNode(fontNamed:"Chalkduster")
         backButton = SKSpriteNode(texture: SKTexture(imageNamed: "Back"), size: CGSize(width: GameSettings.toolbarHeight, height: GameSettings.toolbarHeight))
         self.addChild(scoreLabel)
+        self.addChild(timerLabel)
         self.addChild(backButton)
         backButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 - backButton.size.width/2 - 5, y: 0)
         scoreLabel.fontSize = GameSettings.toolbarHeight / 1.5
         scoreLabel.zPosition = 4
         scoreLabel.fontColor = .whiteColor()
+        timerLabel.fontSize = GameSettings.toolbarHeight / 1.5
+        timerLabel.zPosition = 4
+        timerLabel.fontColor = .whiteColor()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    var text: String = ""{
+    var scoreLabelText: String = ""{
         didSet{
-            scoreLabel.text = text
-            scoreLabel.position = textAlignment == .Left ? leftAlignment: centerAlignment
+            scoreLabel.text = scoreLabelText
+            scoreLabel.position = leftAlignment
+        }
+    }
+    
+    var timerLabelText: String = ""{
+        didSet{
+            timerLabel.text = timerLabelText
+            timerLabel.position = centerAlignment
         }
     }
     
@@ -55,10 +63,10 @@ class ToolbarNode: SKSpriteNode {
             return CGPoint(x: 0 , y: -GameSettings.toolbarHeight/4)
         }
     }
-
-    var textAlignment: ToolbarNodeAlignment = .Left
     
     private var scoreLabel : SKLabelNode!
+    
+    private var timerLabel : SKLabelNode!
     
     var backButton : SKSpriteNode!
 }

@@ -26,7 +26,6 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     private var toolbarNode : ToolbarNode!{
         didSet{
             self.addChild(toolbarNode)
-            toolbarNode.textAlignment = .Center
         }
     }
     
@@ -38,7 +37,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         tableview = UITableView()
         view.addSubview(tableview)
         toolbarNode  = ToolbarNode()
-        toolbarNode.text = "Select level"
+        toolbarNode.timerLabelText = "Select level"
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

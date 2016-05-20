@@ -38,13 +38,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var destroyedCount = 0{
         didSet{
-            toolbarNode.text = "Score: \(destroyedCount - leftCount)"
+            toolbarNode.scoreLabelText = "Score: \(destroyedCount - leftCount)"
         }
     }
     
     private var leftCount = 0{
         didSet{
-            toolbarNode.text = "Score: \(destroyedCount - leftCount)"
+            toolbarNode.scoreLabelText = "Score: \(destroyedCount - leftCount)"
         }
     }
     
