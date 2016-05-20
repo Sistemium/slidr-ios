@@ -94,6 +94,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         self.addChild(block)
                     }
                 }
+                level!.timeout! -= currentTime - oldTime
+                toolbarNode.timerLabelText = level!.timeout!.fixedFractionDigits(1)
             }
         }
         else if self.children.count - 1 < GameSettings.maxNumberOfBlocks{
@@ -130,7 +132,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+        checkResult()
         self.timeSinceLastUpdate = currentTime
+    }
+    
+    private func checkResult(){
+        if gameMode == .Level && level?.blocks.count == 0 && self.children.count == 1 && leftCount == 0{
+            print("You win")
+        }
+        else if gameMode == .Level && (level?.timeout<=0 || level?.blocks.count == 0 && self.children.count == 1 && leftCount != 0){
+            print("You lose")
+        }
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
