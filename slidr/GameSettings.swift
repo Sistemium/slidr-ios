@@ -19,6 +19,6 @@ class GameSettings{
     static let baseSpeed:CGFloat = 11000
     static let minBlockSize:UInt32 = 50
     static let maxBlockSize:UInt32 = 100
-    static let labelSize: CGFloat = 40
+    static let labelSize: CGFloat = 35
     static var maxNumberOfBlocks = 5
 }

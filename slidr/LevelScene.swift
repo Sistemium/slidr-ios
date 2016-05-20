@@ -43,7 +43,6 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let location = touches.first!.locationInNode(self)
         let node = self.nodeAtPoint(location)
-        
         if node == toolbarNode.backButton{
             returnToPreviousScene()
         }

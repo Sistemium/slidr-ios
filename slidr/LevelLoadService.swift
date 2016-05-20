@@ -49,4 +49,22 @@ class LevelLoadService{
         }
         return level
     }
+    
+    func levelByPriority(priority:Float)->Level?{
+        for level in levels{
+            if level.priority == priority{
+                return level
+            }
+        }
+        return nil
+    }
+    
+    func nextLevelByPriority(priority:Float)->Level?{
+        for level in levels{
+            if level.priority > priority{
+                return level
+            }
+        }
+        return nil
+    }
 }

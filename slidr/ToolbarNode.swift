@@ -52,6 +52,18 @@ class ToolbarNode: SKSpriteNode {
         }
     }
     
+    var scoreLabelEnabled: Bool = true{
+        didSet{
+            scoreLabel.hidden = !scoreLabelEnabled
+        }
+    }
+    
+    var timerLabelEnabled: Bool = true{
+        didSet{
+            timerLabel.hidden = !timerLabelEnabled
+        }
+    }
+    
     private var leftAlignment:CGPoint{
         get{
             return CGPoint(x: -GameSettings.playableAreaSize.width/2 + scoreLabel.frame.size.width/2 , y: -GameSettings.toolbarHeight/4)

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D1F1DFD1CEF3E78002479FD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1F1DFC1CEF3E78002479FD /* Extensions.swift */; };
+		6D1F1DFF1CEF428E002479FD /* GameResultScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1F1DFE1CEF428E002479FD /* GameResultScene.swift */; };
 		6D38DD991CDA3A38008353DF /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D38DD981CDA3A38008353DF /* Block.swift */; };
 		6D538BA31CDC9E8100B0F780 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D538BA21CDC9E8100B0F780 /* GameSettings.swift */; };
 		6D538BA71CDCC8D500B0F780 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D538BA51CDCC8D500B0F780 /* Fabric.framework */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		6D1F1DFC1CEF3E78002479FD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		6D1F1DFE1CEF428E002479FD /* GameResultScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultScene.swift; sourceTree = "<group>"; };
 		6D38DD981CDA3A38008353DF /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		6D538BA21CDC9E8100B0F780 /* GameSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		6D538BA51CDCC8D500B0F780 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				6D6346561CEDDAD40067A1AF /* Level.swift */,
 				6D6346581CEDDDDD0067A1AF /* LevelLoadService.swift */,
 				6D1F1DFC1CEF3E78002479FD /* Extensions.swift */,
+				6D1F1DFE1CEF428E002479FD /* GameResultScene.swift */,
 			);
 			path = slidr;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 				6DC0CCCB1CD8C0C20019D466 /* GameScene.swift in Sources */,
 				6D6346571CEDDAD40067A1AF /* Level.swift in Sources */,
 				6D38DD991CDA3A38008353DF /* Block.swift in Sources */,
+				6D1F1DFF1CEF428E002479FD /* GameResultScene.swift in Sources */,
 				6D538BA31CDC9E8100B0F780 /* GameSettings.swift in Sources */,
 				6D6346591CEDDDDD0067A1AF /* LevelLoadService.swift in Sources */,
 				6DA665DA1CEA0B1400644E0A /* MenuScene.swift in Sources */,

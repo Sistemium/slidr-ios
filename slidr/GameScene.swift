@@ -19,6 +19,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var toolbarNode : ToolbarNode!{
         didSet{
             self.addChild(toolbarNode)
+            if gameMode == .Level{
+                toolbarNode.scoreLabelEnabled = false
+            }else{
+                toolbarNode.scoreLabelEnabled = true
+            }
         }
     }
     
@@ -138,10 +143,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func checkResult(){
         if gameMode == .Level && level?.blocks.count == 0 && self.children.count == 1 && leftCount == 0{
-            print("You win")
+            let scene = GameResultScene()
+            scene.size = GameSettings.playableAreaSize
+            scene.scaleMode = .AspectFit
+            scene.result = .Win
+            scene.finishedLevel = level
+            self.view!.presentScene(scene)
         }
         else if gameMode == .Level && (level?.timeout<=0 || level?.blocks.count == 0 && self.children.count == 1 && leftCount != 0){
-            print("You lose")
+            let scene = GameResultScene()
+            scene.size = GameSettings.playableAreaSize
+            scene.scaleMode = .AspectFit
+            scene.result = .Lose
+            scene.finishedLevel = level
+            self.view!.presentScene(scene)
         }
     }
     
