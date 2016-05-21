@@ -130,8 +130,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         for node in self.children{
             if let block = node as? Block{
+                if !block.pushed{
+                    if self.intersectsNode(block){
+                        block.pushed = true
+                    }
+                }
                 block.physicsBody?.velocity = block.velocity
-                if !self.intersectsNode(block){
+                if block.pushed && !self.intersectsNode(block){
                     block.removeFromParent()
                     leftCount+=1
                 }

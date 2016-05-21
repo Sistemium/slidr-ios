@@ -16,6 +16,8 @@ class Block: SKSpriteNode {
     
     var preferedPushTime:Double?
     
+    var pushed = false
+    
     var pushVector : CGVector!{
         get{
             return _pushVector

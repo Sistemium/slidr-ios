@@ -50,7 +50,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     
     private func returnToPreviousScene(){
         tableview.removeFromSuperview()
-        let scene = previousScene!
+        let scene = previousScene ?? MenuScene()
         scene.size = GameSettings.playableAreaSize
         scene.scaleMode = .AspectFit
         self.view?.presentScene(scene)
