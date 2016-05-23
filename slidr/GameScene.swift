@@ -13,7 +13,6 @@ private enum GameMode{
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
     private var timeSinceLastUpdate:CFTimeInterval?
     private var timeToNextBlockPush = GameSettings.pushBlockInterval
     private var toolbarNode : ToolbarNode!{
@@ -75,7 +74,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let location = touches.first!.locationInNode(self)
+        var location = touches.first!.locationInNode(self)
         let node = self.nodeAtPoint(location)
         if let block = node as? Block{
             if block.color == UIColor.redColor(){
@@ -86,6 +85,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if node == toolbarNode.backButton{
             returnToPreviousScene()
+        }
+        
+        for node in self.children{
+            if let block = node as? Block{
+                location = touches.first!.locationInNode(block)
+                let region = SKRegion(radius: Float(block.frame.width + block.frame.height) / 2)
+                if region.containsPoint(location){
+                    block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
+                    return
+                }
+            }
         }
     }
    

@@ -18,7 +18,7 @@
 			<key>positionX</key>
 			<real>0.5</real>
 			<key>positionY</key>
-			<real>1.03</real>
+			<real>1.1</real>
 			<key>pushTime</key>
 			<integer>0</integer>
 		</dict>
@@ -36,7 +36,7 @@
             <key>positionX</key>
             <real>0.5</real>
             <key>positionY</key>
-            <real>1.03</real>
+            <real>1.1</real>
             <key>pushTime</key>
             <real>1.5</real>
         </dict>
