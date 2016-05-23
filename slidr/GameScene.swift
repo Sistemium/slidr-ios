@@ -91,12 +91,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let block = node as? Block{
                 location = touches.first!.locationInNode(block)
                 let region = SKRegion(radius: Float(block.frame.width + block.frame.height) / 2)
-                if region.containsPoint(location){
+                if region.containsPoint(location) && block.color == UIColor.redColor(){
                     block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
                     return
                 }
             }
         }
+        
     }
    
     override func update(currentTime: CFTimeInterval) {
@@ -230,9 +231,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func swipe(sender:UISwipeGestureRecognizer){
         if (sender.state == .Ended){
-            let touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
+            var touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
             let touchedNode = self.nodeAtPoint(touchLocation) as? Block
             if touchedNode?.color == UIColor.blueColor(){
+                GameSettings.baseSpeed = abs(touchedNode!.pushVector.dx + touchedNode!.pushVector.dy)
                 switch sender.direction {
                 case UISwipeGestureRecognizerDirection.Up:
                     touchedNode?.pushVector = GameSettings.moveDirections[0]
@@ -244,6 +246,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     touchedNode?.pushVector = GameSettings.moveDirections[3]
                 default:
                     break
+                }
+                return
+            }
+            
+            for node in self.children{
+                if let block = node as? Block{
+                    touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
+                    touchLocation = self.convertPoint(touchLocation, toNode: block)
+                    let region = SKRegion(radius: Float(block.frame.width + block.frame.height) / 2)
+                    if region.containsPoint(touchLocation) && block.color == UIColor.blueColor(){
+                        GameSettings.baseSpeed = abs(block.pushVector.dx + block.pushVector.dy)
+                        switch sender.direction {
+                        case UISwipeGestureRecognizerDirection.Up:
+                            block.pushVector = GameSettings.moveDirections[0]
+                        case UISwipeGestureRecognizerDirection.Down:
+                            block.pushVector = GameSettings.moveDirections[1]
+                        case UISwipeGestureRecognizerDirection.Right:
+                            block.pushVector = GameSettings.moveDirections[2]
+                        case UISwipeGestureRecognizerDirection.Left:
+                            block.pushVector = GameSettings.moveDirections[3]
+                        default:
+                            break
+                        }
+                        return
+                    }
                 }
             }
         }

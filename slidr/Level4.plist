@@ -6,7 +6,7 @@
         <array>
             <dict>
                 <key>color</key>
-                <string>1.0 0 0 1.0</string>
+                <string>0 0 1.0 1.0</string>
                 <key>height</key>
                 <integer>150</integer>
                 <key>width</key>
