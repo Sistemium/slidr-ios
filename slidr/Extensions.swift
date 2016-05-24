@@ -6,7 +6,21 @@
 //  Copyright © 2016 Edgar Jan Vuicik. All rights reserved.
 //
 
+import UIKit
+
 extension Double {
+    func fixedFractionDigits(digits: Int) -> String {
+        return String(format: "%.\(digits)f", self)
+    }
+}
+
+extension Float {
+    func fixedFractionDigits(digits: Int) -> String {
+        return String(format: "%.\(digits)f", self)
+    }
+}
+
+extension CGFloat {
     func fixedFractionDigits(digits: Int) -> String {
         return String(format: "%.\(digits)f", self)
     }

@@ -73,6 +73,11 @@ class MenuScene: SKScene {
                         scene.previousScene = self
                         self.view!.presentScene(scene)
                     case optionsLabel:
+                        let scene = OptionsScene()
+                        scene.size = GameSettings.playableAreaSize
+                        scene.scaleMode = .AspectFit
+                        scene.previousScene = self
+                        self.view!.presentScene(scene)
                         break
                     default:
                         break

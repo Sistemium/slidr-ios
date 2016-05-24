@@ -17,10 +17,18 @@ class GameSettings{
         }
     }
     static let fadeOutDuration = 1.0
-    static let blockColors = [UIColor.redColor()]
+    static let blockColors = [UIColor.redColor(),UIColor.blueColor()]
     static let toolbarHeight:CGFloat = 30
     static let pushBlockInterval = 0.4
-    static var baseSpeed:CGFloat = 11000
+    static var baseSpeed:CGFloat{
+        get{
+            return NSUserDefaults.standardUserDefaults().valueForKey("baseSpeed") as? CGFloat ?? 10000
+        }
+        
+        set{
+            NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "baseSpeed")
+        }
+    }
     static let minBlockSize:UInt32 = 50
     static let maxBlockSize:UInt32 = 100
     static let labelSize: CGFloat = 35

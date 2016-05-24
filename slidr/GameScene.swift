@@ -33,7 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (level != nil){
                 gameMode = .Level
             }else{
-                gameMode = .Free
+                 gameMode = .Free
             }
         }
     }
@@ -55,7 +55,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.lightGrayColor()
         self.physicsWorld.contactDelegate = self
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameScene.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
         toolbarNode  = ToolbarNode()
         destroyedCount = 0
         leftCount = 0
@@ -234,7 +233,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             var touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
             let touchedNode = self.nodeAtPoint(touchLocation) as? Block
             if touchedNode?.color == UIColor.blueColor(){
-                GameSettings.baseSpeed = abs(touchedNode!.pushVector.dx + touchedNode!.pushVector.dy)
                 switch sender.direction {
                 case UISwipeGestureRecognizerDirection.Up:
                     touchedNode?.pushVector = GameSettings.moveDirections[0]
@@ -256,7 +254,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     touchLocation = self.convertPoint(touchLocation, toNode: block)
                     let region = SKRegion(radius: Float(block.frame.width + block.frame.height) / 2)
                     if region.containsPoint(touchLocation) && block.color == UIColor.blueColor(){
-                        GameSettings.baseSpeed = abs(block.pushVector.dx + block.pushVector.dy)
                         switch sender.direction {
                         case UISwipeGestureRecognizerDirection.Up:
                             block.pushVector = GameSettings.moveDirections[0]
@@ -282,21 +279,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scene.scaleMode = .AspectFit
         self.view!.presentScene(scene)
     }
-    
-//    override func didChangeSize(oldSize: CGSize) {
-//        GameSettings.playableAreaSize = UIScreen.mainScreen().bounds.size
-//        showScore()
-//    }
-//    
-//    func rotated(){
-//        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
-//            showScore()
-//        }
-//        
-//        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)){
-//            showScore()
-//        }
-//        
-//    }
     
 }

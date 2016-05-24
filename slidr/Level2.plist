@@ -12,7 +12,7 @@
             <key>width</key>
             <integer>75</integer>
             <key>pushVectorX</key>
-            <integer>-8000</integer>
+            <integer>-1</integer>
             <key>pushVectorY</key>
             <integer>0</integer>
             <key>positionX</key>
@@ -30,7 +30,7 @@
             <key>width</key>
             <integer>75</integer>
             <key>pushVectorX</key>
-            <integer>8000</integer>
+            <integer>1</integer>
             <key>pushVectorY</key>
             <integer>0</integer>
             <key>positionX</key>
@@ -50,7 +50,7 @@
             <key>pushVectorX</key>
             <integer>0</integer>
             <key>pushVectorY</key>
-            <integer>-8000</integer>
+            <integer>-1</integer>
             <key>positionX</key>
             <real>0.3</real>
             <key>positionY</key>
@@ -68,7 +68,7 @@
             <key>pushVectorX</key>
             <integer>0</integer>
             <key>pushVectorY</key>
-            <integer>8000</integer>
+            <integer>1</integer>
             <key>positionX</key>
             <real>0.7</real>
             <key>positionY</key>

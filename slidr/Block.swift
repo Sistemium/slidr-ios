@@ -36,7 +36,7 @@ class Block: SKSpriteNode {
     
     convenience init(blockData:NSDictionary){
         self.init(texture: nil, color: UIColor(CIColor: CIColor(string:blockData["color"] as! String)), size: CGSize(width: blockData["width"] as! CGFloat, height: blockData["height"] as! CGFloat ))
-        pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat, dy: blockData["pushVectorY"] as! CGFloat)
+        pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.baseSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.baseSpeed)
         position = CGPoint(x: blockData["positionX"] as! CGFloat * GameSettings.playableAreaSize.width, y: blockData["positionY"] as! CGFloat * GameSettings.playableAreaSize.height)
         preferedPushTime = blockData["pushTime"] as? Double
     }
