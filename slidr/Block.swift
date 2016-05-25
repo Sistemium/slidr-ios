@@ -7,8 +7,17 @@
 //
 
 import SpriteKit
+import Darwin
 
 class Block: SKSpriteNode {
+    
+    private var rotation:Double? = 0{
+        didSet{
+            if rotation != nil{
+                self.zRotation = CGFloat(M_PI/(360/rotation!))
+            }
+        }
+    }
     
     private var hitSide = SKSpriteNode()
     
@@ -59,6 +68,7 @@ class Block: SKSpriteNode {
         pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.baseSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.baseSpeed)
         position = CGPoint(x: blockData["positionX"] as! CGFloat * GameSettings.playableAreaSize.width, y: blockData["positionY"] as! CGFloat * GameSettings.playableAreaSize.height)
         preferedPushTime = blockData["pushTime"] as? Double
+        rotation = blockData["rotation"] as? Double
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
