@@ -16,7 +16,7 @@ class GameSettings{
             return [CGVectorMake(0, baseSpeed),CGVectorMake(0, -baseSpeed),CGVectorMake(baseSpeed, 0),CGVectorMake(-baseSpeed, 0)]
         }
     }
-    static let fadeOutDuration = 1.0
+    static let fadeOutDuration = 0.75
     static let blockColors = [UIColor.redColor(),UIColor.blueColor()]
     static let toolbarHeight:CGFloat = 30
     static let pushBlockInterval = 0.4

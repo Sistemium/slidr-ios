@@ -3,82 +3,90 @@
 <plist version="1.0">
 <dict>
 	<key>blocks</key>
-    <array>
-        <dict>
-            <key>color</key>
-            <string>1.0 0 0 1.0</string>
-            <key>height</key>
-            <integer>75</integer>
-            <key>width</key>
-            <integer>75</integer>
-            <key>pushVectorX</key>
-            <integer>-1</integer>
-            <key>pushVectorY</key>
+	<array>
+		<dict>
+			<key>color</key>
+			<string>1.0 0 0 1.0</string>
+			<key>height</key>
+			<integer>75</integer>
+			<key>width</key>
+			<integer>75</integer>
+			<key>pushVectorX</key>
+			<integer>-1</integer>
+			<key>pushVectorY</key>
+			<integer>0</integer>
+			<key>positionX</key>
+			<real>1.2</real>
+			<key>positionY</key>
+			<real>0.5</real>
+			<key>pushTime</key>
+			<integer>0</integer>
+            <key>rotation</key>
             <integer>0</integer>
-            <key>positionX</key>
-            <real>1.2</real>
-            <key>positionY</key>
-            <real>0.5</real>
-            <key>pushTime</key>
+		</dict>
+		<dict>
+			<key>color</key>
+			<string>1.0 0 0 1.0</string>
+			<key>height</key>
+			<integer>75</integer>
+			<key>width</key>
+			<integer>75</integer>
+			<key>pushVectorX</key>
+			<integer>1</integer>
+			<key>pushVectorY</key>
+			<integer>0</integer>
+			<key>positionX</key>
+			<real>-0.2</real>
+			<key>positionY</key>
+			<real>0.5</real>
+			<key>pushTime</key>
+			<real>0.5</real>
+            <key>rotation</key>
             <integer>0</integer>
-        </dict>
-        <dict>
-            <key>color</key>
-            <string>1.0 0 0 1.0</string>
-            <key>height</key>
-            <integer>75</integer>
-            <key>width</key>
-            <integer>75</integer>
-            <key>pushVectorX</key>
-            <integer>1</integer>
-            <key>pushVectorY</key>
+		</dict>
+		<dict>
+			<key>color</key>
+			<string>1.0 0 0 1.0</string>
+			<key>height</key>
+			<integer>75</integer>
+			<key>width</key>
+			<integer>75</integer>
+			<key>pushVectorX</key>
+			<integer>0</integer>
+			<key>pushVectorY</key>
+			<integer>-1</integer>
+			<key>positionX</key>
+			<real>0.3</real>
+			<key>positionY</key>
+			<real>1.1</real>
+			<key>pushTime</key>
+			<integer>0</integer>
+            <key>rotation</key>
             <integer>0</integer>
-            <key>positionX</key>
-            <real>-0.2</real>
-            <key>positionY</key>
-            <real>0.5</real>
-            <key>pushTime</key>
-            <real>0.5</real>
-        </dict>
-        <dict>
-            <key>color</key>
-            <string>1.0 0 0 1.0</string>
-            <key>height</key>
-            <integer>75</integer>
-            <key>width</key>
-            <integer>75</integer>
-            <key>pushVectorX</key>
+		</dict>
+		<dict>
+			<key>color</key>
+			<string>1.0 0 0 1.0</string>
+			<key>height</key>
+			<integer>75</integer>
+			<key>width</key>
+			<integer>75</integer>
+			<key>pushVectorX</key>
+			<integer>0</integer>
+			<key>pushVectorY</key>
+			<integer>1</integer>
+			<key>positionX</key>
+			<real>0.7</real>
+			<key>positionY</key>
+			<real>-0.2</real>
+			<key>pushTime</key>
+			<integer>0</integer>
+            <key>rotation</key>
             <integer>0</integer>
-            <key>pushVectorY</key>
-            <integer>-1</integer>
-            <key>positionX</key>
-            <real>0.3</real>
-            <key>positionY</key>
-            <real>1.1</real>
-            <key>pushTime</key>
-            <integer>0</integer>
-        </dict>
-        <dict>
-            <key>color</key>
-            <string>1.0 0 0 1.0</string>
-            <key>height</key>
-            <integer>75</integer>
-            <key>width</key>
-            <integer>75</integer>
-            <key>pushVectorX</key>
-            <integer>0</integer>
-            <key>pushVectorY</key>
-            <integer>1</integer>
-            <key>positionX</key>
-            <real>0.7</real>
-            <key>positionY</key>
-            <real>-0.2</real>
-            <key>pushTime</key>
-            <integer>0</integer>
-        </dict>
-    </array>
+		</dict>
+	</array>
 	<key>timeout</key>
-	<integer>100</integer>
+	<integer>10</integer>
 	<key>priority</key>
 	<integer>2</integer>
 	<key>name</key>
