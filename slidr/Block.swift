@@ -10,6 +10,8 @@ import SpriteKit
 
 class Block: SKSpriteNode {
     
+    private var hitSide = SKSpriteNode()
+    
     private(set) var velocity : CGVector!
     
     private var _pushVector:CGVector!
@@ -23,8 +25,26 @@ class Block: SKSpriteNode {
             return _pushVector
         }
         set{
-            self.velocity = CGVectorMake(newValue.dx / self.size.height, newValue.dy / self.size.width)
-            _pushVector = newValue
+            if self.physicsBody != nil{
+                self.velocity = CGVectorMake(newValue.dx / self.size.height, newValue.dy / self.size.width)
+                _pushVector = newValue
+                switch (pushVector.dx, pushVector.dy) {
+                case (let x,_) where x<0:
+                    hitSide.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
+                    hitSide.position = CGPoint(x: -self.size.width / 2 + GameSettings.hitSideWidth / 2, y: 0)
+                case (let x,_) where x>0:
+                    hitSide.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
+                    hitSide.position = CGPoint(x: self.size.width / 2 - GameSettings.hitSideWidth / 2, y: 0)
+                case (_,let y) where y<0:
+                    hitSide.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
+                    hitSide.position = CGPoint(x: 0, y: -self.size.height / 2 + GameSettings.hitSideWidth / 2)
+                case (_,let y) where y>0:
+                    hitSide.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
+                    hitSide.position = CGPoint(x: 0, y: self.size.height / 2 - GameSettings.hitSideWidth / 2)
+                default:
+                    break
+                }
+            }
         }
     }
     
@@ -60,6 +80,8 @@ class Block: SKSpriteNode {
         }
         self.physicsBody?.contactTestBitMask = Block.blockId
         Block.blockId += 1
+        self.addChild(hitSide)
+        hitSide.color = UIColor.blackColor()
     }
     
     func randomizeData() {

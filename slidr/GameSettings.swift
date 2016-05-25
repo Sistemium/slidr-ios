@@ -33,4 +33,5 @@ class GameSettings{
     static let maxBlockSize:UInt32 = 100
     static let labelSize: CGFloat = 35
     static var maxNumberOfBlocks = 5
+    static let hitSideWidth:CGFloat = 10
 }
