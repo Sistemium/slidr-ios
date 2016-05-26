@@ -61,19 +61,19 @@ class Block: SKSpriteNode {
     
     convenience init(){
         self.init(texture: nil, color: GameSettings.blockColors[Int(arc4random_uniform(UInt32(GameSettings.blockColors.count)))], size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
+        customInit()
+        randomizeData()
     }
     
     convenience init(blockData:NSDictionary){
         self.init(texture: nil, color: UIColor(CIColor: CIColor(string:blockData["color"] as! String)), size: CGSize(width: blockData["width"] as! CGFloat, height: blockData["height"] as! CGFloat ))
-        pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.baseSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.baseSpeed)
-        position = CGPoint(x: blockData["positionX"] as! CGFloat * GameSettings.playableAreaSize.width, y: blockData["positionY"] as! CGFloat * GameSettings.playableAreaSize.height)
-        preferedPushTime = blockData["pushTime"] as? Double
-        rotation = blockData["rotation"] as? Double
+        customInit()
+        loadBlock(blockData)
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        customInit()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -85,13 +85,17 @@ class Block: SKSpriteNode {
         self.physicsBody?.dynamic = true
         self.physicsBody?.allowsRotation = false
         self.physicsBody?.affectedByGravity = false
-        if pushVector == nil {
-            randomizeData()
-        }
         self.physicsBody?.contactTestBitMask = Block.blockId
         Block.blockId += 1
         self.addChild(hitSide)
         hitSide.color = UIColor.blackColor()
+    }
+    
+    func loadBlock(blockData:NSDictionary){
+        pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.baseSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.baseSpeed)
+        position = CGPoint(x: blockData["positionX"] as! CGFloat * GameSettings.playableAreaSize.width, y: blockData["positionY"] as! CGFloat * GameSettings.playableAreaSize.height)
+        preferedPushTime = blockData["pushTime"] as? Double
+        self.rotation = blockData["rotation"] as? Double
     }
     
     func randomizeData() {
