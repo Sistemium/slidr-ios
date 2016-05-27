@@ -157,7 +157,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func checkResult(){
-        if gameMode == .Level && level?.blocks.count == 0 && self.children.count == 1 && leftCount == 0{
+        if gameMode == .Level && level?.blocks.count == 0 && self.children.count == unusedNodes() && leftCount == 0{
             let scene = GameResultScene()
             scene.size = GameSettings.playableAreaSize
             scene.scaleMode = .AspectFit
@@ -165,7 +165,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scene.finishedLevel = level
             self.view!.presentScene(scene)
         }
-        else if gameMode == .Level && (level?.timeout<=0 || level?.blocks.count == 0 && self.children.count == 1 && leftCount != 0){
+        else if gameMode == .Level && (level?.timeout<=0 || level?.blocks.count == 0 && self.children.count == unusedNodes() && leftCount != 0){
             let scene = GameResultScene()
             scene.size = GameSettings.playableAreaSize
             scene.scaleMode = .AspectFit
@@ -175,53 +175,147 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    func unusedNodes()->Int{
+        var count = 0
+        for node in self.children{
+            if let block = node as? Block{
+                if !(block.physicsBody?.dynamic ?? true){
+                    count+=1
+                }
+            }else{
+                count+=1
+            }
+        }
+        return count
+    }
+    
     func didBeginContact(contact: SKPhysicsContact) {
-        if let block1 = contact.bodyA.node as? Block{
-            if let block2 = contact.bodyB.node as? Block{
-                if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
-                    if block1.color == block2.color{
-                        block1.physicsBody = nil
-                        block2.physicsBody = nil
-                        destroyedCount += 1
-                        let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
-                        block1.runAction(action){
-                            block1.removeFromParent()
+        if let block1 = contact.bodyA.node as? Block, let block2 = contact.bodyB.node as? Block{
+            var fRed : CGFloat = 0
+            var fGreen : CGFloat = 0
+            var fBlue : CGFloat = 0
+            var fAlpha: CGFloat = 0
+            block1.color.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha)
+            if fRed == 0 && fGreen == 0 && fBlue == 0{
+                if block1.rotation != 0{
+                    if self.convertPoint(contact.contactPoint, toNode: block2).distance(block2.corners[0]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                        if block2.pushVector.dy != 0{
+                            block2.pushVector = CGVector(dx: -abs(block2.pushVector.dy), dy: 0)
+                        }else{
+                            block2.pushVector = CGVector(dx: 0, dy: -abs(block2.pushVector.dx))
                         }
-                        block2.runAction(action){
-                            block2.removeFromParent()
+                        return
+                    }
+                    if self.convertPoint(contact.contactPoint, toNode: block2).distance(block2.corners[1]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                        if block2.pushVector.dy != 0{
+                            block2.pushVector = CGVector(dx: -abs(block2.pushVector.dy), dy: 0)
+                        }else{
+                            block2.pushVector = CGVector(dx: 0, dy: abs(block2.pushVector.dx))
                         }
-                    }else{
-                        block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
-                        block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
+                        return
+                    }
+                    if self.convertPoint(contact.contactPoint, toNode: block2).distance(block2.corners[2]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                        if block2.pushVector.dy != 0{
+                            block2.pushVector = CGVector(dx: abs(block2.pushVector.dy), dy: 0)
+                        }else{
+                            block2.pushVector = CGVector(dx: 0, dy: abs(block2.pushVector.dx))
+                        }
+                        return
+                    }
+                    if self.convertPoint(contact.contactPoint, toNode: block2).distance(block2.corners[3]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                        if block2.pushVector.dy != 0{
+                            block2.pushVector = CGVector(dx: abs(block2.pushVector.dy), dy: 0)
+                        }else{
+                            block2.pushVector = CGVector(dx: 0, dy: -abs(block2.pushVector.dx))
+                        }
+                        return
+                    }
+                }
+                block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
+                return
+            }
+            block2.color.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha)
+            if fRed == 0 && fGreen == 0 && fBlue == 0{
+                if block2.rotation != 0{
+                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[0]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                        if block1.pushVector.dy != 0{
+                            block1.pushVector = CGVector(dx: -abs(block2.pushVector.dy), dy: 0)
+                        }else{
+                            block1.pushVector = CGVector(dx: 0, dy: -abs(block2.pushVector.dx))
+                        }
+                        return
+                    }
+                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[1]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                        if block1.pushVector.dy != 0{
+                            block1.pushVector = CGVector(dx: -abs(block2.pushVector.dy), dy: 0)
+                        }else{
+                            block1.pushVector = CGVector(dx: 0, dy: abs(block2.pushVector.dx))
+                        }
+                        return
+                    }
+                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[2]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                        if block1.pushVector.dy != 0{
+                            block1.pushVector = CGVector(dx: abs(block2.pushVector.dy), dy: 0)
+                        }else{
+                            block1.pushVector = CGVector(dx: 0, dy: abs(block2.pushVector.dx))
+                        }
+                        return
+                    }
+                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[3]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                        if block1.pushVector.dy != 0{
+                            block1.pushVector = CGVector(dx: abs(block2.pushVector.dy), dy: 0)
+                        }else{
+                            block1.pushVector = CGVector(dx: 0, dy: -abs(block2.pushVector.dx))
+                        }
+                        return
+                    }
+                }
+                block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
+                return
+            }
+            if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
+                if block1.color == block2.color{
+                    block1.physicsBody = nil
+                    block2.physicsBody = nil
+                    destroyedCount += 1
+                    let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
+                    block1.runAction(action){
+                        block1.removeFromParent()
+                    }
+                    block2.runAction(action){
+                        block2.removeFromParent()
                     }
                 }else{
-                    if block1.pushVector.dx == block2.pushVector.dx && block1.pushVector.dy == block2.pushVector.dy{
-                        if abs(block1.velocity.dx + block1.velocity.dy) > abs(block2.velocity.dx + block2.velocity.dy){
-                            block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
-                        }else{
-                            block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
-                        }
+                    block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
+                    block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
+                }
+            }else{
+                if block1.pushVector.dx == block2.pushVector.dx && block1.pushVector.dy == block2.pushVector.dy{
+                    if abs(block1.velocity.dx + block1.velocity.dy) > abs(block2.velocity.dx + block2.velocity.dy){
+                        block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
+                    }else{
+                        block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                     }
-                    else{
-                        let loseOfSpeedOfBlock1:CGFloat
-                        if block1.pushVector.dx != 0{
-                            loseOfSpeedOfBlock1 = block1.velocity.dx / block1.physicsBody!.velocity.dx
-                        }else{
-                            loseOfSpeedOfBlock1 = block1.velocity.dy / block1.physicsBody!.velocity.dy
-                        }
-                        let loseOfSpeedOfBlock2:CGFloat
-                        if block2.pushVector.dx != 0{
-                            loseOfSpeedOfBlock2 = block2.velocity.dx / block2.physicsBody!.velocity.dx
-                        }else{
-                            loseOfSpeedOfBlock2 = block2.velocity.dy / block2.physicsBody!.velocity.dy
-                        }
-                        if abs(loseOfSpeedOfBlock1) > abs(loseOfSpeedOfBlock2){
-                            block2.pushVector = CGVector(dx: block1.pushVector.dx, dy: block1.pushVector.dy)
-                            block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
-                        }else{
-                            block1.pushVector = CGVector(dx: block2.pushVector.dx, dy: block2.pushVector.dy)
-                            block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
-                        }
+                }
+                else{
+                    let loseOfSpeedOfBlock1:CGFloat
+                    if block1.pushVector.dx != 0{
+                        loseOfSpeedOfBlock1 = block1.velocity.dx / block1.physicsBody!.velocity.dx
+                    }else{
+                        loseOfSpeedOfBlock1 = block1.velocity.dy / block1.physicsBody!.velocity.dy
+                    }
+                    let loseOfSpeedOfBlock2:CGFloat
+                    if block2.pushVector.dx != 0{
+                        loseOfSpeedOfBlock2 = block2.velocity.dx / block2.physicsBody!.velocity.dx
+                    }else{
+                        loseOfSpeedOfBlock2 = block2.velocity.dy / block2.physicsBody!.velocity.dy
+                    }
+                    if abs(loseOfSpeedOfBlock1) > abs(loseOfSpeedOfBlock2){
+                        block2.pushVector = CGVector(dx: block1.pushVector.dx, dy: block1.pushVector.dy)
+                        block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
+                    }else{
+                        block1.pushVector = CGVector(dx: block2.pushVector.dx, dy: block2.pushVector.dy)
+                        block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                     }
                 }
             }

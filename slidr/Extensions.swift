@@ -25,3 +25,9 @@ extension CGFloat {
         return String(format: "%.\(digits)f", self)
     }
 }
+
+extension CGPoint {
+    func distance(point: CGPoint) -> CGFloat {
+        return abs(CGFloat(hypotf(Float(point.x - x), Float(point.y - y))))
+    }
+}

@@ -11,7 +11,7 @@ import Darwin
 
 class Block: SKSpriteNode {
     
-    private var rotation:Double? = 0{
+    var rotation:Double? = 0{
         didSet{
             if rotation != nil{
                 self.zRotation = CGFloat(M_PI/(360/rotation!))
@@ -59,6 +59,12 @@ class Block: SKSpriteNode {
     
     private static var blockId:UInt32 = 0
     
+    var corners:[CGPoint]{
+        get{
+            return [CGPoint(x:  self.size.width / 2 , y: self.size.height / 2 ),CGPoint(x:  self.size.width / 2 , y: -self.size.height / 2 ),CGPoint(x:  -self.size.width / 2 , y: -self.size.height / 2 ),CGPoint(x:  -self.size.width / 2 , y: self.size.height / 2 )]
+        }
+    }
+    
     convenience init(){
         self.init(texture: nil, color: GameSettings.blockColors[Int(arc4random_uniform(UInt32(GameSettings.blockColors.count)))], size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
         customInit()
@@ -96,6 +102,10 @@ class Block: SKSpriteNode {
         position = CGPoint(x: blockData["positionX"] as! CGFloat * GameSettings.playableAreaSize.width, y: blockData["positionY"] as! CGFloat * GameSettings.playableAreaSize.height)
         preferedPushTime = blockData["pushTime"] as? Double
         self.rotation = blockData["rotation"] as? Double
+        let color = CIColor(string:blockData["color"] as! String)
+        if color.red == 0 && color.green == 0 && color.blue == 0{
+            self.physicsBody?.dynamic = false
+        }
     }
     
     func randomizeData() {
