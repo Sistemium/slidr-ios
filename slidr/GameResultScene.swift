@@ -77,21 +77,21 @@ class GameResultScene: SKScene{
         case returnButton:
             let scene = LevelScene()
             scene.size = GameSettings.playableAreaSize
-            scene.scaleMode = .AspectFit
+            scene.scaleMode = .Fill
             scene.previousScene = MenuScene()
             self.view!.presentScene(scene)
         case actionButton:
             if result == .Win{
                 let scene = GameScene()
                 scene.size = GameSettings.playableAreaSize
-                scene.scaleMode = .AspectFit
+                scene.scaleMode = .Fill
                 scene.level = LevelLoadService.sharedInstance.nextLevelByPriority(finishedLevel!.priority!)
                 scene.previousScene = LevelScene()
                 self.view?.presentScene(scene)
             }else{
                 let scene = GameScene()
                 scene.size = GameSettings.playableAreaSize
-                scene.scaleMode = .AspectFit
+                scene.scaleMode = .Fill
                 scene.level = LevelLoadService.sharedInstance.levelByPriority(finishedLevel!.priority!)
                 scene.previousScene = LevelScene()
                 self.view?.presentScene(scene)

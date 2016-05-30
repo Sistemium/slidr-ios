@@ -13,8 +13,8 @@ class OptionsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var slider: UISlider!{
         didSet{
-            slider.minimumValue = 1000
-            slider.maximumValue = 20000
+            slider.minimumValue = 10000
+            slider.maximumValue = 90000
             slider.setValue(Float(GameSettings.baseSpeed), animated: false)
         }
     }

@@ -16,10 +16,11 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         didSet{
             tableview?.delegate = self
             tableview?.dataSource = self
-            tableview?.frame = CGRectMake(0, GameSettings.toolbarHeight, GameSettings.playableAreaSize.width, GameSettings.playableAreaSize.height - GameSettings.toolbarHeight)
+            tableview?.frame = CGRectMake(0, GameSettings.toolbarHeight / GameSettings.playableAreaSize.height * self.view!.frame.height, self.view!.frame.width, self.view!.frame.height - GameSettings.toolbarHeight / GameSettings.playableAreaSize.height * self.view!.frame.height)
             tableview?.estimatedRowHeight = 45
             tableview?.backgroundColor = UIColor.clearColor()
             tableview?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "levelCell")
+            self.view?.addSubview(tableview)
         }
     }
     
@@ -35,7 +36,6 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         self.backgroundColor = UIColor.lightGrayColor()
         levels = LevelLoadService.sharedInstance.levels
         tableview = UITableView()
-        view.addSubview(tableview)
         toolbarNode  = ToolbarNode()
         toolbarNode.timerLabelText = "Select level"
     }
@@ -52,7 +52,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         tableview.removeFromSuperview()
         let scene = previousScene ?? MenuScene()
         scene.size = GameSettings.playableAreaSize
-        scene.scaleMode = .AspectFit
+        scene.scaleMode = .Fill
         self.view?.presentScene(scene)
     }
     
@@ -71,7 +71,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         tableview.removeFromSuperview()
         let scene = GameScene()
         scene.size = GameSettings.playableAreaSize
-        scene.scaleMode = .AspectFit
+        scene.scaleMode = .Fill
         scene.level = levels[indexPath.row]
         scene.previousScene = self
         self.view!.presentScene(scene)

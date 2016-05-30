@@ -62,20 +62,20 @@ class MenuScene: SKScene {
                     case startGameLabel:
                         let scene = LevelScene()
                         scene.size = GameSettings.playableAreaSize
-                        scene.scaleMode = .AspectFit
+                        scene.scaleMode = .Fill
                         scene.previousScene = self
                         self.view!.presentScene(scene)
                         break
                     case freeModeLabel:
                         let scene = GameScene()
                         scene.size = GameSettings.playableAreaSize
-                        scene.scaleMode = .AspectFit
+                        scene.scaleMode = .Fill
                         scene.previousScene = self
                         self.view!.presentScene(scene)
                     case optionsLabel:
                         let scene = OptionsScene()
                         scene.size = GameSettings.playableAreaSize
-                        scene.scaleMode = .AspectFit
+                        scene.scaleMode = .Fill
                         scene.previousScene = self
                         self.view!.presentScene(scene)
                         break

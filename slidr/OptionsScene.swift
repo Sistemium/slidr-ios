@@ -14,10 +14,11 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         didSet{
             tableview?.delegate = self
             tableview?.dataSource = self
-            tableview?.frame = CGRectMake(0, GameSettings.toolbarHeight, GameSettings.playableAreaSize.width, GameSettings.playableAreaSize.height - GameSettings.toolbarHeight)
+            tableview?.frame = CGRectMake(0, GameSettings.toolbarHeight / GameSettings.playableAreaSize.height * self.view!.frame.height, self.view!.frame.width, self.view!.frame.height - GameSettings.toolbarHeight / GameSettings.playableAreaSize.height * self.view!.frame.height)
             tableview?.estimatedRowHeight = 45
             tableview?.backgroundColor = UIColor.clearColor()
             tableview?.allowsSelection = false
+            self.view?.addSubview(tableview)
         }
     }
     
@@ -32,7 +33,6 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.lightGrayColor()
         tableview = UITableView()
-        view.addSubview(tableview)
         toolbarNode  = ToolbarNode()
         toolbarNode.timerLabelText = "Options"
     }
@@ -46,10 +46,10 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     }
     
     private func returnToPreviousScene(){
-        tableview.removeFromSuperview()
+        tableview?.removeFromSuperview()
         let scene = previousScene ?? MenuScene()
         scene.size = GameSettings.playableAreaSize
-        scene.scaleMode = .AspectFit
+        scene.scaleMode = .Fill
         self.view?.presentScene(scene)
     }
     

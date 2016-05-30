@@ -160,7 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if gameMode == .Level && level?.blocks.count == 0 && self.children.count == unusedNodes() && leftCount == 0{
             let scene = GameResultScene()
             scene.size = GameSettings.playableAreaSize
-            scene.scaleMode = .AspectFit
+            scene.scaleMode = .Fill
             scene.result = .Win
             scene.finishedLevel = level
             self.view!.presentScene(scene)
@@ -168,7 +168,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if gameMode == .Level && (level?.timeout<=0 || level?.blocks.count == 0 && self.children.count == unusedNodes() && leftCount != 0){
             let scene = GameResultScene()
             scene.size = GameSettings.playableAreaSize
-            scene.scaleMode = .AspectFit
+            scene.scaleMode = .Fill
             scene.result = .Lose
             scene.finishedLevel = level
             self.view!.presentScene(scene)
@@ -370,7 +370,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func returnToPreviousScene(){
         let scene = previousScene!
         scene.size = GameSettings.playableAreaSize
-        scene.scaleMode = .AspectFit
+        scene.scaleMode = .Fill
         self.view!.presentScene(scene)
     }
     
