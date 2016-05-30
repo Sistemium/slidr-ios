@@ -6,19 +6,19 @@
 	<array>
 		<dict>
 			<key>color</key>
-			<string>0 0 1.0 1.0</string>
+			<string>1.0 0 0 1.0</string>
 			<key>height</key>
-			<integer>220</integer>
+			<integer>150</integer>
 			<key>width</key>
-			<integer>100</integer>
+			<integer>150</integer>
 			<key>pushVectorX</key>
-			<integer>1</integer>
+			<integer>-1</integer>
 			<key>pushVectorY</key>
 			<integer>0</integer>
 			<key>positionX</key>
-			<real>-0.1</real>
+			<real>1.2</real>
 			<key>positionY</key>
-			<real>0.2</real>
+			<real>0.5</real>
 			<key>pushTime</key>
 			<integer>0</integer>
 			<key>rotation</key>
@@ -26,19 +26,59 @@
 		</dict>
 		<dict>
 			<key>color</key>
-			<string>0 0 1.0 1.0</string>
+			<string>1.0 0 0 1.0</string>
 			<key>height</key>
-			<integer>220</integer>
+			<integer>150</integer>
 			<key>width</key>
-			<integer>100</integer>
+			<integer>150</integer>
 			<key>pushVectorX</key>
-			<integer>-1</integer>
+			<integer>1</integer>
 			<key>pushVectorY</key>
 			<integer>0</integer>
 			<key>positionX</key>
-			<real>1.1</real>
+			<real>-0.2</real>
 			<key>positionY</key>
-			<real>0.8</real>
+			<real>0.5</real>
+			<key>pushTime</key>
+			<real>0.5</real>
+			<key>rotation</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>color</key>
+			<string>1.0 0 0 1.0</string>
+			<key>height</key>
+			<integer>150</integer>
+			<key>width</key>
+			<integer>150</integer>
+			<key>pushVectorX</key>
+			<integer>0</integer>
+			<key>pushVectorY</key>
+			<integer>-1</integer>
+			<key>positionX</key>
+			<real>0.3</real>
+			<key>positionY</key>
+			<real>1.1</real>
+			<key>pushTime</key>
+			<integer>0</integer>
+			<key>rotation</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>color</key>
+			<string>1.0 0 0 1.0</string>
+			<key>height</key>
+			<integer>150</integer>
+			<key>width</key>
+			<integer>150</integer>
+			<key>pushVectorX</key>
+			<integer>0</integer>
+			<key>pushVectorY</key>
+			<integer>1</integer>
+			<key>positionX</key>
+			<real>0.7</real>
+			<key>positionY</key>
+			<real>-0.2</real>
 			<key>pushTime</key>
 			<integer>0</integer>
 			<key>rotation</key>
