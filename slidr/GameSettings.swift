@@ -20,9 +20,10 @@ class GameSettings{
     static let blockColors = [UIColor.redColor(),UIColor.blueColor()]
     static let toolbarHeight:CGFloat = 60
     static let pushBlockInterval = 0.4
+    static let defaultSpeed:CGFloat = 45000
     static var baseSpeed:CGFloat{
         get{
-            return NSUserDefaults.standardUserDefaults().valueForKey("baseSpeed") as? CGFloat ?? 45000
+            return NSUserDefaults.standardUserDefaults().valueForKey("baseSpeed") as? CGFloat ?? defaultSpeed
         }
         
         set{

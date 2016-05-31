@@ -21,14 +21,14 @@ class OptionsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var speedLabel: UILabel!{
         didSet{
-        speedLabel.text = GameSettings.baseSpeed.fixedFractionDigits(0)
+        speedLabel.text = (GameSettings.baseSpeed / 1000).fixedFractionDigits(0)
         }
     }
     
     @IBAction func changeSpeed(sender: UISlider) {
         
         GameSettings.baseSpeed = CGFloat(sender.value)
-        speedLabel.text = GameSettings.baseSpeed.fixedFractionDigits(0)
+        speedLabel.text = (GameSettings.baseSpeed / 1000).fixedFractionDigits(0)
         
     }
     

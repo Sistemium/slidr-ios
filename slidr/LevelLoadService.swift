@@ -42,7 +42,7 @@ class LevelLoadService{
         let level = Level()
         level.name = plistData["name"] as? String
         level.priority = plistData["priority"] as? Float
-        level.timeout = plistData["timeout"] as? Double
+        level.timeout = plistData["timeout"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.baseSpeed))
         for element in plistData["blocks"] as! NSArray{
             let blockData = element as! NSDictionary
             level.blocks.append(Block(blockData: blockData))
