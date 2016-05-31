@@ -52,6 +52,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    private var pushedCount = 0
+    
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.lightGrayColor()
         self.physicsWorld.contactDelegate = self
@@ -143,6 +145,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if !block.pushed{
                     if self.intersectsNode(block){
                         block.pushed = true
+                        pushedCount+=1
                     }
                 }
                 block.physicsBody?.velocity = block.velocity
@@ -157,7 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func checkResult(){
-        if gameMode == .Level && level?.blocks.count == 0 && self.children.count == unusedNodes() && leftCount == 0{
+        if gameMode == .Level && level?.blocks.count == 0 && destroyedCount != 0 && pushedCount - unusedNodes() + 1 == destroyedCount && leftCount == 0{
             let scene = GameResultScene()
             scene.size = GameSettings.playableAreaSize
             scene.scaleMode = .Fill
@@ -277,7 +280,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if block1.color == block2.color{
                     block1.physicsBody = nil
                     block2.physicsBody = nil
-                    destroyedCount += 1
+                    destroyedCount += 2
                     let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
                     block1.runAction(action){
                         block1.removeFromParent()
