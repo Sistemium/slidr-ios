@@ -29,13 +29,15 @@ class Block: SKSpriteNode {
     
     var pushed = false
     
+    private var speedModifier:CGFloat = 1
+    
     var pushVector : CGVector!{
         get{
             return _pushVector
         }
         set{
             if self.physicsBody != nil{
-                self.velocity = CGVectorMake(newValue.dx / self.size.height, newValue.dy / self.size.width)
+                self.velocity = CGVectorMake(newValue.dx / self.size.height * speedModifier, newValue.dy / self.size.width * speedModifier)
                 _pushVector = newValue
                 switch (pushVector.dx, pushVector.dy) {
                 case (let x,_) where x<0:
@@ -98,6 +100,7 @@ class Block: SKSpriteNode {
     }
     
     func loadBlock(blockData:NSDictionary){
+        speedModifier = blockData["speedModifier"] as? CGFloat ?? 1
         pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.baseSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.baseSpeed)
         position = CGPoint(x: blockData["positionX"] as! CGFloat * GameSettings.playableAreaSize.width, y: blockData["positionY"] as! CGFloat * GameSettings.playableAreaSize.height)
         preferedPushTime = blockData["pushTime"] as? Double

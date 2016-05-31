@@ -8,33 +8,33 @@
 			<key>color</key>
 			<string>1.0 0 0 1.0</string>
 			<key>height</key>
-			<integer>150</integer>
+			<real>150</real>
 			<key>width</key>
-			<integer>150</integer>
+			<real>150</real>
 			<key>pushVectorX</key>
-			<integer>0</integer>
+			<real>0</real>
 			<key>pushVectorY</key>
-			<integer>-2</integer>
+			<real>-2</real>
 			<key>positionX</key>
 			<real>0.5</real>
 			<key>positionY</key>
 			<real>1.1</real>
 			<key>pushTime</key>
-			<integer>0</integer>
+			<real>0</real>
 			<key>rotation</key>
-			<integer>0</integer>
+			<real>0</real>
 		</dict>
 		<dict>
 			<key>color</key>
 			<string>1.0 0 0 1.0</string>
 			<key>height</key>
-			<integer>150</integer>
+			<real>150</real>
 			<key>width</key>
-			<integer>150</integer>
+			<real>150</real>
 			<key>pushVectorX</key>
-			<integer>0</integer>
+			<real>0</real>
 			<key>pushVectorY</key>
-			<integer>-2</integer>
+			<real>-2</real>
 			<key>positionX</key>
 			<real>0.5</real>
 			<key>positionY</key>
@@ -42,13 +42,13 @@
 			<key>pushTime</key>
 			<real>0</real>
 			<key>rotation</key>
-			<integer>0</integer>
+			<real>0</real>
 		</dict>
 	</array>
 	<key>timeout</key>
-	<integer>10</integer>
+	<real>10</real>
 	<key>priority</key>
-	<integer>1</integer>
+	<real>1</real>
 	<key>name</key>
 	<string>Level 1</string>
 </dict>
