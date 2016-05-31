@@ -15,7 +15,6 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         let scene = MenuScene()
         let skView = self.view as! SKView
-        print(UIScreen.mainScreen().bounds.height / UIScreen.mainScreen().bounds.width)
         if UIScreen.mainScreen().bounds.height / UIScreen.mainScreen().bounds.width > 1.5{
             GameSettings.playableAreaSize = CGSize(width: 768.375, height: 1366)
         }else if UIScreen.mainScreen().bounds.height / UIScreen.mainScreen().bounds.width < 1.5{

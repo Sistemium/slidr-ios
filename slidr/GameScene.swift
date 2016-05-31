@@ -89,7 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for node in self.children{
             if let block = node as? Block{
                 location = touches.first!.locationInNode(block)
-                let region = SKRegion(radius: Float(block.frame.width + block.frame.height) / 2)
+                let region = SKRegion(size: CGSize(width: block.size.width + GameSettings.touchRegion, height: block.size.height + GameSettings.touchRegion))
                 if region.containsPoint(location) && block.color == UIColor.redColor(){
                     block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
                     return
@@ -346,7 +346,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if let block = node as? Block{
                     touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
                     touchLocation = self.convertPoint(touchLocation, toNode: block)
-                    let region = SKRegion(radius: Float(block.frame.width + block.frame.height) / 2)
+                    let region = SKRegion(size: CGSize(width: block.size.width + GameSettings.touchRegion, height: block.size.height  * GameSettings.touchRegion))
                     if region.containsPoint(touchLocation) && block.color == UIColor.blueColor(){
                         switch sender.direction {
                         case UISwipeGestureRecognizerDirection.Up:

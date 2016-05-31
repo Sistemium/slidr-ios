@@ -34,4 +34,5 @@ class GameSettings{
     static let labelSize: CGFloat = 80
     static var maxNumberOfBlocks = 5
     static let hitSideWidth:CGFloat = 20
+    static let touchRegion:CGFloat = 50
 }
