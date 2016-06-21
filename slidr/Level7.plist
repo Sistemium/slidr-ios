@@ -6,39 +6,19 @@
 	<array>
 		<dict>
 			<key>color</key>
-			<string>0 0 0 1.0</string>
+			<string>0 0 1.0 1.0</string>
 			<key>height</key>
-			<real>200</real>
+			<real>160</real>
 			<key>width</key>
-			<real>20</real>
+			<real>160</real>
 			<key>pushVectorX</key>
-			<real>0</real>
+			<real>-1</real>
 			<key>pushVectorY</key>
 			<real>0</real>
 			<key>positionX</key>
-			<real>0.15</real>
+			<real>1.1</real>
 			<key>positionY</key>
-			<real>0.1</real>
-			<key>pushTime</key>
-			<real>0</real>
-			<key>rotation</key>
-			<real>90</real>
-		</dict>
-		<dict>
-			<key>color</key>
-			<string>0 0 0 1.0</string>
-			<key>height</key>
-			<real>40</real>
-			<key>width</key>
-			<real>4000</real>
-			<key>pushVectorX</key>
-			<real>0</real>
-			<key>pushVectorY</key>
-			<real>0</real>
-			<key>positionX</key>
-			<real>0.5</real>
-			<key>positionY</key>
-			<real>0</real>
+			<real>0.2</real>
 			<key>pushTime</key>
 			<real>0</real>
 			<key>rotation</key>
@@ -46,59 +26,39 @@
 		</dict>
 		<dict>
 			<key>color</key>
-			<string>0 0 0 1.0</string>
+			<string>1.0 0 0 1.0</string>
 			<key>height</key>
-			<real>200</real>
+			<real>160</real>
 			<key>width</key>
-			<real>20</real>
+			<real>160</real>
 			<key>pushVectorX</key>
-			<real>0</real>
+			<real>-1</real>
 			<key>pushVectorY</key>
 			<real>0</real>
 			<key>positionX</key>
-			<real>0.15</real>
+			<real>1.1</real>
 			<key>positionY</key>
-			<real>0.45</real>
+			<real>0.4</real>
 			<key>pushTime</key>
 			<real>0</real>
 			<key>rotation</key>
-			<real>-90</real>
+			<real>0</real>
 		</dict>
 		<dict>
 			<key>color</key>
-			<string>0 0 0 1.0</string>
+			<string>1.0 0 0 1.0</string>
 			<key>height</key>
-			<real>200</real>
+			<real>160</real>
 			<key>width</key>
-			<real>20</real>
+			<real>160</real>
 			<key>pushVectorX</key>
-			<real>0</real>
+			<real>-1</real>
 			<key>pushVectorY</key>
 			<real>0</real>
 			<key>positionX</key>
-			<real>0.5</real>
+			<real>1.1</real>
 			<key>positionY</key>
-			<real>0.1</real>
-			<key>pushTime</key>
-			<real>0</real>
-			<key>rotation</key>
-			<real>-90</real>
-		</dict>
-		<dict>
-			<key>color</key>
-			<string>0 0 0 1.0</string>
-			<key>height</key>
-			<real>400</real>
-			<key>width</key>
-			<real>20</real>
-			<key>pushVectorX</key>
-			<real>0</real>
-			<key>pushVectorY</key>
-			<real>0</real>
-			<key>positionX</key>
 			<real>0.6</real>
-			<key>positionY</key>
-			<real>0.75</real>
 			<key>pushTime</key>
 			<real>0</real>
 			<key>rotation</key>
@@ -106,79 +66,19 @@
 		</dict>
 		<dict>
 			<key>color</key>
-			<string>1.0 0 0 1.0</string>
+			<string>0 0 1.0 1.0</string>
 			<key>height</key>
 			<real>160</real>
 			<key>width</key>
 			<real>160</real>
 			<key>pushVectorX</key>
-			<real>-0.5</real>
+			<real>-1</real>
 			<key>pushVectorY</key>
 			<real>0</real>
 			<key>positionX</key>
-			<real>1.2</real>
+			<real>1.1</real>
 			<key>positionY</key>
-			<real>0.28</real>
-			<key>pushTime</key>
-			<real>0</real>
-			<key>rotation</key>
-			<real>0</real>
-		</dict>
-		<dict>
-			<key>color</key>
-			<string>1.0 0 0 1.0</string>
-			<key>height</key>
-			<real>160</real>
-			<key>width</key>
-			<real>160</real>
-			<key>pushVectorX</key>
-			<real>0.5</real>
-			<key>pushVectorY</key>
-			<real>0</real>
-			<key>positionX</key>
-			<real>-0.2</real>
-			<key>positionY</key>
-			<real>0.65</real>
-			<key>pushTime</key>
-			<real>0</real>
-			<key>rotation</key>
-			<real>0</real>
-		</dict>
-		<dict>
-			<key>color</key>
-			<string>1.0 0 0 1.0</string>
-			<key>height</key>
-			<real>160</real>
-			<key>width</key>
-			<real>160</real>
-			<key>pushVectorX</key>
-			<real>0.5</real>
-			<key>pushVectorY</key>
-			<real>0</real>
-			<key>positionX</key>
-			<real>-0.2</real>
-			<key>positionY</key>
-			<real>0.85</real>
-			<key>pushTime</key>
-			<real>0</real>
-			<key>rotation</key>
-			<real>0</real>
-		</dict>
-		<dict>
-			<key>color</key>
-			<string>1.0 0 0 1.0</string>
-			<key>height</key>
-			<real>250</real>
-			<key>width</key>
-			<real>80</real>
-			<key>pushVectorX</key>
-			<real>0</real>
-			<key>pushVectorY</key>
-			<real>-0.5</real>
-			<key>positionX</key>
 			<real>0.8</real>
-			<key>positionY</key>
-			<real>0.87</real>
 			<key>pushTime</key>
 			<real>0</real>
 			<key>rotation</key>
@@ -186,7 +86,7 @@
 		</dict>
 	</array>
 	<key>timeout</key>
-	<real>25</real>
+	<real>10</real>
 	<key>priority</key>
 	<real>7</real>
 	<key>name</key>
