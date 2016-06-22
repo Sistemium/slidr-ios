@@ -46,7 +46,9 @@ class GameViewController: UIViewController {
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
         if motion == .MotionShake {
-            resetLevel()
+            if GameSettings.shakeToResetEnabled{
+                resetLevel()
+            }
         }
     }
     

@@ -1,5 +1,5 @@
 //
-//  OptionsTableViewCell.swift
+//  GameSpeedSliderTableViewCell.swift
 //  slidr
 //
 //  Created by Edgar Jan Vuicik on 24/05/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OptionsTableViewCell: UITableViewCell {
+class GameSpeedSliderTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var slider: UISlider!{

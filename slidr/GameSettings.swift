@@ -37,4 +37,17 @@ class GameSettings{
     static let hitSideWidth:CGFloat = 20
     static let touchRegion:CGFloat = 50
     static let timeUntilWarning = 3.0
+    static var shakeToResetEnabled:Bool{
+        get{
+            if NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys.contains("ShakeToResetEnabled"){
+                return NSUserDefaults.standardUserDefaults().boolForKey("ShakeToResetEnabled")
+            }
+            else{
+                return true
+            }
+        }
+        set{
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "ShakeToResetEnabled")
+        }
+    }
 }
