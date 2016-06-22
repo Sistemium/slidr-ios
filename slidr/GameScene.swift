@@ -19,9 +19,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         didSet{
             self.addChild(toolbarNode)
             if gameMode == .Level{
-                toolbarNode.leftLabelEnabled = false
+                toolbarNode.leftLabelText = level?.name ?? ""
             }else{
-                toolbarNode.leftLabelEnabled = true
+                toolbarNode.leftLabelText = "Free mode"
             }
         }
     }
@@ -40,17 +40,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var gameMode:GameMode = .Free
     
-    var destroyedCount = 0{
-        didSet{
-            toolbarNode.leftLabelText = "Score: \(destroyedCount - leftCount)"
-        }
-    }
+    var destroyedCount = 0
     
-    var leftCount = 0{
-        didSet{
-            toolbarNode.leftLabelText = "Score: \(destroyedCount - leftCount)"
-        }
-    }
+    var leftCount = 0
     
     var pushedCount = 0
     
