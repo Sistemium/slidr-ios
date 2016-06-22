@@ -19,54 +19,64 @@ class ToolbarNode: SKSpriteNode {
         self.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height - GameSettings.toolbarHeight/2)
         self.zPosition = 3
         self.alpha = 0.97
-        scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
-        timerLabel = SKLabelNode(fontNamed:"Chalkduster")
+        leftLabel = SKLabelNode(fontNamed:"Chalkduster")
+        centerLabel = SKLabelNode(fontNamed:"Chalkduster")
         backButton = SKSpriteNode(texture: SKTexture(imageNamed: "Back"), size: CGSize(width: GameSettings.toolbarHeight, height: GameSettings.toolbarHeight))
-        self.addChild(scoreLabel)
-        self.addChild(timerLabel)
+        self.addChild(leftLabel)
+        self.addChild(centerLabel)
         self.addChild(backButton)
         backButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 - backButton.size.width/2 - 5, y: 0)
-        scoreLabel.fontSize = GameSettings.toolbarHeight / 1.5
-        scoreLabel.zPosition = 4
-        scoreLabel.fontColor = .whiteColor()
-        timerLabel.fontSize = GameSettings.toolbarHeight / 1.5
-        timerLabel.zPosition = 4
-        timerLabel.fontColor = .whiteColor()
+        leftLabel.fontSize = GameSettings.toolbarHeight / 1.5
+        leftLabel.zPosition = 4
+        centerLabel.fontSize = GameSettings.toolbarHeight / 1.5
+        centerLabel.zPosition = 4
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    var scoreLabelText: String = ""{
+    var centerLabelColor = UIColor.whiteColor(){
         didSet{
-            scoreLabel.text = scoreLabelText
-            scoreLabel.position = leftAlignment
+            centerLabel.fontColor = centerLabelColor
         }
     }
     
-    var timerLabelText: String = ""{
+    var leftLabelColor = UIColor.whiteColor(){
         didSet{
-            timerLabel.text = timerLabelText
-            timerLabel.position = centerAlignment
+            leftLabel.fontColor = leftLabelColor
         }
     }
     
-    var scoreLabelEnabled: Bool = true{
+    var leftLabelText: String = ""{
         didSet{
-            scoreLabel.hidden = !scoreLabelEnabled
+            leftLabel.text = leftLabelText
+            leftLabel.position = leftAlignment
         }
     }
     
-    var timerLabelEnabled: Bool = true{
+    var centerLabelText: String = ""{
         didSet{
-            timerLabel.hidden = !timerLabelEnabled
+            centerLabel.text = centerLabelText
+            centerLabel.position = centerAlignment
+        }
+    }
+    
+    var leftLabelEnabled: Bool = true{
+        didSet{
+            leftLabel.hidden = !leftLabelEnabled
+        }
+    }
+    
+    var centerLabelEnabled: Bool = true{
+        didSet{
+            centerLabel.hidden = !centerLabelEnabled
         }
     }
     
     private var leftAlignment:CGPoint{
         get{
-            return CGPoint(x: -GameSettings.playableAreaSize.width/2 + scoreLabel.frame.size.width/2 , y: -GameSettings.toolbarHeight/4)
+            return CGPoint(x: -GameSettings.playableAreaSize.width/2 + leftLabel.frame.size.width/2 , y: -GameSettings.toolbarHeight/4)
         }
     }
     
@@ -76,9 +86,9 @@ class ToolbarNode: SKSpriteNode {
         }
     }
     
-    private var scoreLabel : SKLabelNode!
+    private var leftLabel : SKLabelNode!
     
-    private var timerLabel : SKLabelNode!
+    private var centerLabel : SKLabelNode!
     
     var backButton : SKSpriteNode!
 }

@@ -34,7 +34,7 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         self.backgroundColor = UIColor.lightGrayColor()
         tableview = UITableView()
         toolbarNode  = ToolbarNode()
-        toolbarNode.timerLabelText = "Options"
+        toolbarNode.centerLabelText = "Options"
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -54,7 +54,7 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

@@ -37,7 +37,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         levels = LevelLoadService.sharedInstance.levels
         tableview = UITableView()
         toolbarNode  = ToolbarNode()
-        toolbarNode.timerLabelText = "Select level"
+        toolbarNode.centerLabelText = "Select level"
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

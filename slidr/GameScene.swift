@@ -13,15 +13,15 @@ private enum GameMode{
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    private var timeSinceLastUpdate:CFTimeInterval?
-    private var timeToNextBlockPush = GameSettings.pushBlockInterval
+    var timeSinceLastUpdate:CFTimeInterval?
+    var timeToNextBlockPush = GameSettings.pushBlockInterval
     private var toolbarNode : ToolbarNode!{
         didSet{
             self.addChild(toolbarNode)
             if gameMode == .Level{
-                toolbarNode.scoreLabelEnabled = false
+                toolbarNode.leftLabelEnabled = false
             }else{
-                toolbarNode.scoreLabelEnabled = true
+                toolbarNode.leftLabelEnabled = true
             }
         }
     }
@@ -40,19 +40,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var gameMode:GameMode = .Free
     
-    private var destroyedCount = 0{
+    var destroyedCount = 0{
         didSet{
-            toolbarNode.scoreLabelText = "Score: \(destroyedCount - leftCount)"
+            toolbarNode.leftLabelText = "Score: \(destroyedCount - leftCount)"
         }
     }
     
-    private var leftCount = 0{
+    var leftCount = 0{
         didSet{
-            toolbarNode.scoreLabelText = "Score: \(destroyedCount - leftCount)"
+            toolbarNode.leftLabelText = "Score: \(destroyedCount - leftCount)"
         }
     }
     
-    private var pushedCount = 0
+    var pushedCount = 0
     
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.lightGrayColor()
@@ -112,7 +112,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }
                 level!.timeout! -= currentTime - oldTime
-                toolbarNode.timerLabelText = level!.timeout!.fixedFractionDigits(1)
+                toolbarNode.centerLabelText = level!.timeout!.fixedFractionDigits(1)
+                if level?.timeout <= GameSettings.timeUntilWarning{
+                    toolbarNode.centerLabelColor = UIColor.redColor()
+                }else{
+                    toolbarNode.centerLabelColor = UIColor.whiteColor()
+                }
             }
         }
         else if self.children.count - 1 < GameSettings.maxNumberOfBlocks{
