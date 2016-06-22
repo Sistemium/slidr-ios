@@ -18,7 +18,7 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
             tableview?.estimatedRowHeight = 45
             tableview?.backgroundColor = UIColor.clearColor()
             tableview?.allowsSelection = false
-            tableview?.separatorStyle = .None
+            tableview?.cellLayoutMarginsFollowReadableWidth = false
             self.view?.addSubview(tableview)
         }
     }
@@ -62,6 +62,7 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         if indexPath.row == 0{
             let cell =  NSBundle.mainBundle().loadNibNamed("GameSpeedSliderTableViewCell", owner: self, options: nil)[0] as! GameSpeedSliderTableViewCell
             cell.backgroundColor = UIColor.clearColor()
+            
             return cell
         }else{
             let cell =  NSBundle.mainBundle().loadNibNamed("ShakeSwitchTableViewCell", owner: self, options: nil)[0] as! ShakeSwitchTableViewCell
