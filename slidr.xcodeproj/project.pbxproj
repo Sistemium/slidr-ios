@@ -7,20 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5BE49001B0F54F72E0ECE053 /* Level88.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE49E0678E5D6C631A89C1A /* Level88.json */; };
-		5BE495CC43837A4961D6D2D0 /* Level11.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE4970CC26FC6CE01ADFEB5 /* Level11.json */; };
-		5BE495F07476EB0C87DB7A19 /* Level44.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE4975F1A1829FA6B739AE1 /* Level44.json */; };
-		5BE497EF9B962B1910BF604C /* Level33.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE495DE8971ED96F22AB1E8 /* Level33.json */; };
-		5BE499B5021F1AF8F0F791F3 /* Level66.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE49B44371A4036296425C2 /* Level66.json */; };
-		5BE49C2CD3C4DFD7090E02EF /* Level22.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE494A83BC369F330115517 /* Level22.json */; };
-		5BE49E7EE1A114DC4A304DE4 /* Level55.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE4940D360C65EE40F39C0A /* Level55.json */; };
-		5BE49FF0258691ECA3BD2A73 /* Level77.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE49BAA81203A470EBBEE01 /* Level77.json */; };
+		5BE49001B0F54F72E0ECE053 /* Level8.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE49E0678E5D6C631A89C1A /* Level8.json */; };
+		5BE495CC43837A4961D6D2D0 /* Level1.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE4970CC26FC6CE01ADFEB5 /* Level1.json */; };
+		5BE495F07476EB0C87DB7A19 /* Level4.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE4975F1A1829FA6B739AE1 /* Level4.json */; };
+		5BE497EF9B962B1910BF604C /* Level3.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE495DE8971ED96F22AB1E8 /* Level3.json */; };
+		5BE499B5021F1AF8F0F791F3 /* Level6.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE49B44371A4036296425C2 /* Level6.json */; };
+		5BE49C2CD3C4DFD7090E02EF /* Level2.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE494A83BC369F330115517 /* Level2.json */; };
+		5BE49E7EE1A114DC4A304DE4 /* Level5.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE4940D360C65EE40F39C0A /* Level5.json */; };
+		5BE49FF0258691ECA3BD2A73 /* Level7.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE49BAA81203A470EBBEE01 /* Level7.json */; };
 		6D1F1DFD1CEF3E78002479FD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1F1DFC1CEF3E78002479FD /* Extensions.swift */; };
 		6D1F1DFF1CEF428E002479FD /* GameResultScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1F1DFE1CEF428E002479FD /* GameResultScene.swift */; };
-		6D2B7E881CFC6FBF00933386 /* Level3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B7E871CFC6FBF00933386 /* Level3.plist */; };
-		6D2B7E8A1CFC82E000933386 /* Level4.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D2B7E891CFC82E000933386 /* Level4.plist */; };
 		6D38DD991CDA3A38008353DF /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D38DD981CDA3A38008353DF /* Block.swift */; };
-		6D3D36241CF32B1A008EFFE8 /* Level5.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D3D36231CF32B1A008EFFE8 /* Level5.plist */; };
 		6D42E7B21CF45B3300740131 /* OptionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D42E7B11CF45B3300740131 /* OptionsScene.swift */; };
 		6D42E7B41CF460DE00740131 /* GameSpeedSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D42E7B31CF460DE00740131 /* GameSpeedSliderTableViewCell.xib */; };
 		6D42E7B61CF4661000740131 /* GameSpeedSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D42E7B51CF4661000740131 /* GameSpeedSliderTableViewCell.swift */; };
@@ -29,15 +26,10 @@
 		6D538BA81CDCC8D500B0F780 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D538BA61CDCC8D500B0F780 /* Crashlytics.framework */; };
 		6D53CB6E1D1A9A04006F40E7 /* ShakeSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D53CB6D1D1A9A04006F40E7 /* ShakeSwitchTableViewCell.xib */; };
 		6D53CB701D1A9BE9006F40E7 /* ShakeSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D53CB6F1D1A9BE9006F40E7 /* ShakeSwitchTableViewCell.swift */; };
-		6D53F1CF1CF273FE008E137E /* Level7.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D53F1CE1CF273FE008E137E /* Level7.plist */; };
 		6D56F3C81CEB2EDF00CD3D3A /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D56F3C71CEB2EDF00CD3D3A /* LevelScene.swift */; };
 		6D56F3CA1CEB430E00CD3D3A /* ToolbarNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D56F3C91CEB430E00CD3D3A /* ToolbarNode.swift */; };
-		6D6346551CEDD9110067A1AF /* Level1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D6346541CEDD9110067A1AF /* Level1.plist */; };
 		6D6346571CEDDAD40067A1AF /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6346561CEDDAD40067A1AF /* Level.swift */; };
 		6D6346591CEDDDDD0067A1AF /* LevelLoadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6346581CEDDDDD0067A1AF /* LevelLoadService.swift */; };
-		6D63465E1CEDF1F90067A1AF /* Level2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D63465D1CEDF1F90067A1AF /* Level2.plist */; };
-		6D7204FF1CF5CBB200DB211A /* Level8.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D7204FE1CF5CBB200DB211A /* Level8.plist */; };
-		6D9A19431D1962DB00164A27 /* Level6.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6D9A19421D1962DB00164A27 /* Level6.plist */; };
 		6DA665DA1CEA0B1400644E0A /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA665D91CEA0B1400644E0A /* MenuScene.swift */; };
 		6DC0CCC71CD8C0C20019D466 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0CCC61CD8C0C20019D466 /* AppDelegate.swift */; };
 		6DC0CCCB1CD8C0C20019D466 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC0CCCA1CD8C0C20019D466 /* GameScene.swift */; };
@@ -47,20 +39,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5BE4940D360C65EE40F39C0A /* Level55.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level55.json; sourceTree = "<group>"; };
-		5BE494A83BC369F330115517 /* Level22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level22.json; sourceTree = "<group>"; };
-		5BE495DE8971ED96F22AB1E8 /* Level33.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level33.json; sourceTree = "<group>"; };
-		5BE4970CC26FC6CE01ADFEB5 /* Level11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level11.json; sourceTree = "<group>"; };
-		5BE4975F1A1829FA6B739AE1 /* Level44.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level44.json; sourceTree = "<group>"; };
-		5BE49B44371A4036296425C2 /* Level66.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level66.json; sourceTree = "<group>"; };
-		5BE49BAA81203A470EBBEE01 /* Level77.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level77.json; sourceTree = "<group>"; };
-		5BE49E0678E5D6C631A89C1A /* Level88.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level88.json; sourceTree = "<group>"; };
+		5BE4940D360C65EE40F39C0A /* Level5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level5.json; sourceTree = "<group>"; };
+		5BE494A83BC369F330115517 /* Level2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level2.json; sourceTree = "<group>"; };
+		5BE495DE8971ED96F22AB1E8 /* Level3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level3.json; sourceTree = "<group>"; };
+		5BE4970CC26FC6CE01ADFEB5 /* Level1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level1.json; sourceTree = "<group>"; };
+		5BE4975F1A1829FA6B739AE1 /* Level4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level4.json; sourceTree = "<group>"; };
+		5BE49B44371A4036296425C2 /* Level6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level6.json; sourceTree = "<group>"; };
+		5BE49BAA81203A470EBBEE01 /* Level7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level7.json; sourceTree = "<group>"; };
+		5BE49E0678E5D6C631A89C1A /* Level8.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level8.json; sourceTree = "<group>"; };
 		6D1F1DFC1CEF3E78002479FD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6D1F1DFE1CEF428E002479FD /* GameResultScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultScene.swift; sourceTree = "<group>"; };
-		6D2B7E871CFC6FBF00933386 /* Level3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Level3.plist; sourceTree = "<group>"; };
-		6D2B7E891CFC82E000933386 /* Level4.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Level4.plist; sourceTree = "<group>"; };
 		6D38DD981CDA3A38008353DF /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
-		6D3D36231CF32B1A008EFFE8 /* Level5.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Level5.plist; sourceTree = "<group>"; };
 		6D42E7B11CF45B3300740131 /* OptionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsScene.swift; sourceTree = "<group>"; };
 		6D42E7B31CF460DE00740131 /* GameSpeedSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameSpeedSliderTableViewCell.xib; sourceTree = "<group>"; };
 		6D42E7B51CF4661000740131 /* GameSpeedSliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSpeedSliderTableViewCell.swift; sourceTree = "<group>"; };
@@ -69,15 +58,10 @@
 		6D538BA61CDCC8D500B0F780 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		6D53CB6D1D1A9A04006F40E7 /* ShakeSwitchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShakeSwitchTableViewCell.xib; sourceTree = "<group>"; };
 		6D53CB6F1D1A9BE9006F40E7 /* ShakeSwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakeSwitchTableViewCell.swift; sourceTree = "<group>"; };
-		6D53F1CE1CF273FE008E137E /* Level7.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Level7.plist; sourceTree = "<group>"; };
 		6D56F3C71CEB2EDF00CD3D3A /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
 		6D56F3C91CEB430E00CD3D3A /* ToolbarNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarNode.swift; sourceTree = "<group>"; };
-		6D6346541CEDD9110067A1AF /* Level1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Level1.plist; sourceTree = "<group>"; };
 		6D6346561CEDDAD40067A1AF /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		6D6346581CEDDDDD0067A1AF /* LevelLoadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelLoadService.swift; sourceTree = "<group>"; };
-		6D63465D1CEDF1F90067A1AF /* Level2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Level2.plist; sourceTree = "<group>"; };
-		6D7204FE1CF5CBB200DB211A /* Level8.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Level8.plist; sourceTree = "<group>"; };
-		6D9A19421D1962DB00164A27 /* Level6.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Level6.plist; sourceTree = "<group>"; };
 		6DA665D91CEA0B1400644E0A /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		6DC0CCC31CD8C0C20019D466 /* slidr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slidr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DC0CCC61CD8C0C20019D466 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,22 +88,14 @@
 		6D2715681CECBA2000785AF7 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				6D6346541CEDD9110067A1AF /* Level1.plist */,
-				6D63465D1CEDF1F90067A1AF /* Level2.plist */,
-				6D2B7E871CFC6FBF00933386 /* Level3.plist */,
-				6D2B7E891CFC82E000933386 /* Level4.plist */,
-				6D3D36231CF32B1A008EFFE8 /* Level5.plist */,
-				6D9A19421D1962DB00164A27 /* Level6.plist */,
-				6D53F1CE1CF273FE008E137E /* Level7.plist */,
-				6D7204FE1CF5CBB200DB211A /* Level8.plist */,
-				5BE4970CC26FC6CE01ADFEB5 /* Level11.json */,
-				5BE494A83BC369F330115517 /* Level22.json */,
-				5BE495DE8971ED96F22AB1E8 /* Level33.json */,
-				5BE4975F1A1829FA6B739AE1 /* Level44.json */,
-				5BE4940D360C65EE40F39C0A /* Level55.json */,
-				5BE49B44371A4036296425C2 /* Level66.json */,
-				5BE49BAA81203A470EBBEE01 /* Level77.json */,
-				5BE49E0678E5D6C631A89C1A /* Level88.json */,
+				5BE4970CC26FC6CE01ADFEB5 /* Level1.json */,
+				5BE494A83BC369F330115517 /* Level2.json */,
+				5BE495DE8971ED96F22AB1E8 /* Level3.json */,
+				5BE4975F1A1829FA6B739AE1 /* Level4.json */,
+				5BE4940D360C65EE40F39C0A /* Level5.json */,
+				5BE49B44371A4036296425C2 /* Level6.json */,
+				5BE49BAA81203A470EBBEE01 /* Level7.json */,
+				5BE49E0678E5D6C631A89C1A /* Level8.json */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -240,24 +216,16 @@
 			files = (
 				6DC0CCD21CD8C0C20019D466 /* Assets.xcassets in Resources */,
 				6D42E7B41CF460DE00740131 /* GameSpeedSliderTableViewCell.xib in Resources */,
-				6D63465E1CEDF1F90067A1AF /* Level2.plist in Resources */,
-				6D7204FF1CF5CBB200DB211A /* Level8.plist in Resources */,
 				6D53CB6E1D1A9A04006F40E7 /* ShakeSwitchTableViewCell.xib in Resources */,
-				6D3D36241CF32B1A008EFFE8 /* Level5.plist in Resources */,
-				6D53F1CF1CF273FE008E137E /* Level7.plist in Resources */,
 				6DC0CCD01CD8C0C20019D466 /* Main.storyboard in Resources */,
-				6D2B7E8A1CFC82E000933386 /* Level4.plist in Resources */,
-				6D6346551CEDD9110067A1AF /* Level1.plist in Resources */,
-				6D9A19431D1962DB00164A27 /* Level6.plist in Resources */,
-				6D2B7E881CFC6FBF00933386 /* Level3.plist in Resources */,
-				5BE495CC43837A4961D6D2D0 /* Level11.json in Resources */,
-				5BE49C2CD3C4DFD7090E02EF /* Level22.json in Resources */,
-				5BE497EF9B962B1910BF604C /* Level33.json in Resources */,
-				5BE495F07476EB0C87DB7A19 /* Level44.json in Resources */,
-				5BE49E7EE1A114DC4A304DE4 /* Level55.json in Resources */,
-				5BE499B5021F1AF8F0F791F3 /* Level66.json in Resources */,
-				5BE49FF0258691ECA3BD2A73 /* Level77.json in Resources */,
-				5BE49001B0F54F72E0ECE053 /* Level88.json in Resources */,
+				5BE495CC43837A4961D6D2D0 /* Level1.json in Resources */,
+				5BE49C2CD3C4DFD7090E02EF /* Level2.json in Resources */,
+				5BE497EF9B962B1910BF604C /* Level3.json in Resources */,
+				5BE495F07476EB0C87DB7A19 /* Level4.json in Resources */,
+				5BE49E7EE1A114DC4A304DE4 /* Level5.json in Resources */,
+				5BE499B5021F1AF8F0F791F3 /* Level6.json in Resources */,
+				5BE49FF0258691ECA3BD2A73 /* Level7.json in Resources */,
+				5BE49001B0F54F72E0ECE053 /* Level8.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

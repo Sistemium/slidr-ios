@@ -25,25 +25,23 @@ class LevelLoadService{
         let fileManager = NSFileManager.defaultManager()
         let enumerator = fileManager.enumeratorAtPath(NSBundle.mainBundle().bundlePath)
         while let element = enumerator?.nextObject() as? String {
-            if element.hasSuffix(".plist") && element.hasPrefix("Level") {
-                levels.append(readPropertyList(element.substringToIndex(element.characters.indexOf(".")!)))
+            if element.hasSuffix(".json"){
+                levels.append(readJson(element.substringToIndex(element.characters.indexOf(".")!)))
             }
         }
         levels.sortInPlace({ $0.priority < $1.priority })
         return levels
     }
     
-    private func readPropertyList(plist:String) ->Level{
-        var format = NSPropertyListFormat.XMLFormat_v1_0
-        var plistData:[String:AnyObject] = [:]
-        let plistPath:String? = NSBundle.mainBundle().pathForResource(plist, ofType: "plist")!
-        let plistXML = NSFileManager.defaultManager().contentsAtPath(plistPath!)!
-        plistData = try! NSPropertyListSerialization.propertyListWithData(plistXML,options: .MutableContainersAndLeaves,format: &format) as! [String:AnyObject]
+    private func readJson(json:String) ->Level{
+        let jsonPath:String? = NSBundle.mainBundle().pathForResource(json, ofType: "json")!
+        let jsonData = try? NSData(contentsOfFile: jsonPath!, options: NSDataReadingOptions.DataReadingMappedIfSafe)
+        let jsonResult: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
         let level = Level()
-        level.name = plistData["name"] as? String
-        level.priority = plistData["priority"] as? Float
-        level.timeout = plistData["timeout"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.baseSpeed))
-        for element in plistData["blocks"] as! NSArray{
+        level.name = jsonResult["name"] as? String
+        level.priority = jsonResult["priority"] as? Float
+        level.timeout = jsonResult["timeout"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.baseSpeed))
+        for element in jsonResult["blocks"] as! NSArray{
             let blockData = element as! NSDictionary
             level.blocks.append(Block(blockData: blockData))
         }
