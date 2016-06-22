@@ -1,0 +1,51 @@
+{
+  "blocks":[
+    {
+      "color":"0 0 1.0 1.0",
+      "height":160,
+      "width":160,
+      "pushVectorX":-1,
+      "pushVectorY":0,
+      "positionX":1.1,
+      "positionY":0.2,
+      "pushTime":0,
+      "rotation":0
+    },
+    {
+      "color":"1.0 0 0 1.0",
+      "height":160,
+      "width":160,
+      "pushVectorX":-1,
+      "pushVectorY":0,
+      "positionX":1.1,
+      "positionY":0.4,
+      "pushTime":0,
+      "rotation":0
+    },
+    {
+      "color":"1.0 0 0 1.0",
+      "height":160,
+      "width":160,
+      "pushVectorX":-1,
+      "pushVectorY":0,
+      "positionX":1.1,
+      "positionY":0.6,
+      "pushTime":0,
+      "rotation":0
+    },
+    {
+      "color":"0 0 1.0 1.0",
+      "height":160,
+      "width":160,
+      "pushVectorX":-1,
+      "pushVectorY":0,
+      "positionX":1.1,
+      "positionY":0.8,
+      "pushTime":0,
+      "rotation":0
+    }
+  ],
+  "timeout":10,
+  "priority":7,
+  "name":"Level 7"
+}

@@ -1,0 +1,29 @@
+{
+  "blocks":[
+    {
+      "color":"0 0 1.0 1.0",
+      "height":220,
+      "width":100,
+      "pushVectorX":1,
+      "pushVectorY":0,
+      "positionX":-0.1,
+      "positionY":0.2,
+      "pushTime":0,
+      "rotation":0
+    },
+    {
+      "color":"0 0 1.0 1.0",
+      "height":220,
+      "width":100,
+      "pushVectorX":-1,
+      "pushVectorY":0,
+      "positionX":1.1,
+      "positionY":0.8,
+      "pushTime":0,
+      "rotation":0
+    }
+  ],
+  "timeout":10,
+  "priority":5,
+  "name":"Level 5"
+}

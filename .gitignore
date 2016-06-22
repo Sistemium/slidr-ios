@@ -7,3 +7,14 @@ xcuserdata
 /Fabric.framework/*
 
 fabric.sh
+.idea/misc.xml
+
+.idea/modules.xml
+
+.idea/slidr.iml
+
+.idea/vcs.xml
+
+.idea/workspace.xml
+
+.idea/xcode.xml
