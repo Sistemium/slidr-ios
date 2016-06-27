@@ -1,0 +1,139 @@
+{
+    "blocks":[
+              {
+              "color":"0 0 0 1.0",
+              "height":250,
+              "width":20,
+              "pushVectorX":0,
+              "pushVectorY":0,
+              "positionX":0.15,
+              "positionY":0.1,
+              "pushTime":0,
+              "rotation":90
+              },
+              {
+              "color":"0 0 0 1.0",
+              "height":250,
+              "width":20,
+              "pushVectorX":0,
+              "pushVectorY":0,
+              "positionX":0.85,
+              "positionY":0.1,
+              "pushTime":0,
+              "rotation":270
+              },
+              {
+              "color":"0 0 0 1.0",
+              "height":250,
+              "width":20,
+              "pushVectorX":0,
+              "pushVectorY":0,
+              "positionX":0.85,
+              "positionY":0.85,
+              "pushTime":0,
+              "rotation":90
+              },
+              {
+              "color":"0 0 0 1.0",
+              "height":250,
+              "width":20,
+              "pushVectorX":0,
+              "pushVectorY":0,
+              "positionX":0.15,
+              "positionY":0.85,
+              "pushTime":0,
+              "rotation":270
+              },
+              {
+              "color":"1.0 0 0 1.0",
+              "height":150,
+              "width":100,
+              "pushVectorX":0,
+              "pushVectorY":0.5,
+              "positionX":0.4,
+              "positionY":-0.1,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
+              "color":"0 0 1.0 1.0",
+              "height":150,
+              "width":100,
+              "pushVectorX":0,
+              "pushVectorY":0.5,
+              "positionX":0.6,
+              "positionY":-0.1,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
+              "color":"0 0 1.0 1.0",
+              "height":150,
+              "width":100,
+              "pushVectorX":0,
+              "pushVectorY":-0.5,
+              "positionX":0.4,
+              "positionY":1.1,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
+              "color":"1.0 0 0 1.0",
+              "height":150,
+              "width":100,
+              "pushVectorX":0,
+              "pushVectorY":-0.5,
+              "positionX":0.6,
+              "positionY":1.1,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
+              "color":"0 0 1.0 1.0",
+              "height":150,
+              "width":100,
+              "pushVectorX":0.5,
+              "pushVectorY":0,
+              "positionX":-0.1,
+              "positionY":0.35,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
+              "color":"1.0 0 0 1.0",
+              "height":150,
+              "width":100,
+              "pushVectorX":0.5,
+              "pushVectorY":0,
+              "positionX":-0.1,
+              "positionY":0.65,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
+              "color":"0 0 1.0 1.0",
+              "height":150,
+              "width":100,
+              "pushVectorX":-0.5,
+              "pushVectorY":0,
+              "positionX":1.1,
+              "positionY":0.35,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
+              "color":"1.0 0 0 1.0",
+              "height":150,
+              "width":100,
+              "pushVectorX":-0.5,
+              "pushVectorY":0,
+              "positionX":1.1,
+              "positionY":0.65,
+              "pushTime":0,
+              "rotation":0
+              }
+              ],
+    "timeout":100,
+    "priority":9,
+    "name":"Level 9"
+}

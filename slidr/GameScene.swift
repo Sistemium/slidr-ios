@@ -66,7 +66,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.view?.addGestureRecognizer(recognizer)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         var location = touches.first!.locationInNode(self)
         let node = self.nodeAtPoint(location)
         if let block = node as? Block{
@@ -247,35 +247,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             block2.color.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha)
             if fRed == 0 && fGreen == 0 && fBlue == 0{
                 if block2.rotation != 0{
-                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[0]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[0]) <= (abs(block1.pushVector.dy) + abs(block1.pushVector.dx))/1000{
                         if block1.pushVector.dy != 0{
-                            block1.pushVector = CGVector(dx: -abs(block2.pushVector.dy), dy: 0)
+                            block1.pushVector = CGVector(dx: -abs(block1.pushVector.dy), dy: 0)
                         }else{
-                            block1.pushVector = CGVector(dx: 0, dy: -abs(block2.pushVector.dx))
+                            block1.pushVector = CGVector(dx: 0, dy: -abs(block1.pushVector.dx))
                         }
                         return
                     }
-                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[1]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[1]) <= (abs(block1.pushVector.dy) + abs(block1.pushVector.dx))/1000{
                         if block1.pushVector.dy != 0{
-                            block1.pushVector = CGVector(dx: -abs(block2.pushVector.dy), dy: 0)
+                            block1.pushVector = CGVector(dx: -abs(block1.pushVector.dy), dy: 0)
                         }else{
-                            block1.pushVector = CGVector(dx: 0, dy: abs(block2.pushVector.dx))
+                            block1.pushVector = CGVector(dx: 0, dy: abs(block1.pushVector.dx))
                         }
                         return
                     }
-                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[2]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[2]) <= (abs(block1.pushVector.dy) + abs(block1.pushVector.dx))/1000{
                         if block1.pushVector.dy != 0{
-                            block1.pushVector = CGVector(dx: abs(block2.pushVector.dy), dy: 0)
+                            block1.pushVector = CGVector(dx: abs(block1.pushVector.dy), dy: 0)
                         }else{
-                            block1.pushVector = CGVector(dx: 0, dy: abs(block2.pushVector.dx))
+                            block1.pushVector = CGVector(dx: 0, dy: abs(block1.pushVector.dx))
                         }
                         return
                     }
-                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[3]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
+                    if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[3]) <= (abs(block1.pushVector.dy) + abs(block1.pushVector.dx))/1000{
                         if block1.pushVector.dy != 0{
-                            block1.pushVector = CGVector(dx: abs(block2.pushVector.dy), dy: 0)
+                            block1.pushVector = CGVector(dx: abs(block1.pushVector.dy), dy: 0)
                         }else{
-                            block1.pushVector = CGVector(dx: 0, dy: -abs(block2.pushVector.dx))
+                            block1.pushVector = CGVector(dx: 0, dy: -abs(block1.pushVector.dx))
                         }
                         return
                     }
