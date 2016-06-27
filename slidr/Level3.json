@@ -4,10 +4,32 @@
       "color":"1.0 0 0 1.0",
       "height":160,
       "width":160,
+      "pushVectorX":-1,
+      "pushVectorY":0,
+      "positionX":1.2,
+      "positionY":0.5,
+      "pushTime":0,
+      "rotation":0
+    },
+    {
+      "color":"1.0 0 0 1.0",
+      "height":160,
+      "width":160,
+      "pushVectorX":1,
+      "pushVectorY":0,
+      "positionX":-0.2,
+      "positionY":0.5,
+      "pushTime":0.5,
+      "rotation":0
+    },
+    {
+      "color":"1.0 0 0 1.0",
+      "height":160,
+      "width":160,
       "pushVectorX":0,
       "pushVectorY":-1,
       "positionX":0.3,
-      "positionY":1.2,
+      "positionY":1.1,
       "pushTime":0,
       "rotation":0
     },
@@ -19,28 +41,6 @@
       "pushVectorY":1,
       "positionX":0.7,
       "positionY":-0.2,
-      "pushTime":0,
-      "rotation":0
-    },
-    {
-      "color":"1.0 0 0 1.0",
-      "height":160,
-      "width":160,
-      "pushVectorX":-1,
-      "pushVectorY":0,
-      "positionX":1.6,
-      "positionY":0.7,
-      "pushTime":0,
-      "rotation":0
-    },
-    {
-      "color":"1.0 0 0 1.0",
-      "height":160,
-      "width":160,
-      "pushVectorX":1,
-      "pushVectorY":0,
-      "positionX":-0.6,
-      "positionY":0.3,
       "pushTime":0,
       "rotation":0
     }

@@ -71,7 +71,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let node = self.nodeAtPoint(location)
         if let block = node as? Block{
             if block.color == UIColor.redColor(){
-                block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
+                if block.numberOfActions == nil || block.numberOfActions! > 0{
+                    block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
+                }
+                if block.numberOfActions != nil{
+                    block.numberOfActions! -= 1
+                }
                 return
             }
         }
@@ -85,7 +90,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 location = touches.first!.locationInNode(block)
                 let region = SKRegion(size: CGSize(width: block.size.width + GameSettings.touchRegion, height: block.size.height + GameSettings.touchRegion))
                 if region.containsPoint(location) && block.color == UIColor.redColor(){
-                    block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
+                    if block.numberOfActions == nil || block.numberOfActions! > 0{
+                        block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
+                    }
+                    if block.numberOfActions != nil{
+                        block.numberOfActions! -= 1
+                    }
                     return
                 }
             }
@@ -325,19 +335,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func swipe(sender:UISwipeGestureRecognizer){
         if (sender.state == .Ended){
             var touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
-            let touchedNode = self.nodeAtPoint(touchLocation) as? Block
-            if touchedNode?.color == UIColor.blueColor(){
-                switch sender.direction {
-                case UISwipeGestureRecognizerDirection.Up:
-                    touchedNode?.pushVector = GameSettings.moveDirections[0]
-                case UISwipeGestureRecognizerDirection.Down:
-                    touchedNode?.pushVector = GameSettings.moveDirections[1]
-                case UISwipeGestureRecognizerDirection.Right:
-                    touchedNode?.pushVector = GameSettings.moveDirections[2]
-                case UISwipeGestureRecognizerDirection.Left:
-                    touchedNode?.pushVector = GameSettings.moveDirections[3]
-                default:
-                    break
+            let block = self.nodeAtPoint(touchLocation) as? Block
+            if block?.color == UIColor.blueColor(){
+                if block!.numberOfActions == nil || block!.numberOfActions! > 0{
+                    switch sender.direction {
+                    case UISwipeGestureRecognizerDirection.Up:
+                        block?.pushVector = GameSettings.moveDirections[0]
+                    case UISwipeGestureRecognizerDirection.Down:
+                        block?.pushVector = GameSettings.moveDirections[1]
+                    case UISwipeGestureRecognizerDirection.Right:
+                        block?.pushVector = GameSettings.moveDirections[2]
+                    case UISwipeGestureRecognizerDirection.Left:
+                        block?.pushVector = GameSettings.moveDirections[3]
+                    default:
+                        break
+                    }
+                }
+                if block!.numberOfActions != nil{
+                    block!.numberOfActions! -= 1
                 }
                 return
             }

@@ -1,0 +1,43 @@
+{
+    "blocks":[
+              {
+              "color":"1.0 0 0 1.0",
+              "height":150,
+              "width":150,
+              "pushVectorX":1,
+              "pushVectorY":0,
+              "positionX":-0.1,
+              "positionY":0.8,
+              "pushTime":0,
+              "rotation":0,
+              "numberOfActions":1
+              },
+              {
+              "color":"1.0 0 0 1.0",
+              "height":150,
+              "width":150,
+              "pushVectorX":-1,
+              "pushVectorY":0,
+              "positionX":1.1,
+              "positionY":0.2,
+              "pushTime":0,
+              "rotation":0,
+              "numberOfActions":1
+              },
+              {
+              "color":"0 0 1.0 1.0",
+              "height":150,
+              "width":150,
+              "pushVectorX":1,
+              "pushVectorY":0,
+              "positionX":0.4,
+              "positionY":0.5,
+              "pushTime":0,
+              "rotation":0,
+              "numberOfActions":4
+              }
+              ],
+    "timeout":10,
+    "priority":9,
+    "name":"Level 9"
+}

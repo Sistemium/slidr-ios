@@ -27,6 +27,12 @@ class Block: SKSpriteNode {
     
     var preferedPushTime:Double?
     
+    var numberOfActions:Int?{
+        didSet{
+            
+        }
+    }
+    
     var pushed = false
     
     private var speedModifier:CGFloat = 1
@@ -105,6 +111,7 @@ class Block: SKSpriteNode {
         position = CGPoint(x: blockData["positionX"] as! CGFloat * GameSettings.playableAreaSize.width, y: blockData["positionY"] as! CGFloat * GameSettings.playableAreaSize.height)
         preferedPushTime = blockData["pushTime"] as? Double
         self.rotation = blockData["rotation"] as? Double
+        self.numberOfActions = blockData["numberOfActions"] as? Int
         let color = CIColor(string:blockData["color"] as! String)
         if color.red == 0 && color.green == 0 && color.blue == 0{
             self.physicsBody?.dynamic = false
