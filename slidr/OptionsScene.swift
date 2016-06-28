@@ -18,7 +18,11 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
             tableview?.estimatedRowHeight = 45
             tableview?.backgroundColor = UIColor.clearColor()
             tableview?.allowsSelection = false
-            tableview?.cellLayoutMarginsFollowReadableWidth = false
+            if #available(iOS 9.0, *) {
+                tableview?.cellLayoutMarginsFollowReadableWidth = false
+            } else {
+                // Fallback on earlier versions
+            }
             self.view?.addSubview(tableview)
         }
     }

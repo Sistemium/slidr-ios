@@ -195,7 +195,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scene.result = .Win
             scene.finishedLevel = level
             self.view!.presentScene(scene)
-        }
+        }else if gameMode == .Level && leftCount != 0{
+            let scene = GameResultScene()
+            scene.size = GameSettings.playableAreaSize
+            scene.scaleMode = .Fill
+            scene.result = .Lose
+            scene.finishedLevel = level
+            self.view!.presentScene(scene)
+            }
         else if gameMode == .Level && (level?.timeout<=0 || level?.blocks.count == 0 && self.children.count == unusedNodes() && leftCount != 0){
             let scene = GameResultScene()
             scene.size = GameSettings.playableAreaSize
@@ -390,25 +397,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if let block = node as? Block{
                     touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
                     touchLocation = self.convertPoint(touchLocation, toNode: block)
-                    let region = SKRegion(size: CGSize(width: block.size.width + GameSettings.touchRegion, height: block.size.height  * GameSettings.touchRegion))
-                    if region.containsPoint(touchLocation) && block.color == UIColor.blueColor(){
+                    if  block.color == UIColor.blueColor(){
                         candidatesToGesture[touchLocation.distance(block.anchorPoint)] = block
                     }
                 }
             }
-            if candidatesToGesture.keys.minElement() != nil{
+            if candidatesToGesture.keys.minElement() != nil {
                 let chosen = candidatesToGesture[candidatesToGesture.keys.minElement()!]
-                switch sender.direction {
-                case UISwipeGestureRecognizerDirection.Up:
-                    chosen!.pushVector = GameSettings.moveDirections[0]
-                case UISwipeGestureRecognizerDirection.Down:
-                    chosen!.pushVector = GameSettings.moveDirections[1]
-                case UISwipeGestureRecognizerDirection.Right:
-                    chosen!.pushVector = GameSettings.moveDirections[2]
-                case UISwipeGestureRecognizerDirection.Left:
-                    chosen!.pushVector = GameSettings.moveDirections[3]
-                default:
-                    break
+                touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
+                touchLocation = self.convertPoint(touchLocation, toNode: chosen!)
+                let region = SKRegion(size: CGSize(width: chosen!.size.width + GameSettings.touchRegion, height: chosen!.size.height  * GameSettings.touchRegion))
+                if region.containsPoint(touchLocation){
+                    switch sender.direction {
+                    case UISwipeGestureRecognizerDirection.Up:
+                        chosen!.pushVector = GameSettings.moveDirections[0]
+                    case UISwipeGestureRecognizerDirection.Down:
+                        chosen!.pushVector = GameSettings.moveDirections[1]
+                    case UISwipeGestureRecognizerDirection.Right:
+                        chosen!.pushVector = GameSettings.moveDirections[2]
+                    case UISwipeGestureRecognizerDirection.Left:
+                        chosen!.pushVector = GameSettings.moveDirections[3]
+                    default:
+                        break
+                    }
                 }
             }
         }

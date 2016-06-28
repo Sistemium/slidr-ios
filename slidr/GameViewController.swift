@@ -41,7 +41,7 @@ class GameViewController: UIViewController {
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .Portrait
+        return [.Portrait, .PortraitUpsideDown]
     }
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {

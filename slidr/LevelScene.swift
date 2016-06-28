@@ -20,7 +20,11 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
             tableview?.estimatedRowHeight = 45
             tableview?.backgroundColor = UIColor.clearColor()
             tableview?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "levelCell")
-            tableview?.cellLayoutMarginsFollowReadableWidth = false
+            if #available(iOS 9.0, *) {
+                tableview?.cellLayoutMarginsFollowReadableWidth = false
+            } else {
+                // Fallback on earlier versions
+            }
             self.view?.addSubview(tableview)
         }
     }
