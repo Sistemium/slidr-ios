@@ -51,6 +51,6 @@ class GameSettings{
         }
     }
     static let freeModeTimer = 10.0
-    static let redBlockReward = 5.0
-    static let blueBlockReward = 5.0
+    static let redBlockReward = 3.0
+    static let blueBlockReward = 3.0
 }

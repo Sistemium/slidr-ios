@@ -384,7 +384,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 return
             }
             
-            let candidatesToGesture:[CGFloat:Block] = [:]
+            var candidatesToGesture:[CGFloat:Block] = [:]
             
             for node in self.children{
                 if let block = node as? Block{
@@ -392,21 +392,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     touchLocation = self.convertPoint(touchLocation, toNode: block)
                     let region = SKRegion(size: CGSize(width: block.size.width + GameSettings.touchRegion, height: block.size.height  * GameSettings.touchRegion))
                     if region.containsPoint(touchLocation) && block.color == UIColor.blueColor(){
-                        
-                        switch sender.direction {
-                        case UISwipeGestureRecognizerDirection.Up:
-                            block.pushVector = GameSettings.moveDirections[0]
-                        case UISwipeGestureRecognizerDirection.Down:
-                            block.pushVector = GameSettings.moveDirections[1]
-                        case UISwipeGestureRecognizerDirection.Right:
-                            block.pushVector = GameSettings.moveDirections[2]
-                        case UISwipeGestureRecognizerDirection.Left:
-                            block.pushVector = GameSettings.moveDirections[3]
-                        default:
-                            break
-                        }
-                        return
+                        candidatesToGesture[touchLocation.distance(block.anchorPoint)] = block
                     }
+                }
+            }
+            if candidatesToGesture.keys.minElement() != nil{
+                let chosen = candidatesToGesture[candidatesToGesture.keys.minElement()!]
+                switch sender.direction {
+                case UISwipeGestureRecognizerDirection.Up:
+                    chosen!.pushVector = GameSettings.moveDirections[0]
+                case UISwipeGestureRecognizerDirection.Down:
+                    chosen!.pushVector = GameSettings.moveDirections[1]
+                case UISwipeGestureRecognizerDirection.Right:
+                    chosen!.pushVector = GameSettings.moveDirections[2]
+                case UISwipeGestureRecognizerDirection.Left:
+                    chosen!.pushVector = GameSettings.moveDirections[3]
+                default:
+                    break
                 }
             }
         }
