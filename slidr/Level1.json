@@ -5,22 +5,24 @@
       "height":150,
       "width":150,
       "pushVectorX":0,
-      "pushVectorY":-2,
+      "pushVectorY":-1,
       "positionX":0.5,
       "positionY":1.1,
       "pushTime":0,
-      "rotation":0
+      "rotation":0,
+      "speedModifier":2
     },
     {
       "color":"1.0 0 0 1.0",
       "height":150,
       "width":150,
       "pushVectorX":0,
-      "pushVectorY":-2,
+      "pushVectorY":-1,
       "positionX":0.5,
       "positionY":1.4,
       "pushTime":0,
-      "rotation":0
+      "rotation":0,
+      "speedModifier":2
     }
   ],
   "timeout":10,

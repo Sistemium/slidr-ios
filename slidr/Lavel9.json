@@ -49,88 +49,96 @@
               "height":150,
               "width":100,
               "pushVectorX":0,
-              "pushVectorY":0.5,
+              "pushVectorY":1,
               "positionX":0.4,
               "positionY":-0.1,
               "pushTime":0,
-              "rotation":0
+              "rotation":0,
+              "speedModifier":0.5
               },
               {
               "color":"0 0 1.0 1.0",
               "height":150,
               "width":100,
               "pushVectorX":0,
-              "pushVectorY":0.5,
+              "pushVectorY":1,
               "positionX":0.6,
               "positionY":-0.1,
               "pushTime":0,
-              "rotation":0
+              "rotation":0,
+              "speedModifier":0.5
               },
               {
               "color":"0 0 1.0 1.0",
               "height":150,
               "width":100,
               "pushVectorX":0,
-              "pushVectorY":-0.5,
+              "pushVectorY":-1,
               "positionX":0.4,
               "positionY":1.1,
               "pushTime":0,
-              "rotation":0
+              "rotation":0,
+              "speedModifier":0.5
               },
               {
               "color":"1.0 0 0 1.0",
               "height":150,
               "width":100,
               "pushVectorX":0,
-              "pushVectorY":-0.5,
+              "pushVectorY":-1,
               "positionX":0.6,
               "positionY":1.1,
               "pushTime":0,
-              "rotation":0
+              "rotation":0,
+              "speedModifier":0.5
               },
               {
               "color":"0 0 1.0 1.0",
               "height":150,
               "width":100,
-              "pushVectorX":0.5,
+              "pushVectorX":1,
               "pushVectorY":0,
               "positionX":-0.1,
               "positionY":0.35,
               "pushTime":0,
-              "rotation":0
+              "rotation":0,
+              "speedModifier":0.5
               },
               {
               "color":"1.0 0 0 1.0",
               "height":150,
               "width":100,
-              "pushVectorX":0.5,
+              "pushVectorX":1,
               "pushVectorY":0,
               "positionX":-0.1,
               "positionY":0.65,
               "pushTime":0,
-              "rotation":0
+              "rotation":0,
+              "speedModifier":0.5
               },
               {
               "color":"0 0 1.0 1.0",
               "height":150,
               "width":100,
-              "pushVectorX":-0.5,
+              "pushVectorX":-1,
               "pushVectorY":0,
               "positionX":1.1,
               "positionY":0.35,
               "pushTime":0,
-              "rotation":0
+              "rotation":0,
+              "speedModifier":0.5
               },
               {
               "color":"1.0 0 0 1.0",
               "height":150,
               "width":100,
-              "pushVectorX":-0.5,
+              "pushVectorX":-1,
               "pushVectorY":0,
               "positionX":1.1,
               "positionY":0.65,
               "pushTime":0,
-              "rotation":0
+              "rotation":0,
+              "speedModifier":0.5
               }
               ],
     "timeout":20,
