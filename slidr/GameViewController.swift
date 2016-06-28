@@ -67,6 +67,7 @@ class GameViewController: UIViewController {
             }
             if let _ = game.level{
                 game.level = LevelLoadService.sharedInstance.levelByPriority(game.level!.priority!)
+                game.freeModeTimer = GameSettings.freeModeTimer
             }
         }
         

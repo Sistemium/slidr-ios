@@ -133,7 +133,7 @@
               "rotation":0
               }
               ],
-    "timeout":100,
+    "timeout":20,
     "priority":9,
     "name":"Level 9"
 }

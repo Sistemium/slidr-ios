@@ -75,11 +75,18 @@ class GameResultScene: SKScene{
         let node = self.nodeAtPoint(location)
         switch node {
         case returnButton:
-            let scene = LevelScene()
-            scene.size = GameSettings.playableAreaSize
-            scene.scaleMode = .Fill
-            scene.previousScene = MenuScene()
-            self.view!.presentScene(scene)
+            if finishedLevel != nil {
+                let scene = LevelScene()
+                scene.size = GameSettings.playableAreaSize
+                scene.scaleMode = .Fill
+                scene.previousScene = MenuScene()
+                self.view!.presentScene(scene)
+            }else{
+                let scene = MenuScene()
+                scene.size = GameSettings.playableAreaSize
+                scene.scaleMode = .Fill
+                self.view!.presentScene(scene)
+            }
         case actionButton:
             if result == .Win{
                 let scene = GameScene()
@@ -92,8 +99,12 @@ class GameResultScene: SKScene{
                 let scene = GameScene()
                 scene.size = GameSettings.playableAreaSize
                 scene.scaleMode = .Fill
-                scene.level = LevelLoadService.sharedInstance.levelByPriority(finishedLevel!.priority!)
-                scene.previousScene = LevelScene()
+                if finishedLevel != nil {
+                    scene.level = LevelLoadService.sharedInstance.levelByPriority(finishedLevel!.priority!)
+                    scene.previousScene = LevelScene()
+                }else{
+                    scene.previousScene = MenuScene()
+                }
                 self.view?.presentScene(scene)
             }
         default:

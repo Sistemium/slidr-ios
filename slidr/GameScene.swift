@@ -46,6 +46,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var pushedCount = 0
     
+    var freeModeTimer = GameSettings.freeModeTimer
+    
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.lightGrayColor()
         self.physicsWorld.contactDelegate = self
@@ -104,6 +106,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
    
     override func update(currentTime: CFTimeInterval) {
+        if gameMode == .Level{
+            if let oldTime = self.timeSinceLastUpdate{
+                level!.timeout! -= currentTime - oldTime
+                toolbarNode.centerLabelText = level!.timeout!.fixedFractionDigits(1)
+                if level?.timeout <= GameSettings.timeUntilWarning{
+                    toolbarNode.centerLabelColor = UIColor.redColor()
+                }else{
+                    toolbarNode.centerLabelColor = UIColor.whiteColor()
+                }
+            }
+        }else{
+            if let oldTime = self.timeSinceLastUpdate{
+                self.freeModeTimer -= currentTime - oldTime
+                toolbarNode.centerLabelText = self.freeModeTimer.fixedFractionDigits(1)
+                if self.freeModeTimer <= GameSettings.timeUntilWarning{
+                    toolbarNode.centerLabelColor = UIColor.redColor()
+                }else{
+                    toolbarNode.centerLabelColor = UIColor.whiteColor()
+                }
+            }
+        }
         if gameMode == .Level {
             if let oldTime = self.timeSinceLastUpdate{
                 for block in level!.blocks{
@@ -112,13 +135,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         level?.blocks.removeAtIndex((level?.blocks.indexOf(block))!)
                         self.addChild(block)
                     }
-                }
-                level!.timeout! -= currentTime - oldTime
-                toolbarNode.centerLabelText = level!.timeout!.fixedFractionDigits(1)
-                if level?.timeout <= GameSettings.timeUntilWarning{
-                    toolbarNode.centerLabelColor = UIColor.redColor()
-                }else{
-                    toolbarNode.centerLabelColor = UIColor.whiteColor()
                 }
             }
         }
@@ -144,7 +160,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         self.addChild(block)
                     }
                 }
-                
             }
         }
         for node in self.children{
@@ -167,7 +182,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func checkResult(){
-        if gameMode == .Level && level?.blocks.count == 0 && destroyedCount != 0 && pushedCount - unusedNodes() + 1 == destroyedCount && leftCount == 0{
+        if gameMode == .Free && self.freeModeTimer <= 0{
+            let scene = GameResultScene()
+            scene.size = GameSettings.playableAreaSize
+            scene.scaleMode = .Fill
+            scene.result = .Lose
+            self.view!.presentScene(scene)
+        }else if gameMode == .Level && level?.blocks.count == 0 && destroyedCount != 0 && pushedCount - unusedNodes() + 1 == destroyedCount && leftCount == 0{
             let scene = GameResultScene()
             scene.size = GameSettings.playableAreaSize
             scene.scaleMode = .Fill
@@ -295,6 +316,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     block2.runAction(action){
                         block2.removeFromParent()
                     }
+                    if block1.color == UIColor.redColor(){
+                        freeModeTimer += GameSettings.redBlockReward
+                    }
+                    if block1.color == UIColor.blueColor(){
+                        freeModeTimer += GameSettings.blueBlockReward
+                    }
                 }else{
                     block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
                     block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
@@ -357,12 +384,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 return
             }
             
+            let candidatesToGesture:[CGFloat:Block] = [:]
+            
             for node in self.children{
                 if let block = node as? Block{
                     touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
                     touchLocation = self.convertPoint(touchLocation, toNode: block)
                     let region = SKRegion(size: CGSize(width: block.size.width + GameSettings.touchRegion, height: block.size.height  * GameSettings.touchRegion))
                     if region.containsPoint(touchLocation) && block.color == UIColor.blueColor(){
+                        
                         switch sender.direction {
                         case UISwipeGestureRecognizerDirection.Up:
                             block.pushVector = GameSettings.moveDirections[0]

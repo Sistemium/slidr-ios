@@ -50,4 +50,7 @@ class GameSettings{
             NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "ShakeToResetEnabled")
         }
     }
+    static let freeModeTimer = 10.0
+    static let redBlockReward = 5.0
+    static let blueBlockReward = 5.0
 }
