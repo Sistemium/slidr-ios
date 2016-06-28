@@ -11,6 +11,12 @@ import Darwin
 
 class Block: SKSpriteNode {
     
+    var moveDirections:[CGVector]{
+        get{
+            return [CGVectorMake(0, GameSettings.baseSpeed * abs(pushVectorY)),CGVectorMake(0, -GameSettings.baseSpeed * abs(pushVectorY)),CGVectorMake(GameSettings.baseSpeed * abs(pushVectorX), 0),CGVectorMake(-GameSettings.baseSpeed * abs(pushVectorX), 0)]
+        }
+    }
+    
     var rotation:Double? = 0{
         didSet{
             if rotation != nil{
@@ -36,6 +42,10 @@ class Block: SKSpriteNode {
     var pushed = false
     
     private var speedModifier:CGFloat = 1
+    
+    var pushVectorX:CGFloat = 0
+    
+    var pushVectorY:CGFloat = 0
     
     var pushVector : CGVector!{
         get{
@@ -108,6 +118,8 @@ class Block: SKSpriteNode {
     func loadBlock(blockData:NSDictionary){
         speedModifier = blockData["speedModifier"] as? CGFloat ?? 1
         pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.baseSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.baseSpeed)
+        pushVectorX = blockData["pushVectorX"] as! CGFloat
+        pushVectorY = blockData["pushVectorY"] as! CGFloat
         position = CGPoint(x: blockData["positionX"] as! CGFloat * GameSettings.playableAreaSize.width, y: blockData["positionY"] as! CGFloat * GameSettings.playableAreaSize.height)
         preferedPushTime = blockData["pushTime"] as? Double
         self.rotation = blockData["rotation"] as? Double

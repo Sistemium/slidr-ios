@@ -72,15 +72,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var location = touches.first!.locationInNode(self)
         let node = self.nodeAtPoint(location)
         if let block = node as? Block{
-            if block.color == UIColor.redColor(){
-                if block.numberOfActions == nil || block.numberOfActions! > 0{
-                    block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
-                }
-                if block.numberOfActions != nil{
-                    block.numberOfActions! -= 1
-                }
-                return
+            if block.numberOfActions == nil || block.numberOfActions! > 0{
+                block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
             }
+            if block.numberOfActions != nil{
+                block.numberOfActions! -= 1
+            }
+            return
         }
         
         if node == toolbarNode.backButton{
@@ -91,7 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let block = node as? Block{
                 location = touches.first!.locationInNode(block)
                 let region = SKRegion(size: CGSize(width: block.size.width + GameSettings.touchRegion, height: block.size.height + GameSettings.touchRegion))
-                if region.containsPoint(location) && block.color == UIColor.redColor(){
+                if region.containsPoint(location){
                     if block.numberOfActions == nil || block.numberOfActions! > 0{
                         block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
                     }
@@ -370,19 +368,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if (sender.state == .Ended){
             var touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
             let block = self.nodeAtPoint(touchLocation) as? Block
-            if block?.color == UIColor.blueColor(){
+            if block != nil{
                 if block!.numberOfActions == nil || block!.numberOfActions! > 0{
-                    switch sender.direction {
-                    case UISwipeGestureRecognizerDirection.Up:
-                        block?.pushVector = GameSettings.moveDirections[0]
-                    case UISwipeGestureRecognizerDirection.Down:
-                        block?.pushVector = GameSettings.moveDirections[1]
-                    case UISwipeGestureRecognizerDirection.Right:
-                        block?.pushVector = GameSettings.moveDirections[2]
-                    case UISwipeGestureRecognizerDirection.Left:
-                        block?.pushVector = GameSettings.moveDirections[3]
-                    default:
-                        break
+                    if block?.color == UIColor.redColor(){
+                        switch sender.direction {
+                        case UISwipeGestureRecognizerDirection.Up:
+                            if block?.pushVector.dy != 0 {
+                                block?.pushVector = block!.moveDirections[0]
+                            }
+                        case UISwipeGestureRecognizerDirection.Down:
+                            if block?.pushVector.dy != 0 {
+                                block?.pushVector = block!.moveDirections[1]
+                            }
+                        case UISwipeGestureRecognizerDirection.Right:
+                            if block?.pushVector.dx != 0 {
+                                block?.pushVector = block!.moveDirections[2]
+                            }
+                        case UISwipeGestureRecognizerDirection.Left:
+                            if block?.pushVector.dx != 0 {
+                                block?.pushVector = block!.moveDirections[3]
+                            }
+                        default:
+                            break
+                        }
+                    }else{
+                        switch sender.direction {
+                        case UISwipeGestureRecognizerDirection.Up:
+                            block?.pushVector = block!.moveDirections[0]
+                        case UISwipeGestureRecognizerDirection.Down:
+                            block?.pushVector = block!.moveDirections[1]
+                        case UISwipeGestureRecognizerDirection.Right:
+                            block?.pushVector = block!.moveDirections[2]
+                        case UISwipeGestureRecognizerDirection.Left:
+                            block?.pushVector = block!.moveDirections[3]
+                        default:
+                            break
+                        }
                     }
                 }
                 if block!.numberOfActions != nil{
@@ -410,13 +431,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if region.containsPoint(touchLocation){
                     switch sender.direction {
                     case UISwipeGestureRecognizerDirection.Up:
-                        chosen!.pushVector = GameSettings.moveDirections[0]
+                        chosen!.pushVector = chosen!.moveDirections[0]
                     case UISwipeGestureRecognizerDirection.Down:
-                        chosen!.pushVector = GameSettings.moveDirections[1]
+                        chosen!.pushVector = chosen!.moveDirections[1]
                     case UISwipeGestureRecognizerDirection.Right:
-                        chosen!.pushVector = GameSettings.moveDirections[2]
+                        chosen!.pushVector = chosen!.moveDirections[2]
                     case UISwipeGestureRecognizerDirection.Left:
-                        chosen!.pushVector = GameSettings.moveDirections[3]
+                        chosen!.pushVector = chosen!.moveDirections[3]
                     default:
                         break
                     }
