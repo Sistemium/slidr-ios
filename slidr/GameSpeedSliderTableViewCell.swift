@@ -21,7 +21,7 @@ class GameSpeedSliderTableViewCell: UITableViewCell {
     
     @IBOutlet weak var speedLabel: UILabel!{
         didSet{
-        speedLabel.text = (GameSettings.baseSpeed / 1000).fixedFractionDigits(0)
+            speedLabel.text = (GameSettings.baseSpeed / 1000).fixedFractionDigits(0)
         }
     }
     
@@ -32,5 +32,5 @@ class GameSpeedSliderTableViewCell: UITableViewCell {
         
     }
     
-
+    
 }

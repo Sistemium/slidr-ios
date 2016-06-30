@@ -193,7 +193,7 @@
 				TargetAttributes = {
 					6DC0CCC21CD8C0C20019D466 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = HZMMGDCLPA;
+						DevelopmentTeam = DP58H3X45C;
 					};
 				};
 			};

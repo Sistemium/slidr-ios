@@ -1,51 +1,51 @@
 {
-  "blocks":[
-    {
-      "color":"1.0 0 0 1.0",
-      "height":150,
-      "width":150,
-      "pushVectorX":0,
-      "pushVectorY":-1,
-      "positionX":0.5,
-      "positionY":1.1,
-      "pushTime":0,
-      "rotation":0
-    },
-    {
-      "color":"0 0 1.0 1.0",
-      "height":150,
-      "width":150,
-      "pushVectorX":0,
-      "pushVectorY":-1,
-      "positionX":0.5,
-      "positionY":1.35,
-      "pushTime":0,
-      "rotation":0
-    },
-    {
-      "color":"1.0 0 0 1.0",
-      "height":150,
-      "width":150,
-      "pushVectorX":0,
-      "pushVectorY":-1,
-      "positionX":0.5,
-      "positionY":1.6,
-      "pushTime":0,
-      "rotation":0
-    },
-    {
-      "color":"0 0 1.0 1.0",
-      "height":150,
-      "width":150,
-      "pushVectorX":0,
-      "pushVectorY":-1,
-      "positionX":0.5,
-      "positionY":1.85,
-      "pushTime":0,
-      "rotation":0
-    }
-  ],
-  "timeout":10,
-  "priority":6,
-  "name":"Level 6"
+    "blocks":[
+              {
+              "color":"1.0 0 0 1.0",
+              "height":150,
+              "width":150,
+              "pushVectorX":0,
+              "pushVectorY":-1,
+              "positionX":0.5,
+              "positionY":1.1,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
+              "color":"0 0 1.0 1.0",
+              "height":150,
+              "width":150,
+              "pushVectorX":0,
+              "pushVectorY":-1,
+              "positionX":0.5,
+              "positionY":1.35,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
+              "color":"1.0 0 0 1.0",
+              "height":150,
+              "width":150,
+              "pushVectorX":0,
+              "pushVectorY":-1,
+              "positionX":0.5,
+              "positionY":1.6,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
+              "color":"0 0 1.0 1.0",
+              "height":150,
+              "width":150,
+              "pushVectorX":0,
+              "pushVectorY":-1,
+              "positionX":0.5,
+              "positionY":1.85,
+              "pushTime":0,
+              "rotation":0
+              }
+              ],
+    "timeout":10,
+    "priority":6,
+    "name":"Level 6"
 }

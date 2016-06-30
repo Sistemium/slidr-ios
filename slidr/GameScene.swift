@@ -33,7 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (level != nil){
                 gameMode = .Level
             }else{
-                 gameMode = .Free
+                gameMode = .Free
             }
         }
     }
@@ -45,6 +45,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var leftCount = 0
     
     var pushedCount = 0
+    
+    var isThereUnpushedBlocks = false
     
     var freeModeTimer = GameSettings.freeModeTimer
     
@@ -102,7 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
     }
-   
+    
     override func update(currentTime: CFTimeInterval) {
         if gameMode == .Level{
             if let oldTime = self.timeSinceLastUpdate{
@@ -160,12 +162,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+        isThereUnpushedBlocks = false
         for node in self.children{
             if let block = node as? Block{
                 if !block.pushed{
                     if self.intersectsNode(block){
                         block.pushed = true
                         pushedCount+=1
+                    }else{
+                        isThereUnpushedBlocks = true
                     }
                 }
                 block.physicsBody?.velocity = block.velocity
@@ -186,7 +191,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scene.scaleMode = .Fill
             scene.result = .Lose
             self.view!.presentScene(scene)
-        }else if gameMode == .Level && level?.blocks.count == 0 && destroyedCount != 0 && pushedCount - unusedNodes() + 1 == destroyedCount && leftCount == 0{
+        }else if gameMode == .Level && level?.blocks.count == 0 && destroyedCount != 0 && leftCount == 0 && !isThereUnpushedBlocks && self.children.count - unusedNodes() == 0{
             let scene = GameResultScene()
             scene.size = GameSettings.playableAreaSize
             scene.scaleMode = .Fill
@@ -200,7 +205,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scene.result = .Lose
             scene.finishedLevel = level
             self.view!.presentScene(scene)
-            }
+        }
         else if gameMode == .Level && (level?.timeout<=0 || level?.blocks.count == 0 && self.children.count == unusedNodes() && leftCount != 0){
             let scene = GameResultScene()
             scene.size = GameSettings.playableAreaSize

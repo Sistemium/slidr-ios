@@ -39,7 +39,7 @@ class GameResultScene: SKScene{
             questionLabel.fontColor = UIColor.whiteColor()
         }
     }
-
+    
     private var returnButton: SKLabelNode!{
         didSet{
             self.addChild(returnButton)
