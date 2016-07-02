@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-private enum GameMode{
+enum GameMode{
     case Free,Level
 }
 
@@ -38,7 +38,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    private var gameMode:GameMode = .Free
+    var gameMode:GameMode = .Free
     
     var destroyedCount = 0
     

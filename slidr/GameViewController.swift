@@ -58,19 +58,20 @@ class GameViewController: UIViewController {
     func resetLevel(){
         let skView = self.view as! SKView
         if let game = skView.scene as? GameScene{
-            game.destroyedCount = 0
-            game.leftCount = 0
-            game.timeSinceLastUpdate = nil
-            game.timeToNextBlockPush = GameSettings.pushBlockInterval
-            game.pushedCount = 0
-            for node in game.children{
-                if let block = node as? Block{
-                    block.removeFromParent()
+            if game.gameMode == .Level{
+                game.destroyedCount = 0
+                game.leftCount = 0
+                game.timeSinceLastUpdate = nil
+                game.timeToNextBlockPush = GameSettings.pushBlockInterval
+                game.pushedCount = 0
+                for node in game.children{
+                    if let block = node as? Block{
+                        block.removeFromParent()
+                    }
                 }
-            }
-            if let _ = game.level{
-                game.level = LevelLoadService.sharedInstance.levelByPriority(game.level!.priority!)
-                game.freeModeTimer = GameSettings.freeModeTimer
+                if let _ = game.level{
+                    game.level = LevelLoadService.sharedInstance.levelByPriority(game.level!.priority!)
+                }
             }
         }
         
