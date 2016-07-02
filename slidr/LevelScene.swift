@@ -22,6 +22,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
             tableview?.estimatedRowHeight = 44
             tableview?.backgroundColor = UIColor.clearColor()
             tableview?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "levelCell")
+            tableview?.alwaysBounceVertical = false
             if #available(iOS 9.0, *) {
                 tableview?.cellLayoutMarginsFollowReadableWidth = false
             } else {

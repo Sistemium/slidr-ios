@@ -20,6 +20,7 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
             tableview?.estimatedRowHeight = 44
             tableview?.backgroundColor = UIColor.clearColor()
             tableview?.allowsSelection = false
+            tableview?.alwaysBounceVertical = false
             if #available(iOS 9.0, *) {
                 tableview?.cellLayoutMarginsFollowReadableWidth = false
             } else {
