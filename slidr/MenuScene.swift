@@ -14,7 +14,7 @@ class MenuScene: SKScene {
         didSet{
             self.addChild(startGameLabel)
             startGameLabel.text = "Start game"
-            startGameLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/1.7)
+            startGameLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + 100)
             startGameLabel.fontSize = GameSettings.labelSize
             startGameLabel.zPosition = 3.0
             startGameLabel.fontColor = .whiteColor()
@@ -36,22 +36,22 @@ class MenuScene: SKScene {
         didSet{
             self.addChild(optionsLabel)
             optionsLabel.text = "Options"
-            optionsLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2.4)
+            optionsLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - 100)
             optionsLabel.fontSize = GameSettings.labelSize
             optionsLabel.zPosition = 3.0
             optionsLabel.fontColor = .whiteColor()
         }
     }
     
-    override func didMoveToView(view: SKView) {
-        for child in self.children{
-            child.removeFromParent()
-        }
-        self.backgroundColor = UIColor.lightGrayColor()
-        startGameLabel = SKLabelNode(fontNamed:"Chalkduster")
-        freeModeLabel = SKLabelNode(fontNamed:"Chalkduster")
-        optionsLabel = SKLabelNode(fontNamed:"Chalkduster")
-    }
+//    override func didMoveToView(view: SKView) {
+//        for child in self.children{
+//            child.removeFromParent()
+//        }
+//        self.backgroundColor = UIColor.lightGrayColor()
+//        startGameLabel = SKLabelNode(fontNamed:"Chalkduster")
+//        freeModeLabel = SKLabelNode(fontNamed:"Chalkduster")
+//        optionsLabel = SKLabelNode(fontNamed:"Chalkduster")
+//    }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let location = touches.first!.locationInNode(self)
@@ -86,5 +86,15 @@ class MenuScene: SKScene {
                 return
             }
         }
+    }
+    
+    override func didChangeSize(oldSize: CGSize) {
+        for child in self.children{
+            child.removeFromParent()
+        }
+        self.backgroundColor = UIColor.lightGrayColor()
+        startGameLabel = SKLabelNode(fontNamed:"Chalkduster")
+        freeModeLabel = SKLabelNode(fontNamed:"Chalkduster")
+        optionsLabel = SKLabelNode(fontNamed:"Chalkduster")
     }
 }

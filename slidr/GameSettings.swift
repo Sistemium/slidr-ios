@@ -10,7 +10,15 @@ import Foundation
 import UIKit
 
 class GameSettings{
-    static var playableAreaSize = CGSize()
+    static private var _playableAreaSize = CGSize()
+    static var playableAreaSize:CGSize{
+        get{
+            return _playableAreaSize
+        }
+        set{
+            _playableAreaSize = newValue
+        }
+    }
     static var moveDirections:[CGVector]{
         get{
             return [CGVectorMake(0, baseSpeed),CGVectorMake(0, -baseSpeed),CGVectorMake(baseSpeed, 0),CGVectorMake(-baseSpeed, 0)]

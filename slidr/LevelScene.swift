@@ -12,12 +12,14 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     
     var levels:[Level]!
     
+    private var viewScale:CGFloat = 0 // stupid  thing, I need this because view size is different than scene size
+    
     var tableview : UITableView!{
         didSet{
             tableview?.delegate = self
             tableview?.dataSource = self
-            tableview?.frame = CGRectMake(0, GameSettings.toolbarHeight / GameSettings.playableAreaSize.height * self.view!.frame.height, self.view!.frame.width, self.view!.frame.height - GameSettings.toolbarHeight / GameSettings.playableAreaSize.height * self.view!.frame.height)
-            tableview?.estimatedRowHeight = 45
+            tableview?.frame = CGRectMake(0, GameSettings.toolbarHeight * viewScale, GameSettings.playableAreaSize.width * viewScale, GameSettings.playableAreaSize.height * viewScale - GameSettings.toolbarHeight * viewScale)
+            tableview?.estimatedRowHeight = 44
             tableview?.backgroundColor = UIColor.clearColor()
             tableview?.registerClass(UITableViewCell.self, forCellReuseIdentifier: "levelCell")
             if #available(iOS 9.0, *) {
@@ -38,6 +40,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     var previousScene:SKScene?
     
     override func didMoveToView(view: SKView) {
+        viewScale = self.view!.frame.size.width / GameSettings.playableAreaSize.width
         self.backgroundColor = UIColor.lightGrayColor()
         levels = LevelLoadService.sharedInstance.levels
         tableview = UITableView()
@@ -80,6 +83,20 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         scene.level = levels[indexPath.row]
         scene.previousScene = self
         self.view!.presentScene(scene)
+    }
+    
+    override func didChangeSize(oldSize: CGSize) {
+        if self.view != nil{
+            for child in self.children{
+                child.removeFromParent()
+            }
+            tableview?.removeFromSuperview()
+            tableview = UITableView()
+            self.backgroundColor = UIColor.lightGrayColor()
+            toolbarNode  = ToolbarNode()
+            toolbarNode.centerLabelText = "Select level"
+        }
+        
     }
     
 }

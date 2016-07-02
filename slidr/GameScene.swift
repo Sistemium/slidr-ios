@@ -53,6 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.lightGrayColor()
         self.physicsWorld.contactDelegate = self
+        toolbarNode?.removeFromParent()
         toolbarNode  = ToolbarNode()
         destroyedCount = 0
         leftCount = 0
@@ -481,4 +482,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.view!.presentScene(scene)
     }
     
+    override func didChangeSize(oldSize: CGSize) {
+            toolbarNode?.removeFromParent()
+            toolbarNode  = ToolbarNode()
+    }
 }

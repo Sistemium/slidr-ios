@@ -31,3 +31,9 @@ extension CGPoint {
         return abs(CGFloat(hypotf(Float(point.x - x), Float(point.y - y))))
     }
 }
+
+extension CGSize{
+    func reversed() -> CGSize {
+        return CGSizeMake(height, width)
+    }
+}

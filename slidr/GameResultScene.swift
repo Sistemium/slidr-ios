@@ -63,6 +63,9 @@ class GameResultScene: SKScene{
     }
     
     override func didMoveToView(view: SKView) {
+        for child in self.children{
+            child.removeFromParent()
+        }
         self.backgroundColor = UIColor.lightGrayColor()
         resultLabel = SKLabelNode(fontNamed:"Chalkduster")
         questionLabel = SKLabelNode(fontNamed:"Chalkduster")
@@ -110,5 +113,16 @@ class GameResultScene: SKScene{
         default:
             break
         }
+    }
+    
+    override func didChangeSize(oldSize: CGSize) {
+        for child in self.children{
+            child.removeFromParent()
+        }
+        self.backgroundColor = UIColor.lightGrayColor()
+        resultLabel = SKLabelNode(fontNamed:"Chalkduster")
+        questionLabel = SKLabelNode(fontNamed:"Chalkduster")
+        returnButton = SKLabelNode(fontNamed:"Chalkduster")
+        actionButton = SKLabelNode(fontNamed:"Chalkduster")
     }
 }

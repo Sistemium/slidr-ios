@@ -13,7 +13,6 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let scene = MenuScene()
         let skView = self.view as! SKView
         if UIScreen.mainScreen().bounds.height / UIScreen.mainScreen().bounds.width > 1.5{
             GameSettings.playableAreaSize = CGSize(width: 768.375, height: 1366)
@@ -22,6 +21,10 @@ class GameViewController: UIViewController {
         } else{
             GameSettings.playableAreaSize = CGSize(width: 910.666, height: 1366)
         }
+        if !UIApplication.sharedApplication().statusBarOrientation.isPortrait{
+            GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
+        }
+        let scene = MenuScene()
         scene.size = GameSettings.playableAreaSize
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .Fill
@@ -41,7 +44,7 @@ class GameViewController: UIViewController {
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return [.Portrait, .PortraitUpsideDown]
+        return [.Portrait, .PortraitUpsideDown, .LandscapeRight, .LandscapeLeft]
     }
     
     override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
@@ -72,4 +75,12 @@ class GameViewController: UIViewController {
         }
         
     }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
+        let skView = self.view as! SKView
+        skView.scene!.size = GameSettings.playableAreaSize
+    }
+
 }
