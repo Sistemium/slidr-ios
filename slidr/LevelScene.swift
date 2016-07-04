@@ -73,6 +73,10 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         let cell = tableview.dequeueReusableCellWithIdentifier("levelCell")!
         cell.textLabel?.text = levels[indexPath.row].name
         cell.backgroundColor = UIColor.clearColor()
+        if indexPath.row > NSUserDefaults.standardUserDefaults().valueForKey("completedLevels") as? Int ?? 0{
+            cell.userInteractionEnabled = false
+            cell.textLabel!.enabled = false
+        }
         return cell
     }
     

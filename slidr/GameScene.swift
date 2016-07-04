@@ -203,6 +203,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scene.scaleMode = .Fill
             scene.result = .Win
             scene.finishedLevel = level
+            if NSUserDefaults.standardUserDefaults().valueForKey("completedLevels") as? Float ?? 0 < self.level!.priority{
+                NSUserDefaults.standardUserDefaults().setValue(self.level!.priority, forKey: "completedLevels")
+            }
             self.view!.presentScene(scene)
         }else if gameMode == .Level && leftCount != 0{
             let scene = GameResultScene()
