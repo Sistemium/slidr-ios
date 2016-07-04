@@ -1,7 +1,7 @@
 {
     "blocks":[
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":20,
               "width":200,
               "pushVectorX":0,
@@ -12,7 +12,7 @@
               "rotation":0
               },
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":20,
               "width":200,
               "pushVectorX":0,
@@ -23,7 +23,7 @@
               "rotation":0
               },
               {
-              "color":"1.0 0 0 1.0",
+              "type":"standart",
               "height":90,
               "width":90,
               "pushVectorX":0,
@@ -34,7 +34,7 @@
               "rotation":0
               },
               {
-              "color":"1.0 0 0 1.0",
+              "type":"standart",
               "height":90,
               "width":90,
               "pushVectorX":0,
@@ -45,7 +45,7 @@
               "rotation":0
               },
               {
-              "color":"0 0 1.0 1.0",
+              "type":"swipeable",
               "height":150,
               "width":90,
               "pushVectorX":0,
@@ -56,7 +56,7 @@
               "rotation":0
               },
               {
-              "color":"0 0 1.0 1.0",
+              "type":"swipeable",
               "height":150,
               "width":90,
               "pushVectorX":0,
@@ -67,7 +67,7 @@
               "rotation":0
               },
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":20,
               "width":250,
               "pushVectorX":0,
@@ -78,7 +78,7 @@
               "rotation":90
               },
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":20,
               "width":250,
               "pushVectorX":0,
@@ -89,7 +89,7 @@
               "rotation":270
               },
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":20,
               "width":250,
               "pushVectorX":0,
@@ -100,7 +100,7 @@
               "rotation":270
               },
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":40,
               "width":300,
               "pushVectorX":0,
@@ -112,7 +112,7 @@
               }
               ,
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":20,
               "width":300,
               "pushVectorX":0,

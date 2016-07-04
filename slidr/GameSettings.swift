@@ -25,7 +25,6 @@ class GameSettings{
         }
     }
     static let fadeOutDuration = 0.75
-    static let blockColors = [UIColor.redColor(),UIColor.blueColor()]
     static let toolbarHeight:CGFloat = 60
     static let pushBlockInterval = 0.4
     static let defaultSpeed:CGFloat = 45000

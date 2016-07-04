@@ -1,7 +1,7 @@
 {
     "blocks":[
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":200,
               "width":20,
               "pushVectorX":0,
@@ -12,7 +12,7 @@
               "rotation":90
               },
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":40,
               "width":4000,
               "pushVectorX":0,
@@ -23,7 +23,7 @@
               "rotation":0
               },
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":200,
               "width":20,
               "pushVectorX":0,
@@ -34,7 +34,7 @@
               "rotation":-90
               },
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":200,
               "width":20,
               "pushVectorX":0,
@@ -45,7 +45,7 @@
               "rotation":-90
               },
               {
-              "color":"0 0 0 1.0",
+              "type":"wall",
               "height":400,
               "width":20,
               "pushVectorX":0,
@@ -56,7 +56,7 @@
               "rotation":0
               },
               {
-              "color":"1.0 0 0 1.0",
+              "type":"standart",
               "height":160,
               "width":160,
               "pushVectorX":-1,
@@ -68,7 +68,7 @@
               "speedModifier":0.5
               },
               {
-              "color":"1.0 0 0 1.0",
+              "type":"standart",
               "height":160,
               "width":160,
               "pushVectorX":1,
@@ -80,7 +80,7 @@
               "speedModifier":0.5
               },
               {
-              "color":"1.0 0 0 1.0",
+              "type":"standart",
               "height":160,
               "width":160,
               "pushVectorX":1,
@@ -92,7 +92,7 @@
               "speedModifier":0.5
               },
               {
-              "color":"1.0 0 0 1.0",
+              "type":"standart",
               "height":250,
               "width":80,
               "pushVectorX":0,

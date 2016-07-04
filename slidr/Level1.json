@@ -1,7 +1,7 @@
 {
     "blocks":[
               {
-              "color":"1.0 0 0 1.0",
+              "type":"standart",
               "height":150,
               "width":150,
               "pushVectorX":0,
@@ -13,7 +13,7 @@
               "speedModifier":2
               },
               {
-              "color":"1.0 0 0 1.0",
+              "type":"standart",
               "height":150,
               "width":150,
               "pushVectorX":0,

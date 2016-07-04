@@ -1,7 +1,7 @@
 {
     "blocks":[
               {
-              "color":"1.0 0 0 1.0",
+              "type":"standart",
               "height":150,
               "width":150,
               "pushVectorX":0,
@@ -12,7 +12,7 @@
               "rotation":0
               },
               {
-              "color":"0 0 1.0 1.0",
+              "type":"swipeable",
               "height":150,
               "width":150,
               "pushVectorX":0,
@@ -23,7 +23,7 @@
               "rotation":0
               },
               {
-              "color":"1.0 0 0 1.0",
+              "type":"standart",
               "height":150,
               "width":150,
               "pushVectorX":0,
@@ -34,7 +34,7 @@
               "rotation":0
               },
               {
-              "color":"0 0 1.0 1.0",
+              "type":"swipeable",
               "height":150,
               "width":150,
               "pushVectorX":0,

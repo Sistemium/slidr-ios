@@ -238,12 +238,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
         if let block1 = contact.bodyA.node as? Block, let block2 = contact.bodyB.node as? Block{
-            var fRed : CGFloat = 0
-            var fGreen : CGFloat = 0
-            var fBlue : CGFloat = 0
-            var fAlpha: CGFloat = 0
-            block1.color.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha)
-            if fRed == 0 && fGreen == 0 && fBlue == 0{
+            if block1.blockType == .wall{
                 if block1.rotation != 0{
                     if self.convertPoint(contact.contactPoint, toNode: block2).distance(block2.corners[0]) <= (abs(block2.pushVector.dy) + abs(block2.pushVector.dx))/1000{
                         if block2.pushVector.dy != 0{
@@ -281,8 +276,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                 return
             }
-            block2.color.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha)
-            if fRed == 0 && fGreen == 0 && fBlue == 0{
+            if block2.blockType == .wall{
                 if block2.rotation != 0{
                     if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[0]) <= (abs(block1.pushVector.dy) + abs(block1.pushVector.dx))/1000{
                         if block1.pushVector.dy != 0{
@@ -321,7 +315,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 return
             }
             if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
-                if block1.color == block2.color{
+                if block1.blockType == block2.blockType{
                     block1.physicsBody = nil
                     block2.physicsBody = nil
                     destroyedCount += 2
@@ -332,10 +326,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     block2.runAction(action){
                         block2.removeFromParent()
                     }
-                    if block1.color == UIColor.redColor(){
+                    if block1.blockType == .standart{
                         freeModeTimer += GameSettings.redBlockReward
                     }
-                    if block1.color == UIColor.blueColor(){
+                    if block1.blockType == .swipeable{
                         freeModeTimer += GameSettings.blueBlockReward
                     }
                 }else{
@@ -381,7 +375,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let block = self.nodeAtPoint(touchLocation) as? Block
             if block != nil{
                 if block!.numberOfActions == nil || block!.numberOfActions! > 0{
-                    if block?.color == UIColor.redColor(){
+                    if block?.blockType == .standart{
                         switch sender.direction {
                         case UISwipeGestureRecognizerDirection.Up:
                             if block?.pushVector.dy != 0 {
@@ -429,7 +423,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if let block = node as? Block{
                     touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
                     touchLocation = self.convertPoint(touchLocation, toNode: block)
-                    if  block.color == UIColor.blueColor(){
+                    if  block.blockType == .swipeable{
                         candidatesToGesture[touchLocation.distance(block.anchorPoint)] = block
                     }
                 }
@@ -440,7 +434,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 touchLocation = self.convertPoint(touchLocation, toNode: chosen!)
                 let region = SKRegion(size: CGSize(width: chosen!.size.width + GameSettings.touchRegion, height: chosen!.size.height  * GameSettings.touchRegion))
                 if region.containsPoint(touchLocation){
-                    if chosen!.color == UIColor.redColor(){
+                    if chosen!.blockType == .standart{
                         switch sender.direction {
                         case UISwipeGestureRecognizerDirection.Up:
                             if chosen!.pushVector.dy != 0 {

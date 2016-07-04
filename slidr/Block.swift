@@ -9,7 +9,27 @@
 import SpriteKit
 import Darwin
 
+enum BlockType{
+    case standart, swipeable, wall
+}
+
 class Block: SKSpriteNode {
+    
+    var blockType = BlockType.standart{
+        didSet{
+            switch blockType {
+            case .standart:
+                self.color = UIColor.redColor()
+                self.physicsBody?.dynamic = true
+            case .swipeable:
+                self.color = UIColor.blueColor()
+                self.physicsBody?.dynamic = true
+            case .wall:
+                self.color = UIColor.blackColor()
+                self.physicsBody?.dynamic = false
+            }
+        }
+    }
     
     var moveDirections:[CGVector]{
         get{
@@ -80,13 +100,13 @@ class Block: SKSpriteNode {
     }
     
     convenience init(){
-        self.init(texture: nil, color: GameSettings.blockColors[Int(arc4random_uniform(UInt32(GameSettings.blockColors.count)))], size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
+        self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
         customInit()
         randomizeData()
     }
     
     convenience init(blockData:NSDictionary){
-        self.init(texture: nil, color: UIColor(CIColor: CIColor(string:blockData["color"] as! String)), size: CGSize(width: blockData["width"] as! CGFloat, height: blockData["height"] as! CGFloat ))
+        self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: blockData["width"] as! CGFloat, height: blockData["height"] as! CGFloat ))
         customInit()
         loadBlock(blockData)
     }
@@ -118,13 +138,25 @@ class Block: SKSpriteNode {
         preferedPushTime = blockData["pushTime"] as? Double
         self.rotation = blockData["rotation"] as? Double
         self.numberOfActions = blockData["numberOfActions"] as? Int
-        let color = CIColor(string:blockData["color"] as! String)
-        if color.red == 0 && color.green == 0 && color.blue == 0{
-            self.physicsBody?.dynamic = false
+        switch blockData["type"] as! String {
+        case "standart":
+            blockType = .standart
+        case "swipeable":
+            self.blockType = .swipeable
+        case "wall":
+            self.blockType = .wall
+        default:
+            break
         }
     }
     
     func randomizeData() {
+        switch arc4random_uniform(2) {
+        case 0:
+            self.blockType = .standart
+        default:
+            self.blockType = .swipeable
+        }
         pushVector = GameSettings.moveDirections[Int(arc4random_uniform(4))]
         if pushVector.dx == 0{
             if pushVector.dy > 0{
