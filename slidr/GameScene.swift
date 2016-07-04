@@ -14,6 +14,7 @@ enum GameMode{
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var timeSinceLastUpdate:CFTimeInterval?
+    var startTime:CFTimeInterval?
     var timeToNextBlockPush = GameSettings.pushBlockInterval
     private var toolbarNode : ToolbarNode!{
         didSet{
@@ -181,16 +182,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        checkResult()
+        if startTime == nil{
+            startTime = currentTime
+        }
+        checkResult(currentTime)
         self.timeSinceLastUpdate = currentTime
     }
     
-    private func checkResult(){
+    private func checkResult(currentTime: CFTimeInterval){
         if gameMode == .Free && self.freeModeTimer <= 0{
             let scene = GameResultScene()
             scene.size = GameSettings.playableAreaSize
             scene.scaleMode = .Fill
             scene.result = .Lose
+            scene.scoreTime = currentTime - startTime!
             self.view!.presentScene(scene)
         }else if gameMode == .Level && level?.blocks.count == 0 && destroyedCount != 0 && leftCount == 0 && !isThereUnpushedBlocks && self.children.count - unusedNodes() == 0{
             let scene = GameResultScene()

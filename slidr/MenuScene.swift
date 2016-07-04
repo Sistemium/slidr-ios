@@ -14,7 +14,7 @@ class MenuScene: SKScene {
         didSet{
             self.addChild(startGameLabel)
             startGameLabel.text = "Start game"
-            startGameLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + 100)
+            startGameLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 1.3)
             startGameLabel.fontSize = GameSettings.labelSize
             startGameLabel.zPosition = 3.0
             startGameLabel.fontColor = .whiteColor()
@@ -36,7 +36,7 @@ class MenuScene: SKScene {
         didSet{
             self.addChild(optionsLabel)
             optionsLabel.text = "Options"
-            optionsLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - 100)
+            optionsLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 1.3)
             optionsLabel.fontSize = GameSettings.labelSize
             optionsLabel.zPosition = 3.0
             optionsLabel.fontColor = .whiteColor()

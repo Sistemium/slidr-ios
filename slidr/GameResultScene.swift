@@ -14,6 +14,8 @@ enum Result{
 
 class GameResultScene: SKScene{
     
+    var scoreTime:CFTimeInterval?
+    
     var result:Result = Result.Win
     
     var finishedLevel :Level?
@@ -22,7 +24,7 @@ class GameResultScene: SKScene{
         didSet{
             self.addChild(resultLabel)
             resultLabel.text = result == .Win ? "You Win" : "You Lose"
-            resultLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/1.7)
+            resultLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 1.3)
             resultLabel.fontSize = GameSettings.labelSize
             resultLabel.zPosition = 3.0
             resultLabel.fontColor = result == .Win ? UIColor.greenColor() : UIColor.redColor()
@@ -44,7 +46,7 @@ class GameResultScene: SKScene{
         didSet{
             self.addChild(returnButton)
             returnButton.text = "No"
-            returnButton.position = CGPoint(x: GameSettings.playableAreaSize.width/3, y: GameSettings.playableAreaSize.height/2.4)
+            returnButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 - GameSettings.labelSize * 1.3, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 1.3)
             returnButton.fontSize = GameSettings.labelSize
             returnButton.zPosition = 3.0
             returnButton.fontColor = UIColor.whiteColor()
@@ -55,10 +57,40 @@ class GameResultScene: SKScene{
         didSet{
             self.addChild(actionButton)
             actionButton.text = "Yes"
-            actionButton.position = CGPoint(x: GameSettings.playableAreaSize.width/1.5, y: GameSettings.playableAreaSize.height/2.4)
+            actionButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 + GameSettings.labelSize * 1.3, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 1.3)
             actionButton.fontSize = GameSettings.labelSize
             actionButton.zPosition = 3.0
             actionButton.fontColor = UIColor.whiteColor()
+        }
+    }
+    
+    private var scoreLabel: SKLabelNode!{
+        didSet{
+            self.addChild(scoreLabel)
+            scoreLabel.text = scoreTime == nil ? "" : "You survived \(scoreTime!.fixedFractionDigits(0)) seconds"
+            scoreLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 2.4)
+            scoreLabel.fontSize = GameSettings.labelSize * 0.5
+            scoreLabel.zPosition = 3.0
+            scoreLabel.fontColor = UIColor.blackColor()
+        }
+    }
+    
+    private var recordLabel: SKLabelNode!{
+        didSet{
+            self.addChild(recordLabel)
+            if scoreTime != nil{
+                let record = NSUserDefaults.standardUserDefaults().integerForKey("record")
+                if record < Int(scoreTime!){
+                    recordLabel.text = "It is your new record!"
+                    NSUserDefaults.standardUserDefaults().setValue(Int(scoreTime!), forKey: "record")
+                }else{
+                    recordLabel.text = "Your best time was \(record) seconds"
+                }
+            }
+            recordLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 3.5)
+            recordLabel.fontSize = GameSettings.labelSize * 0.5
+            recordLabel.zPosition = 3.0
+            recordLabel.fontColor = UIColor.blackColor()
         }
     }
     
@@ -71,6 +103,8 @@ class GameResultScene: SKScene{
         questionLabel = SKLabelNode(fontNamed:"Chalkduster")
         returnButton = SKLabelNode(fontNamed:"Chalkduster")
         actionButton = SKLabelNode(fontNamed:"Chalkduster")
+        scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
+        recordLabel = SKLabelNode(fontNamed:"Chalkduster")
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -124,5 +158,7 @@ class GameResultScene: SKScene{
         questionLabel = SKLabelNode(fontNamed:"Chalkduster")
         returnButton = SKLabelNode(fontNamed:"Chalkduster")
         actionButton = SKLabelNode(fontNamed:"Chalkduster")
+        scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
+        recordLabel = SKLabelNode(fontNamed:"Chalkduster")
     }
 }
