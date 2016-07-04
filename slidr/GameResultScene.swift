@@ -20,6 +20,8 @@ class GameResultScene: SKScene{
     
     var finishedLevel :Level?
     
+    var infoText = ""
+    
     private var resultLabel: SKLabelNode!{
         didSet{
             self.addChild(resultLabel)
@@ -94,6 +96,17 @@ class GameResultScene: SKScene{
         }
     }
     
+    private var infoLabel: SKLabelNode!{
+        didSet{
+            self.addChild(infoLabel)
+            infoLabel.text = infoText
+            infoLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 2.6)
+            infoLabel.fontSize = GameSettings.labelSize * 0.5
+            infoLabel.zPosition = 3.0
+            infoLabel.fontColor = UIColor.blackColor()
+        }
+    }
+    
     override func didMoveToView(view: SKView) {
         for child in self.children{
             child.removeFromParent()
@@ -105,6 +118,7 @@ class GameResultScene: SKScene{
         actionButton = SKLabelNode(fontNamed:"Chalkduster")
         scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
         recordLabel = SKLabelNode(fontNamed:"Chalkduster")
+        infoLabel = SKLabelNode(fontNamed:"Chalkduster")
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -160,5 +174,6 @@ class GameResultScene: SKScene{
         actionButton = SKLabelNode(fontNamed:"Chalkduster")
         scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
         recordLabel = SKLabelNode(fontNamed:"Chalkduster")
+        infoLabel = SKLabelNode(fontNamed:"Chalkduster")
     }
 }

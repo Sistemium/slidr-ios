@@ -196,6 +196,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scene.scaleMode = .Fill
             scene.result = .Lose
             scene.scoreTime = currentTime - startTime!
+            scene.infoText = "Time's Up!"
             self.view!.presentScene(scene)
         }else if gameMode == .Level && level?.blocks.count == 0 && destroyedCount != 0 && leftCount == 0 && !isThereUnpushedBlocks && self.children.count - unusedNodes() == 0{
             let scene = GameResultScene()
@@ -213,14 +214,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scene.scaleMode = .Fill
             scene.result = .Lose
             scene.finishedLevel = level
+            scene.infoText = "Block left game area!"
             self.view!.presentScene(scene)
         }
-        else if gameMode == .Level && (level?.timeout<=0 || level?.blocks.count == 0 && self.children.count == unusedNodes() && leftCount != 0){
+        else if gameMode == .Level && level?.timeout<=0{
             let scene = GameResultScene()
             scene.size = GameSettings.playableAreaSize
             scene.scaleMode = .Fill
             scene.result = .Lose
             scene.finishedLevel = level
+            scene.infoText = "Time's Up!"
+            self.view!.presentScene(scene)
+        }
+        else if gameMode == .Level && level?.blocks.count == 0 && self.children.count - unusedNodes() == 0 && leftCount != 0{
+            let scene = GameResultScene()
+            scene.size = GameSettings.playableAreaSize
+            scene.scaleMode = .Fill
+            scene.result = .Lose
+            scene.finishedLevel = level
+            scene.infoText = "Block left game area!"
             self.view!.presentScene(scene)
         }
     }
