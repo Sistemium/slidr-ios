@@ -17,26 +17,26 @@ class Block: SKSpriteNode {
     
     var blockType = BlockType.standart{
         didSet{
+            self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
             switch blockType {
             case .standart:
                 self.color = UIColor.redColor()
                 hitSide.color = UIColor.blackColor()
-                self.physicsBody?.dynamic = true
+                self.physicsBody!.dynamic = true
             case .swipeable:
                 self.color = UIColor.blueColor()
                 hitSide.color = UIColor.blackColor()
-                self.physicsBody?.dynamic = true
+                self.physicsBody!.dynamic = true
             case .wall:
                 self.color = UIColor.blackColor()
                 hitSide.color = UIColor.blackColor()
-                self.physicsBody?.dynamic = false
+                self.physicsBody!.dynamic = false
             case .bomb:
                 self.color = UIColor.yellowColor()
                 hitSide.color = UIColor.clearColor()
-                self.physicsBody?.dynamic = true
+                self.physicsBody!.dynamic = true
                 self.size = CGSize(width: self.size.width/3, height: self.size.height/3)
             }
-            self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
         }
     }
     
