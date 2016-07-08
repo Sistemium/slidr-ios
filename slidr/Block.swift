@@ -42,7 +42,6 @@ class Block: SKSpriteNode {
     
     override var physicsBody: SKPhysicsBody?{
         didSet{
-            self.physicsBody?.dynamic = true
             self.physicsBody?.allowsRotation = false
             self.physicsBody?.affectedByGravity = false
             self.physicsBody?.contactTestBitMask = Block.blockId
@@ -113,14 +112,14 @@ class Block: SKSpriteNode {
     
     convenience init(){
         self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
-        customInit()
         randomizeData()
+        customInit()
     }
     
     convenience init(blockData:NSDictionary){
         self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: blockData["width"] as! CGFloat, height: blockData["height"] as! CGFloat ))
-        customInit()
         loadBlock(blockData)
+        customInit()
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -135,6 +134,17 @@ class Block: SKSpriteNode {
     private func customInit(){
         Block.blockId += 1
         self.addChild(hitSide)
+        if GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
+            
+            var t = position.x
+            position.x = (-position.y / GameSettings.playableAreaSize.height + 1) * GameSettings.playableAreaSize.width
+            position.y = t / GameSettings.playableAreaSize.width * GameSettings.playableAreaSize.height
+            t = size.height
+            size.height = size.width
+            size.width = t
+            physicsBody = SKPhysicsBody(rectangleOfSize: size)
+            pushVector = CGVectorMake(-pushVector.dy, pushVector.dx)
+        }
     }
     
     func loadBlock(blockData:NSDictionary){
