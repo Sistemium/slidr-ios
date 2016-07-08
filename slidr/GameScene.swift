@@ -76,6 +76,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var location = touches.first!.locationInNode(self)
         let node = self.nodeAtPoint(location)
         if let block = node as? Block{
+            if block.blockType == .bomb && block.physicsBody != nil{
+                block.physicsBody = nil
+                destroyedCount += 1
+                let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration/3)
+                block.runAction(action){
+                    block.removeFromParent()
+                }
+                let ripple = RippleCircle(radius: 20, position: block.position)
+                ripple.strokeColor = UIColor.yellowColor()
+                ripple.lineWidth = 10
+                self.addChild(ripple)
+                ripple.ripple(20, duration: 1.0)
+                ripple.removeFromParent()
+                return
+            }
             if block.numberOfActions == nil || block.numberOfActions! > 0{
                 block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
             }
@@ -94,6 +109,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 location = touches.first!.locationInNode(block)
                 let region = SKRegion(size: CGSize(width: block.size.width + GameSettings.touchRegion, height: block.size.height + GameSettings.touchRegion))
                 if region.containsPoint(location){
+                    if block.blockType == .bomb && block.physicsBody != nil{
+                        block.physicsBody = nil
+                        destroyedCount += 1
+                        let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration/3)
+                        block.runAction(action){
+                            block.removeFromParent()
+                        }
+                        let ripple = RippleCircle(radius: 20, position: block.position)
+                        ripple.strokeColor = UIColor.yellowColor()
+                        ripple.lineWidth = 10
+                        self.addChild(ripple)
+                        ripple.ripple(20, duration: 1.0)
+                        ripple.removeFromParent()
+                        return
+                    }
                     if block.numberOfActions == nil || block.numberOfActions! > 0{
                         block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
                     }
@@ -342,10 +372,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         block2.removeFromParent()
                     }
                     if block1.blockType == .standart{
-                        freeModeTimer += GameSettings.redBlockReward
+                        freeModeTimer += GameSettings.redBlockReward * 2
                     }
                     if block1.blockType == .swipeable{
-                        freeModeTimer += GameSettings.blueBlockReward
+                        freeModeTimer += GameSettings.blueBlockReward * 2 
                     }
                 }else{
                     block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
@@ -381,6 +411,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }
             }
+        }else{
+            if let block = contact.bodyA.node as? Block{
+                block.physicsBody = nil
+                destroyedCount += 1
+                let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
+                block.runAction(action){
+                    block.removeFromParent()
+                }
+                if block.blockType == .standart{
+                    freeModeTimer += GameSettings.redBlockReward
+                }
+                if block.blockType == .swipeable{
+                    freeModeTimer += GameSettings.blueBlockReward
+                }
+            }else{
+                if let block = contact.bodyB.node as? Block{
+                    block.physicsBody = nil
+                    destroyedCount += 1
+                    let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
+                    block.runAction(action){
+                        block.removeFromParent()
+                    }
+                    if block.blockType == .standart{
+                        freeModeTimer += GameSettings.redBlockReward
+                    }
+                    if block.blockType == .swipeable{
+                        freeModeTimer += GameSettings.blueBlockReward
+                    }
+                }
+            }
         }
     }
     
@@ -389,7 +449,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             var touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
             let block = self.nodeAtPoint(touchLocation) as? Block
             if block != nil{
-                if block!.numberOfActions == nil || block!.numberOfActions! > 0{
+                if (block!.blockType == .standart || block!.blockType == .swipeable) && (block!.numberOfActions == nil || block!.numberOfActions! > 0){
                     if block?.blockType == .standart{
                         switch sender.direction {
                         case UISwipeGestureRecognizerDirection.Up:

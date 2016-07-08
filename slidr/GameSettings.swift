@@ -10,15 +10,7 @@ import Foundation
 import UIKit
 
 class GameSettings{
-    static private var _playableAreaSize = CGSize()
-    static var playableAreaSize:CGSize{
-        get{
-            return _playableAreaSize
-        }
-        set{
-            _playableAreaSize = newValue
-        }
-    }
+    static var playableAreaSize = CGSize()
     static var moveDirections:[CGVector]{
         get{
             return [CGVectorMake(0, baseSpeed),CGVectorMake(0, -baseSpeed),CGVectorMake(baseSpeed, 0),CGVectorMake(-baseSpeed, 0)]
@@ -40,9 +32,9 @@ class GameSettings{
     static let minBlockSize:UInt32 = 100
     static let maxBlockSize:UInt32 = 200
     static let labelSize: CGFloat = 100
-    static var maxNumberOfBlocks = 5
+    static var maxNumberOfBlocks = 6
     static let hitSideWidth:CGFloat = 20
-    static let touchRegion:CGFloat = 75
+    static let touchRegion:CGFloat = 90
     static let timeUntilWarning = 3.0
     static var shakeToResetEnabled:Bool{
         get{
@@ -58,6 +50,6 @@ class GameSettings{
         }
     }
     static let freeModeTimer = 10.0
-    static let redBlockReward = 3.0
-    static let blueBlockReward = 3.0
+    static let redBlockReward = 1.5
+    static let blueBlockReward = 1.5
 }

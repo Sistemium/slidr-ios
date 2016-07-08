@@ -79,7 +79,13 @@ class GameViewController: UIViewController {
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
+        if size.width > size.height && GameSettings.playableAreaSize.width < GameSettings.playableAreaSize.height{
+            GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
+        }else{
+            if size.width < size.height && GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
+                GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
+            }
+        }
         let skView = self.view as! SKView
         skView.scene!.size = GameSettings.playableAreaSize
     }

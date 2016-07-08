@@ -10,7 +10,7 @@ import SpriteKit
 import Darwin
 
 enum BlockType{
-    case standart, swipeable, wall
+    case standart, swipeable, wall, bomb
 }
 
 class Block: SKSpriteNode {
@@ -20,14 +20,32 @@ class Block: SKSpriteNode {
             switch blockType {
             case .standart:
                 self.color = UIColor.redColor()
+                hitSide.color = UIColor.blackColor()
                 self.physicsBody?.dynamic = true
             case .swipeable:
                 self.color = UIColor.blueColor()
+                hitSide.color = UIColor.blackColor()
                 self.physicsBody?.dynamic = true
             case .wall:
                 self.color = UIColor.blackColor()
+                hitSide.color = UIColor.blackColor()
                 self.physicsBody?.dynamic = false
+            case .bomb:
+                self.color = UIColor.yellowColor()
+                hitSide.color = UIColor.clearColor()
+                self.physicsBody?.dynamic = true
+                self.size = CGSize(width: self.size.width/3, height: self.size.height/3)
             }
+            self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
+        }
+    }
+    
+    override var physicsBody: SKPhysicsBody?{
+        didSet{
+            self.physicsBody?.dynamic = true
+            self.physicsBody?.allowsRotation = false
+            self.physicsBody?.affectedByGravity = false
+            self.physicsBody?.contactTestBitMask = Block.blockId
         }
     }
     
@@ -53,11 +71,7 @@ class Block: SKSpriteNode {
     
     var preferedPushTime:Double?
     
-    var numberOfActions:Int?{
-        didSet{
-            
-        }
-    }
+    var numberOfActions:Int?
     
     var pushed = false
     
@@ -68,25 +82,23 @@ class Block: SKSpriteNode {
             return _pushVector
         }
         set{
-            if self.physicsBody != nil{
-                self.velocity = CGVectorMake(newValue.dx / self.size.height * speedModifier, newValue.dy / self.size.width * speedModifier)
-                _pushVector = newValue
-                switch (pushVector.dx, pushVector.dy) {
-                case (let x,_) where x<0:
-                    hitSide.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
-                    hitSide.position = CGPoint(x: -self.size.width / 2 + GameSettings.hitSideWidth / 2, y: 0)
-                case (let x,_) where x>0:
-                    hitSide.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
-                    hitSide.position = CGPoint(x: self.size.width / 2 - GameSettings.hitSideWidth / 2, y: 0)
-                case (_,let y) where y<0:
-                    hitSide.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
-                    hitSide.position = CGPoint(x: 0, y: -self.size.height / 2 + GameSettings.hitSideWidth / 2)
-                case (_,let y) where y>0:
-                    hitSide.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
-                    hitSide.position = CGPoint(x: 0, y: self.size.height / 2 - GameSettings.hitSideWidth / 2)
-                default:
-                    break
-                }
+            self.velocity = CGVectorMake(newValue.dx / self.size.height * speedModifier, newValue.dy / self.size.width * speedModifier)
+            _pushVector = newValue
+            switch (pushVector.dx, pushVector.dy) {
+            case (let x,_) where x<0:
+                hitSide.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
+                hitSide.position = CGPoint(x: -self.size.width / 2 + GameSettings.hitSideWidth / 2, y: 0)
+            case (let x,_) where x>0:
+                hitSide.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
+                hitSide.position = CGPoint(x: self.size.width / 2 - GameSettings.hitSideWidth / 2, y: 0)
+            case (_,let y) where y<0:
+                hitSide.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
+                hitSide.position = CGPoint(x: 0, y: -self.size.height / 2 + GameSettings.hitSideWidth / 2)
+            case (_,let y) where y>0:
+                hitSide.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
+                hitSide.position = CGPoint(x: 0, y: self.size.height / 2 - GameSettings.hitSideWidth / 2)
+            default:
+                break
             }
         }
     }
@@ -121,14 +133,8 @@ class Block: SKSpriteNode {
     }
     
     private func customInit(){
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
-        self.physicsBody?.dynamic = true
-        self.physicsBody?.allowsRotation = false
-        self.physicsBody?.affectedByGravity = false
-        self.physicsBody?.contactTestBitMask = Block.blockId
         Block.blockId += 1
         self.addChild(hitSide)
-        hitSide.color = UIColor.blackColor()
     }
     
     func loadBlock(blockData:NSDictionary){
@@ -145,15 +151,19 @@ class Block: SKSpriteNode {
             self.blockType = .swipeable
         case "wall":
             self.blockType = .wall
+        case "bomb":
+            self.blockType = .bomb
         default:
             break
         }
     }
     
     func randomizeData() {
-        switch arc4random_uniform(2) {
+        switch arc4random_uniform(3) {
         case 0:
             self.blockType = .standart
+        case 1:
+            self.blockType = .bomb
         default:
             self.blockType = .swipeable
         }
