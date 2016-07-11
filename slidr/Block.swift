@@ -17,25 +17,28 @@ class Block: SKSpriteNode {
     
     var blockType = BlockType.standart{
         didSet{
-            self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
             switch blockType {
             case .standart:
                 self.color = UIColor.redColor()
                 hitSide.color = UIColor.blackColor()
+                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 self.physicsBody!.dynamic = true
             case .swipeable:
                 self.color = UIColor.blueColor()
                 hitSide.color = UIColor.blackColor()
+                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 self.physicsBody!.dynamic = true
             case .wall:
                 self.color = UIColor.blackColor()
                 hitSide.color = UIColor.blackColor()
+                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 self.physicsBody!.dynamic = false
             case .bomb:
                 self.color = UIColor.yellowColor()
                 hitSide.color = UIColor.clearColor()
-                self.physicsBody!.dynamic = true
                 self.size = CGSize(width: self.size.width/3, height: self.size.height/3)
+                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
+                self.physicsBody!.dynamic = true
             }
         }
     }
@@ -135,7 +138,6 @@ class Block: SKSpriteNode {
         Block.blockId += 1
         self.addChild(hitSide)
         if GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
-            
             var t = position.x
             position.x = (-position.y / GameSettings.playableAreaSize.height + 1) * GameSettings.playableAreaSize.width
             position.y = t / GameSettings.playableAreaSize.width * GameSettings.playableAreaSize.height
@@ -143,6 +145,9 @@ class Block: SKSpriteNode {
             size.height = size.width
             size.width = t
             physicsBody = SKPhysicsBody(rectangleOfSize: size)
+            if blockType == .wall{
+                physicsBody!.dynamic = false
+            }
             pushVector = CGVectorMake(-pushVector.dy, pushVector.dx)
         }
     }
