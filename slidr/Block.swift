@@ -137,25 +137,12 @@ class Block: SKSpriteNode {
     private func customInit(){
         Block.blockId += 1
         self.addChild(hitSide)
-        if GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
-            var t = position.x
-            position.x = (-position.y / GameSettings.playableAreaSize.height + 1) * GameSettings.playableAreaSize.width
-            position.y = t / GameSettings.playableAreaSize.width * GameSettings.playableAreaSize.height
-            t = size.height
-            size.height = size.width
-            size.width = t
-            physicsBody = SKPhysicsBody(rectangleOfSize: size)
-            if blockType == .wall{
-                physicsBody!.dynamic = false
-            }
-            pushVector = CGVectorMake(-pushVector.dy, pushVector.dx)
-        }
     }
     
     func loadBlock(blockData:NSDictionary){
         speedModifier = blockData["speedModifier"] as? CGFloat ?? 1
         pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.baseSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.baseSpeed)
-        position = CGPoint(x: blockData["positionX"] as! CGFloat * GameSettings.playableAreaSize.width, y: blockData["positionY"] as! CGFloat * GameSettings.playableAreaSize.height)
+        position = CGPoint(x: blockData["positionX"] as! CGFloat, y: blockData["positionY"] as! CGFloat)
         preferedPushTime = blockData["pushTime"] as? Double
         self.rotation = blockData["rotation"] as? Double
         self.numberOfActions = blockData["numberOfActions"] as? Int

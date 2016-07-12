@@ -165,6 +165,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     block.preferedPushTime! -= currentTime - oldTime
                     if block.preferedPushTime < 0{
                         level?.blocks.removeAtIndex((level?.blocks.indexOf(block))!)
+                        if GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
+                            var t = block.position.x
+                            block.position.x = (-block.position.y + 1)
+                            block.position.y = t
+                            t = block.size.height
+                            block.size.height = block.size.width
+                            block.size.width = t
+                            block.physicsBody = SKPhysicsBody(rectangleOfSize: block.size)
+                            if block.blockType == .wall{
+                                block.physicsBody!.dynamic = false
+                            }
+                            block.pushVector = CGVectorMake(-block.pushVector.dy, block.pushVector.dx)
+                        }
+                        block.position.x *= GameSettings.playableAreaSize.width
+                        block.position.y *= GameSettings.playableAreaSize.height
                         self.addChild(block)
                     }
                 }
@@ -557,7 +572,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didChangeSize(oldSize: CGSize) {
-            toolbarNode?.removeFromParent()
-            toolbarNode  = ToolbarNode()
+        toolbarNode?.removeFromParent()
+        toolbarNode  = ToolbarNode()
     }
 }
