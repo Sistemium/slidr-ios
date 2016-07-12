@@ -17,25 +17,28 @@ class Block: SKSpriteNode {
     
     var blockType = BlockType.standart{
         didSet{
-            self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
             switch blockType {
             case .standart:
                 self.color = UIColor.redColor()
                 hitSide.color = UIColor.blackColor()
+                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 self.physicsBody!.dynamic = true
             case .swipeable:
                 self.color = UIColor.blueColor()
                 hitSide.color = UIColor.blackColor()
+                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 self.physicsBody!.dynamic = true
             case .wall:
                 self.color = UIColor.blackColor()
                 hitSide.color = UIColor.blackColor()
+                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 self.physicsBody!.dynamic = false
             case .bomb:
                 self.color = UIColor.yellowColor()
                 hitSide.color = UIColor.clearColor()
-                self.physicsBody!.dynamic = true
                 self.size = CGSize(width: self.size.width/3, height: self.size.height/3)
+                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
+                self.physicsBody!.dynamic = true
             }
         }
     }
@@ -112,14 +115,14 @@ class Block: SKSpriteNode {
     
     convenience init(){
         self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
-        customInit()
         randomizeData()
+        customInit()
     }
     
     convenience init(blockData:NSDictionary){
         self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: blockData["width"] as! CGFloat, height: blockData["height"] as! CGFloat ))
-        customInit()
         loadBlock(blockData)
+        customInit()
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -139,7 +142,7 @@ class Block: SKSpriteNode {
     func loadBlock(blockData:NSDictionary){
         speedModifier = blockData["speedModifier"] as? CGFloat ?? 1
         pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.baseSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.baseSpeed)
-        position = CGPoint(x: blockData["positionX"] as! CGFloat * GameSettings.playableAreaSize.width, y: blockData["positionY"] as! CGFloat * GameSettings.playableAreaSize.height)
+        position = CGPoint(x: blockData["positionX"] as! CGFloat, y: blockData["positionY"] as! CGFloat)
         preferedPushTime = blockData["pushTime"] as? Double
         self.rotation = blockData["rotation"] as? Double
         self.numberOfActions = blockData["numberOfActions"] as? Int

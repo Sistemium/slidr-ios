@@ -98,7 +98,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
             tableview?.removeFromSuperview()
             tableview = UITableView()
             self.backgroundColor = UIColor.lightGrayColor()
-            toolbarNode  = ToolbarNode()
+            toolbarNode = ToolbarNode()
             toolbarNode.centerLabelText = "Select level"
         }
         
