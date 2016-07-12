@@ -13,17 +13,6 @@
               },
               {
               "type":"wall",
-              "height":40,
-              "width":4000,
-              "pushVectorX":0,
-              "pushVectorY":0,
-              "positionX":0.5,
-              "positionY":0,
-              "pushTime":0,
-              "rotation":0
-              },
-              {
-              "type":"wall",
               "height":200,
               "width":20,
               "pushVectorX":0,
