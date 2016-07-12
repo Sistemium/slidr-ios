@@ -336,7 +336,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                 return
             }
-            if block2.blockType == .wall{
+            else if block2.blockType == .wall{
                 if block2.rotation != 0{
                     if self.convertPoint(contact.contactPoint, toNode: block1).distance(block1.corners[0]) <= (abs(block1.pushVector.dy) + abs(block1.pushVector.dx))/1000{
                         if block1.pushVector.dy != 0{
@@ -374,7 +374,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
                 return
             }
-            if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
+            else if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
                 if block1.blockType == block2.blockType{
                     block1.physicsBody = nil
                     block2.physicsBody = nil
@@ -393,6 +393,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         freeModeTimer += GameSettings.blueBlockReward * 2 
                     }
                 }else{
+                    if block1.blockType == .bomb{
+                        block1.physicsBody = nil
+                        let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
+                        block1.runAction(action){
+                            block1.removeFromParent()
+                        }
+                    }
+                    if block2.blockType == .bomb{
+                        block2.physicsBody = nil
+                        let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
+                        block2.runAction(action){
+                            block2.removeFromParent()
+                        }
+                    }
                     block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
                     block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                 }
