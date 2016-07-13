@@ -164,10 +164,10 @@ class Block: SKSpriteNode {
         switch arc4random_uniform(9) {
         case 0,1,2,3:
             self.blockType = .standart
-        case 4:
-            self.blockType = .bomb
-        default:
+        case 4,5,6,7:
             self.blockType = .swipeable
+        default:
+            self.blockType = .bomb
         }
         pushVector = GameSettings.moveDirections[Int(arc4random_uniform(4))]
         if pushVector.dx == 0{

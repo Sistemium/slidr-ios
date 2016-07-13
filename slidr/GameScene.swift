@@ -470,20 +470,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }else{
             if let block = contact.bodyA.node as? Block{
-                block.physicsBody = nil
-                destroyedCount += 1
-                let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
-                block.runAction(action){
-                    block.removeFromParent()
-                }
-                if block.blockType == .standart{
-                    freeModeTimer += GameSettings.redBlockReward
-                }
-                if block.blockType == .swipeable{
-                    freeModeTimer += GameSettings.blueBlockReward
-                }
-            }else{
-                if let block = contact.bodyB.node as? Block{
+                if block.blockType == .bomb && block.physicsBody != nil{
+                    block.physicsBody = nil
+                    destroyedCount += 1
+                    let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration/3)
+                    block.runAction(action){
+                        block.removeFromParent()
+                    }
+                    let ripple = RippleCircle(radius: 20, position: block.position)
+                    ripple.strokeColor = UIColor.yellowColor()
+                    ripple.lineWidth = 10
+                    self.addChild(ripple)
+                    ripple.ripple(20, duration: 1.0)
+                    ripple.removeFromParent()
+                    return
+                }else{
                     block.physicsBody = nil
                     destroyedCount += 1
                     let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
@@ -495,6 +496,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                     if block.blockType == .swipeable{
                         freeModeTimer += GameSettings.blueBlockReward
+                    }
+                }
+            }else{
+                if let block = contact.bodyB.node as? Block{
+                    if block.blockType == .bomb && block.physicsBody != nil{
+                        block.physicsBody = nil
+                        destroyedCount += 1
+                        let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration/3)
+                        block.runAction(action){
+                            block.removeFromParent()
+                        }
+                        let ripple = RippleCircle(radius: 20, position: block.position)
+                        ripple.strokeColor = UIColor.yellowColor()
+                        ripple.lineWidth = 10
+                        self.addChild(ripple)
+                        ripple.ripple(20, duration: 1.0)
+                        ripple.removeFromParent()
+                        return
+                    }else{
+                        block.physicsBody = nil
+                        destroyedCount += 1
+                        let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
+                        block.runAction(action){
+                            block.removeFromParent()
+                        }
+                        if block.blockType == .standart{
+                            freeModeTimer += GameSettings.redBlockReward
+                        }
+                        if block.blockType == .swipeable{
+                            freeModeTimer += GameSettings.blueBlockReward
+                        }
                     }
                 }
             }
