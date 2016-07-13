@@ -393,6 +393,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         freeModeTimer += GameSettings.blueBlockReward * 2 
                     }
                 }else{
+                    block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
+                    block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                     if block1.blockType == .bomb{
                         block1.physicsBody = nil
                         let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
@@ -407,8 +409,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             block2.removeFromParent()
                         }
                     }
-                    block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
-                    block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                 }
             }else{
                 if block1.pushVector.dx == block2.pushVector.dx && block1.pushVector.dy == block2.pushVector.dy{
@@ -416,6 +416,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
                     }else{
                         block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
+                    }
+                    if block1.blockType == .bomb{
+                        block1.physicsBody = nil
+                        let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
+                        block1.runAction(action){
+                            block1.removeFromParent()
+                        }
+                    }
+                    if block2.blockType == .bomb{
+                        block2.physicsBody = nil
+                        let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
+                        block2.runAction(action){
+                            block2.removeFromParent()
+                        }
                     }
                 }
                 else{
@@ -437,6 +451,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }else{
                         block1.pushVector = CGVector(dx: block2.pushVector.dx, dy: block2.pushVector.dy)
                         block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
+                    }
+                    if block1.blockType == .bomb{
+                        block1.physicsBody = nil
+                        let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
+                        block1.runAction(action){
+                            block1.removeFromParent()
+                        }
+                    }
+                    if block2.blockType == .bomb{
+                        block2.physicsBody = nil
+                        let action = SKAction.fadeOutWithDuration(GameSettings.fadeOutDuration)
+                        block2.runAction(action){
+                            block2.removeFromParent()
+                        }
                     }
                 }
             }

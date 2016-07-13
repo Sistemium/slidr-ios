@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3565CFF51D362B0900C1324E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3565CFF41D362B0900C1324E /* Crashlytics.framework */; };
 		5BE49001B0F54F72E0ECE053 /* Level8.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE49E0678E5D6C631A89C1A /* Level8.json */; };
 		5BE495CC43837A4961D6D2D0 /* Level1.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE4970CC26FC6CE01ADFEB5 /* Level1.json */; };
 		5BE495F07476EB0C87DB7A19 /* Level4.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE4975F1A1829FA6B739AE1 /* Level4.json */; };
@@ -25,7 +26,6 @@
 		6D42E7B61CF4661000740131 /* GameSpeedSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D42E7B51CF4661000740131 /* GameSpeedSliderTableViewCell.swift */; };
 		6D538BA31CDC9E8100B0F780 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D538BA21CDC9E8100B0F780 /* GameSettings.swift */; };
 		6D538BA71CDCC8D500B0F780 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D538BA51CDCC8D500B0F780 /* Fabric.framework */; };
-		6D538BA81CDCC8D500B0F780 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D538BA61CDCC8D500B0F780 /* Crashlytics.framework */; };
 		6D53CB6E1D1A9A04006F40E7 /* ShakeSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D53CB6D1D1A9A04006F40E7 /* ShakeSwitchTableViewCell.xib */; };
 		6D53CB701D1A9BE9006F40E7 /* ShakeSwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D53CB6F1D1A9BE9006F40E7 /* ShakeSwitchTableViewCell.swift */; };
 		6D56F3C81CEB2EDF00CD3D3A /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D56F3C71CEB2EDF00CD3D3A /* LevelScene.swift */; };
@@ -42,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3565CFF41D362B0900C1324E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		5BE4940D360C65EE40F39C0A /* Level5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level5.json; sourceTree = "<group>"; };
 		5BE494A83BC369F330115517 /* Level3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level3.json; sourceTree = "<group>"; };
 		5BE495DE8971ED96F22AB1E8 /* Level2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level2.json; sourceTree = "<group>"; };
@@ -60,7 +61,6 @@
 		6D42E7B51CF4661000740131 /* GameSpeedSliderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSpeedSliderTableViewCell.swift; sourceTree = "<group>"; };
 		6D538BA21CDC9E8100B0F780 /* GameSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		6D538BA51CDCC8D500B0F780 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		6D538BA61CDCC8D500B0F780 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		6D53CB6D1D1A9A04006F40E7 /* ShakeSwitchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShakeSwitchTableViewCell.xib; sourceTree = "<group>"; };
 		6D53CB6F1D1A9BE9006F40E7 /* ShakeSwitchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShakeSwitchTableViewCell.swift; sourceTree = "<group>"; };
 		6D56F3C71CEB2EDF00CD3D3A /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; wrapsLines = 1; };
@@ -83,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D538BA81CDCC8D500B0F780 /* Crashlytics.framework in Frameworks */,
+				3565CFF51D362B0900C1324E /* Crashlytics.framework in Frameworks */,
 				6D538BA71CDCC8D500B0F780 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,8 +123,8 @@
 			children = (
 				6DC0CCC51CD8C0C20019D466 /* slidr */,
 				6DC0CCC41CD8C0C20019D466 /* Products */,
+				3565CFF41D362B0900C1324E /* Crashlytics.framework */,
 				6D538BA51CDCC8D500B0F780 /* Fabric.framework */,
-				6D538BA61CDCC8D500B0F780 /* Crashlytics.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,7 +173,7 @@
 				6DC0CCBF1CD8C0C20019D466 /* Sources */,
 				6DC0CCC01CD8C0C20019D466 /* Frameworks */,
 				6DC0CCC11CD8C0C20019D466 /* Resources */,
-				6D538BA41CDCC88D00B0F780 /* ShellScript */,
+				6D538BA41CDCC88D00B0F780 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -243,13 +243,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6D538BA41CDCC88D00B0F780 /* ShellScript */ = {
+		6D538BA41CDCC88D00B0F780 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

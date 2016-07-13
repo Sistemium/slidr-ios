@@ -29,6 +29,10 @@
 			<dict>
 				<key>KitInfo</key>
 				<dict/>
+			</dict>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
 				<key>KitName</key>
 				<string>Crashlytics</string>
 			</dict>

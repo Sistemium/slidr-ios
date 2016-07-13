@@ -161,10 +161,10 @@ class Block: SKSpriteNode {
     }
     
     func randomizeData() {
-        switch arc4random_uniform(3) {
-        case 0:
+        switch arc4random_uniform(9) {
+        case 0,1,2,3:
             self.blockType = .standart
-        case 1:
+        case 4:
             self.blockType = .bomb
         default:
             self.blockType = .swipeable
