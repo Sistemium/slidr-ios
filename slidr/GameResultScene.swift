@@ -69,7 +69,10 @@ class GameResultScene: SKScene{
     private var scoreLabel: SKLabelNode!{
         didSet{
             self.addChild(scoreLabel)
-            scoreLabel.text = scoreTime == nil ? "" : "You survived \(scoreTime!.fixedFractionDigits(0)) seconds"
+            scoreLabel.text = scoreTime == nil ? "" : "You survived \(scoreTime!.fixedFractionDigits(0)) second"
+            if scoreTime != 1.0 {
+                scoreLabel.text! += "s"
+            }
             scoreLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 2.4)
             scoreLabel.fontSize = GameSettings.labelSize * 0.5
             scoreLabel.zPosition = 3.0
@@ -86,7 +89,10 @@ class GameResultScene: SKScene{
                     recordLabel.text = "It is your new record!"
                     NSUserDefaults.standardUserDefaults().setValue(Int(scoreTime!), forKey: "record")
                 }else{
-                    recordLabel.text = "Your best time was \(record) seconds"
+                    recordLabel.text = "Your best time was \(record) second"
+                    if recordLabel != 1.0 {
+                        recordLabel.text! += "s"
+                    }
                 }
             }
             recordLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 3.5)
