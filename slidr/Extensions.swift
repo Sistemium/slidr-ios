@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SpriteKit
 
 extension Double {
     func fixedFractionDigits(digits: Int) -> String {
@@ -35,5 +36,17 @@ extension CGPoint {
 extension CGSize{
     func reversed() -> CGSize {
         return CGSizeMake(height, width)
+    }
+}
+
+extension SKScene{
+    var dynamicChildren:[SKNode]{
+        var dynamicChildren:[SKNode] = []
+        for node in self.children{
+            if !(node.physicsBody?.dynamic ?? true){
+                dynamicChildren.append(node)
+            }
+        }
+        return dynamicChildren
     }
 }

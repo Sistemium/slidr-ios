@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 class GameSettings{
     static var playableAreaSize = CGSize()
@@ -16,7 +17,8 @@ class GameSettings{
             return [CGVectorMake(0, baseSpeed),CGVectorMake(0, -baseSpeed),CGVectorMake(baseSpeed, 0),CGVectorMake(-baseSpeed, 0)]
         }
     }
-    static let fadeOutDuration = 0.75
+    static let fadeoutAction = SKAction.fadeOutWithDuration(0.75)
+    static let fastFadeoutAction = SKAction.fadeOutWithDuration(0.75)
     static let toolbarHeight:CGFloat = 60
     static let pushBlockInterval = 0.4
     static let defaultSpeed:CGFloat = 45000
