@@ -446,7 +446,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func rotationEnded(){
         for child in children{
             if let block = child as? Block{
-                block.hidden = false
+                block.runAction(SKAction.fadeInWithDuration(0.1))
                 block.movementEnabled = true
             }
         }
@@ -457,7 +457,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         toolbarNode  = ToolbarNode()
         for child in children{
             if let block = child as? Block{
-                block.hidden = true
+                block.runAction(SKAction.fadeOutWithDuration(0.1))
                 block.movementEnabled = false
                 block.position.x /= oldSize.width
                 block.position.y /= oldSize.height
@@ -570,7 +570,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if startTime == nil{
             startTime = currentTime
         }
-//        checkResult(currentTime)
+        checkResult(currentTime)
         self.timeSinceLastUpdate = currentTime
     }
     
