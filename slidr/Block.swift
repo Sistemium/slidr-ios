@@ -207,10 +207,10 @@ class Block: SKSpriteNode {
     }
     
     func randomizeData() {
-        switch arc4random_uniform(9) {
-        case 0,1,2:
+        switch arc4random_uniform(5) {
+        case 0,1:
             self.blockType = .standart
-        case 3,4,5:
+        case 2,3:
             self.blockType = .swipeable
         default:
             self.blockType = .bomb
@@ -229,5 +229,33 @@ class Block: SKSpriteNode {
                 position = CGPointMake(GameSettings.playableAreaSize.width + size.width/2, CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.height - size.height ))) + size.height/2)
             }
         }
+    }
+    
+    func switchOrientationToLeft(){
+        var t = self.position.x
+        self.position.x = (-self.position.y + 1)
+        self.position.y = t
+        t = self.size.height
+        self.size.height = self.size.width
+        self.size.width = t
+        self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
+        if self.blockType == .wall{
+            self.physicsBody!.dynamic = false
+        }
+        self.pushVector = CGVectorMake(-self.pushVector.dy, self.pushVector.dx)
+    }
+    
+    func switchOrientationToRight(){
+        var t = (-self.position.x + 1)
+        self.position.x = self.position.y
+        self.position.y = t
+        t = self.size.height
+        self.size.height = self.size.width
+        self.size.width = t
+        self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
+        if self.blockType == .wall{
+            self.physicsBody!.dynamic = false
+        }
+        self.pushVector = CGVectorMake(self.pushVector.dy, -self.pushVector.dx)
     }
 }

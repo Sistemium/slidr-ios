@@ -445,6 +445,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didChangeSize(oldSize: CGSize) {
         toolbarNode?.removeFromParent()
         toolbarNode  = ToolbarNode()
+        for child in children{
+            if let block = child as? Block{
+                block.position.x /= oldSize.width
+                block.position.y /= oldSize.height
+                switch (UIDevice.currentDevice().orientation,GameSettings.lastKnownOrientation) {
+                case (.LandscapeLeft, .Portrait), (.PortraitUpsideDown, .LandscapeLeft), (.LandscapeRight, .PortraitUpsideDown), (.Portrait, .LandscapeRight):
+                    block.switchOrientationToLeft()
+                case (.LandscapeRight, .Portrait), (.PortraitUpsideDown, .LandscapeRight), (.LandscapeLeft, .PortraitUpsideDown), (.Portrait, .LandscapeLeft):
+                    block.switchOrientationToRight()
+                case (.PortraitUpsideDown, .Portrait), (.Portrait, .PortraitUpsideDown), (.LandscapeLeft, .LandscapeRight), (.LandscapeRight, .LandscapeLeft):
+                    block.switchOrientationToRight()
+                    block.switchOrientationToRight()
+                default:
+                    break
+                }
+                block.position.x *= GameSettings.playableAreaSize.width
+                block.position.y *= GameSettings.playableAreaSize.height
+            }
+        }
+        GameSettings.lastKnownOrientation = UIDevice.currentDevice().orientation
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -476,17 +496,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     if block.preferedPushTime < 0{
                         level?.blocks.removeAtIndex((level?.blocks.indexOf(block))!)
                         if GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
-                            var t = block.position.x
-                            block.position.x = (-block.position.y + 1)
-                            block.position.y = t
-                            t = block.size.height
-                            block.size.height = block.size.width
-                            block.size.width = t
-                            block.physicsBody = SKPhysicsBody(rectangleOfSize: block.size)
-                            if block.blockType == .wall{
-                                block.physicsBody!.dynamic = false
+                            if UIDevice.currentDevice().orientation == .LandscapeLeft{
+                                block.switchOrientationToLeft()
+                            }else{
+                                block.switchOrientationToRight()
                             }
-                            block.pushVector = CGVectorMake(-block.pushVector.dy, block.pushVector.dx)
+                            GameSettings.lastKnownOrientation = UIDevice.currentDevice().orientation
                         }
                         block.position.x *= GameSettings.playableAreaSize.width
                         block.position.y *= GameSettings.playableAreaSize.height
@@ -543,7 +558,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if startTime == nil{
             startTime = currentTime
         }
-        checkResult(currentTime)
+//        checkResult(currentTime)
         self.timeSinceLastUpdate = currentTime
     }
 }

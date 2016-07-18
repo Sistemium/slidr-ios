@@ -11,6 +11,7 @@ import UIKit
 import SpriteKit
 
 class GameSettings{
+    static var lastKnownOrientation:UIDeviceOrientation = .Portrait
     static var playableAreaSize = CGSize()
     static var moveDirections:[CGVector]{
         get{

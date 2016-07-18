@@ -43,16 +43,6 @@ class MenuScene: SKScene {
         }
     }
     
-//    override func didMoveToView(view: SKView) {
-//        for child in self.children{
-//            child.removeFromParent()
-//        }
-//        self.backgroundColor = UIColor.lightGrayColor()
-//        startGameLabel = SKLabelNode(fontNamed:"Chalkduster")
-//        freeModeLabel = SKLabelNode(fontNamed:"Chalkduster")
-//        optionsLabel = SKLabelNode(fontNamed:"Chalkduster")
-//    }
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let location = touches.first!.locationInNode(self)
         for node in self.children{

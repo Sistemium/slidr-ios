@@ -40,10 +40,10 @@ class GameViewController: UIViewController {
     }
     
     override func shouldAutorotate() -> Bool {
-        let skView = self.view as! SKView
-        if skView.scene is GameScene{
-            return false
-        }
+//        let skView = self.view as! SKView
+//        if skView.scene is GameScene{
+//            return false
+//        }
         return true
     }
     
@@ -80,17 +80,16 @@ class GameViewController: UIViewController {
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        if size.width > size.height && GameSettings.playableAreaSize.width < GameSettings.playableAreaSize.height{
+        coordinator.animateAlongsideTransition(nil, completion:
+            {_ in
+                UIView.setAnimationsEnabled(true)
+        })
+        UIView.setAnimationsEnabled(false)
+        if size.width > size.height && GameSettings.playableAreaSize.width < GameSettings.playableAreaSize.height || size.width < size.height && GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
             GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
-            let skView = self.view as! SKView
-            skView.scene!.size = GameSettings.playableAreaSize
-        }else{
-            if size.width < size.height && GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
-                GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
-                let skView = self.view as! SKView
-                skView.scene!.size = GameSettings.playableAreaSize
-            }
         }
+        let skView = self.view as! SKView
+        skView.scene!.size = GameSettings.playableAreaSize
     }
 
 }
