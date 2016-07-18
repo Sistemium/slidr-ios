@@ -440,6 +440,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         recognizer = UISwipeGestureRecognizer(target: self, action: #selector(GameScene.swipe))
         recognizer.direction = .Right
         self.view?.addGestureRecognizer(recognizer)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GameScene.rotationEnded), name: "RotationEnded", object: nil)
+    }
+    
+    func rotationEnded(){
+        for child in children{
+            if let block = child as? Block{
+                block.runAction(SKAction.fadeInWithDuration(0.1))
+                block.movementEnabled = true
+            }
+        }
     }
     
     override func didChangeSize(oldSize: CGSize) {
@@ -447,6 +457,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         toolbarNode  = ToolbarNode()
         for child in children{
             if let block = child as? Block{
+                block.runAction(SKAction.fadeOutWithDuration(0.1))
+                block.movementEnabled = false
                 block.position.x /= oldSize.width
                 block.position.y /= oldSize.height
                 switch (UIDevice.currentDevice().orientation,GameSettings.lastKnownOrientation) {
@@ -558,7 +570,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if startTime == nil{
             startTime = currentTime
         }
-//        checkResult(currentTime)
+        checkResult(currentTime)
         self.timeSinceLastUpdate = currentTime
     }
+    
+    override func willMoveFromView(view: SKView) {
+        super.willMoveFromView(view)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
 }

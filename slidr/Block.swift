@@ -113,7 +113,22 @@ class Block: SKSpriteNode {
     
     private var hitSide = SKSpriteNode()
     
-    private(set) var velocity : CGVector!
+    private var _velocity:CGVector!
+    
+    var movementEnabled = true
+    
+    private(set) var velocity:CGVector{
+        get{
+            if movementEnabled{
+                return _velocity
+            }else{
+                return CGVectorMake(0, 0)
+            }
+        }
+        set{
+            _velocity = newValue
+        }
+    }
     
     private var _pushVector:CGVector!
     
