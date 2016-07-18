@@ -82,9 +82,8 @@ class GameViewController: UIViewController {
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
         coordinator.animateAlongsideTransition(nil, completion:
             {_ in
-                UIView.setAnimationsEnabled(true)
+                NSNotificationCenter.defaultCenter().postNotificationName("RotationEnded", object: nil)
         })
-        UIView.setAnimationsEnabled(false)
         if size.width > size.height && GameSettings.playableAreaSize.width < GameSettings.playableAreaSize.height || size.width < size.height && GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
             GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
         }
