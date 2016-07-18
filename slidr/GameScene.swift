@@ -535,7 +535,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 block.physicsBody?.velocity = block.velocity
                 if block.pushed && !self.intersectsNode(block){
                     block.removeFromParent()
+                    blockLeftGameArea = true
                 }
+                block.runAction(SKAction.sequence(block.actions))
             }
         }
         if startTime == nil{

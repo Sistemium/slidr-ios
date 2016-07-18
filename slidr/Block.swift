@@ -15,6 +15,8 @@ enum BlockType{
 
 class Block: SKSpriteNode {
     
+    var actions:[SKAction] = []
+    
     var blockType = BlockType.standart{
         didSet{
             switch blockType {
@@ -34,11 +36,55 @@ class Block: SKSpriteNode {
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 self.physicsBody!.dynamic = false
             case .bomb:
-                self.color = UIColor.yellowColor()
+                self.color = UIColor.clearColor()
                 hitSide.color = UIColor.clearColor()
-                self.size = CGSize(width: self.size.width/3, height: self.size.height/3)
+                self.size = CGSize(width: self.size.width/3, height: self.size.width/3)
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 self.physicsBody!.dynamic = true
+                let shape = SKShapeNode(circleOfRadius: self.size.width / 2)
+                shape.position = CGPoint(x: 0,y: 0)
+                self.addChild(shape)
+                //action for color changing animation
+//                var green:CGFloat = 1.0
+//                var step:CGFloat = -0.01
+//                actions.append(SKAction.runBlock({
+//                    green += step
+//                    if green < 0.5{
+//                        step = -step
+//                        green = 0.5
+//                    }
+//                    if green > 1{
+//                        step = -step
+//                        green = 1
+//                    }
+//                    shape.fillColor = UIColor(red: 1.0, green: green, blue: 0, alpha: 1.0)
+//                    shape.strokeColor = shape.fillColor
+//                }))
+                
+                //action for ripple animation
+                let innerShapes:[SKShapeNode] = [SKShapeNode(circleOfRadius: self.size.width / 2),SKShapeNode(circleOfRadius: self.size.width / 2)]
+                innerShapes[1].xScale = 0.5
+                innerShapes[1].yScale = 0.5
+                shape.fillColor = UIColor.yellowColor()
+                shape.strokeColor = shape.fillColor
+                let blur = SKEffectNode()
+                blur.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:10.0)])!
+                shape.addChild(blur)
+                blur.addChild(innerShapes[0])
+                blur.addChild(innerShapes[1])
+                actions.append(SKAction.runBlock({
+                    for innerShape in innerShapes{
+                        innerShape.lineWidth = 20
+                        innerShape.xScale -= 0.02
+                        innerShape.yScale -= 0.02
+                        if innerShape.xScale <= 0{
+                            innerShape.xScale = 1.0
+                            innerShape.yScale = 1.0
+                        }
+                        innerShape.strokeColor = UIColor(red: 1.0, green: 0, blue: 0, alpha: 1 - innerShape.xScale)
+                        innerShape.position = CGPoint(x: 0,y: 0)
+                    }
+                }))
             }
         }
     }
@@ -162,9 +208,9 @@ class Block: SKSpriteNode {
     
     func randomizeData() {
         switch arc4random_uniform(9) {
-        case 0,1,2,3:
+        case 0,1,2:
             self.blockType = .standart
-        case 4,5,6,7:
+        case 3,4,5:
             self.blockType = .swipeable
         default:
             self.blockType = .bomb

@@ -43,7 +43,7 @@ extension SKScene{
     var dynamicChildren:[SKNode]{
         var dynamicChildren:[SKNode] = []
         for node in self.children{
-            if !(node.physicsBody?.dynamic ?? true){
+            if node.physicsBody?.dynamic ?? false{
                 dynamicChildren.append(node)
             }
         }
