@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class MenuScene: SKScene {
+class MenuScene: GameScene {
     
     private var startGameLabel: SKLabelNode!{
         didSet{
@@ -43,7 +43,7 @@ class MenuScene: SKScene {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let location = touches.first!.locationInNode(self)
         for node in self.children{
             if node.containsPoint(location){
@@ -76,6 +76,9 @@ class MenuScene: SKScene {
                 return
             }
         }
+    }
+    
+    override func swipe(sender: UISwipeGestureRecognizer) {
     }
     
     override func didChangeSize(oldSize: CGSize) {
