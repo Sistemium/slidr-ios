@@ -10,6 +10,11 @@ import SpriteKit
 
 class MenuScene: GameScene {
     
+    override func didMoveToView(view: SKView) {
+        gameMode = .Menu
+        super.didMoveToView(view)
+    }
+    
     private var startGameLabel: SKLabelNode!{
         didSet{
             startGameLabel.text = "Start game"

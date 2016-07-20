@@ -25,7 +25,6 @@ class GameViewController: UIViewController {
             GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
         }
         let scene = MenuScene()
-        scene.gameMode = .Menu
         scene.size = GameSettings.playableAreaSize
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .Fill

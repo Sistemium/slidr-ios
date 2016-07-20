@@ -143,13 +143,10 @@ class GameResultScene: SKScene{
                 let scene = LevelScene()
                 scene.size = GameSettings.playableAreaSize
                 scene.scaleMode = .Fill
-                let menu = MenuScene()
-                menu.gameMode = .Menu
-                scene.previousScene = menu
+                scene.previousScene = MenuScene()
                 self.view!.presentScene(scene)
             }else{
                 let scene = MenuScene()
-                scene.gameMode = .Menu
                 scene.size = GameSettings.playableAreaSize
                 scene.scaleMode = .Fill
                 self.view!.presentScene(scene)
