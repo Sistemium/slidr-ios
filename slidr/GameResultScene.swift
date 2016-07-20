@@ -22,7 +22,7 @@ class GameResultScene: SKScene{
     
     var infoText = ""
     
-    private var resultLabel: SKLabelNode!{
+    private var resultLabel: OutlineSKLabelNode!{
         didSet{
             resultLabel.text = result == .Win ? "You Win" : "You Lose"
             resultLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 1.3)
@@ -34,7 +34,7 @@ class GameResultScene: SKScene{
         }
     }
     
-    private var questionLabel: SKLabelNode!{
+    private var questionLabel: OutlineSKLabelNode!{
         didSet{
             questionLabel.text = result == .Win ? "Play next level?" : "Play again?"
             questionLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2)
@@ -46,7 +46,7 @@ class GameResultScene: SKScene{
         }
     }
     
-    private var returnButton: SKLabelNode!{
+    private var returnButton: OutlineSKLabelNode!{
         didSet{
             returnButton.text = "No"
             returnButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 - GameSettings.labelSize * 1.3, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 1.3)
@@ -58,7 +58,7 @@ class GameResultScene: SKScene{
         }
     }
     
-    private var actionButton: SKLabelNode!{
+    private var actionButton: OutlineSKLabelNode!{
         didSet{
             actionButton.text = "Yes"
             actionButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 + GameSettings.labelSize * 1.3, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 1.3)
@@ -70,7 +70,7 @@ class GameResultScene: SKScene{
         }
     }
     
-    private var scoreLabel: SKLabelNode!{
+    private var scoreLabel: OutlineSKLabelNode!{
         didSet{
             scoreLabel.text = scoreTime == nil ? "" : "You survived \(scoreTime!.fixedFractionDigits(0)) second"
             if scoreTime != nil && scoreTime != 1.0 {
@@ -85,7 +85,7 @@ class GameResultScene: SKScene{
         }
     }
     
-    private var recordLabel: SKLabelNode!{
+    private var recordLabel: OutlineSKLabelNode!{
         didSet{
             if scoreTime != nil{
                 let record = NSUserDefaults.standardUserDefaults().integerForKey("record")
@@ -103,12 +103,12 @@ class GameResultScene: SKScene{
             recordLabel.fontSize = GameSettings.labelSize * 0.5
             recordLabel.zPosition = 3.0
             recordLabel.fontColor = UIColor.blackColor()
-            self.addChild(recordLabel)
-            self.addChild(recordLabel.outlineLabel)
+            addChild(recordLabel)
+            addChild(recordLabel.outlineLabel)
         }
     }
     
-    private var infoLabel: SKLabelNode!{
+    private var infoLabel: OutlineSKLabelNode!{
         didSet{
             infoLabel.text = infoText
             infoLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 2.6)
@@ -125,13 +125,13 @@ class GameResultScene: SKScene{
             child.removeFromParent()
         }
         self.backgroundColor = UIColor.lightGrayColor()
-        resultLabel = SKLabelNode(fontNamed:"Chalkduster")
-        questionLabel = SKLabelNode(fontNamed:"Chalkduster")
-        returnButton = SKLabelNode(fontNamed:"Chalkduster")
-        actionButton = SKLabelNode(fontNamed:"Chalkduster")
-        scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
-        recordLabel = SKLabelNode(fontNamed:"Chalkduster")
-        infoLabel = SKLabelNode(fontNamed:"Chalkduster")
+        resultLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        questionLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        returnButton = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        actionButton = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        scoreLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        recordLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        infoLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -181,12 +181,12 @@ class GameResultScene: SKScene{
             child.removeFromParent()
         }
         self.backgroundColor = UIColor.lightGrayColor()
-        resultLabel = SKLabelNode(fontNamed:"Chalkduster")
-        questionLabel = SKLabelNode(fontNamed:"Chalkduster")
-        returnButton = SKLabelNode(fontNamed:"Chalkduster")
-        actionButton = SKLabelNode(fontNamed:"Chalkduster")
-        scoreLabel = SKLabelNode(fontNamed:"Chalkduster")
-        recordLabel = SKLabelNode(fontNamed:"Chalkduster")
-        infoLabel = SKLabelNode(fontNamed:"Chalkduster")
+        resultLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        questionLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        returnButton = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        actionButton = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        scoreLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        recordLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        infoLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
     }
 }

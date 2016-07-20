@@ -15,7 +15,7 @@ class MenuScene: GameScene {
         super.didMoveToView(view)
     }
     
-    private var startGameLabel: SKLabelNode!{
+    private var startGameLabel: OutlineSKLabelNode!{
         didSet{
             startGameLabel.text = "Start game"
             startGameLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 1.3)
@@ -27,7 +27,7 @@ class MenuScene: GameScene {
         }
     }
     
-    private var freeModeLabel: SKLabelNode!{
+    private var freeModeLabel: OutlineSKLabelNode!{
         didSet{
             freeModeLabel.text = "Free mode"
             freeModeLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2)
@@ -39,7 +39,7 @@ class MenuScene: GameScene {
         }
     }
     
-    private var optionsLabel: SKLabelNode!{
+    private var optionsLabel: OutlineSKLabelNode!{
         didSet{
             optionsLabel.text = "Options"
             optionsLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 1.3)
@@ -55,7 +55,7 @@ class MenuScene: GameScene {
         let location = touches.first!.locationInNode(self)
         for node in self.children{
             if node.containsPoint(location){
-                if let button = node as? SKLabelNode{
+                if let button = node as? OutlineSKLabelNode{
                     switch button {
                     case startGameLabel:
                         let scene = LevelScene()
@@ -94,8 +94,8 @@ class MenuScene: GameScene {
             child.removeFromParent()
         }
         self.backgroundColor = UIColor.lightGrayColor()
-        startGameLabel = SKLabelNode(fontNamed:"Chalkduster")
-        freeModeLabel = SKLabelNode(fontNamed:"Chalkduster")
-        optionsLabel = SKLabelNode(fontNamed:"Chalkduster")
+        startGameLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        freeModeLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        optionsLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
     }
 }

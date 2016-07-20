@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3565CFF51D362B0900C1324E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3565CFF41D362B0900C1324E /* Crashlytics.framework */; };
+		358FAF581D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358FAF571D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift */; };
 		35BB875D1D3E6EE700EA5D40 /* BluredBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BB875C1D3E6EE700EA5D40 /* BluredBlock.swift */; };
 		5BE49001B0F54F72E0ECE053 /* Level8.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE49E0678E5D6C631A89C1A /* Level8.json */; };
 		5BE495CC43837A4961D6D2D0 /* Level1.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE4970CC26FC6CE01ADFEB5 /* Level1.json */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		3565CFF41D362B0900C1324E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		358FAF571D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineSKLabelNode.swift; sourceTree = "<group>"; };
 		35BB875C1D3E6EE700EA5D40 /* BluredBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluredBlock.swift; sourceTree = "<group>"; };
 		5BE4940D360C65EE40F39C0A /* Level5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level5.json; sourceTree = "<group>"; };
 		5BE494A83BC369F330115517 /* Level3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level3.json; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				6D53CB6F1D1A9BE9006F40E7 /* ShakeSwitchTableViewCell.swift */,
 				6DFB18211D2E61A30029DB56 /* RippleCircle.swift */,
 				35BB875C1D3E6EE700EA5D40 /* BluredBlock.swift */,
+				358FAF571D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift */,
 			);
 			path = slidr;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				6D53CB701D1A9BE9006F40E7 /* ShakeSwitchTableViewCell.swift in Sources */,
 				6D42E7B61CF4661000740131 /* GameSpeedSliderTableViewCell.swift in Sources */,
 				35BB875D1D3E6EE700EA5D40 /* BluredBlock.swift in Sources */,
+				358FAF581D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift in Sources */,
 				6D1F1DFF1CEF428E002479FD /* GameResultScene.swift in Sources */,
 				6D538BA31CDC9E8100B0F780 /* GameSettings.swift in Sources */,
 				6D6346591CEDDDDD0067A1AF /* LevelLoadService.swift in Sources */,
