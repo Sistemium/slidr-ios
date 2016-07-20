@@ -140,10 +140,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if block1.blockType == block2.blockType{
                     block1.physicsBody = nil
                     block2.physicsBody = nil
-                    block1.runAction(GameSettings.fadeoutAction){
+                    block1.runAction(SKAction.fadeOutWithDuration(0.75)){
                         block1.removeFromParent()
                     }
-                    block2.runAction(GameSettings.fadeoutAction){
+                    block2.runAction(SKAction.fadeOutWithDuration(0.75)){
                         block2.removeFromParent()
                     }
                     if block1.blockType == .standart{
@@ -157,13 +157,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                     if block1.blockType == .bomb{
                         block1.physicsBody = nil
-                        block1.runAction(GameSettings.fadeoutAction){
+                        block1.runAction(SKAction.fadeOutWithDuration(0.75)){
                             block1.removeFromParent()
                         }
                     }
                     if block2.blockType == .bomb{
                         block2.physicsBody = nil
-                        block2.runAction(GameSettings.fadeoutAction){
+                        block2.runAction(SKAction.fadeOutWithDuration(0.75)){
                             block2.removeFromParent()
                         }
                     }
@@ -177,13 +177,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                     if block1.blockType == .bomb{
                         block1.physicsBody = nil
-                        block1.runAction(GameSettings.fadeoutAction){
+                        block1.runAction(SKAction.fadeOutWithDuration(0.75)){
                             block1.removeFromParent()
                         }
                     }
                     if block2.blockType == .bomb{
                         block2.physicsBody = nil
-                        block2.runAction(GameSettings.fadeoutAction){
+                        block2.runAction(SKAction.fadeOutWithDuration(0.75)){
                             block2.removeFromParent()
                         }
                     }
@@ -210,13 +210,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                     if block1.blockType == .bomb{
                         block1.physicsBody = nil
-                        block1.runAction(GameSettings.fadeoutAction){
+                        block1.runAction(SKAction.fadeOutWithDuration(0.75)){
                             block1.removeFromParent()
                         }
                     }
                     if block2.blockType == .bomb{
                         block2.physicsBody = nil
-                        block2.runAction(GameSettings.fadeoutAction){
+                        block2.runAction(SKAction.fadeOutWithDuration(0.75)){
                             block2.removeFromParent()
                         }
                     }
@@ -226,7 +226,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let block = contact.bodyA.node as? Block ?? contact.bodyB.node as? Block{
                 if block.blockType == .bomb && block.physicsBody != nil{
                     block.physicsBody = nil
-                    block.runAction(GameSettings.fastFadeoutAction){
+                    block.runAction(SKAction.fadeOutWithDuration(0.75)){
                         block.removeFromParent()
                     }
                     let ripple = RippleCircle(radius: 20, position: block.position)
@@ -238,7 +238,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     return
                 }else{
                     block.physicsBody = nil
-                    block.runAction(GameSettings.fastFadeoutAction){
+                    block.runAction(SKAction.fadeOutWithDuration(0.75)){
                         block.removeFromParent()
                     }
                     if block.blockType == .standart{
@@ -267,7 +267,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let block = node as? Block{
             if block.blockType == .bomb && block.physicsBody != nil{
                 block.physicsBody = nil
-                block.runAction(GameSettings.fastFadeoutAction){
+                block.runAction(SKAction.fadeOutWithDuration(0.25)){
                     block.removeFromParent()
                 }
                 let ripple = RippleCircle(radius: 20, position: block.position)
@@ -298,7 +298,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if region.containsPoint(location){
                     if block.blockType == .bomb && block.physicsBody != nil{
                         block.physicsBody = nil
-                        block.runAction(GameSettings.fastFadeoutAction){
+                        block.runAction(SKAction.fadeOutWithDuration(0.25)){
                             block.removeFromParent()
                         }
                         let ripple = RippleCircle(radius: 20, position: block.position)
@@ -582,6 +582,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func willMoveFromView(view: SKView) {
         super.willMoveFromView(view)
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        for recognizer in self.view!.gestureRecognizers! {
+            self.view!.removeGestureRecognizer(recognizer)
+        }
     }
     
 }
