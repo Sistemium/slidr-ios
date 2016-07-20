@@ -50,3 +50,20 @@ extension SKScene{
         return dynamicChildren
     }
 }
+
+extension SKLabelNode{
+    
+    var outlineLabel:SKLabelNode{
+        let offSetX:CGFloat = 3
+        let offSetY:CGFloat = 3
+        
+        let dropShadow = SKLabelNode(fontNamed: self.fontName)
+        dropShadow.fontSize = self.fontSize
+        dropShadow.fontColor = UIColor.blackColor()
+        dropShadow.text = self.text
+        dropShadow.zPosition = self.zPosition - 1
+        dropShadow.position = CGPointMake(self.position.x - offSetX, self.position.y - offSetY)
+        return dropShadow
+    }
+    
+}
