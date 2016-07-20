@@ -68,6 +68,7 @@ class Block: SKSpriteNode {
                 shape.fillColor = UIColor.yellowColor()
                 shape.strokeColor = shape.fillColor
                 let blur = SKEffectNode()
+                blur.shouldRasterize = true
                 blur.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:10.0)])!
                 shape.addChild(blur)
                 blur.addChild(innerShapes[0])
@@ -111,7 +112,7 @@ class Block: SKSpriteNode {
         }
     }
     
-    private var hitSide = SKSpriteNode()
+    var hitSide = SKSpriteNode()
     
     private var _velocity:CGVector!
     
@@ -166,7 +167,7 @@ class Block: SKSpriteNode {
         }
     }
     
-    private static var blockId:UInt32 = 0
+    static var blockId:UInt32 = 0
     
     var corners:[CGPoint]{
         get{
@@ -176,8 +177,8 @@ class Block: SKSpriteNode {
     
     convenience init(){
         self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
-        randomizeData()
         customInit()
+        randomizeData()
     }
     
     convenience init(blockData:NSDictionary){
@@ -195,7 +196,7 @@ class Block: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
-    private func customInit(){
+    func customInit(){
         Block.blockId += 1
         self.addChild(hitSide)
     }
@@ -222,10 +223,10 @@ class Block: SKSpriteNode {
     }
     
     func randomizeData() {
-        switch arc4random_uniform(5) {
-        case 0,1:
+        switch arc4random_uniform(7) {
+        case 0,1,2:
             self.blockType = .standart
-        case 2,3:
+        case 3,4,5:
             self.blockType = .swipeable
         default:
             self.blockType = .bomb

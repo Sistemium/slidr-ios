@@ -19,11 +19,13 @@ class ToolbarNode: SKSpriteNode {
         self.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height - GameSettings.toolbarHeight/2)
         self.zPosition = 3
         self.alpha = 0.97
-        leftLabel = SKLabelNode(fontNamed:"Chalkduster")
-        centerLabel = SKLabelNode(fontNamed:"Chalkduster")
+        leftLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        centerLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         backButton = SKSpriteNode(texture: SKTexture(imageNamed: "Back"), size: CGSize(width: GameSettings.toolbarHeight, height: GameSettings.toolbarHeight))
         self.addChild(leftLabel)
         self.addChild(centerLabel)
+        self.addChild(leftLabel.outlineLabel)
+        self.addChild(centerLabel.outlineLabel)
         self.addChild(backButton)
         backButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 - backButton.size.width/2 - 5, y: 0)
         leftLabel.fontSize = GameSettings.toolbarHeight / 1.5
@@ -86,9 +88,9 @@ class ToolbarNode: SKSpriteNode {
         }
     }
     
-    private var leftLabel : SKLabelNode!
+    private var leftLabel : OutlineSKLabelNode!
     
-    private var centerLabel : SKLabelNode!
+    private var centerLabel : OutlineSKLabelNode!
     
     var backButton : SKSpriteNode!
     

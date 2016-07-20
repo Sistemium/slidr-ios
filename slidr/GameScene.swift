@@ -9,7 +9,7 @@
 import SpriteKit
 
 enum GameMode{
-    case Free,Level
+    case Free,Level,Menu
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -21,12 +21,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var toolbarNode : ToolbarNode!{
         didSet{
-            self.addChild(toolbarNode)
             switch gameMode{
             case .Level:
+                self.addChild(toolbarNode)
                 toolbarNode.leftLabelText = level?.name ?? ""
             case .Free:
+                self.addChild(toolbarNode)
                 toolbarNode.leftLabelText = "Free mode"
+            default:
+                break
             }
         }
     }
@@ -67,6 +70,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if self.freeModeTimer <= 0 {
                 presentResultScene(.Lose, infoText: "Time's Up!",score: currentTime - startTime!)
             }
+        default:
+            break
         }
     }
     
@@ -522,11 +527,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        else if self.children.count - 1 < GameSettings.maxNumberOfBlocks{
+        else if self.dynamicChildren.count < GameSettings.maxNumberOfBlocks{
             if let oldTime = self.timeSinceLastUpdate{
                 timeToNextBlockPush -= currentTime - oldTime
                 if timeToNextBlockPush < 0 {
-                    let block = Block()
+                    let block = gameMode == .Menu ? BluredBlock() : Block()
                     let testNode = SKSpriteNode()
                     testNode.size = CGSize(width: block.frame.width * 2, height:block.frame.height * 2)
                     testNode.position = block.position
