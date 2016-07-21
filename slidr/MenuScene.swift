@@ -61,20 +61,20 @@ class MenuScene: GameScene {
                         let scene = LevelScene()
                         scene.size = GameSettings.playableAreaSize
                         scene.scaleMode = .Fill
-                        scene.previousScene = self
+                        scene.previousScene = MenuScene()
                         self.view!.presentScene(scene)
                         break
                     case freeModeLabel:
                         let scene = GameScene()
                         scene.size = GameSettings.playableAreaSize
                         scene.scaleMode = .Fill
-                        scene.previousScene = self
+                        scene.previousScene = MenuScene()
                         self.view!.presentScene(scene)
                     case optionsLabel:
                         let scene = OptionsScene()
                         scene.size = GameSettings.playableAreaSize
                         scene.scaleMode = .Fill
-                        scene.previousScene = self
+                        scene.previousScene = MenuScene()
                         self.view!.presentScene(scene)
                         break
                     default:
@@ -90,7 +90,7 @@ class MenuScene: GameScene {
     }
     
     override func didChangeSize(oldSize: CGSize) {
-        for child in self.children{
+        for child in children{
             child.removeFromParent()
         }
         self.backgroundColor = UIColor.lightGrayColor()

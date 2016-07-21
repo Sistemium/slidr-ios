@@ -86,15 +86,13 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         scene.size = GameSettings.playableAreaSize
         scene.scaleMode = .Fill
         scene.level = levels[indexPath.row]
-        scene.previousScene = self
+        scene.previousScene = LevelScene()
         self.view!.presentScene(scene)
     }
     
     override func didChangeSize(oldSize: CGSize) {
         if self.view != nil{
-            for child in self.children{
-                child.removeFromParent()
-            }
+            toolbarNode?.removeFromParent()
             tableview?.removeFromSuperview()
             tableview = UITableView()
             self.backgroundColor = UIColor.lightGrayColor()
