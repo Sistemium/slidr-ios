@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import SpriteKit
 
 class GameSettings{
     static var lastKnownOrientation:UIDeviceOrientation = .Portrait
@@ -53,4 +52,17 @@ class GameSettings{
     static let freeModeTimer = 10.0
     static let redBlockReward = 1.5
     static let blueBlockReward = 1.5
+    static var lockOrientationInGameEnabled:Bool{
+        get{
+            if NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys.contains("LockOrientationInGameEnabled"){
+                return NSUserDefaults.standardUserDefaults().boolForKey("LockOrientationInGameEnabled")
+            }
+            else{
+                return false
+            }
+        }
+        set{
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "LockOrientationInGameEnabled")
+        }
+    }
 }
