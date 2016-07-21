@@ -512,14 +512,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     block.preferedPushTime! -= currentTime - oldTime
                     if block.preferedPushTime < 0{
                         level?.blocks.removeAtIndex((level?.blocks.indexOf(block))!)
-                        if GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
-                            if UIDevice.currentDevice().orientation == .LandscapeLeft{
-                                block.switchOrientationToLeft()
-                            }else{
-                                block.switchOrientationToRight()
-                            }
-                            GameSettings.lastKnownOrientation = UIDevice.currentDevice().orientation
+                        switch UIApplication.sharedApplication().statusBarOrientation {
+                        case .LandscapeLeft:
+                            block.switchOrientationToRight()
+                        case .LandscapeRight:
+                            block.switchOrientationToLeft()
+                        case .PortraitUpsideDown:
+                            block.switchOrientationToRight()
+                            block.switchOrientationToRight()
+                        default:
+                            break
                         }
+                        GameSettings.lastKnownOrientation = UIDevice.currentDevice().orientation
                         block.position.x *= GameSettings.playableAreaSize.width
                         block.position.y *= GameSettings.playableAreaSize.height
                         self.addChild(block)
