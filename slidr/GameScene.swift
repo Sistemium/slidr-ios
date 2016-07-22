@@ -89,41 +89,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func repulseBlock(block:Block,fromWall wall:Block,withContactPoint point:CGPoint){
-            if wall.rotation != 0{
-                if self.convertPoint(point, toNode: block).distance(block.corners[0]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
-                    if block.pushVector.dy != 0{
-                        block.pushVector = CGVector(dx: -abs(block.pushVector.dy), dy: 0)
-                    }else{
-                        block.pushVector = CGVector(dx: 0, dy: -abs(block.pushVector.dx))
-                    }
-                    return
+        if wall.rotation != 0{
+            if self.convertPoint(point, toNode: block).distance(block.corners[0]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
+                if block.pushVector.dy != 0{
+                    block.pushVector = CGVector(dx: -abs(block.pushVector.dy), dy: 0)
+                }else{
+                    block.pushVector = CGVector(dx: 0, dy: -abs(block.pushVector.dx))
                 }
-                if self.convertPoint(point, toNode: block).distance(block.corners[1]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
-                    if block.pushVector.dy != 0{
-                        block.pushVector = CGVector(dx: -abs(block.pushVector.dy), dy: 0)
-                    }else{
-                        block.pushVector = CGVector(dx: 0, dy: abs(block.pushVector.dx))
-                    }
-                    return
-                }
-                if self.convertPoint(point, toNode: block).distance(block.corners[2]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
-                    if block.pushVector.dy != 0{
-                        block.pushVector = CGVector(dx: abs(block.pushVector.dy), dy: 0)
-                    }else{
-                        block.pushVector = CGVector(dx: 0, dy: abs(block.pushVector.dx))
-                    }
-                    return
-                }
-                if self.convertPoint(point, toNode: block).distance(block.corners[3]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
-                    if block.pushVector.dy != 0{
-                        block.pushVector = CGVector(dx: abs(block.pushVector.dy), dy: 0)
-                    }else{
-                        block.pushVector = CGVector(dx: 0, dy: -abs(block.pushVector.dx))
-                    }
-                    return
-                }
+                return
             }
-            block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
+            if self.convertPoint(point, toNode: block).distance(block.corners[1]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
+                if block.pushVector.dy != 0{
+                    block.pushVector = CGVector(dx: -abs(block.pushVector.dy), dy: 0)
+                }else{
+                    block.pushVector = CGVector(dx: 0, dy: abs(block.pushVector.dx))
+                }
+                return
+            }
+            if self.convertPoint(point, toNode: block).distance(block.corners[2]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
+                if block.pushVector.dy != 0{
+                    block.pushVector = CGVector(dx: abs(block.pushVector.dy), dy: 0)
+                }else{
+                    block.pushVector = CGVector(dx: 0, dy: abs(block.pushVector.dx))
+                }
+                return
+            }
+            if self.convertPoint(point, toNode: block).distance(block.corners[3]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
+                if block.pushVector.dy != 0{
+                    block.pushVector = CGVector(dx: abs(block.pushVector.dy), dy: 0)
+                }else{
+                    block.pushVector = CGVector(dx: 0, dy: -abs(block.pushVector.dx))
+                }
+                return
+            }
+        }
+        block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -425,7 +425,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-
+    
     // MARK: Lifecycle
     
     override func didMoveToView(view: SKView) {

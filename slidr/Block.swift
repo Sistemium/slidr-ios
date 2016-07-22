@@ -45,21 +45,21 @@ class Block: SKSpriteNode {
                 shape.position = CGPoint(x: 0,y: 0)
                 self.addChild(shape)
                 //action for color changing animation
-//                var green:CGFloat = 1.0
-//                var step:CGFloat = -0.01
-//                actions.append(SKAction.runBlock({
-//                    green += step
-//                    if green < 0.5{
-//                        step = -step
-//                        green = 0.5
-//                    }
-//                    if green > 1{
-//                        step = -step
-//                        green = 1
-//                    }
-//                    shape.fillColor = UIColor(red: 1.0, green: green, blue: 0, alpha: 1.0)
-//                    shape.strokeColor = shape.fillColor
-//                }))
+                //                var green:CGFloat = 1.0
+                //                var step:CGFloat = -0.01
+                //                actions.append(SKAction.runBlock({
+                //                    green += step
+                //                    if green < 0.5{
+                //                        step = -step
+                //                        green = 0.5
+                //                    }
+                //                    if green > 1{
+                //                        step = -step
+                //                        green = 1
+                //                    }
+                //                    shape.fillColor = UIColor(red: 1.0, green: green, blue: 0, alpha: 1.0)
+                //                    shape.strokeColor = shape.fillColor
+                //                }))
                 
                 //action for ripple animation
                 let innerShapes:[SKShapeNode] = [SKShapeNode(circleOfRadius: self.size.width / 2),SKShapeNode(circleOfRadius: self.size.width / 2)]

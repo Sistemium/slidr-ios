@@ -90,5 +90,5 @@ class GameViewController: UIViewController {
         let skView = self.view as! SKView
         skView.scene!.size = GameSettings.playableAreaSize
     }
-
+    
 }
