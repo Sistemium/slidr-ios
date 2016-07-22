@@ -20,7 +20,7 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     private var lockOrientationSwitcher:UISwitch!{
         didSet{
             lockOrientationSwitcher.on = GameSettings.lockOrientationInGameEnabled
-            shakeSwitcher.addTarget(self, action: #selector(switchLockOrientationEnabled), forControlEvents: .ValueChanged)
+            lockOrientationSwitcher.addTarget(self, action: #selector(switchLockOrientationEnabled), forControlEvents: .ValueChanged)
         }
     }
     

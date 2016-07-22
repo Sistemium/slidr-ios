@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -16,30 +16,30 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block speed:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1z-Tm-wc0">
-                        <rect key="frame" x="8" y="8" width="99" height="21"/>
+                        <rect key="frame" x="16" y="8" width="99" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="TJr-jg-nPl">
-                        <rect key="frame" x="6" y="37" width="588" height="33.5"/>
+                        <rect key="frame" x="14" y="37" width="572" height="33.5"/>
                         <connections>
                             <action selector="changeSpeed:" destination="d4D-t4-dCq" eventType="valueChanged" id="1xV-qj-MPc"/>
                         </connections>
                     </slider>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjo-on-lvm">
-                        <rect key="frame" x="544" y="8" width="48" height="21"/>
+                        <rect key="frame" x="536" y="8" width="48" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="leadingMargin" secondItem="TJr-jg-nPl" secondAttribute="leading" id="2DF-zM-INw"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="I1z-Tm-wc0" secondAttribute="leading" id="7pu-Gg-GEp"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="yjo-on-lvm" secondAttribute="trailing" id="VQb-Cj-ViT"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="TJr-jg-nPl" secondAttribute="leading" constant="-8" id="2DF-zM-INw"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="I1z-Tm-wc0" secondAttribute="leading" constant="-8" id="7pu-Gg-GEp"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="yjo-on-lvm" secondAttribute="trailing" constant="8" id="VQb-Cj-ViT"/>
                     <constraint firstAttribute="topMargin" secondItem="yjo-on-lvm" secondAttribute="top" id="ZuK-oV-3Qu"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="TJr-jg-nPl" secondAttribute="trailing" id="bZ0-uj-E2l"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="TJr-jg-nPl" secondAttribute="trailing" constant="8" id="bZ0-uj-E2l"/>
                     <constraint firstAttribute="bottomMargin" secondItem="TJr-jg-nPl" secondAttribute="bottom" id="fy0-Vy-8bs"/>
                     <constraint firstAttribute="topMargin" secondItem="I1z-Tm-wc0" secondAttribute="top" id="rJH-51-qSj"/>
                     <constraint firstItem="TJr-jg-nPl" firstAttribute="top" secondItem="I1z-Tm-wc0" secondAttribute="bottom" constant="8" id="tdN-ca-bHr"/>

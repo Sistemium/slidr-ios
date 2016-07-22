@@ -40,10 +40,10 @@ class GameViewController: UIViewController {
     }
     
     override func shouldAutorotate() -> Bool {
-//        let skView = self.view as! SKView
-//        if skView.scene is GameScene{
-//            return false
-//        }
+        let skView = self.view as! SKView
+        if (skView.scene!.dynamicType == GameScene.self || skView.scene! is GameResultScene) && GameSettings.lockOrientationInGameEnabled{
+            return false
+        }
         return true
     }
     
