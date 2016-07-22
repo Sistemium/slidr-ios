@@ -278,7 +278,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 ripple.removeFromParent()
                 return
             }
-            if block.numberOfActions == nil || block.numberOfActions! > 0{
+            if block.physicsBody != nil && (block.numberOfActions == nil || block.numberOfActions! > 0){
                 block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
             }
             if block.numberOfActions != nil{
@@ -309,7 +309,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         ripple.removeFromParent()
                         return
                     }
-                    if block.numberOfActions == nil || block.numberOfActions! > 0{
+                    if block.physicsBody != nil && (block.numberOfActions == nil || block.numberOfActions! > 0){
                         block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
                     }
                     if block.numberOfActions != nil{
