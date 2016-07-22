@@ -375,7 +375,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if let block = node as? Block{
                     touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
                     touchLocation = self.convertPoint(touchLocation, toNode: block)
-                    if  block.blockType == .swipeable{
+                    if block.blockType == .swipeable || block.blockType == .standart{
                         candidatesToGesture[touchLocation.distance(block.anchorPoint)] = block
                     }
                 }
