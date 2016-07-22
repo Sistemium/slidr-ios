@@ -1,99 +1,29 @@
 {
     "blocks":[
               {
-              "type":"wall",
-              "height":200,
-              "width":20,
-              "pushVectorX":0,
+              "type":"swipeable",
+              "height":220,
+              "width":100,
+              "pushVectorX":1,
               "pushVectorY":0,
-              "positionX":0.15,
-              "positionY":0.1,
-              "pushTime":0,
-              "rotation":90
-              },
-              {
-              "type":"wall",
-              "height":200,
-              "width":20,
-              "pushVectorX":0,
-              "pushVectorY":0,
-              "positionX":0.15,
-              "positionY":0.45,
-              "pushTime":0,
-              "rotation":-90
-              },
-              {
-              "type":"wall",
-              "height":200,
-              "width":20,
-              "pushVectorX":0,
-              "pushVectorY":0,
-              "positionX":0.5,
-              "positionY":0.1,
-              "pushTime":0,
-              "rotation":-90
-              },
-              {
-              "type":"wall",
-              "height":400,
-              "width":20,
-              "pushVectorX":0,
-              "pushVectorY":0,
-              "positionX":0.6,
-              "positionY":0.75,
+              "positionX":-0.1,
+              "positionY":0.2,
               "pushTime":0,
               "rotation":0
               },
               {
-              "type":"standart",
-              "height":160,
-              "width":160,
+              "type":"swipeable",
+              "height":220,
+              "width":100,
               "pushVectorX":-1,
               "pushVectorY":0,
-              "positionX":1.2,
-              "positionY":0.28,
+              "positionX":1.1,
+              "positionY":0.8,
               "pushTime":0,
-              "rotation":0,
-              "speedModifier":0.5
-              },
-              {
-              "type":"standart",
-              "height":160,
-              "width":160,
-              "pushVectorX":1,
-              "pushVectorY":0,
-              "positionX":-0.2,
-              "positionY":0.65,
-              "pushTime":0,
-              "rotation":0,
-              "speedModifier":0.5
-              },
-              {
-              "type":"standart",
-              "height":160,
-              "width":160,
-              "pushVectorX":1,
-              "pushVectorY":0,
-              "positionX":-0.2,
-              "positionY":0.85,
-              "pushTime":0,
-              "rotation":0,
-              "speedModifier":0.5
-              },
-              {
-              "type":"standart",
-              "height":250,
-              "width":80,
-              "pushVectorX":0,
-              "pushVectorY":-1,
-              "positionX":0.8,
-              "positionY":0.87,
-              "pushTime":0,
-              "rotation":0,
-              "speedModifier":0.5
+              "rotation":0
               }
               ],
-    "timeout":25,
+    "timeout":10,
     "priority":8,
     "name":"Level 8"
 }

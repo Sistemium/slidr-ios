@@ -6,11 +6,21 @@
               "width":150,
               "pushVectorX":0,
               "pushVectorY":-1,
-              "positionX":0.3,
+              "positionX":0.5,
               "positionY":1.1,
               "pushTime":0,
-              "rotation":0,
-              "speedModifier":2
+              "rotation":0
+              },
+              {
+              "type":"swipeable",
+              "height":150,
+              "width":150,
+              "pushVectorX":0,
+              "pushVectorY":-1,
+              "positionX":0.5,
+              "positionY":1.35,
+              "pushTime":0,
+              "rotation":0
               },
               {
               "type":"standart",
@@ -18,38 +28,24 @@
               "width":150,
               "pushVectorX":0,
               "pushVectorY":-1,
-              "positionX":0.3,
-              "positionY":1.4,
+              "positionX":0.5,
+              "positionY":1.6,
               "pushTime":0,
-              "rotation":0,
-              "speedModifier":2
+              "rotation":0
               },
               {
-              "type":"standart",
+              "type":"swipeable",
               "height":150,
               "width":150,
               "pushVectorX":0,
-              "pushVectorY":1,
-              "positionX":0.6,
-              "positionY":-0.1,
+              "pushVectorY":-1,
+              "positionX":0.5,
+              "positionY":1.85,
               "pushTime":0,
-              "rotation":0,
-              "speedModifier":2
-              },
-              {
-              "type":"standart",
-              "height":150,
-              "width":150,
-              "pushVectorX":0,
-              "pushVectorY":1,
-              "positionX":0.6,
-              "positionY":-0.4,
-              "pushTime":0,
-              "rotation":0,
-              "speedModifier":2
+              "rotation":0
               }
               ],
     "timeout":10,
-    "priority":3,
-    "name":"Level 3"
+    "priority":9,
+    "name":"Level 9"
 }
