@@ -65,4 +65,18 @@ class GameSettings{
             NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "LockOrientationInGameEnabled")
         }
     }
+    
+    static var completedLevels:Int{
+        get{
+            if NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys.contains("completedLevels"){
+                return NSUserDefaults.standardUserDefaults().integerForKey("completedLevels")
+            }
+            else{
+                return 0
+            }
+        }
+        set{
+            NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "completedLevels")
+        }
+    }
 }

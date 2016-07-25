@@ -58,6 +58,9 @@ class LevelLoadService{
     }
     
     func nextLevelByPriority(priority:Float)->Level?{
+        if Int(priority) > GameSettings.completedLevels{
+            GameSettings.completedLevels = Int(priority)
+        }
         for level in levels{
             if level.priority > priority{
                 return level
