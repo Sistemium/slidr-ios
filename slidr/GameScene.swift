@@ -327,18 +327,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         switch sender.direction {
                         case UISwipeGestureRecognizerDirection.Up:
                             if block?.pushVector.dy != 0 {
+                                block?.boost = GameSettings.boostValue
                                 block?.pushVector = GameSettings.moveDirections[0]
                             }
                         case UISwipeGestureRecognizerDirection.Down:
                             if block?.pushVector.dy != 0 {
+                                block?.boost = GameSettings.boostValue
                                 block?.pushVector = GameSettings.moveDirections[1]
                             }
                         case UISwipeGestureRecognizerDirection.Right:
                             if block?.pushVector.dx != 0 {
+                                block?.boost = GameSettings.boostValue
                                 block?.pushVector = GameSettings.moveDirections[2]
                             }
                         case UISwipeGestureRecognizerDirection.Left:
                             if block?.pushVector.dx != 0 {
+                                block?.boost = GameSettings.boostValue
                                 block?.pushVector = GameSettings.moveDirections[3]
                             }
                         default:
@@ -347,12 +351,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }else{
                         switch sender.direction {
                         case UISwipeGestureRecognizerDirection.Up:
+                            block?.boost = GameSettings.boostValue
                             block?.pushVector = GameSettings.moveDirections[0]
                         case UISwipeGestureRecognizerDirection.Down:
+                            block?.boost = GameSettings.boostValue
                             block?.pushVector = GameSettings.moveDirections[1]
                         case UISwipeGestureRecognizerDirection.Right:
+                            block?.boost = GameSettings.boostValue
                             block?.pushVector = GameSettings.moveDirections[2]
                         case UISwipeGestureRecognizerDirection.Left:
+                            block?.boost = GameSettings.boostValue
                             block?.pushVector = GameSettings.moveDirections[3]
                         default:
                             break
@@ -386,18 +394,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         switch sender.direction {
                         case UISwipeGestureRecognizerDirection.Up:
                             if chosen!.pushVector.dy != 0 {
+                                chosen!.boost = GameSettings.boostValue
                                 chosen!.pushVector = GameSettings.moveDirections[0]
                             }
                         case UISwipeGestureRecognizerDirection.Down:
                             if chosen!.pushVector.dy != 0 {
+                                chosen!.boost = GameSettings.boostValue
                                 chosen!.pushVector = GameSettings.moveDirections[1]
                             }
                         case UISwipeGestureRecognizerDirection.Right:
                             if chosen!.pushVector.dx != 0 {
+                                chosen!.boost = GameSettings.boostValue
                                 chosen!.pushVector = GameSettings.moveDirections[2]
                             }
                         case UISwipeGestureRecognizerDirection.Left:
                             if chosen!.pushVector.dx != 0 {
+                                chosen!.boost = GameSettings.boostValue
                                 chosen!.pushVector = GameSettings.moveDirections[3]
                             }
                         default:
@@ -406,12 +418,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }else{
                         switch sender.direction {
                         case UISwipeGestureRecognizerDirection.Up:
+                            chosen!.boost = GameSettings.boostValue
                             chosen!.pushVector = GameSettings.moveDirections[0]
                         case UISwipeGestureRecognizerDirection.Down:
+                            chosen!.boost = GameSettings.boostValue
                             chosen!.pushVector = GameSettings.moveDirections[1]
                         case UISwipeGestureRecognizerDirection.Right:
+                            chosen!.boost = GameSettings.boostValue
                             chosen!.pushVector = GameSettings.moveDirections[2]
                         case UISwipeGestureRecognizerDirection.Left:
+                            chosen!.boost = GameSettings.boostValue
                             chosen!.pushVector = GameSettings.moveDirections[3]
                         default:
                             break

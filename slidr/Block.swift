@@ -44,24 +44,6 @@ class Block: SKSpriteNode {
                 let shape = SKShapeNode(circleOfRadius: self.size.width / 2)
                 shape.position = CGPoint(x: 0,y: 0)
                 self.addChild(shape)
-                //action for color changing animation
-                //                var green:CGFloat = 1.0
-                //                var step:CGFloat = -0.01
-                //                actions.append(SKAction.runBlock({
-                //                    green += step
-                //                    if green < 0.5{
-                //                        step = -step
-                //                        green = 0.5
-                //                    }
-                //                    if green > 1{
-                //                        step = -step
-                //                        green = 1
-                //                    }
-                //                    shape.fillColor = UIColor(red: 1.0, green: green, blue: 0, alpha: 1.0)
-                //                    shape.strokeColor = shape.fillColor
-                //                }))
-                
-                //action for ripple animation
                 let innerShapes:[SKShapeNode] = [SKShapeNode(circleOfRadius: self.size.width / 2),SKShapeNode(circleOfRadius: self.size.width / 2)]
                 innerShapes[1].xScale = 0.5
                 innerShapes[1].yScale = 0.5
@@ -98,12 +80,6 @@ class Block: SKSpriteNode {
         }
     }
     
-    var moveDirections:[CGVector]{
-        get{
-            return [CGVectorMake(0, GameSettings.baseSpeed * speedModifier),CGVectorMake(0, -GameSettings.baseSpeed * speedModifier),CGVectorMake(GameSettings.baseSpeed * speedModifier, 0),CGVectorMake(-GameSettings.baseSpeed * speedModifier, 0)]
-        }
-    }
-    
     var rotation:Double? = 0{
         didSet{
             if rotation != nil{
@@ -114,24 +90,23 @@ class Block: SKSpriteNode {
     
     var hitSide = SKSpriteNode()
     
-    private var _velocity:CGVector!
-    
     var movementEnabled = true
     
-    private(set) var velocity:CGVector{
+    var velocity:CGVector{
         get{
             if movementEnabled{
-                return _velocity
+                if boost > 1{
+                    boost -= 0.01
+                    print(boost)
+                }else{
+                    boost = 1
+                }
+                return CGVectorMake(pushVector.dx / self.size.height * speedModifier * boost, pushVector.dy / self.size.width * speedModifier * boost)
             }else{
                 return CGVectorMake(0, 0)
             }
         }
-        set{
-            _velocity = newValue
-        }
     }
-    
-    private var _pushVector:CGVector!
     
     var preferedPushTime:Double?
     
@@ -141,13 +116,10 @@ class Block: SKSpriteNode {
     
     private var speedModifier:CGFloat = 1
     
+    var boost:CGFloat = 1
+    
     var pushVector : CGVector!{
-        get{
-            return _pushVector
-        }
-        set{
-            self.velocity = CGVectorMake(newValue.dx / self.size.height * speedModifier, newValue.dy / self.size.width * speedModifier)
-            _pushVector = newValue
+        didSet{
             switch (pushVector.dx, pushVector.dy) {
             case (let x,_) where x<0:
                 hitSide.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
