@@ -79,4 +79,7 @@ class GameSettings{
             NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "completedLevels")
         }
     }
+    
+    static let blockFadeoutTime = 0.5
+    static let fastBlockFadeoutTime = 0.25
 }

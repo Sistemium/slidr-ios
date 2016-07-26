@@ -88,6 +88,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.view!.presentScene(scene)
     }
     
+    private func destroyBlock(block:Block,withTime time:Double){
+        if gameMode == .Free && block.blockType != .bomb{
+            block.removeFromParent()
+            let score = SKLabelNode(fontNamed:"Chalkduster")
+            self.addChild(score)
+            score.position = block.position
+            score.fontSize = GameSettings.toolbarHeight / 1.5
+            score.zPosition = 4
+            score.fontColor = UIColor.greenColor()
+            score.text = "+" + (block.blockType == .standart ? GameSettings.redBlockReward.description: GameSettings.blueBlockReward.description)
+            score.runAction(SKAction.fadeOutWithDuration(time)){
+                score.removeFromParent()
+            }
+        }else{
+            block.runAction(SKAction.fadeOutWithDuration(time * 2)){
+                block.removeFromParent()
+            }
+        }
+    }
+    
     private func repulseBlock(block:Block,fromWall wall:Block,withContactPoint point:CGPoint){
         if wall.rotation != 0{
             if self.convertPoint(point, toNode: block).distance(block.corners[0]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
@@ -140,12 +160,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if block1.blockType == block2.blockType{
                     block1.physicsBody = nil
                     block2.physicsBody = nil
-                    block1.runAction(SKAction.fadeOutWithDuration(0.75)){
-                        block1.removeFromParent()
-                    }
-                    block2.runAction(SKAction.fadeOutWithDuration(0.75)){
-                        block2.removeFromParent()
-                    }
+                    destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
+                    destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
                     if block1.blockType == .standart{
                         freeModeTimer += GameSettings.redBlockReward * 2
                     }
@@ -157,15 +173,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                     if block1.blockType == .bomb{
                         block1.physicsBody = nil
-                        block1.runAction(SKAction.fadeOutWithDuration(0.75)){
-                            block1.removeFromParent()
-                        }
+                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
                     }
                     if block2.blockType == .bomb{
                         block2.physicsBody = nil
-                        block2.runAction(SKAction.fadeOutWithDuration(0.75)){
-                            block2.removeFromParent()
-                        }
+                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
                     }
                 }
             }else{
@@ -177,15 +189,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                     if block1.blockType == .bomb{
                         block1.physicsBody = nil
-                        block1.runAction(SKAction.fadeOutWithDuration(0.75)){
-                            block1.removeFromParent()
-                        }
+                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
                     }
                     if block2.blockType == .bomb{
                         block2.physicsBody = nil
-                        block2.runAction(SKAction.fadeOutWithDuration(0.75)){
-                            block2.removeFromParent()
-                        }
+                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
                     }
                 }
                 else{
@@ -210,15 +218,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                     if block1.blockType == .bomb{
                         block1.physicsBody = nil
-                        block1.runAction(SKAction.fadeOutWithDuration(0.75)){
-                            block1.removeFromParent()
-                        }
+                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
                     }
                     if block2.blockType == .bomb{
                         block2.physicsBody = nil
-                        block2.runAction(SKAction.fadeOutWithDuration(0.75)){
-                            block2.removeFromParent()
-                        }
+                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
                     }
                 }
             }
@@ -226,9 +230,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let block = contact.bodyA.node as? Block ?? contact.bodyB.node as? Block{
                 if block.blockType == .bomb && block.physicsBody != nil{
                     block.physicsBody = nil
-                    block.runAction(SKAction.fadeOutWithDuration(0.75)){
-                        block.removeFromParent()
-                    }
+                    destroyBlock(block,withTime: GameSettings.blockFadeoutTime)
                     let ripple = RippleCircle(radius: 20, position: block.position)
                     ripple.strokeColor = UIColor.yellowColor()
                     ripple.lineWidth = 10
@@ -238,9 +240,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     return
                 }else{
                     block.physicsBody = nil
-                    block.runAction(SKAction.fadeOutWithDuration(0.75)){
-                        block.removeFromParent()
-                    }
+                    destroyBlock(block,withTime: GameSettings.blockFadeoutTime)
                     if block.blockType == .standart{
                         freeModeTimer += GameSettings.redBlockReward
                     }
@@ -267,9 +267,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let block = node as? Block{
             if block.blockType == .bomb && block.physicsBody != nil{
                 block.physicsBody = nil
-                block.runAction(SKAction.fadeOutWithDuration(0.25)){
-                    block.removeFromParent()
-                }
+                destroyBlock(block,withTime: GameSettings.fastBlockFadeoutTime)
                 let ripple = RippleCircle(radius: 20, position: block.position)
                 ripple.strokeColor = UIColor.yellowColor()
                 ripple.lineWidth = 10
@@ -298,9 +296,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if region.containsPoint(location){
                     if block.blockType == .bomb && block.physicsBody != nil{
                         block.physicsBody = nil
-                        block.runAction(SKAction.fadeOutWithDuration(0.25)){
-                            block.removeFromParent()
-                        }
+                        destroyBlock(block,withTime: GameSettings.fastBlockFadeoutTime)
                         let ripple = RippleCircle(radius: 20, position: block.position)
                         ripple.strokeColor = UIColor.yellowColor()
                         ripple.lineWidth = 10
@@ -451,7 +447,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func rotationEnded(){
         for child in children{
             if let block = child as? Block{
-                block.runAction(SKAction.fadeInWithDuration(0.1))
+                block.hidden = false
                 block.movementEnabled = true
             }
         }
@@ -462,7 +458,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         toolbarNode  = ToolbarNode()
         for child in children{
             if let block = child as? Block{
-                block.runAction(SKAction.fadeOutWithDuration(0.1))
+                block.hidden = true
                 block.movementEnabled = false
                 block.position.x /= oldSize.width
                 block.position.y /= oldSize.height
