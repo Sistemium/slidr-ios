@@ -25,9 +25,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             case .Level:
                 self.addChild(toolbarNode)
                 toolbarNode.leftLabelText = level?.name ?? ""
+                toolbarNode.rightButton = toolbarNode.backButton
             case .Free:
                 self.addChild(toolbarNode)
                 toolbarNode.leftLabelText = "Free mode"
+                toolbarNode.rightButton = toolbarNode.backButton
             default:
                 break
             }
@@ -102,7 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 score.removeFromParent()
             }
         }else{
-            block.runAction(SKAction.fadeOutWithDuration(time * 2)){
+            block.runAction(SKAction.fadeOutWithDuration(time)){
                 block.removeFromParent()
             }
         }
@@ -230,7 +232,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let block = contact.bodyA.node as? Block ?? contact.bodyB.node as? Block{
                 if block.blockType == .bomb && block.physicsBody != nil{
                     block.physicsBody = nil
-                    destroyBlock(block,withTime: GameSettings.blockFadeoutTime)
+                    destroyBlock(block,withTime: 0)
                     let ripple = RippleCircle(radius: 20, position: block.position)
                     ripple.strokeColor = UIColor.yellowColor()
                     ripple.lineWidth = 10
@@ -267,7 +269,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let block = node as? Block{
             if block.blockType == .bomb && block.physicsBody != nil{
                 block.physicsBody = nil
-                destroyBlock(block,withTime: GameSettings.fastBlockFadeoutTime)
+                destroyBlock(block,withTime: 0)
                 let ripple = RippleCircle(radius: 20, position: block.position)
                 ripple.strokeColor = UIColor.yellowColor()
                 ripple.lineWidth = 10
@@ -296,7 +298,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if region.containsPoint(location){
                     if block.blockType == .bomb && block.physicsBody != nil{
                         block.physicsBody = nil
-                        destroyBlock(block,withTime: GameSettings.fastBlockFadeoutTime)
+                        destroyBlock(block,withTime: 0)
                         let ripple = RippleCircle(radius: 20, position: block.position)
                         ripple.strokeColor = UIColor.yellowColor()
                         ripple.lineWidth = 10

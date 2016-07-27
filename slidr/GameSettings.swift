@@ -82,6 +82,5 @@ class GameSettings{
     
     static let blockFadeoutTime = 0.5
     static let fastBlockFadeoutTime = 0.25
-    
     static let boostValue:CGFloat = 2
 }

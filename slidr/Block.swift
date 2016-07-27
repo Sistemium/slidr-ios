@@ -41,14 +41,15 @@ class Block: SKSpriteNode {
                 self.size = CGSize(width: self.size.width/3, height: self.size.width/3)
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 self.physicsBody!.dynamic = true
-                let shape = SKShapeNode(circleOfRadius: self.size.width / 2)
+                let shape = SKShapeNode(rectOfSize: self.size)
                 shape.position = CGPoint(x: 0,y: 0)
                 self.addChild(shape)
                 let innerShapes:[SKShapeNode] = [SKShapeNode(circleOfRadius: self.size.width / 2),SKShapeNode(circleOfRadius: self.size.width / 2)]
                 innerShapes[1].xScale = 0.5
                 innerShapes[1].yScale = 0.5
+                shape.fillTexture = SKTexture.init(image: UIImage(named: "Bomb")!)
                 shape.fillColor = UIColor.yellowColor()
-                shape.strokeColor = shape.fillColor
+                shape.strokeColor = UIColor.clearColor()
                 let blur = SKEffectNode()
                 blur.shouldRasterize = true
                 blur.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:10.0)])!
@@ -97,7 +98,6 @@ class Block: SKSpriteNode {
             if movementEnabled{
                 if boost > 1{
                     boost -= 0.01
-                    print(boost)
                 }else{
                     boost = 1
                 }

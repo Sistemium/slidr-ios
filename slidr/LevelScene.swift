@@ -35,6 +35,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     private var toolbarNode : ToolbarNode!{
         didSet{
             self.addChild(toolbarNode)
+            toolbarNode.rightButton = toolbarNode.backButton
         }
     }
     
