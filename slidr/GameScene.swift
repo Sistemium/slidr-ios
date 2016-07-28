@@ -159,6 +159,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 return
             }
             else if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
+                
+                //dangerous fix for caterpillar bug, if somthing went wrong witch block colision consider that it is the reason
+                let loseOfSpeedOfBlock1:CGFloat
+                if block1.pushVector.dx != 0{
+                    loseOfSpeedOfBlock1 = block1.velocity.dx / block1.physicsBody!.velocity.dx
+                }else{
+                    loseOfSpeedOfBlock1 = block1.velocity.dy / block1.physicsBody!.velocity.dy
+                }
+                let loseOfSpeedOfBlock2:CGFloat
+                if block2.pushVector.dx != 0{
+                    loseOfSpeedOfBlock2 = block2.velocity.dx / block2.physicsBody!.velocity.dx
+                }else{
+                    loseOfSpeedOfBlock2 = block2.velocity.dy / block2.physicsBody!.velocity.dy
+                }
+                
+                if Int(loseOfSpeedOfBlock1) == Int(loseOfSpeedOfBlock2) && Int(loseOfSpeedOfBlock2) == 1{
+                    return
+                }
+                
                 if block1.blockType == block2.blockType{
                     block1.physicsBody = nil
                     block2.physicsBody = nil

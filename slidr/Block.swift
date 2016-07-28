@@ -10,7 +10,7 @@ import SpriteKit
 import Darwin
 
 enum BlockType{
-    case standart, swipeable, wall, bomb
+    case standart, swipeable, wall, bomb, caterpillar
 }
 
 class Block: SKSpriteNode {
@@ -24,17 +24,41 @@ class Block: SKSpriteNode {
                 self.color = UIColor.redColor()
                 hitSide.color = UIColor.blackColor()
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
-                self.physicsBody!.dynamic = true
             case .swipeable:
                 self.color = UIColor.blueColor()
                 hitSide.color = UIColor.blackColor()
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
-                self.physicsBody!.dynamic = true
             case .wall:
                 self.color = UIColor.blackColor()
                 hitSide.color = UIColor.blackColor()
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
-                self.physicsBody!.dynamic = false
+            case .caterpillar:
+                self.color = UIColor.greenColor()
+                hitSide.color = UIColor.blackColor()
+                self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
+                var change:CGFloat = -4
+                var count = 0
+                actions.append(SKAction.runBlock({
+                    if self.pushVector == GameSettings.moveDirections[0] || self.pushVector == GameSettings.moveDirections[1]{
+                        self.size = CGSize(width: self.size.width, height: self.size.height + change)
+                        if self.size.height <= 0 {
+                            self.size = CGSize(width: self.size.width, height: self.size.height - change)
+                        }
+                    }else{
+                        self.size = CGSize(width: self.size.width - change, height: self.size.height)
+                        if self.size.width <= 0 {
+                            self.size = CGSize(width: self.size.width, height: self.size.height + change)
+                        }
+                    }
+                    count+=1
+                    if count == 25{
+                        change = -change
+                        count = 0
+                    }
+                    self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width, height: self.size.height))
+                    self.pushVector = CGVector(dx: self.pushVector.dx,dy: self.pushVector.dy)
+                    self.physicsBody?.velocity = self.velocity
+                }))
             case .bomb:
                 self.color = UIColor.clearColor()
                 hitSide.color = UIColor.clearColor()
@@ -78,6 +102,11 @@ class Block: SKSpriteNode {
             self.physicsBody?.allowsRotation = false
             self.physicsBody?.affectedByGravity = false
             self.physicsBody?.contactTestBitMask = Block.blockId
+            if self.blockType == .wall{
+                self.physicsBody?.dynamic = false
+            }else{
+                self.physicsBody?.dynamic = true
+            }
         }
     }
     
@@ -189,6 +218,8 @@ class Block: SKSpriteNode {
             self.blockType = .wall
         case "bomb":
             self.blockType = .bomb
+        case "caterpillar":
+            self.blockType = .caterpillar
         default:
             break
         }
@@ -197,11 +228,11 @@ class Block: SKSpriteNode {
     func randomizeData() {
         switch arc4random_uniform(7) {
         case 0,1,2:
-            self.blockType = .standart
+            self.blockType = .caterpillar
         case 3,4,5:
-            self.blockType = .swipeable
+            self.blockType = .caterpillar
         default:
-            self.blockType = .bomb
+            self.blockType = .caterpillar
         }
         pushVector = GameSettings.moveDirections[Int(arc4random_uniform(4))]
         if pushVector.dx == 0{
@@ -227,9 +258,6 @@ class Block: SKSpriteNode {
         self.size.height = self.size.width
         self.size.width = t
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
-        if self.blockType == .wall{
-            self.physicsBody!.dynamic = false
-        }
         self.pushVector = CGVectorMake(-self.pushVector.dy, self.pushVector.dx)
     }
     
@@ -241,9 +269,6 @@ class Block: SKSpriteNode {
         self.size.height = self.size.width
         self.size.width = t
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
-        if self.blockType == .wall{
-            self.physicsBody!.dynamic = false
-        }
         self.pushVector = CGVectorMake(self.pushVector.dy, -self.pushVector.dx)
     }
 }
