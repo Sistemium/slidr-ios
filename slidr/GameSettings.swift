@@ -83,4 +83,7 @@ class GameSettings{
     static let blockFadeoutTime = 0.5
     static let fastBlockFadeoutTime = 0.25
     static let boostValue:CGFloat = 1.5
+    static let roundCornerValue:CGFloat = 10
+    static let caterpillarSpeed:CGFloat = 4
+    static let caterpillarDeepth:CGFloat = 0.6
 }

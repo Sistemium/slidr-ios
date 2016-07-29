@@ -21,44 +21,15 @@ class Block: SKSpriteNode {
         didSet{
             switch blockType {
             case .standart:
-                self.color = UIColor.redColor()
-                hitSide.color = UIColor.blackColor()
-                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
+                makeCaterpillarWithColor(UIColor.redColor())
             case .swipeable:
-                self.color = UIColor.blueColor()
-                hitSide.color = UIColor.blackColor()
-                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
+                makeCaterpillarWithColor(UIColor.blueColor())
             case .wall:
                 self.color = UIColor.blackColor()
                 hitSide.color = UIColor.blackColor()
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
             case .caterpillar:
-                self.color = UIColor.greenColor()
-                hitSide.color = UIColor.blackColor()
-                self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
-                var change:CGFloat = -4
-                var count = 0
-                actions.append(SKAction.runBlock({
-                    if self.pushVector == GameSettings.moveDirections[0] || self.pushVector == GameSettings.moveDirections[1]{
-                        self.size = CGSize(width: self.size.width, height: self.size.height + change)
-                        if self.size.height <= 0 {
-                            self.size = CGSize(width: self.size.width, height: self.size.height - change)
-                        }
-                    }else{
-                        self.size = CGSize(width: self.size.width - change, height: self.size.height)
-                        if self.size.width <= 0 {
-                            self.size = CGSize(width: self.size.width, height: self.size.height + change)
-                        }
-                    }
-                    count+=1
-                    if count == 25{
-                        change = -change
-                        count = 0
-                    }
-                    self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width, height: self.size.height))
-                    self.pushVector = CGVector(dx: self.pushVector.dx,dy: self.pushVector.dy)
-                    self.physicsBody?.velocity = self.velocity
-                }))
+                makeCaterpillarWithColor(UIColor.greenColor())
             case .bomb:
                 self.color = UIColor.clearColor()
                 hitSide.color = UIColor.clearColor()
@@ -95,6 +66,75 @@ class Block: SKSpriteNode {
                 }))
             }
         }
+    }
+    
+    private var maxWidth:CGFloat = 0
+    private var maxHeight:CGFloat = 0
+    private var minWidth:CGFloat = 0
+    private var minHeight:CGFloat = 0
+    
+    private func makeCaterpillarWithColor(color:UIColor){
+        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width, height: self.size.height))
+        self.color = UIColor.clearColor()
+        hitSide.color = UIColor.blackColor()
+        let tile = SKSpriteNode()
+        hitSide.removeFromParent()
+        tile.addChild(hitSide)
+        tile.size = self.size
+        tile.color = color
+        let cropNode = SKCropNode()
+        self.addChild(cropNode)
+        let mask = SKShapeNode()
+        mask.path = CGPathCreateWithRoundedRect(CGRectMake(-self.size.width/2, -self.size.height/2, self.size.width, self.size.height), GameSettings.roundCornerValue , GameSettings.roundCornerValue, nil)
+        mask.fillColor = color
+        cropNode.maskNode = mask
+        cropNode.addChild(tile)
+        var change:CGFloat = -GameSettings.caterpillarSpeed
+        maxWidth = self.size.width
+        maxHeight = self.size.height
+        minWidth = self.size.width * GameSettings.caterpillarDeepth
+        minHeight = self.size.height * GameSettings.caterpillarDeepth
+        if minWidth < GameSettings.roundCornerValue * 2{
+            minWidth = GameSettings.roundCornerValue * 2
+        }
+        if minHeight < GameSettings.roundCornerValue * 2{
+            minHeight = GameSettings.roundCornerValue * 2
+        }
+        actions.append(SKAction.runBlock({
+            if change<0{
+                change = (-abs(self.velocity.dx + self.velocity.dy)) / 50
+            }else{
+                change = abs(self.velocity.dx + self.velocity.dy) / 50
+            }
+            if self.pushVector == GameSettings.moveDirections[0] || self.pushVector == GameSettings.moveDirections[1]{
+                self.size = CGSize(width: self.size.width, height: self.size.height + change)
+                if self.size.height < self.minHeight {
+                    self.size = CGSize(width: self.size.width, height: self.minHeight)
+                    change = -change
+                }
+                if self.size.height > self.maxHeight {
+                    self.size = CGSize(width: self.size.width, height: self.maxHeight)
+                    change = -change
+                }
+            }else{
+                self.size = CGSize(width: self.size.width + change, height: self.size.height)
+                if self.size.width < self.minWidth {
+                    self.size = CGSize(width: self.minWidth, height: self.size.height)
+                    change = -change
+                }
+                if self.size.width > self.maxWidth {
+                    self.size = CGSize(width: self.maxWidth, height: self.size.height)
+                    change = -change
+                }
+            }
+            tile.size = self.size
+            mask.path = CGPathCreateWithRoundedRect(CGRectMake(-self.size.width/2, -self.size.height/2, self.size.width, self.size.height), GameSettings.roundCornerValue, GameSettings.roundCornerValue, nil)
+            if self.physicsBody != nil{
+                self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width, height: self.size.height))
+            }
+            self.pushVector = CGVector(dx: self.pushVector.dx,dy: self.pushVector.dy)
+            self.physicsBody?.velocity = self.velocity
+        }))
     }
     
     override var physicsBody: SKPhysicsBody?{
@@ -184,8 +224,8 @@ class Block: SKSpriteNode {
     
     convenience init(blockData:NSDictionary){
         self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: blockData["width"] as! CGFloat, height: blockData["height"] as! CGFloat ))
-        loadBlock(blockData)
         customInit()
+        loadBlock(blockData)
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -228,11 +268,11 @@ class Block: SKSpriteNode {
     func randomizeData() {
         switch arc4random_uniform(7) {
         case 0,1,2:
-            self.blockType = .caterpillar
+            self.blockType = .standart
         case 3,4,5:
-            self.blockType = .caterpillar
+            self.blockType = .swipeable
         default:
-            self.blockType = .caterpillar
+            self.blockType = .bomb
         }
         pushVector = GameSettings.moveDirections[Int(arc4random_uniform(4))]
         if pushVector.dx == 0{
@@ -259,6 +299,12 @@ class Block: SKSpriteNode {
         self.size.width = t
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
         self.pushVector = CGVectorMake(-self.pushVector.dy, self.pushVector.dx)
+        t = minHeight
+        minHeight = minWidth
+        minWidth = t
+        t = maxHeight
+        maxHeight = maxWidth
+        maxWidth = t
     }
     
     func switchOrientationToRight(){
@@ -270,5 +316,11 @@ class Block: SKSpriteNode {
         self.size.width = t
         self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
         self.pushVector = CGVectorMake(self.pushVector.dy, -self.pushVector.dx)
+        t = minHeight
+        minHeight = minWidth
+        minWidth = t
+        t = maxHeight
+        maxHeight = maxWidth
+        maxWidth = t
     }
 }
