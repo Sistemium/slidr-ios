@@ -11,15 +11,33 @@ import UIKit
 
 class GameSettings{
     static var lastKnownOrientation:UIDeviceOrientation = .Portrait
-    static var playableAreaSize = CGSize()
+    
+    private static var _playableAreaSize = CGSize()
+    
+    static var playableAreaSize:CGSize{
+        get{
+            return CGSize(width: _playableAreaSize.width * rezolutionNormalizationValue, height: _playableAreaSize.height * rezolutionNormalizationValue)
+        }
+        set{
+            _playableAreaSize = CGSize(width: newValue.width / rezolutionNormalizationValue, height: newValue.height / rezolutionNormalizationValue)
+        }
+    }
     static var moveDirections:[CGVector]{
         get{
             return [CGVectorMake(0, baseSpeed),CGVectorMake(0, -baseSpeed),CGVectorMake(baseSpeed, 0),CGVectorMake(-baseSpeed, 0)]
         }
     }
-    static let toolbarHeight:CGFloat = 60
+    static var toolbarHeight:CGFloat{
+        get{
+            return 60 * rezolutionNormalizationValue
+        }
+    }
     static let pushBlockInterval = 0.4
-    static let defaultSpeed:CGFloat = 45000
+    static var defaultSpeed:CGFloat{
+        get{
+            return 45000 * rezolutionNormalizationValue
+        }
+    }
     static var baseSpeed:CGFloat{
         get{
             return NSUserDefaults.standardUserDefaults().valueForKey("baseSpeed") as? CGFloat ?? defaultSpeed
@@ -29,12 +47,32 @@ class GameSettings{
             NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "baseSpeed")
         }
     }
-    static let minBlockSize:UInt32 = 100
-    static let maxBlockSize:UInt32 = 200
-    static let labelSize: CGFloat = 100
+    static var minBlockSize:UInt32{
+        get{
+            return UInt32(100.0 * rezolutionNormalizationValue)
+        }
+    }
+    static var maxBlockSize:UInt32{
+        get{
+            return UInt32(200.0 * rezolutionNormalizationValue)
+        }
+    }
+    static var labelSize: CGFloat{
+        get{
+            return 100 * rezolutionNormalizationValue
+        }
+    }
     static var maxNumberOfBlocks = 6
-    static let hitSideWidth:CGFloat = 20
-    static let touchRegion:CGFloat = 90
+    static var hitSideWidth:CGFloat{
+        get{
+            return 20 * rezolutionNormalizationValue
+        }
+    }
+    static var touchRegion:CGFloat{
+        get{
+            return 90 * rezolutionNormalizationValue
+        }
+    }
     static let timeUntilWarning = 3.0
     static var shakeToResetEnabled:Bool{
         get{
@@ -84,6 +122,14 @@ class GameSettings{
     static let fastBlockFadeoutTime = 0.25
     static let boostValue:CGFloat = 1.5
     static let roundCornerValue:CGFloat = 10
-    static let caterpillarSpeed:CGFloat = 4
     static let caterpillarDeepth:CGFloat = 0.6
+    //Game is optimized for iPad pro, cause it has biggest resolution, if game was launched on device with lower resolution this value helps to downscale expected resolution i onrder to improve perfomance
+    static var rezolutionNormalizationValue:CGFloat = 1
+    static var rippleRadius:CGFloat{
+        get{
+            return 20 * rezolutionNormalizationValue
+        }
+    }
+    
+    static let caterpillarSpeed:CGFloat = 0.015
 }

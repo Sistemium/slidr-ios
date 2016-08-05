@@ -14,7 +14,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let skView = self.view as! SKView
-        if UIScreen.mainScreen().bounds.height / UIScreen.mainScreen().bounds.width > 1.5{
+        if max(UIScreen.mainScreen().bounds.height,UIScreen.mainScreen().bounds.width) / min(UIScreen.mainScreen().bounds.width,UIScreen.mainScreen().bounds.height) > 1.5{
             GameSettings.playableAreaSize = CGSize(width: 768.375, height: 1366)
         }else if UIScreen.mainScreen().bounds.height / UIScreen.mainScreen().bounds.width < 1.5{
             GameSettings.playableAreaSize = CGSize(width: 1024.5, height: 1366)
@@ -24,6 +24,7 @@ class GameViewController: UIViewController {
         if !UIApplication.sharedApplication().statusBarOrientation.isPortrait{
             GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
         }
+        GameSettings.rezolutionNormalizationValue = max(UIScreen.mainScreen().bounds.height,UIScreen.mainScreen().bounds.width) / 1366
         let scene = MenuScene()
         scene.size = GameSettings.playableAreaSize
         skView.ignoresSiblingOrder = true

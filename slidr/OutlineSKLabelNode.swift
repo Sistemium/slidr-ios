@@ -19,7 +19,7 @@ class OutlineSKLabelNode:SKLabelNode{
         _outlineLabel.fontSize = self.fontSize
         _outlineLabel.fontColor = UIColor.blackColor()
         _outlineLabel.text = self.text
-        _outlineLabel.zPosition = self.zPosition - 1
+        _outlineLabel.zPosition = self.zPosition - 0.1
         _outlineLabel.position = CGPointMake(self.position.x - self.offSetX, self.position.y - self.offSetY)
         return _outlineLabel
     }()
@@ -44,7 +44,7 @@ class OutlineSKLabelNode:SKLabelNode{
     
     override var zPosition: CGFloat{
         didSet{
-            outlineLabel.zPosition = zPosition - 1
+            outlineLabel.zPosition = zPosition - 0.1
         }
     }
     

@@ -27,7 +27,7 @@ class GameResultScene: SKScene{
             resultLabel.text = result == .Win ? "You Win" : "You Lose"
             resultLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 1.3)
             resultLabel.fontSize = GameSettings.labelSize
-            resultLabel.zPosition = 3.0
+            resultLabel.zPosition = 1.0
             resultLabel.fontColor = result == .Win ? UIColor.greenColor() : UIColor.redColor()
             self.addChild(resultLabel)
             self.addChild(resultLabel.outlineLabel)
@@ -39,7 +39,7 @@ class GameResultScene: SKScene{
             questionLabel.text = result == .Win ? "Play next level?" : "Play again?"
             questionLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2)
             questionLabel.fontSize = GameSettings.labelSize
-            questionLabel.zPosition = 3.0
+            questionLabel.zPosition = 1.0
             questionLabel.fontColor = UIColor.whiteColor()
             self.addChild(questionLabel)
             self.addChild(questionLabel.outlineLabel)
@@ -51,7 +51,7 @@ class GameResultScene: SKScene{
             returnButton.text = "No"
             returnButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 - GameSettings.labelSize * 1.3, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 1.3)
             returnButton.fontSize = GameSettings.labelSize
-            returnButton.zPosition = 3.0
+            returnButton.zPosition = 1.0
             returnButton.fontColor = UIColor.whiteColor()
             self.addChild(returnButton)
             self.addChild(returnButton.outlineLabel)
@@ -63,7 +63,7 @@ class GameResultScene: SKScene{
             actionButton.text = "Yes"
             actionButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 + GameSettings.labelSize * 1.3, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 1.3)
             actionButton.fontSize = GameSettings.labelSize
-            actionButton.zPosition = 3.0
+            actionButton.zPosition = 1.0
             actionButton.fontColor = UIColor.whiteColor()
             self.addChild(actionButton)
             self.addChild(actionButton.outlineLabel)
@@ -78,7 +78,7 @@ class GameResultScene: SKScene{
             }
             scoreLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 2.4)
             scoreLabel.fontSize = GameSettings.labelSize * 0.5
-            scoreLabel.zPosition = 3.0
+            scoreLabel.zPosition = 1.0
             scoreLabel.fontColor = UIColor.blackColor()
             self.addChild(scoreLabel)
             self.addChild(scoreLabel.outlineLabel)
@@ -101,7 +101,7 @@ class GameResultScene: SKScene{
             }
             recordLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 3.5)
             recordLabel.fontSize = GameSettings.labelSize * 0.5
-            recordLabel.zPosition = 3.0
+            recordLabel.zPosition = 1.0
             recordLabel.fontColor = UIColor.blackColor()
             addChild(recordLabel)
             addChild(recordLabel.outlineLabel)
@@ -113,7 +113,7 @@ class GameResultScene: SKScene{
             infoLabel.text = infoText
             infoLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 2.6)
             infoLabel.fontSize = GameSettings.labelSize * 0.5
-            infoLabel.zPosition = 3.0
+            infoLabel.zPosition = 1.0
             infoLabel.fontColor = UIColor.blackColor()
             self.addChild(infoLabel)
             self.addChild(infoLabel.outlineLabel)

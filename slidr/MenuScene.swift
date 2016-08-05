@@ -20,7 +20,7 @@ class MenuScene: GameScene {
             startGameLabel.text = "Start game"
             startGameLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 1.3)
             startGameLabel.fontSize = GameSettings.labelSize
-            startGameLabel.zPosition = 3.0
+            startGameLabel.zPosition = 2.0
             startGameLabel.fontColor = .whiteColor()
             self.addChild(startGameLabel)
             self.addChild(startGameLabel.outlineLabel)
@@ -32,7 +32,7 @@ class MenuScene: GameScene {
             freeModeLabel.text = "Free mode"
             freeModeLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2)
             freeModeLabel.fontSize = GameSettings.labelSize
-            freeModeLabel.zPosition = 3.0
+            freeModeLabel.zPosition = 2.0
             freeModeLabel.fontColor = .whiteColor()
             self.addChild(freeModeLabel)
             self.addChild(freeModeLabel.outlineLabel)
@@ -44,7 +44,7 @@ class MenuScene: GameScene {
             optionsLabel.text = "Options"
             optionsLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 1.3)
             optionsLabel.fontSize = GameSettings.labelSize
-            optionsLabel.zPosition = 3.0
+            optionsLabel.zPosition = 2.0
             optionsLabel.fontColor = .whiteColor()
             self.addChild(optionsLabel)
             self.addChild(optionsLabel.outlineLabel)

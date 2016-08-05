@@ -97,7 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.addChild(score)
             score.position = block.position
             score.fontSize = GameSettings.toolbarHeight / 1.5
-            score.zPosition = 4
+            score.zPosition = 1.5
             score.fontColor = UIColor.greenColor()
             score.text = "+" + (block.blockType == .standart ? GameSettings.redBlockReward.description: GameSettings.blueBlockReward.description)
             score.runAction(SKAction.fadeOutWithDuration(time)){
@@ -252,11 +252,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if block.blockType == .bomb && block.physicsBody != nil{
                     block.physicsBody = nil
                     destroyBlock(block,withTime: 0)
-                    let ripple = RippleCircle(radius: 20, position: block.position)
+                    let ripple = RippleCircle(radius: GameSettings.rippleRadius, position: block.position)
                     ripple.strokeColor = UIColor.yellowColor()
                     ripple.lineWidth = 10
                     self.addChild(ripple)
-                    ripple.ripple(20, duration: 1.0)
+                    ripple.ripple(GameSettings.rippleRadius, duration: 1.0)
                     ripple.removeFromParent()
                     return
                 }else{
@@ -282,57 +282,63 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: User interactions
     
+    func nodeInPoint(p: CGPoint) -> SKNode? { //node at point is not very trustable
+        return self.nodesAtPoint(p).filter{return $0.zPosition == 1.0 || $0.zPosition == 33.0}.sort{return $0.zPosition < $1.zPosition}.last
+    }
+    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        var location = touches.first!.locationInNode(self)
-        let node = self.nodeAtPoint(location)
-        if let block = node as? Block{
-            if block.blockType == .bomb && block.physicsBody != nil{
-                block.physicsBody = nil
-                destroyBlock(block,withTime: 0)
-                let ripple = RippleCircle(radius: 20, position: block.position)
-                ripple.strokeColor = UIColor.yellowColor()
-                ripple.lineWidth = 10
-                self.addChild(ripple)
-                ripple.ripple(20, duration: 1.0)
-                ripple.removeFromParent()
+        for toch in touches{
+            var location = toch.locationInNode(self)
+            let node = self.nodeInPoint(location)
+            if let block = node as? Block{
+                if block.blockType == .bomb && block.physicsBody != nil{
+                    block.physicsBody = nil
+                    destroyBlock(block,withTime: 0)
+                    let ripple = RippleCircle(radius: 20, position: block.position)
+                    ripple.strokeColor = UIColor.yellowColor()
+                    ripple.lineWidth = 10
+                    self.addChild(ripple)
+                    ripple.ripple(20, duration: 1.0)
+                    ripple.removeFromParent()
+                    return
+                }
+                if block.physicsBody != nil && (block.numberOfActions == nil || block.numberOfActions! > 0){
+                    block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
+                }
+                if block.numberOfActions != nil{
+                    block.numberOfActions! -= 1
+                }
                 return
             }
-            if block.physicsBody != nil && (block.numberOfActions == nil || block.numberOfActions! > 0){
-                block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
+            
+            if node == toolbarNode.backButton{
+                returnToPreviousScene()
             }
-            if block.numberOfActions != nil{
-                block.numberOfActions! -= 1
-            }
-            return
-        }
-        
-        if node == toolbarNode.backButton{
-            returnToPreviousScene()
-        }
-        
-        for node in self.children{
-            if let block = node as? Block{
-                location = touches.first!.locationInNode(block)
-                let region = SKRegion(size: CGSize(width: block.size.width + GameSettings.touchRegion, height: block.size.height + GameSettings.touchRegion))
-                if region.containsPoint(location){
-                    if block.blockType == .bomb && block.physicsBody != nil{
-                        block.physicsBody = nil
-                        destroyBlock(block,withTime: 0)
-                        let ripple = RippleCircle(radius: 20, position: block.position)
-                        ripple.strokeColor = UIColor.yellowColor()
-                        ripple.lineWidth = 10
-                        self.addChild(ripple)
-                        ripple.ripple(20, duration: 1.0)
-                        ripple.removeFromParent()
+            
+            for node in self.children{
+                if let block = node as? Block{
+                    location = touches.first!.locationInNode(block)
+                    let region = SKRegion(size: CGSize(width: block.size.width + GameSettings.touchRegion, height: block.size.height + GameSettings.touchRegion))
+                    if region.containsPoint(location){
+                        if block.blockType == .bomb && block.physicsBody != nil{
+                            block.physicsBody = nil
+                            destroyBlock(block,withTime: 0)
+                            let ripple = RippleCircle(radius: 20, position: block.position)
+                            ripple.strokeColor = UIColor.yellowColor()
+                            ripple.lineWidth = 10
+                            self.addChild(ripple)
+                            ripple.ripple(20, duration: 1.0)
+                            ripple.removeFromParent()
+                            return
+                        }
+                        if block.physicsBody != nil && (block.numberOfActions == nil || block.numberOfActions! > 0){
+                            block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
+                        }
+                        if block.numberOfActions != nil{
+                            block.numberOfActions! -= 1
+                        }
                         return
                     }
-                    if block.physicsBody != nil && (block.numberOfActions == nil || block.numberOfActions! > 0){
-                        block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
-                    }
-                    if block.numberOfActions != nil{
-                        block.numberOfActions! -= 1
-                    }
-                    return
                 }
             }
         }
@@ -341,7 +347,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func swipe(sender:UISwipeGestureRecognizer){
         if (sender.state == .Ended){
             var touchLocation = self.convertPointFromView(sender.locationInView(sender.view))
-            let block = self.nodeAtPoint(touchLocation) as? Block
+            let block = self.nodeInPoint(touchLocation) as? Block
             if block != nil{
                 if (block!.blockType == .standart || block!.blockType == .swipeable) && (block!.numberOfActions == nil || block!.numberOfActions! > 0){
                     if block?.blockType == .standart{
@@ -603,6 +609,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 block.physicsBody?.velocity = block.velocity
                 if block.pushed && !self.intersectsNode(block){
+                    block.physicsBody = nil
                     block.removeFromParent()
                     blockLeftGameArea = true
                 }

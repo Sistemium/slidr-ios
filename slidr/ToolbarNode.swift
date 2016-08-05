@@ -17,7 +17,7 @@ class ToolbarNode: SKSpriteNode {
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
         self.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height - GameSettings.toolbarHeight/2)
-        self.zPosition = 3
+        self.zPosition = 22
         self.alpha = 0.97
         leftLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         centerLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
@@ -26,9 +26,10 @@ class ToolbarNode: SKSpriteNode {
         self.addChild(leftLabel.outlineLabel)
         self.addChild(centerLabel.outlineLabel)
         leftLabel.fontSize = GameSettings.toolbarHeight / 1.5
-        leftLabel.zPosition = 4
+        leftLabel.zPosition = 33
         centerLabel.fontSize = GameSettings.toolbarHeight / 1.5
-        centerLabel.zPosition = 4
+        centerLabel.zPosition = 33
+        backButton.zPosition = 33
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -90,8 +91,6 @@ class ToolbarNode: SKSpriteNode {
     private var centerLabel : OutlineSKLabelNode!
     
     var backButton : SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "Back"), size: CGSize(width: GameSettings.toolbarHeight, height: GameSettings.toolbarHeight))
-    
-    var settingsButton : SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "Back"), size: CGSize(width: GameSettings.toolbarHeight, height: GameSettings.toolbarHeight))
     
     var rightButton : SKSpriteNode!{
         willSet{

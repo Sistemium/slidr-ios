@@ -39,7 +39,7 @@ class Block: SKSpriteNode {
                 let shape = SKShapeNode(rectOfSize: self.size)
                 shape.position = CGPoint(x: 0,y: 0)
                 self.addChild(shape)
-                let innerShapes:[SKShapeNode] = [SKShapeNode(circleOfRadius: self.size.width / 2),SKShapeNode(circleOfRadius: self.size.width / 2)]
+                var innerShapes:[SKShapeNode] = [SKShapeNode(circleOfRadius: self.size.width / 2),SKShapeNode(circleOfRadius: self.size.width / 2)]
                 innerShapes[1].xScale = 0.5
                 innerShapes[1].yScale = 0.5
                 shape.fillTexture = SKTexture.init(image: UIImage(named: "Bomb")!)
@@ -51,6 +51,10 @@ class Block: SKSpriteNode {
                 shape.addChild(blur)
                 blur.addChild(innerShapes[0])
                 blur.addChild(innerShapes[1])
+                blur.zPosition = 1.5
+                shape.zPosition = 1.5
+                innerShapes[0].zPosition = 1.5
+                innerShapes[1].zPosition = 1.5
                 actions.append(SKAction.runBlock({
                     for innerShape in innerShapes{
                         innerShape.lineWidth = 20
@@ -89,7 +93,7 @@ class Block: SKSpriteNode {
         mask.fillColor = color
         cropNode.maskNode = mask
         cropNode.addChild(tile)
-        var change:CGFloat = -GameSettings.caterpillarSpeed
+        var change:CGFloat = -1
         maxWidth = self.size.width
         maxHeight = self.size.height
         minWidth = self.size.width * GameSettings.caterpillarDeepth
@@ -100,11 +104,13 @@ class Block: SKSpriteNode {
         if minHeight < GameSettings.roundCornerValue * 2{
             minHeight = GameSettings.roundCornerValue * 2
         }
-        actions.append(SKAction.runBlock({
+        cropNode.zPosition = 1.5
+        tile.zPosition = 1.5
+        actions.append(SKAction.runBlock({ [unowned self] in
             if change<0{
-                change = (-abs(self.velocity.dx + self.velocity.dy)) / 50
+                change = (-abs(self.velocity.dx + self.velocity.dy)) * GameSettings.caterpillarSpeed
             }else{
-                change = abs(self.velocity.dx + self.velocity.dy) / 50
+                change = abs(self.velocity.dx + self.velocity.dy) * GameSettings.caterpillarSpeed
             }
             if self.pushVector == GameSettings.moveDirections[0] || self.pushVector == GameSettings.moveDirections[1]{
                 self.size = CGSize(width: self.size.width, height: self.size.height + change)
@@ -158,7 +164,11 @@ class Block: SKSpriteNode {
         }
     }
     
-    var hitSide = SKSpriteNode()
+    var hitSide = SKSpriteNode(){
+        didSet{
+            hitSide.zPosition = 1.5
+        }
+    }
     
     var movementEnabled = true
     
@@ -239,6 +249,7 @@ class Block: SKSpriteNode {
     
     func customInit(){
         Block.blockId += 1
+        self.zPosition = 1
         self.addChild(hitSide)
     }
     
