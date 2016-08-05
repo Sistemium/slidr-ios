@@ -50,3 +50,26 @@ extension SKScene{
         return dynamicChildren
     }
 }
+
+private var startXAssocKey = 0
+private var startYAssocKey = 0
+
+extension UITouch {
+    var startX: CGFloat! {
+        get {
+            return objc_getAssociatedObject(self, &startXAssocKey) as? CGFloat
+        }
+        set {
+            objc_setAssociatedObject(self, &startXAssocKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
+    var startY: CGFloat! {
+        get {
+            return objc_getAssociatedObject(self, &startYAssocKey) as? CGFloat
+        }
+        set {
+            objc_setAssociatedObject(self, &startYAssocKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+}

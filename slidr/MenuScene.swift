@@ -86,9 +86,6 @@ class MenuScene: GameScene {
         }
     }
     
-    override func swipe(sender: UISwipeGestureRecognizer) {
-    }
-    
     override func didChangeSize(oldSize: CGSize) {
         for child in children{
             child.removeFromParent()
