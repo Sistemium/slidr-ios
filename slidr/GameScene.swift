@@ -153,6 +153,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
         if let block1 = contact.bodyA.node as? Block, let block2 = contact.bodyB.node as? Block{
+            
+            //dangerous fix for caterpillar bug, if somthing went wrong witch block colision consider that it is the reason
+            var loseOfSpeedOfBlock1:CGFloat
+            if block1.pushVector.dx != 0{
+                loseOfSpeedOfBlock1 = block1.velocity.dx / block1.physicsBody!.velocity.dx
+            }else{
+                loseOfSpeedOfBlock1 = block1.velocity.dy / block1.physicsBody!.velocity.dy
+            }
+            var loseOfSpeedOfBlock2:CGFloat
+            if block2.pushVector.dx != 0{
+                loseOfSpeedOfBlock2 = block2.velocity.dx / block2.physicsBody!.velocity.dx
+            }else{
+                loseOfSpeedOfBlock2 = block2.velocity.dy / block2.physicsBody!.velocity.dy
+            }
+            if loseOfSpeedOfBlock1.isNaN {
+                loseOfSpeedOfBlock1 = 1
+            }
+            if loseOfSpeedOfBlock2.isNaN {
+                loseOfSpeedOfBlock2 = 1
+            }
+            
+            if Int(loseOfSpeedOfBlock1) == 1 && Int(loseOfSpeedOfBlock2) == 1{
+                return
+            }
+            
             if block1.blockType == .wall{
                 repulseBlock(block2,fromWall:block1,withContactPoint: contact.contactPoint)
                 return
@@ -162,24 +187,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 return
             }
             else if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
-                
-                //dangerous fix for caterpillar bug, if somthing went wrong witch block colision consider that it is the reason
-                let loseOfSpeedOfBlock1:CGFloat
-                if block1.pushVector.dx != 0{
-                    loseOfSpeedOfBlock1 = block1.velocity.dx / block1.physicsBody!.velocity.dx
-                }else{
-                    loseOfSpeedOfBlock1 = block1.velocity.dy / block1.physicsBody!.velocity.dy
-                }
-                let loseOfSpeedOfBlock2:CGFloat
-                if block2.pushVector.dx != 0{
-                    loseOfSpeedOfBlock2 = block2.velocity.dx / block2.physicsBody!.velocity.dx
-                }else{
-                    loseOfSpeedOfBlock2 = block2.velocity.dy / block2.physicsBody!.velocity.dy
-                }
-                
-                if Int(loseOfSpeedOfBlock1) == Int(loseOfSpeedOfBlock2) && Int(loseOfSpeedOfBlock2) == 1{
-                    return
-                }
                 
                 if block1.blockType == block2.blockType{
                     block1.physicsBody = nil
@@ -318,7 +325,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for toch in touches{
+        tochesCycle: for toch in touches{
             var location = toch.locationInNode(self)
             
             var dx = location.x - toch.startX
@@ -372,7 +379,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             self.addChild(ripple)
                             ripple.ripple(20, duration: 1.0)
                             ripple.removeFromParent()
-                            continue
+                            continue tochesCycle
                         }
                         if block.physicsBody != nil && (block.numberOfActions == nil || block.numberOfActions! > 0){
                             block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
@@ -380,7 +387,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         if block.numberOfActions != nil{
                             block.numberOfActions! -= 1
                         }
-                        continue
+                        continue tochesCycle
                     }
                 }
             }
