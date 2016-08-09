@@ -30,25 +30,19 @@ class Block: SKSpriteNode {
             case .bomb:
                 self.color = UIColor.clearColor()
                 self.size = CGSize(width: self.size.width/3, height: self.size.width/3)
+                self.texture = SKTexture(imageNamed: "Bomb")
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 self.physicsBody!.dynamic = true
-                let shape = SKShapeNode(rectOfSize: self.size)
-                shape.position = CGPoint(x: 0,y: 0)
-                self.addChild(shape)
                 var innerShapes:[SKShapeNode] = [SKShapeNode(circleOfRadius: self.size.width / 2),SKShapeNode(circleOfRadius: self.size.width / 2)]
                 innerShapes[1].xScale = 0.5
                 innerShapes[1].yScale = 0.5
-                shape.fillTexture = SKTexture.init(image: UIImage(named: "Bomb")!)
-                shape.fillColor = UIColor.yellowColor()
-                shape.strokeColor = UIColor.clearColor()
                 let blur = SKEffectNode()
                 blur.shouldRasterize = true
                 blur.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:10.0)])!
-                shape.addChild(blur)
+                self.addChild(blur)
                 blur.addChild(innerShapes[0])
                 blur.addChild(innerShapes[1])
                 blur.zPosition = 1.5
-                shape.zPosition = 1.5
                 innerShapes[0].zPosition = 1.5
                 innerShapes[1].zPosition = 1.5
                 actions.append(SKAction.runBlock({
@@ -80,7 +74,7 @@ class Block: SKSpriteNode {
         mask.path = CGPathCreateWithRoundedRect(CGRectMake(-self.size.width/2, -self.size.height/2, self.size.width, self.size.height), GameSettings.roundCornerValue , GameSettings.roundCornerValue, nil)
         mask.fillColor = color
         mask.strokeColor = color
-        hitSide = SKSpriteNode()
+        hitSide = Head()
         mask.addChild(hitSide)
         self.addChild(mask)
         var change:CGFloat = 1
@@ -151,12 +145,7 @@ class Block: SKSpriteNode {
         }
     }
     
-    var hitSide:SKSpriteNode!{
-        didSet{
-            hitSide.color = UIColor.blackColor()
-            hitSide.zPosition = 1.5
-        }
-    }
+    var hitSide:Head!
     
     var movementEnabled = true
     
@@ -228,7 +217,6 @@ class Block: SKSpriteNode {
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

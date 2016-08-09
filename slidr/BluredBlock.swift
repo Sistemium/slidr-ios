@@ -16,11 +16,18 @@ class BluredBlock: Block {
         }
     }
     
-    var blockView = SKSpriteNode()
+    private var blockView = SKSpriteNode()
     
     override var size: CGSize{
         didSet{
             blockView.size = size
+        }
+    }
+    
+    override var texture: SKTexture?{
+        didSet{
+            blockView.texture = texture
+            super.texture = nil
         }
     }
     
