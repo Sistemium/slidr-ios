@@ -87,7 +87,7 @@ class GameSettings{
             NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "ShakeToResetEnabled")
         }
     }
-    static let freeModeTimer = 1000.0
+    static let freeModeTimer = 10.0
     static let redBlockReward = 1.5
     static let blueBlockReward = 1.5
     static var lockOrientationInGameEnabled:Bool{
@@ -122,7 +122,7 @@ class GameSettings{
     static let fastBlockFadeoutTime = 0.25
     static let boostValue:CGFloat = 1.5
     static let roundCornerValue:CGFloat = 10
-    static let caterpillarDeepth:CGFloat = 0.6
+    static let caterpillarDeepth:CGFloat = 1.6
     //Game is optimized for iPad pro, cause it has biggest resolution, if game was launched on device with lower resolution this value helps to downscale expected resolution i onrder to improve perfomance
     static var rezolutionNormalizationValue:CGFloat = 1
     static var rippleRadius:CGFloat{

@@ -10,7 +10,7 @@ import SpriteKit
 import Darwin
 
 enum BlockType{
-    case standart, swipeable, wall, bomb, caterpillar
+    case standart, swipeable, wall, bomb
 }
 
 class Block: SKSpriteNode {
@@ -26,13 +26,9 @@ class Block: SKSpriteNode {
                 makeCaterpillarWithColor(UIColor.blueColor())
             case .wall:
                 self.color = UIColor.blackColor()
-                hitSide.color = UIColor.blackColor()
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
-            case .caterpillar:
-                makeCaterpillarWithColor(UIColor.greenColor())
             case .bomb:
                 self.color = UIColor.clearColor()
-                hitSide.color = UIColor.clearColor()
                 self.size = CGSize(width: self.size.width/3, height: self.size.width/3)
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 self.physicsBody!.dynamic = true
@@ -80,32 +76,24 @@ class Block: SKSpriteNode {
     private func makeCaterpillarWithColor(color:UIColor){
         self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width, height: self.size.height))
         self.color = UIColor.clearColor()
-        hitSide.color = UIColor.blackColor()
-        let tile = SKSpriteNode()
-        hitSide.removeFromParent()
-        tile.addChild(hitSide)
-        tile.size = self.size
-        tile.color = color
-        let cropNode = SKCropNode()
-        self.addChild(cropNode)
         let mask = SKShapeNode()
         mask.path = CGPathCreateWithRoundedRect(CGRectMake(-self.size.width/2, -self.size.height/2, self.size.width, self.size.height), GameSettings.roundCornerValue , GameSettings.roundCornerValue, nil)
         mask.fillColor = color
-        cropNode.maskNode = mask
-        cropNode.addChild(tile)
-        var change:CGFloat = -1
-        maxWidth = self.size.width
-        maxHeight = self.size.height
-        minWidth = self.size.width * GameSettings.caterpillarDeepth
-        minHeight = self.size.height * GameSettings.caterpillarDeepth
+        mask.strokeColor = color
+        hitSide = SKSpriteNode()
+        mask.addChild(hitSide)
+        self.addChild(mask)
+        var change:CGFloat = 1
+        maxWidth = self.size.width * GameSettings.caterpillarDeepth
+        maxHeight = self.size.height * GameSettings.caterpillarDeepth
+        minWidth = self.size.width
+        minHeight = self.size.height
         if minWidth < GameSettings.roundCornerValue * 2{
             minWidth = GameSettings.roundCornerValue * 2
         }
         if minHeight < GameSettings.roundCornerValue * 2{
             minHeight = GameSettings.roundCornerValue * 2
         }
-        cropNode.zPosition = 1.5
-        tile.zPosition = 1.5
         actions.append(SKAction.runBlock({ [unowned self] in
             if change<0{
                 change = (-abs(self.velocity.dx + self.velocity.dy)) * GameSettings.caterpillarSpeed
@@ -133,7 +121,6 @@ class Block: SKSpriteNode {
                     change = -change
                 }
             }
-            tile.size = self.size
             mask.path = CGPathCreateWithRoundedRect(CGRectMake(-self.size.width/2, -self.size.height/2, self.size.width, self.size.height), GameSettings.roundCornerValue, GameSettings.roundCornerValue, nil)
             if self.physicsBody != nil{
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width, height: self.size.height))
@@ -164,8 +151,9 @@ class Block: SKSpriteNode {
         }
     }
     
-    var hitSide = SKSpriteNode(){
+    var hitSide:SKSpriteNode!{
         didSet{
+            hitSide.color = UIColor.blackColor()
             hitSide.zPosition = 1.5
         }
     }
@@ -201,17 +189,17 @@ class Block: SKSpriteNode {
         didSet{
             switch (pushVector.dx, pushVector.dy) {
             case (let x,_) where x<0:
-                hitSide.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
-                hitSide.position = CGPoint(x: -self.size.width / 2 + GameSettings.hitSideWidth / 2, y: 0)
+                hitSide?.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
+                hitSide?.position = CGPoint(x: -self.size.width / 2 + GameSettings.hitSideWidth / 2, y: 0)
             case (let x,_) where x>0:
-                hitSide.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
-                hitSide.position = CGPoint(x: self.size.width / 2 - GameSettings.hitSideWidth / 2, y: 0)
+                hitSide?.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
+                hitSide?.position = CGPoint(x: self.size.width / 2 - GameSettings.hitSideWidth / 2, y: 0)
             case (_,let y) where y<0:
-                hitSide.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
-                hitSide.position = CGPoint(x: 0, y: -self.size.height / 2 + GameSettings.hitSideWidth / 2)
+                hitSide?.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
+                hitSide?.position = CGPoint(x: 0, y: -self.size.height / 2 + GameSettings.hitSideWidth / 2)
             case (_,let y) where y>0:
-                hitSide.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
-                hitSide.position = CGPoint(x: 0, y: self.size.height / 2 - GameSettings.hitSideWidth / 2)
+                hitSide?.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
+                hitSide?.position = CGPoint(x: 0, y: self.size.height / 2 - GameSettings.hitSideWidth / 2)
             default:
                 break
             }
@@ -250,7 +238,6 @@ class Block: SKSpriteNode {
     func customInit(){
         Block.blockId += 1
         self.zPosition = 1
-        self.addChild(hitSide)
     }
     
     func loadBlock(blockData:NSDictionary){
@@ -269,8 +256,6 @@ class Block: SKSpriteNode {
             self.blockType = .wall
         case "bomb":
             self.blockType = .bomb
-        case "caterpillar":
-            self.blockType = .caterpillar
         default:
             break
         }

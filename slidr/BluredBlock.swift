@@ -43,6 +43,5 @@ class BluredBlock: Block {
         super.addChild(skEffectNode)
         addChild(blockView)
         super.color = UIColor.clearColor()
-        self.addChild(hitSide)
     }
 }

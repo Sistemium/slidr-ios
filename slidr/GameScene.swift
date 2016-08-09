@@ -151,43 +151,53 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
     }
     
+    func nullVelocityCollisionOccuredWith(block1:Block,block2:Block) -> Bool{
+        //dangerous fix for caterpillar bug, if somthing went wrong witch block colision consider that it is the reason
+        var loseOfSpeedOfBlock1:CGFloat
+        if block1.pushVector.dx != 0{
+            loseOfSpeedOfBlock1 = block1.velocity.dx / block1.physicsBody!.velocity.dx
+        }else{
+            loseOfSpeedOfBlock1 = block1.velocity.dy / block1.physicsBody!.velocity.dy
+        }
+        var loseOfSpeedOfBlock2:CGFloat
+        if block2.pushVector.dx != 0{
+            loseOfSpeedOfBlock2 = block2.velocity.dx / block2.physicsBody!.velocity.dx
+        }else{
+            loseOfSpeedOfBlock2 = block2.velocity.dy / block2.physicsBody!.velocity.dy
+        }
+        if loseOfSpeedOfBlock1.isNaN {
+            loseOfSpeedOfBlock1 = 1
+        }
+        if loseOfSpeedOfBlock2.isNaN {
+            loseOfSpeedOfBlock2 = 1
+        }
+        if Int(loseOfSpeedOfBlock1) == 1 && Int(loseOfSpeedOfBlock2) == 1{
+            return true
+        }
+        return false
+    }
+    
     func didBeginContact(contact: SKPhysicsContact) {
         if let block1 = contact.bodyA.node as? Block, let block2 = contact.bodyB.node as? Block{
             
-            //dangerous fix for caterpillar bug, if somthing went wrong witch block colision consider that it is the reason
-            var loseOfSpeedOfBlock1:CGFloat
-            if block1.pushVector.dx != 0{
-                loseOfSpeedOfBlock1 = block1.velocity.dx / block1.physicsBody!.velocity.dx
-            }else{
-                loseOfSpeedOfBlock1 = block1.velocity.dy / block1.physicsBody!.velocity.dy
-            }
-            var loseOfSpeedOfBlock2:CGFloat
-            if block2.pushVector.dx != 0{
-                loseOfSpeedOfBlock2 = block2.velocity.dx / block2.physicsBody!.velocity.dx
-            }else{
-                loseOfSpeedOfBlock2 = block2.velocity.dy / block2.physicsBody!.velocity.dy
-            }
-            if loseOfSpeedOfBlock1.isNaN {
-                loseOfSpeedOfBlock1 = 1
-            }
-            if loseOfSpeedOfBlock2.isNaN {
-                loseOfSpeedOfBlock2 = 1
-            }
-            
-            if Int(loseOfSpeedOfBlock1) == 1 && Int(loseOfSpeedOfBlock2) == 1{
-                return
-            }
-            
             if block1.blockType == .wall{
+                if nullVelocityCollisionOccuredWith(block1,block2: block2) {
+                    return
+                }
                 repulseBlock(block2,fromWall:block1,withContactPoint: contact.contactPoint)
                 return
             }
             else if block2.blockType == .wall{
+                if nullVelocityCollisionOccuredWith(block1,block2: block2) {
+                    return
+                }
                 repulseBlock(block1, fromWall: block2, withContactPoint: contact.contactPoint)
                 return
             }
             else if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
-                
+                if nullVelocityCollisionOccuredWith(block1,block2: block2) {
+                    return
+                }
                 if block1.blockType == block2.blockType{
                     block1.physicsBody = nil
                     block2.physicsBody = nil
