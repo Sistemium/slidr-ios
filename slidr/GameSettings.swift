@@ -121,8 +121,7 @@ class GameSettings{
     static let blockFadeoutTime = 0.5
     static let fastBlockFadeoutTime = 0.25
     static let boostValue:CGFloat = 1.5
-    static let roundCornerValue:CGFloat = 10
-    static let caterpillarDeepth:CGFloat = 1.6
+    static let caterpillarDeepth:CGFloat = 0.3
     //Game is optimized for iPad pro, cause it has biggest resolution, if game was launched on device with lower resolution this value helps to downscale expected resolution i onrder to improve perfomance
     static var rezolutionNormalizationValue:CGFloat = 1
     static var rippleRadius:CGFloat{

@@ -45,7 +45,7 @@ class BluredBlock: Block {
     }
     
     override func customInit(){
-        Block.blockId += 1
+        super.customInit()
         skEffectNode = SKEffectNode()
         super.addChild(skEffectNode)
         addChild(blockView)
