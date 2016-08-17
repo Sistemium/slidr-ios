@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "F2C94C93D7720E73C9B1E05BE562607C2CBB2540",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "A691D8FA42A40EA54F1A221C66E5777475164EC7" : 0,
+    "F2C94C93D7720E73C9B1E05BE562607C2CBB2540" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "39357A51-745F-4E92-B2DE-6113684948C9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "A691D8FA42A40EA54F1A221C66E5777475164EC7" : "Swift-VectorBoolean\/",
+    "F2C94C93D7720E73C9B1E05BE562607C2CBB2540" : "slidr-ios\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "slidr",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "slidr.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/lrtitze\/Swift-VectorBoolean.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A691D8FA42A40EA54F1A221C66E5777475164EC7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Sistemium\/slidr-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F2C94C93D7720E73C9B1E05BE562607C2CBB2540"
+    }
+  ]
+}

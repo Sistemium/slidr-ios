@@ -73,3 +73,11 @@ extension UITouch {
         }
     }
 }
+
+extension Int{
+    var deg2Rad : CGFloat
+    {
+        return CGFloat(self) * CGFloat(M_PI) / 180.0
+    }
+}
+

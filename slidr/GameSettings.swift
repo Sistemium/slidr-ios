@@ -87,7 +87,7 @@ class GameSettings{
             NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "ShakeToResetEnabled")
         }
     }
-    static let freeModeTimer = 10.0
+    static let freeModeTimer = 10000.0
     static let redBlockReward = 1.5
     static let blueBlockReward = 1.5
     static var lockOrientationInGameEnabled:Bool{
@@ -130,5 +130,11 @@ class GameSettings{
         }
     }
     
-    static let caterpillarSpeed:CGFloat = 0.015
+    static let caterpillarSpeed:CGFloat = 0.025
+    static var caterpillarPartSize:CGFloat{
+        get{
+            return 200 * rezolutionNormalizationValue
+        }
+    }
+    static let caterpillarSpaceBetweenParts:CGFloat = 0.5
 }
