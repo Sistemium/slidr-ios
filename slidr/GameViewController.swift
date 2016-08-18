@@ -13,7 +13,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let skView = self.view as! SKView
+        let skView = view as! SKView
         if max(UIScreen.mainScreen().bounds.height,UIScreen.mainScreen().bounds.width) / min(UIScreen.mainScreen().bounds.width,UIScreen.mainScreen().bounds.height) > 1.5{
             GameSettings.playableAreaSize = CGSize(width: 768.375, height: 1366)
         }else if UIScreen.mainScreen().bounds.height / UIScreen.mainScreen().bounds.width < 1.5{
@@ -41,7 +41,7 @@ class GameViewController: UIViewController {
     }
     
     override func shouldAutorotate() -> Bool {
-        let skView = self.view as! SKView
+        let skView = view as! SKView
         if (skView.scene!.dynamicType == GameScene.self || skView.scene! is GameResultScene) && GameSettings.lockOrientationInGameEnabled{
             return false
         }
@@ -61,7 +61,7 @@ class GameViewController: UIViewController {
     }
     
     func resetLevel(){
-        let skView = self.view as! SKView
+        let skView = view as! SKView
         if let game = skView.scene as? GameScene{
             if game.gameMode == .Level{
                 game.timeSinceLastUpdate = nil
@@ -88,7 +88,7 @@ class GameViewController: UIViewController {
         if size.width > size.height && GameSettings.playableAreaSize.width < GameSettings.playableAreaSize.height || size.width < size.height && GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
             GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
         }
-        let skView = self.view as! SKView
+        let skView = view as! SKView
         skView.scene!.size = GameSettings.playableAreaSize
     }
     

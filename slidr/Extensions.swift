@@ -42,7 +42,7 @@ extension CGSize{
 extension SKScene{
     var dynamicChildren:[SKNode]{
         var dynamicChildren:[SKNode] = []
-        for node in self.children{
+        for node in children{
             if node.physicsBody?.dynamic ?? false{
                 dynamicChildren.append(node)
             }

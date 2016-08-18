@@ -11,7 +11,7 @@ import SpriteKit
 class BluredBlock: Block {
     var skEffectNode:SKEffectNode!{
         didSet{
-            skEffectNode.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:40.0)])!
+            skEffectNode.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:35.0)])!
             skEffectNode.shouldRasterize = true
         }
     }

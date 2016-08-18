@@ -12,16 +12,16 @@ class RippleCircle: SKShapeNode {
     
     var radius: CGFloat! {
         didSet {
-            self.path = RippleCircle.path(self.radius)
-            self.physicsBody = SKPhysicsBody(circleOfRadius: radius)
-            self.physicsBody!.collisionBitMask = 0
+            path = RippleCircle.path(radius)
+            physicsBody = SKPhysicsBody(circleOfRadius: radius)
+            physicsBody!.collisionBitMask = 0
         }
     }
     
     init(radius: CGFloat, position: CGPoint) {
         self.radius = radius
         super.init()
-        self.path = RippleCircle.path(self.radius)
+        path = RippleCircle.path(radius)
         self.position = position
     }
     
@@ -36,7 +36,7 @@ class RippleCircle: SKShapeNode {
     }
     
     func ripple(scale: CGFloat, duration: NSTimeInterval) {
-        if let scene = self.scene {
+        if let scene = scene {
             let currentRadius = radius
             let finalRadius = radius * scale
             let circleNode = RippleCircle(radius: radius, position: position)

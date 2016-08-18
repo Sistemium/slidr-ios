@@ -13,7 +13,7 @@ class OutlineSKLabelNode:SKLabelNode{
     private let offSetX:CGFloat = 3
     private let offSetY:CGFloat = 3
     
-    lazy var outlineLabel : SKLabelNode = {
+    lazy var outlineLabel : SKLabelNode = {[unowned self] in
         let _outlineLabel = SKLabelNode()
         _outlineLabel.fontName = self.fontName
         _outlineLabel.fontSize = self.fontSize
@@ -50,7 +50,7 @@ class OutlineSKLabelNode:SKLabelNode{
     
     override var position: CGPoint{
         didSet{
-            outlineLabel.position = CGPointMake(self.position.x - offSetX, self.position.y - offSetY)
+            outlineLabel.position = CGPointMake(position.x - offSetX, position.y - offSetY)
         }
     }
     

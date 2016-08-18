@@ -37,7 +37,7 @@ class LevelLoadService{
         let jsonPath:String? = NSBundle.mainBundle().pathForResource(json, ofType: "json")!
         let jsonData = try? NSData(contentsOfFile: jsonPath!, options: NSDataReadingOptions.DataReadingMappedIfSafe)
         let jsonResult: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-        let level = Level()
+        var level = Level()
         level.name = jsonResult["name"] as? String
         level.priority = jsonResult["priority"] as? Float
         level.timeout = jsonResult["timeout"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.baseSpeed))

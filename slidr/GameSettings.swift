@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GameSettings{
+struct GameSettings{
     static var lastKnownOrientation:UIDeviceOrientation = .Portrait
     
     private static var _playableAreaSize = CGSize()

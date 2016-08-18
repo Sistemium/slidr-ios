@@ -25,7 +25,7 @@ class Head:SKSpriteNode {
     
     override var size: CGSize{
         didSet{
-            shape = SKShapeNode(ellipseOfSize: self.size)
+            shape = SKShapeNode(ellipseOfSize: size)
         }
     }
     
@@ -34,14 +34,14 @@ class Head:SKSpriteNode {
             oldValue?.removeFromParent()
             shape.strokeColor = UIColor.blackColor()
             shape.fillColor = UIColor.blackColor()
-            shape.zPosition = self.zPosition
+            shape.zPosition = zPosition
             addChild(shape)
         }
     }
     
     private func customInit(){
-        shape = SKShapeNode(ellipseOfSize: self.size)
-        self.zPosition = 1.5
+        shape = SKShapeNode(ellipseOfSize: size)
+        zPosition = 1.5
     }
     
 }

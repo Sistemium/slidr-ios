@@ -28,13 +28,13 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
             } else {
                 // Fallback on earlier versions
             }
-            self.view?.addSubview(tableview)
+            view?.addSubview(tableview)
         }
     }
     
     private var toolbarNode : ToolbarNode!{
         didSet{
-            self.addChild(toolbarNode)
+            addChild(toolbarNode)
             toolbarNode.rightButton = toolbarNode.backButton
         }
     }
@@ -43,7 +43,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     
     override func didMoveToView(view: SKView) {
         viewScale = self.view!.frame.size.width / GameSettings.playableAreaSize.width
-        self.backgroundColor = UIColor.lightGrayColor()
+        backgroundColor = UIColor.lightGrayColor()
         levels = LevelLoadService.sharedInstance.levels
         tableview = UITableView()
         toolbarNode  = ToolbarNode()
@@ -52,7 +52,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let location = touches.first!.locationInNode(self)
-        let node = self.nodeAtPoint(location)
+        let node = nodeAtPoint(location)
         if node == toolbarNode.backButton{
             returnToPreviousScene()
         }
@@ -63,7 +63,7 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         let scene = previousScene ?? MenuScene()
         scene.size = GameSettings.playableAreaSize
         scene.scaleMode = .Fill
-        self.view?.presentScene(scene)
+        view?.presentScene(scene)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,15 +88,15 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         scene.scaleMode = .Fill
         scene.level = levels[indexPath.row]
         scene.previousScene = LevelScene()
-        self.view!.presentScene(scene)
+        view!.presentScene(scene)
     }
     
     override func didChangeSize(oldSize: CGSize) {
-        if self.view != nil{
+        if view != nil{
             toolbarNode?.removeFromParent()
             tableview?.removeFromSuperview()
             tableview = UITableView()
-            self.backgroundColor = UIColor.lightGrayColor()
+            backgroundColor = UIColor.lightGrayColor()
             toolbarNode = ToolbarNode()
             toolbarNode.centerLabelText = "Select level"
         }

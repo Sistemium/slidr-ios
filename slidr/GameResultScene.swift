@@ -29,8 +29,8 @@ class GameResultScene: SKScene{
             resultLabel.fontSize = GameSettings.labelSize
             resultLabel.zPosition = 1.0
             resultLabel.fontColor = result == .Win ? UIColor.greenColor() : UIColor.redColor()
-            self.addChild(resultLabel)
-            self.addChild(resultLabel.outlineLabel)
+            addChild(resultLabel)
+            addChild(resultLabel.outlineLabel)
         }
     }
     
@@ -41,8 +41,8 @@ class GameResultScene: SKScene{
             questionLabel.fontSize = GameSettings.labelSize
             questionLabel.zPosition = 1.0
             questionLabel.fontColor = UIColor.whiteColor()
-            self.addChild(questionLabel)
-            self.addChild(questionLabel.outlineLabel)
+            addChild(questionLabel)
+            addChild(questionLabel.outlineLabel)
         }
     }
     
@@ -53,8 +53,8 @@ class GameResultScene: SKScene{
             returnButton.fontSize = GameSettings.labelSize
             returnButton.zPosition = 1.0
             returnButton.fontColor = UIColor.whiteColor()
-            self.addChild(returnButton)
-            self.addChild(returnButton.outlineLabel)
+            addChild(returnButton)
+            addChild(returnButton.outlineLabel)
         }
     }
     
@@ -65,8 +65,8 @@ class GameResultScene: SKScene{
             actionButton.fontSize = GameSettings.labelSize
             actionButton.zPosition = 1.0
             actionButton.fontColor = UIColor.whiteColor()
-            self.addChild(actionButton)
-            self.addChild(actionButton.outlineLabel)
+            addChild(actionButton)
+            addChild(actionButton.outlineLabel)
         }
     }
     
@@ -80,8 +80,8 @@ class GameResultScene: SKScene{
             scoreLabel.fontSize = GameSettings.labelSize * 0.5
             scoreLabel.zPosition = 1.0
             scoreLabel.fontColor = UIColor.blackColor()
-            self.addChild(scoreLabel)
-            self.addChild(scoreLabel.outlineLabel)
+            addChild(scoreLabel)
+            addChild(scoreLabel.outlineLabel)
         }
     }
     
@@ -115,16 +115,16 @@ class GameResultScene: SKScene{
             infoLabel.fontSize = GameSettings.labelSize * 0.5
             infoLabel.zPosition = 1.0
             infoLabel.fontColor = UIColor.blackColor()
-            self.addChild(infoLabel)
-            self.addChild(infoLabel.outlineLabel)
+            addChild(infoLabel)
+            addChild(infoLabel.outlineLabel)
         }
     }
     
     override func didMoveToView(view: SKView) {
-        for child in self.children{
+        for child in children{
             child.removeFromParent()
         }
-        self.backgroundColor = UIColor.lightGrayColor()
+        backgroundColor = UIColor.lightGrayColor()
         resultLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         questionLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         returnButton = OutlineSKLabelNode(fontNamed:"Chalkduster")
@@ -136,7 +136,7 @@ class GameResultScene: SKScene{
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let location = touches.first!.locationInNode(self)
-        let node = self.nodeAtPoint(location)
+        let node = nodeAtPoint(location)
         switch node {
         case returnButton:
             if finishedLevel != nil {
@@ -144,12 +144,12 @@ class GameResultScene: SKScene{
                 scene.size = GameSettings.playableAreaSize
                 scene.scaleMode = .Fill
                 scene.previousScene = MenuScene()
-                self.view!.presentScene(scene)
+                view!.presentScene(scene)
             }else{
                 let scene = MenuScene()
                 scene.size = GameSettings.playableAreaSize
                 scene.scaleMode = .Fill
-                self.view!.presentScene(scene)
+                view!.presentScene(scene)
             }
         case actionButton:
             if result == .Win{
@@ -158,7 +158,7 @@ class GameResultScene: SKScene{
                 scene.scaleMode = .Fill
                 scene.level = LevelLoadService.sharedInstance.nextLevelByPriority(finishedLevel!.priority!)
                 scene.previousScene = LevelScene()
-                self.view?.presentScene(scene)
+                view?.presentScene(scene)
             }else{
                 let scene = GameScene()
                 scene.size = GameSettings.playableAreaSize
@@ -169,7 +169,7 @@ class GameResultScene: SKScene{
                 }else{
                     scene.previousScene = MenuScene()
                 }
-                self.view?.presentScene(scene)
+                view?.presentScene(scene)
             }
         default:
             break
@@ -177,10 +177,10 @@ class GameResultScene: SKScene{
     }
     
     override func didChangeSize(oldSize: CGSize) {
-        for child in self.children{
+        for child in children{
             child.removeFromParent()
         }
-        self.backgroundColor = UIColor.lightGrayColor()
+        backgroundColor = UIColor.lightGrayColor()
         resultLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         questionLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         returnButton = OutlineSKLabelNode(fontNamed:"Chalkduster")

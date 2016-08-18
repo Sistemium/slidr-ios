@@ -22,8 +22,8 @@ class MenuScene: GameScene {
             startGameLabel.fontSize = GameSettings.labelSize
             startGameLabel.zPosition = 2.0
             startGameLabel.fontColor = .whiteColor()
-            self.addChild(startGameLabel)
-            self.addChild(startGameLabel.outlineLabel)
+            addChild(startGameLabel)
+            addChild(startGameLabel.outlineLabel)
         }
     }
     
@@ -34,8 +34,8 @@ class MenuScene: GameScene {
             freeModeLabel.fontSize = GameSettings.labelSize
             freeModeLabel.zPosition = 2.0
             freeModeLabel.fontColor = .whiteColor()
-            self.addChild(freeModeLabel)
-            self.addChild(freeModeLabel.outlineLabel)
+            addChild(freeModeLabel)
+            addChild(freeModeLabel.outlineLabel)
         }
     }
     
@@ -46,14 +46,14 @@ class MenuScene: GameScene {
             optionsLabel.fontSize = GameSettings.labelSize
             optionsLabel.zPosition = 2.0
             optionsLabel.fontColor = .whiteColor()
-            self.addChild(optionsLabel)
-            self.addChild(optionsLabel.outlineLabel)
+            addChild(optionsLabel)
+            addChild(optionsLabel.outlineLabel)
         }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let location = touches.first!.locationInNode(self)
-        for node in self.children{
+        for node in children{
             if node.containsPoint(location){
                 if let button = node as? OutlineSKLabelNode{
                     switch button {
@@ -62,20 +62,20 @@ class MenuScene: GameScene {
                         scene.size = GameSettings.playableAreaSize
                         scene.scaleMode = .Fill
                         scene.previousScene = MenuScene()
-                        self.view!.presentScene(scene)
+                        view!.presentScene(scene)
                         break
                     case freeModeLabel:
                         let scene = GameScene()
                         scene.size = GameSettings.playableAreaSize
                         scene.scaleMode = .Fill
                         scene.previousScene = MenuScene()
-                        self.view!.presentScene(scene)
+                        view!.presentScene(scene)
                     case optionsLabel:
                         let scene = OptionsScene()
                         scene.size = GameSettings.playableAreaSize
                         scene.scaleMode = .Fill
                         scene.previousScene = MenuScene()
-                        self.view!.presentScene(scene)
+                        view!.presentScene(scene)
                         break
                     default:
                         break
@@ -90,7 +90,7 @@ class MenuScene: GameScene {
         for child in children{
             child.removeFromParent()
         }
-        self.backgroundColor = UIColor.lightGrayColor()
+        backgroundColor = UIColor.lightGrayColor()
         startGameLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         freeModeLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         optionsLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")

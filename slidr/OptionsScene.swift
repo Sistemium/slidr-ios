@@ -42,13 +42,13 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
             } else {
                 // Fallback on earlier versions
             }
-            self.view?.addSubview(tableview)
+            view?.addSubview(tableview)
         }
     }
     
     private var toolbarNode : ToolbarNode!{
         didSet{
-            self.addChild(toolbarNode)
+            addChild(toolbarNode)
             toolbarNode.rightButton = toolbarNode.backButton
         }
     }
@@ -57,19 +57,19 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     
     override func didMoveToView(view: SKView) {
         viewScale = self.view!.frame.size.width / GameSettings.playableAreaSize.width
-        for child in self.children{
+        for child in children{
             child.removeFromParent()
         }
         tableview?.removeFromSuperview()
         tableview = UITableView()
-        self.backgroundColor = UIColor.lightGrayColor()
+        backgroundColor = UIColor.lightGrayColor()
         toolbarNode  = ToolbarNode()
         toolbarNode.centerLabelText = "Options"
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let location = touches.first!.locationInNode(self)
-        let node = self.nodeAtPoint(location)
+        let node = nodeAtPoint(location)
         if node == toolbarNode.backButton{
             returnToPreviousScene()
         }
@@ -80,7 +80,7 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         let scene = previousScene ?? MenuScene()
         scene.size = GameSettings.playableAreaSize
         scene.scaleMode = .Fill
-        self.view?.presentScene(scene)
+        view?.presentScene(scene)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,13 +109,13 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     }
     
     override func didChangeSize(oldSize: CGSize) {
-        if self.view != nil{
-            for child in self.children{
+        if view != nil{
+            for child in children{
                 child.removeFromParent()
             }
             tableview?.removeFromSuperview()
             tableview = UITableView()
-            self.backgroundColor = UIColor.lightGrayColor()
+            backgroundColor = UIColor.lightGrayColor()
             toolbarNode = ToolbarNode()
             toolbarNode.centerLabelText = "Options"
         }

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Edgar Jan Vuicik. All rights reserved.
 //
 
-class Level{
+struct Level{
     var name:String?
     var priority:Float?
     var timeout:Double?
