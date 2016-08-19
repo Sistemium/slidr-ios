@@ -650,7 +650,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for node in children{
             if let block = node as? Block{
                 if !block.pushed{
-                    if intersectsNode(block){
+                    if intersectsNode(block) && block.originalSize.height >= block.size.height && block.originalSize.width >= block.size.width{
                         block.pushed = true
                     }else{
                         isThereUnpushedBlocks = true
