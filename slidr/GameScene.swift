@@ -93,23 +93,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         view!.presentScene(scene)
     }
     
-    private func destroyBlock(block:Block,withTime time:Double){
-        if gameMode == .Free && block.type != .bomb{
-            block.removeFromParent()
+    private func destroyBlock(block:Block,withTime time:Double, withReward reward:Double? = nil){
+        if reward != nil && gameMode == .Free{
             let score = SKLabelNode(fontNamed:"Chalkduster")
             addChild(score)
             score.position = block.position
             score.fontSize = GameSettings.toolbarHeight / 1.5
             score.zPosition = 1.5
             score.fontColor = UIColor.greenColor()
-            score.text = "+" + (block.type == .standart ? GameSettings.redBlockReward.description: GameSettings.blueBlockReward.description)
-            score.runAction(SKAction.fadeOutWithDuration(time)){
+            score.text = "+" + reward!.description
+            let group = SKAction.group([SKAction.fadeOutWithDuration(time * 2),SKAction.moveByY(200, duration: time * 2)])
+            score.runAction(group){
                 score.removeFromParent()
             }
-        }else{
-            block.runAction(SKAction.fadeOutWithDuration(time)){
-                block.removeFromParent()
-            }
+            freeModeTimer += reward!
+        }
+        block.runAction(SKAction.fadeOutWithDuration(time)){
+            block.removeFromParent()
         }
     }
     
@@ -178,8 +178,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
+        if contact.bodyA.node == nil || contact.bodyB.node == nil {
+            return
+        }
         if let block1 = contact.bodyA.node as? Block, let block2 = contact.bodyB.node as? Block{
-            
             if block1.type == .wall{
                 if nullVelocityCollisionOccuredWith(block1,block2: block2) {
                     return
@@ -201,13 +203,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if block1.type == block2.type {
                     block1.physicsBody = nil
                     block2.physicsBody = nil
-                    destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
-                    destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
                     if block1.type == .standart{
-                        freeModeTimer += GameSettings.redBlockReward * 2
+                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime, withReward:GameSettings.redBlockReward)
+                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime, withReward:GameSettings.redBlockReward)
                     }
                     if block1.type == .swipeable{
-                        freeModeTimer += GameSettings.blueBlockReward * 2
+                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime, withReward:GameSettings.blueBlockReward)
+                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime, withReward:GameSettings.blueBlockReward)
+                    }
+                    if block1.type == .bomb{
+                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
+                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
                     }
                 }else{
                     block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
@@ -281,13 +287,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     return
                 }else{
                     block.physicsBody = nil
-                    destroyBlock(block,withTime: GameSettings.blockFadeoutTime)
+                    var reward:Double? = nil
                     if block.type == .standart{
                         freeModeTimer += GameSettings.redBlockReward
+                        reward = GameSettings.redBlockReward
                     }
                     if block.type == .swipeable{
                         freeModeTimer += GameSettings.blueBlockReward
+                        reward = GameSettings.blueBlockReward
                     }
+                    destroyBlock(block,withTime: GameSettings.blockFadeoutTime, withReward:reward)
                 }
             }
         }
@@ -337,7 +346,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         tochesCycle: for toch in touches{
             var location = toch.locationInNode(self)
-            
             var dx = location.x - toch.startX
             var dy = location.y - toch.startY
             let magnitude = sqrt(dx*dx+dy*dy)
@@ -406,7 +414,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func swipe(touchLocation:CGPoint, direction:UISwipeGestureRecognizerDirection){
         let block = nodeInPoint(touchLocation) as? Block
-        if block != nil{
+        if block != nil && block?.physicsBody != nil{
             if (block!.type == .standart || block!.type == .swipeable) && (block!.numberOfActions == nil || block!.numberOfActions! > 0){
                 if block?.type == .standart{
                     switch direction {
@@ -473,7 +481,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let touchLocation = convertPoint(touchLocation, toNode: chosen!)
             let region = SKRegion(size: CGSize(width: chosen!.size.width + GameSettings.touchRegion, height: chosen!.size.height  * GameSettings.touchRegion))
             if region.containsPoint(touchLocation){
-                if chosen!.blockType == .standart{
+                if chosen!.type == .standart{
                     switch direction {
                     case UISwipeGestureRecognizerDirection.Up:
                         if chosen!.pushVector.dy != 0 {
@@ -654,7 +662,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     block.removeFromParent()
                     blockLeftGameArea = true
                 }
-                block.animate()
+                if block.physicsBody != nil{
+                    block.animate()
+                }
             }
         }
         if startTime == nil{

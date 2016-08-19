@@ -136,12 +136,12 @@ class Block: SKSpriteNode {
                     change = -change
                 }
             }
-            mask.size = self.size
             if self.physicsBody != nil{
                 self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width, height: self.size.height))
             }
-            self.pushVector = CGVector(dx: self.pushVector.dx,dy: self.pushVector.dy)
             self.physicsBody?.velocity = self.velocity
+            updateHitSide()
+            mask?.size = self.size
         }
     }
     
@@ -220,7 +220,7 @@ class Block: SKSpriteNode {
     
     var pushVector : CGVector!{
         didSet{
-            updateHitSide()
+            animate()
         }
     }
     
@@ -275,6 +275,9 @@ class Block: SKSpriteNode {
             type = .bomb
         default:
             break
+        }
+        if blockData["name"] as? String == "test" {
+            color = UIColor.greenColor()
         }
     }
     

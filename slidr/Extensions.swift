@@ -81,3 +81,8 @@ extension Int{
     }
 }
 
+extension SKAction {
+    class func moveByY (deltaY: CGFloat, duration: NSTimeInterval) -> SKAction! {
+        return SKAction.moveBy(CGVectorMake(0, deltaY), duration: duration)
+    }
+}
