@@ -158,10 +158,10 @@ class Block: SKSpriteNode {
         }
     }
     
-    var rotation:Double? = 0{
+    var rotation:Int? = 0{
         didSet{
             if rotation != nil{
-                zRotation = CGFloat(M_PI/(360/rotation!))
+                zRotation = rotation!.deg2Rad
             }
         }
     }
@@ -262,7 +262,7 @@ class Block: SKSpriteNode {
         pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.baseSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.baseSpeed)
         position = CGPoint(x: blockData["positionX"] as! CGFloat, y: blockData["positionY"] as! CGFloat)
         preferedPushTime = blockData["pushTime"] as? Double
-        rotation = blockData["rotation"] as? Double
+        rotation = blockData["rotation"] as? Int
         numberOfActions = blockData["numberOfActions"] as? Int
         switch blockData["type"] as! String {
         case "standart":

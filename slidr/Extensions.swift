@@ -54,8 +54,8 @@ extension SKScene{
 private var startXAssocKey = 0
 private var startYAssocKey = 0
 
-extension UITouch {
-    var startX: CGFloat! {
+extension UITouch{
+    var startX: CGFloat!{
         get {
             return objc_getAssociatedObject(self, &startXAssocKey) as? CGFloat
         }
@@ -64,7 +64,7 @@ extension UITouch {
         }
     }
     
-    var startY: CGFloat! {
+    var startY: CGFloat!{
         get {
             return objc_getAssociatedObject(self, &startYAssocKey) as? CGFloat
         }
@@ -75,8 +75,7 @@ extension UITouch {
 }
 
 extension Int{
-    var deg2Rad : CGFloat
-    {
+    var deg2Rad : CGFloat{
         return CGFloat(self) * CGFloat(M_PI) / 180.0
     }
 }

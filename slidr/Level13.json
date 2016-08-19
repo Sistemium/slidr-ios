@@ -75,7 +75,7 @@
               "positionX":0.15,
               "positionY":0.85,
               "pushTime":0,
-              "rotation":90
+              "rotation":45
               },
               {
               "type":"wall",
@@ -86,7 +86,7 @@
               "positionX":0.45,
               "positionY":0.85,
               "pushTime":0,
-              "rotation":270
+              "rotation":135
               },
               {
               "type":"wall",
@@ -97,7 +97,7 @@
               "positionX":0.15,
               "positionY":0.6,
               "pushTime":0,
-              "rotation":270
+              "rotation":135
               },
               {
               "type":"wall",
