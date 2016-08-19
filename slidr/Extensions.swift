@@ -80,6 +80,18 @@ extension Int{
     }
 }
 
+extension Double{
+    var deg2Rad : CGFloat{
+        return CGFloat(self) * CGFloat(M_PI) / 180.0
+    }
+}
+
+extension CGFloat{
+    var deg2Rad : CGFloat{
+        return CGFloat(self) * CGFloat(M_PI) / 180.0
+    }
+}
+
 extension SKAction {
     class func moveByY (deltaY: CGFloat, duration: NSTimeInterval) -> SKAction! {
         return SKAction.moveBy(CGVectorMake(0, deltaY), duration: duration)
