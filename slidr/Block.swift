@@ -168,27 +168,53 @@ class Block: SKSpriteNode {
     
     var hitSide:Head!{
         didSet{
+            
             updateHitSide()
         }
     }
     
+    private var lastPushVector:CGVector?
+    
     private func updateHitSide(){
-        switch (pushVector.dx, pushVector.dy) {
-        case (let x,_) where x<0:
-            hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
-            hitSide?.position = CGPoint(x: -size.width / 2 + caterpillarPartSize.width / 2, y: 0)
-        case (let x,_) where x>0:
-            hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
-            hitSide?.position = CGPoint(x: size.width / 2 - caterpillarPartSize.width / 2, y: 0)
-        case (_,let y) where y<0:
-            hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
-            hitSide?.position = CGPoint(x: 0, y: -size.height / 2 + caterpillarPartSize.height / 2)
-        case (_,let y) where y>0:
-            hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
-            hitSide?.position = CGPoint(x: 0, y: size.height / 2 - caterpillarPartSize.height / 2)
-        default:
-            break
+        if pushVector != lastPushVector {
+            hitSide?.stopAnimation()
         }
+        if pushVector == lastPushVector?.inverted{
+            switch pushVector{
+            case GameSettings.moveDirections[3]:
+                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
+                hitSide?.animateNewPosition(CGPoint(x: -size.width / 2 + caterpillarPartSize.width / 2, y: 0))
+            case GameSettings.moveDirections[2]:
+                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
+                hitSide?.animateNewPosition(CGPoint(x: size.width / 2 - caterpillarPartSize.width / 2, y: 0))
+            case GameSettings.moveDirections[1]:
+                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
+                hitSide?.animateNewPosition(CGPoint(x: 0, y: -size.height / 2 + caterpillarPartSize.height / 2))
+            case GameSettings.moveDirections[0]:
+                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
+                hitSide?.animateNewPosition(CGPoint(x: 0, y: size.height / 2 - caterpillarPartSize.height / 2))
+            default:
+                break
+            }
+        }else{
+            switch pushVector{
+            case GameSettings.moveDirections[3]:
+                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
+                hitSide?.position = CGPoint(x: -size.width / 2 + caterpillarPartSize.width / 2, y: 0)
+            case GameSettings.moveDirections[2]:
+                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
+                hitSide?.position = CGPoint(x: size.width / 2 - caterpillarPartSize.width / 2, y: 0)
+            case GameSettings.moveDirections[1]:
+                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
+                hitSide?.position = CGPoint(x: 0, y: -size.height / 2 + caterpillarPartSize.height / 2)
+            case GameSettings.moveDirections[0]:
+                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
+                hitSide?.position = CGPoint(x: 0, y: size.height / 2 - caterpillarPartSize.height / 2)
+            default:
+                break
+            }
+        }
+        lastPushVector = pushVector
     }
     
     var movementEnabled = true

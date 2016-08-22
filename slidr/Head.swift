@@ -44,4 +44,27 @@ class Head:SKSpriteNode {
         zPosition = 1.5
     }
     
+    private var copy : SKSpriteNode?
+    
+    func animateNewPosition(newValue:CGPoint){
+        if copy == nil {
+            copy = SKSpriteNode()
+        }
+        copy?.addChild(shape.copy() as! SKNode)
+        parent?.addChild(copy!)
+        copy?.position = position
+        hidden = true
+        position = newValue
+        copy?.runAction(SKAction.moveTo(newValue, duration: 0.3)){[unowned self] in
+            self.hidden = false
+            self.copy?.removeFromParent()
+            self.copy = nil
+        }
+    }
+    
+    func stopAnimation(){
+        copy?.removeAllActions()
+        copy?.removeFromParent()
+        hidden = false
+    }
 }

@@ -97,3 +97,19 @@ extension SKAction {
         return SKAction.moveBy(CGVectorMake(0, deltaY), duration: duration)
     }
 }
+
+extension CGPoint{
+    var inverted:CGPoint{
+        get{
+            return CGPoint(x: -x, y: -y)
+        }
+    }
+}
+
+extension CGVector{
+    var inverted:CGVector{
+        get{
+            return CGVector(dx: -dx, dy: -dy)
+        }
+    }
+}
