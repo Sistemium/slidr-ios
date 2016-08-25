@@ -142,6 +142,6 @@
               }
               ],
     "timeout":20,
-    "priority":12,
-    "name":"Level 12"
+    "priority":10,
+    "name":"Level 10"
 }

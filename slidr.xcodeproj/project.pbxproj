@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3527780F1D5C95CB006C9B16 /* Lavel12.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778031D5C95CB006C9B16 /* Lavel12.json */; };
+		3527780F1D5C95CB006C9B16 /* Lavel10.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778031D5C95CB006C9B16 /* Lavel10.json */; };
 		352778101D5C95CB006C9B16 /* Level2.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778041D5C95CB006C9B16 /* Level2.json */; };
 		352778111D5C95CB006C9B16 /* Level3.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778051D5C95CB006C9B16 /* Level3.json */; };
 		352778121D5C95CB006C9B16 /* Level4.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778061D5C95CB006C9B16 /* Level4.json */; };
 		352778131D5C95CB006C9B16 /* Level5.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778071D5C95CB006C9B16 /* Level5.json */; };
-		352778141D5C95CB006C9B16 /* Level6.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778081D5C95CB006C9B16 /* Level6.json */; };
-		352778151D5C95CB006C9B16 /* Level7.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778091D5C95CB006C9B16 /* Level7.json */; };
-		352778161D5C95CB006C9B16 /* Level8.json in Resources */ = {isa = PBXBuildFile; fileRef = 3527780A1D5C95CB006C9B16 /* Level8.json */; };
-		352778171D5C95CB006C9B16 /* Level9.json in Resources */ = {isa = PBXBuildFile; fileRef = 3527780B1D5C95CB006C9B16 /* Level9.json */; };
-		352778181D5C95CB006C9B16 /* Level10.json in Resources */ = {isa = PBXBuildFile; fileRef = 3527780C1D5C95CB006C9B16 /* Level10.json */; };
-		352778191D5C95CB006C9B16 /* Level11.json in Resources */ = {isa = PBXBuildFile; fileRef = 3527780D1D5C95CB006C9B16 /* Level11.json */; };
-		3527781A1D5C95CB006C9B16 /* Level13.json in Resources */ = {isa = PBXBuildFile; fileRef = 3527780E1D5C95CB006C9B16 /* Level13.json */; };
+		352778161D5C95CB006C9B16 /* Level6.json in Resources */ = {isa = PBXBuildFile; fileRef = 3527780A1D5C95CB006C9B16 /* Level6.json */; };
+		352778171D5C95CB006C9B16 /* Level7.json in Resources */ = {isa = PBXBuildFile; fileRef = 3527780B1D5C95CB006C9B16 /* Level7.json */; };
+		352778181D5C95CB006C9B16 /* Level8.json in Resources */ = {isa = PBXBuildFile; fileRef = 3527780C1D5C95CB006C9B16 /* Level8.json */; };
+		352778191D5C95CB006C9B16 /* Level9.json in Resources */ = {isa = PBXBuildFile; fileRef = 3527780D1D5C95CB006C9B16 /* Level9.json */; };
+		3527781A1D5C95CB006C9B16 /* Level11.json in Resources */ = {isa = PBXBuildFile; fileRef = 3527780E1D5C95CB006C9B16 /* Level11.json */; };
 		355282BB1D59E5C500AE6413 /* Head.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355282BA1D59E5C500AE6413 /* Head.swift */; };
 		355282E81D5B7DF700AE6413 /* CaterpillarMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355282E71D5B7DF700AE6413 /* CaterpillarMask.swift */; };
 		3565CFF51D362B0900C1324E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3565CFF41D362B0900C1324E /* Crashlytics.framework */; };
+		35813E8D1D6C6FD000016784 /* ChallengeLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35813E8C1D6C6FD000016784 /* ChallengeLevelScene.swift */; };
+		35813E901D6C7C2100016784 /* Challenge1.json in Resources */ = {isa = PBXBuildFile; fileRef = 35813E8F1D6C7C2100016784 /* Challenge1.json */; };
 		358FAF581D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358FAF571D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift */; };
 		35BB875D1D3E6EE700EA5D40 /* BluredBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BB875C1D3E6EE700EA5D40 /* BluredBlock.swift */; };
 		5BE495CC43837A4961D6D2D0 /* Level1.json in Resources */ = {isa = PBXBuildFile; fileRef = 5BE4970CC26FC6CE01ADFEB5 /* Level1.json */; };
@@ -47,21 +47,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		352778031D5C95CB006C9B16 /* Lavel12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Lavel12.json; sourceTree = "<group>"; };
+		352778031D5C95CB006C9B16 /* Lavel10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Lavel10.json; sourceTree = "<group>"; };
 		352778041D5C95CB006C9B16 /* Level2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level2.json; sourceTree = "<group>"; };
 		352778051D5C95CB006C9B16 /* Level3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level3.json; sourceTree = "<group>"; };
 		352778061D5C95CB006C9B16 /* Level4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level4.json; sourceTree = "<group>"; };
 		352778071D5C95CB006C9B16 /* Level5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level5.json; sourceTree = "<group>"; };
-		352778081D5C95CB006C9B16 /* Level6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level6.json; sourceTree = "<group>"; };
-		352778091D5C95CB006C9B16 /* Level7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level7.json; sourceTree = "<group>"; };
-		3527780A1D5C95CB006C9B16 /* Level8.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level8.json; sourceTree = "<group>"; };
-		3527780B1D5C95CB006C9B16 /* Level9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level9.json; sourceTree = "<group>"; };
-		3527780C1D5C95CB006C9B16 /* Level10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level10.json; sourceTree = "<group>"; };
-		3527780D1D5C95CB006C9B16 /* Level11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level11.json; sourceTree = "<group>"; };
-		3527780E1D5C95CB006C9B16 /* Level13.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level13.json; sourceTree = "<group>"; };
+		3527780A1D5C95CB006C9B16 /* Level6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level6.json; sourceTree = "<group>"; };
+		3527780B1D5C95CB006C9B16 /* Level7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level7.json; sourceTree = "<group>"; };
+		3527780C1D5C95CB006C9B16 /* Level8.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level8.json; sourceTree = "<group>"; };
+		3527780D1D5C95CB006C9B16 /* Level9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level9.json; sourceTree = "<group>"; };
+		3527780E1D5C95CB006C9B16 /* Level11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level11.json; sourceTree = "<group>"; };
 		355282BA1D59E5C500AE6413 /* Head.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Head.swift; sourceTree = "<group>"; };
 		355282E71D5B7DF700AE6413 /* CaterpillarMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaterpillarMask.swift; sourceTree = "<group>"; };
 		3565CFF41D362B0900C1324E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		35813E8C1D6C6FD000016784 /* ChallengeLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeLevelScene.swift; sourceTree = "<group>"; };
+		35813E8F1D6C7C2100016784 /* Challenge1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Challenge1.json; sourceTree = "<group>"; };
 		358FAF571D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineSKLabelNode.swift; sourceTree = "<group>"; };
 		35BB875C1D3E6EE700EA5D40 /* BluredBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluredBlock.swift; sourceTree = "<group>"; };
 		5BE4970CC26FC6CE01ADFEB5 /* Level1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level1.json; sourceTree = "<group>"; };
@@ -101,6 +101,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35813E8E1D6C7C0500016784 /* Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				35813E8F1D6C7C2100016784 /* Challenge1.json */,
+			);
+			name = Challenges;
+			sourceTree = "<group>";
+		};
 		6D2715681CECBA2000785AF7 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,14 +117,12 @@
 				352778051D5C95CB006C9B16 /* Level3.json */,
 				352778061D5C95CB006C9B16 /* Level4.json */,
 				352778071D5C95CB006C9B16 /* Level5.json */,
-				352778091D5C95CB006C9B16 /* Level7.json */,
-				352778081D5C95CB006C9B16 /* Level6.json */,
-				3527780A1D5C95CB006C9B16 /* Level8.json */,
-				3527780B1D5C95CB006C9B16 /* Level9.json */,
-				3527780C1D5C95CB006C9B16 /* Level10.json */,
-				3527780D1D5C95CB006C9B16 /* Level11.json */,
-				352778031D5C95CB006C9B16 /* Lavel12.json */,
-				3527780E1D5C95CB006C9B16 /* Level13.json */,
+				3527780A1D5C95CB006C9B16 /* Level6.json */,
+				3527780B1D5C95CB006C9B16 /* Level7.json */,
+				3527780C1D5C95CB006C9B16 /* Level8.json */,
+				3527780D1D5C95CB006C9B16 /* Level9.json */,
+				352778031D5C95CB006C9B16 /* Lavel10.json */,
+				3527780E1D5C95CB006C9B16 /* Level11.json */,
 			);
 			name = Levels;
 			sourceTree = "<group>";
@@ -152,6 +158,7 @@
 		6DC0CCC51CD8C0C20019D466 /* slidr */ = {
 			isa = PBXGroup;
 			children = (
+				35813E8E1D6C7C0500016784 /* Challenges */,
 				6D2715681CECBA2000785AF7 /* Levels */,
 				6D38DD901CDA2CE0008353DF /* Resources */,
 				6DC0CCCA1CD8C0C20019D466 /* GameScene.swift */,
@@ -161,6 +168,7 @@
 				6D538BA21CDC9E8100B0F780 /* GameSettings.swift */,
 				6DA665D91CEA0B1400644E0A /* MenuScene.swift */,
 				6D56F3C71CEB2EDF00CD3D3A /* LevelScene.swift */,
+				35813E8C1D6C6FD000016784 /* ChallengeLevelScene.swift */,
 				6D56F3C91CEB430E00CD3D3A /* ToolbarNode.swift */,
 				6D6346561CEDDAD40067A1AF /* Level.swift */,
 				6D6346581CEDDDDD0067A1AF /* LevelLoadService.swift */,
@@ -238,20 +246,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3527781A1D5C95CB006C9B16 /* Level13.json in Resources */,
-				352778151D5C95CB006C9B16 /* Level7.json in Resources */,
-				352778191D5C95CB006C9B16 /* Level11.json in Resources */,
+				3527781A1D5C95CB006C9B16 /* Level11.json in Resources */,
+				352778191D5C95CB006C9B16 /* Level9.json in Resources */,
 				352778131D5C95CB006C9B16 /* Level5.json in Resources */,
 				352778111D5C95CB006C9B16 /* Level3.json in Resources */,
-				352778161D5C95CB006C9B16 /* Level8.json in Resources */,
+				352778161D5C95CB006C9B16 /* Level6.json in Resources */,
 				6DC0CCD21CD8C0C20019D466 /* Assets.xcassets in Resources */,
-				352778141D5C95CB006C9B16 /* Level6.json in Resources */,
-				3527780F1D5C95CB006C9B16 /* Lavel12.json in Resources */,
-				352778181D5C95CB006C9B16 /* Level10.json in Resources */,
+				3527780F1D5C95CB006C9B16 /* Lavel10.json in Resources */,
+				352778181D5C95CB006C9B16 /* Level8.json in Resources */,
 				6D42E7B41CF460DE00740131 /* GameSpeedSliderTableViewCell.xib in Resources */,
 				352778101D5C95CB006C9B16 /* Level2.json in Resources */,
 				6DC0CCD01CD8C0C20019D466 /* Main.storyboard in Resources */,
-				352778171D5C95CB006C9B16 /* Level9.json in Resources */,
+				35813E901D6C7C2100016784 /* Challenge1.json in Resources */,
+				352778171D5C95CB006C9B16 /* Level7.json in Resources */,
 				5BE495CC43837A4961D6D2D0 /* Level1.json in Resources */,
 				352778121D5C95CB006C9B16 /* Level4.json in Resources */,
 			);
@@ -286,6 +293,7 @@
 				6D42E7B21CF45B3300740131 /* OptionsScene.swift in Sources */,
 				6D38DD991CDA3A38008353DF /* Block.swift in Sources */,
 				6D42E7B61CF4661000740131 /* GameSpeedSliderTableViewCell.swift in Sources */,
+				35813E8D1D6C6FD000016784 /* ChallengeLevelScene.swift in Sources */,
 				35BB875D1D3E6EE700EA5D40 /* BluredBlock.swift in Sources */,
 				358FAF581D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift in Sources */,
 				355282E81D5B7DF700AE6413 /* CaterpillarMask.swift in Sources */,

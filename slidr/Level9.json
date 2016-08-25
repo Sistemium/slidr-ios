@@ -1,51 +1,99 @@
 {
     "blocks":[
               {
+              "type":"wall",
+              "height":200,
+              "width":20,
+              "pushVectorX":0,
+              "pushVectorY":0,
+              "positionX":0.15,
+              "positionY":0.1,
+              "pushTime":0,
+              "rotation":45
+              },
+              {
+              "type":"wall",
+              "height":200,
+              "width":20,
+              "pushVectorX":0,
+              "pushVectorY":0,
+              "positionX":0.15,
+              "positionY":0.45,
+              "pushTime":0,
+              "rotation":-45
+              },
+              {
+              "type":"wall",
+              "height":200,
+              "width":20,
+              "pushVectorX":0,
+              "pushVectorY":0,
+              "positionX":0.5,
+              "positionY":0.1,
+              "pushTime":0,
+              "rotation":-45
+              },
+              {
+              "type":"wall",
+              "height":400,
+              "width":20,
+              "pushVectorX":0,
+              "pushVectorY":0,
+              "positionX":0.6,
+              "positionY":0.75,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
               "type":"standart",
-              "height":150,
-              "width":150,
-              "pushVectorX":0,
-              "pushVectorY":-1,
-              "positionX":0.5,
-              "positionY":1.1,
+              "height":160,
+              "width":160,
+              "pushVectorX":-1,
+              "pushVectorY":0,
+              "positionX":1.2,
+              "positionY":0.28,
               "pushTime":0,
-              "rotation":0
-              },
-              {
-              "type":"swipeable",
-              "height":150,
-              "width":150,
-              "pushVectorX":0,
-              "pushVectorY":-1,
-              "positionX":0.5,
-              "positionY":1.35,
-              "pushTime":0,
-              "rotation":0
+              "rotation":0,
+              "speedModifier":0.5
               },
               {
               "type":"standart",
-              "height":150,
-              "width":150,
-              "pushVectorX":0,
-              "pushVectorY":-1,
-              "positionX":0.5,
-              "positionY":1.6,
+              "height":160,
+              "width":160,
+              "pushVectorX":1,
+              "pushVectorY":0,
+              "positionX":-0.2,
+              "positionY":0.65,
               "pushTime":0,
-              "rotation":0
+              "rotation":0,
+              "speedModifier":0.5
               },
               {
-              "type":"swipeable",
-              "height":150,
-              "width":150,
+              "type":"standart",
+              "height":160,
+              "width":160,
+              "pushVectorX":1,
+              "pushVectorY":0,
+              "positionX":-0.2,
+              "positionY":0.85,
+              "pushTime":0,
+              "rotation":0,
+              "speedModifier":0.5
+              },
+              {
+              "type":"standart",
+              "height":250,
+              "width":80,
               "pushVectorX":0,
               "pushVectorY":-1,
-              "positionX":0.5,
-              "positionY":1.85,
+              "positionX":0.8,
+              "positionY":0.87,
               "pushTime":0,
-              "rotation":0
+              "rotation":0,
+              "speedModifier":0.5
               }
               ],
-    "timeout":10,
+    "timeout":25,
     "priority":9,
     "name":"Level 9"
 }

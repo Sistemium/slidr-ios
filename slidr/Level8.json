@@ -2,19 +2,41 @@
     "blocks":[
               {
               "type":"swipeable",
-              "height":220,
-              "width":100,
-              "pushVectorX":1,
+              "height":160,
+              "width":160,
+              "pushVectorX":-1,
               "pushVectorY":0,
-              "positionX":-0.1,
+              "positionX":1.1,
               "positionY":0.2,
               "pushTime":0,
               "rotation":0
               },
               {
+              "type":"standart",
+              "height":160,
+              "width":160,
+              "pushVectorX":-1,
+              "pushVectorY":0,
+              "positionX":1.1,
+              "positionY":0.4,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
+              "type":"standart",
+              "height":160,
+              "width":160,
+              "pushVectorX":-1,
+              "pushVectorY":0,
+              "positionX":1.1,
+              "positionY":0.6,
+              "pushTime":0,
+              "rotation":0
+              },
+              {
               "type":"swipeable",
-              "height":220,
-              "width":100,
+              "height":160,
+              "width":160,
               "pushVectorX":-1,
               "pushVectorY":0,
               "positionX":1.1,

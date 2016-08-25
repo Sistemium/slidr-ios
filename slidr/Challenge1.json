@@ -1,0 +1,32 @@
+{
+    "blocks":[
+              {
+              "type":"swipeable",
+              "height":150,
+              "width":150,
+              "pushVectorX":0,
+              "pushVectorY":-1,
+              "positionX":0.5,
+              "positionY":1.1,
+              "pushTime":0,
+              "rotation":0,
+              "speedModifier":2
+              },
+              {
+              "type":"swipeable",
+              "height":150,
+              "width":150,
+              "pushVectorX":0,
+              "pushVectorY":-1,
+              "positionX":0.5,
+              "positionY":1.4,
+              "pushTime":0,
+              "rotation":0,
+              "speedModifier":2
+              }
+              ],
+    "timeout":91,
+    "completionTime":90,
+    "priority":1,
+    "name":"Challenge 1"
+}
