@@ -11,9 +11,7 @@ import UIKit
 
 struct GameSettings{
     static var lastKnownOrientation:UIDeviceOrientation = .Portrait
-    
     private static var _playableAreaSize = CGSize()
-    
     static var playableAreaSize:CGSize{
         get{
             return CGSize(width: _playableAreaSize.width * rezolutionNormalizationValue, height: _playableAreaSize.height * rezolutionNormalizationValue)
@@ -35,7 +33,7 @@ struct GameSettings{
     static let pushBlockInterval = 0.4
     static var defaultSpeed:CGFloat{
         get{
-            return 45000 * rezolutionNormalizationValue
+            return 85000 * rezolutionNormalizationValue
         }
     }
     static var baseSpeed:CGFloat{
@@ -59,20 +57,10 @@ struct GameSettings{
     }
     static var labelSize: CGFloat{
         get{
-            return 100 * rezolutionNormalizationValue
+            return 85 * rezolutionNormalizationValue
         }
     }
     static var maxNumberOfBlocks = 6
-    static var hitSideWidth:CGFloat{
-        get{
-            return 20 * rezolutionNormalizationValue
-        }
-    }
-    static var touchRegion:CGFloat{
-        get{
-            return 90 * rezolutionNormalizationValue
-        }
-    }
     static let timeUntilWarning = 3.0
     static var shakeToResetEnabled:Bool{
         get{
@@ -117,24 +105,31 @@ struct GameSettings{
             NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "completedLevels")
         }
     }
-    
     static let blockFadeoutTime = 0.5
-    static let fastBlockFadeoutTime = 0.25
     static let boostValue:CGFloat = 1.5
-    static let caterpillarDeepth:CGFloat = 0.3
+    static let caterpillarDeepth:CGFloat = 0.4
     //Game is optimized for iPad pro, cause it has biggest resolution, if game was launched on device with lower resolution this value helps to downscale expected resolution i onrder to improve perfomance
     static var rezolutionNormalizationValue:CGFloat = 1
     static var rippleRadius:CGFloat{
         get{
-            return 20 * rezolutionNormalizationValue
+            return 30 * rezolutionNormalizationValue
         }
     }
-    
-    static let caterpillarSpeed:CGFloat = 0.025
+    static var labelOffset:CGFloat{
+        get{
+            return 3.5 * rezolutionNormalizationValue
+        }
+    }
     static var caterpillarPartSize:CGFloat{
         get{
             return 200 * rezolutionNormalizationValue
         }
     }
     static let caterpillarSpaceBetweenParts:CGFloat = 0.5
+    static var caterpillarSpeed:CGFloat = 0.02
+    static var rippleLineWidth:CGFloat{
+        get{
+            return 15 * rezolutionNormalizationValue
+        }
+    }
 }

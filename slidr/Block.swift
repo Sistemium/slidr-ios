@@ -31,7 +31,7 @@ class Block: SKSpriteNode {
                 physicsBody = SKPhysicsBody(rectangleOfSize: size)
             case .bomb:
                 color = UIColor.clearColor()
-                size = CGSize(width: size.width/3, height: size.width/3)
+                size = CGSize(width: size.width/2.5, height: size.width/2.5)
                 texture = SKTexture(imageNamed: "Bomb")
                 physicsBody = SKPhysicsBody(rectangleOfSize: size)
                 physicsBody!.dynamic = true
@@ -227,7 +227,7 @@ class Block: SKSpriteNode {
                 }else{
                     boost = 1
                 }
-                return CGVectorMake(pushVector.dx / size.height * speedModifier * boost, pushVector.dy / size.width * speedModifier * boost)
+                return CGVectorMake(GameSettings.rezolutionNormalizationValue * pushVector.dx / size.height * speedModifier * boost,GameSettings.rezolutionNormalizationValue * pushVector.dy / size.width * speedModifier * boost)
             }else{
                 return CGVectorMake(0, 0)
             }
@@ -264,7 +264,7 @@ class Block: SKSpriteNode {
     }
     
     convenience init(blockData:NSDictionary){
-        self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: blockData["width"] as! CGFloat, height: blockData["height"] as! CGFloat ))
+        self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: blockData["width"] as! CGFloat * GameSettings.rezolutionNormalizationValue, height: blockData["height"] as! CGFloat * GameSettings.rezolutionNormalizationValue))
         loadBlock(blockData)
     }
     

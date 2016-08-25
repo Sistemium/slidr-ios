@@ -100,7 +100,5 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
             toolbarNode = ToolbarNode()
             toolbarNode.centerLabelText = "Select level"
         }
-        
     }
-    
 }

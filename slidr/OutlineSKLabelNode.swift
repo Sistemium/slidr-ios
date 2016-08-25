@@ -10,8 +10,8 @@ import SpriteKit
 
 class OutlineSKLabelNode:SKLabelNode{
     
-    private let offSetX:CGFloat = 3
-    private let offSetY:CGFloat = 3
+    private let offSetX:CGFloat = GameSettings.labelOffset
+    private let offSetY:CGFloat = GameSettings.labelOffset
     
     lazy var outlineLabel : SKLabelNode = {[unowned self] in
         let _outlineLabel = SKLabelNode()
