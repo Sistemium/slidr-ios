@@ -77,6 +77,9 @@ class LevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         if indexPath.row > GameSettings.completedLevels{
             cell.userInteractionEnabled = false
             cell.textLabel!.enabled = false
+        }else{
+            cell.userInteractionEnabled = true
+            cell.textLabel!.enabled = true
         }
         return cell
     }
