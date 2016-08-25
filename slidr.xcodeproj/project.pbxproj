@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3527780F1D5C95CB006C9B16 /* Lavel10.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778031D5C95CB006C9B16 /* Lavel10.json */; };
+		3527780F1D5C95CB006C9B16 /* Level10.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778031D5C95CB006C9B16 /* Level10.json */; };
 		352778101D5C95CB006C9B16 /* Level2.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778041D5C95CB006C9B16 /* Level2.json */; };
 		352778111D5C95CB006C9B16 /* Level3.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778051D5C95CB006C9B16 /* Level3.json */; };
 		352778121D5C95CB006C9B16 /* Level4.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778061D5C95CB006C9B16 /* Level4.json */; };
@@ -47,7 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		352778031D5C95CB006C9B16 /* Lavel10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Lavel10.json; sourceTree = "<group>"; };
+		352778031D5C95CB006C9B16 /* Level10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level10.json; sourceTree = "<group>"; };
 		352778041D5C95CB006C9B16 /* Level2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level2.json; sourceTree = "<group>"; };
 		352778051D5C95CB006C9B16 /* Level3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level3.json; sourceTree = "<group>"; };
 		352778061D5C95CB006C9B16 /* Level4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level4.json; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 				3527780B1D5C95CB006C9B16 /* Level7.json */,
 				3527780C1D5C95CB006C9B16 /* Level8.json */,
 				3527780D1D5C95CB006C9B16 /* Level9.json */,
-				352778031D5C95CB006C9B16 /* Lavel10.json */,
+				352778031D5C95CB006C9B16 /* Level10.json */,
 				3527780E1D5C95CB006C9B16 /* Level11.json */,
 			);
 			name = Levels;
@@ -252,7 +252,7 @@
 				352778111D5C95CB006C9B16 /* Level3.json in Resources */,
 				352778161D5C95CB006C9B16 /* Level6.json in Resources */,
 				6DC0CCD21CD8C0C20019D466 /* Assets.xcassets in Resources */,
-				3527780F1D5C95CB006C9B16 /* Lavel10.json in Resources */,
+				3527780F1D5C95CB006C9B16 /* Level10.json in Resources */,
 				352778181D5C95CB006C9B16 /* Level8.json in Resources */,
 				6D42E7B41CF460DE00740131 /* GameSpeedSliderTableViewCell.xib in Resources */,
 				352778101D5C95CB006C9B16 /* Level2.json in Resources */,
