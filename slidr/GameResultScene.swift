@@ -132,6 +132,9 @@ class GameResultScene: SKScene{
         scoreLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         recordLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         infoLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        if result == .Win{
+            LevelLoadService.sharedInstance.updateCompletedLevelsByPriority(finishedLevel!.priority!)
+        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
