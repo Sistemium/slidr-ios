@@ -17,6 +17,12 @@ class LevelLoadService{
         }
     }
     
+    var challanges : [Level]{
+        get{
+            return loadChallanges()
+        }
+    }
+    
     private init() {
     }
     
@@ -25,12 +31,25 @@ class LevelLoadService{
         let fileManager = NSFileManager.defaultManager()
         let enumerator = fileManager.enumeratorAtPath(NSBundle.mainBundle().bundlePath)
         while let element = enumerator?.nextObject() as? String {
-            if element.hasSuffix(".json"){
+            if element.hasSuffix(".json") && element.hasPrefix("Level"){
                 levels.append(readJson(element.substringToIndex(element.characters.indexOf(".")!)))
             }
         }
         levels.sortInPlace({ $0.priority < $1.priority })
         return levels
+    }
+    
+    private func loadChallanges() -> [Level]{
+        var challanges = [Level]()
+        let fileManager = NSFileManager.defaultManager()
+        let enumerator = fileManager.enumeratorAtPath(NSBundle.mainBundle().bundlePath)
+        while let element = enumerator?.nextObject() as? String {
+            if element.hasSuffix(".json") && element.hasPrefix("Challenge"){
+                challanges.append(readJson(element.substringToIndex(element.characters.indexOf(".")!)))
+            }
+        }
+        challanges.sortInPlace({ $0.priority < $1.priority })
+        return challanges
     }
     
     private func readJson(json:String) ->Level{
@@ -41,6 +60,9 @@ class LevelLoadService{
         level.name = jsonResult["name"] as? String
         level.priority = jsonResult["priority"] as? Float
         level.timeout = jsonResult["timeout"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.baseSpeed))
+        if jsonResult["completionTime"] != nil{
+            level.completionTime = jsonResult["completionTime"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.baseSpeed))
+        }
         for element in jsonResult["blocks"] as! NSArray{
             let blockData = element as! NSDictionary
             level.blocks.append(Block(blockData: blockData))

@@ -55,6 +55,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var blockLeftGameArea = false
     
+    var puzzleRules = true
+    
     var isThereUnpushedBlocks = false
     
     var freeModeTimer = GameSettings.freeModeTimer
@@ -62,13 +64,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func checkResult(currentTime: CFTimeInterval){
         switch gameMode{
         case .Level:
-            if blockLeftGameArea {
+            if blockLeftGameArea && puzzleRules {
                 presentResultScene(.Lose, infoText: "Block left game area!")
             }
             else if level?.timeout<=0 {
                 presentResultScene(.Lose, infoText: "Time's Up!")
             }
-            else if !isThereUnpushedBlocks && dynamicChildren.count == 0{
+            else if !isThereUnpushedBlocks && dynamicChildren.count == 0 && puzzleRules{
                 presentResultScene(.Win, infoText: "")
             }
         case .Free:
@@ -165,10 +167,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }else{
             loseOfSpeedOfBlock2 = block2.velocity.dy / block2.physicsBody!.velocity.dy
         }
-        if loseOfSpeedOfBlock1.isNaN {
+        if loseOfSpeedOfBlock1.isNaN || loseOfSpeedOfBlock1.isInfinite{
             loseOfSpeedOfBlock1 = 1
         }
-        if loseOfSpeedOfBlock2.isNaN {
+        if loseOfSpeedOfBlock2.isNaN || loseOfSpeedOfBlock2.isInfinite{
             loseOfSpeedOfBlock2 = 1
         }
         if Int(loseOfSpeedOfBlock1) == 1 && Int(loseOfSpeedOfBlock2) == 1{
@@ -280,7 +282,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     destroyBlock(block,withTime: 0)
                     let ripple = RippleCircle(radius: GameSettings.rippleRadius, position: block.position)
                     ripple.strokeColor = UIColor.yellowColor()
-                    ripple.lineWidth = 10
+                    ripple.lineWidth = GameSettings.rippleLineWidth
                     addChild(ripple)
                     ripple.ripple(GameSettings.rippleRadius, duration: 1.0)
                     ripple.removeFromParent()
@@ -345,7 +347,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         tochesCycle: for toch in touches{
-            var location = toch.locationInNode(self)
+            let location = toch.locationInNode(self)
             var dx = location.x - toch.startX
             var dy = location.y - toch.startY
             let magnitude = sqrt(dx*dx+dy*dy)
@@ -362,11 +364,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if block.type == .bomb && block.physicsBody != nil{
                     block.physicsBody = nil
                     destroyBlock(block,withTime: 0)
-                    let ripple = RippleCircle(radius: 20, position: block.position)
+                    let ripple = RippleCircle(radius: GameSettings.rippleRadius, position: block.position)
                     ripple.strokeColor = UIColor.yellowColor()
-                    ripple.lineWidth = 10
+                    ripple.lineWidth = GameSettings.rippleLineWidth
                     addChild(ripple)
-                    ripple.ripple(20, duration: 1.0)
+                    ripple.ripple(GameSettings.rippleRadius, duration: 1.0)
                     ripple.removeFromParent()
                     continue
                 }
@@ -383,30 +385,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 returnToPreviousScene()
             }
             
+            var candidatesToGesture:[CGFloat:Block] = [:]
+            
             for node in children{
                 if let block = node as? Block{
-                    location = touches.first!.locationInNode(block)
-                    let region = SKRegion(size: CGSize(width: block.size.width + GameSettings.touchRegion, height: block.size.height + GameSettings.touchRegion))
-                    if region.containsPoint(location){
-                        if block.type == .bomb && block.physicsBody != nil{
-                            block.physicsBody = nil
-                            destroyBlock(block,withTime: 0)
-                            let ripple = RippleCircle(radius: 20, position: block.position)
-                            ripple.strokeColor = UIColor.yellowColor()
-                            ripple.lineWidth = 10
-                            addChild(ripple)
-                            ripple.ripple(20, duration: 1.0)
-                            ripple.removeFromParent()
-                            continue tochesCycle
-                        }
-                        if block.physicsBody != nil && (block.numberOfActions == nil || block.numberOfActions! > 0){
-                            block.pushVector = CGVector(dx: -block.pushVector.dx, dy: -block.pushVector.dy)
-                        }
-                        if block.numberOfActions != nil{
-                            block.numberOfActions! -= 1
-                        }
-                        continue tochesCycle
+                    let location = convertPoint(location, toNode: block)
+                    if block.type == .swipeable || block.type == .standart || block.type == .bomb{
+                        candidatesToGesture[location.distance(block.anchorPoint)] = block
                     }
+                }
+            }
+            if candidatesToGesture.keys.minElement() != nil {
+                let chosen = candidatesToGesture[candidatesToGesture.keys.minElement()!]
+                if chosen!.type == .bomb && chosen!.physicsBody != nil{
+                    chosen!.physicsBody = nil
+                    destroyBlock(chosen!,withTime: 0)
+                    let ripple = RippleCircle(radius: GameSettings.rippleRadius, position: chosen!.position)
+                    ripple.strokeColor = UIColor.yellowColor()
+                    ripple.lineWidth = GameSettings.rippleLineWidth
+                    addChild(ripple)
+                    ripple.ripple(GameSettings.rippleRadius, duration: 1.0)
+                    ripple.removeFromParent()
+                    continue tochesCycle
+                }
+                if chosen!.physicsBody != nil && (chosen!.numberOfActions == nil || chosen!.numberOfActions! > 0){
+                    chosen!.pushVector = CGVector(dx: -chosen!.pushVector.dx, dy: -chosen!.pushVector.dy)
+                }
+                if chosen!.numberOfActions != nil{
+                    chosen!.numberOfActions! -= 1
                 }
             }
         }
@@ -478,51 +484,47 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         if candidatesToGesture.keys.minElement() != nil {
             let chosen = candidatesToGesture[candidatesToGesture.keys.minElement()!]
-            let touchLocation = convertPoint(touchLocation, toNode: chosen!)
-            let region = SKRegion(size: CGSize(width: chosen!.size.width + GameSettings.touchRegion, height: chosen!.size.height  * GameSettings.touchRegion))
-            if region.containsPoint(touchLocation){
-                if chosen!.type == .standart{
-                    switch direction {
-                    case UISwipeGestureRecognizerDirection.Up:
-                        if chosen!.pushVector.dy != 0 {
-                            chosen!.boost = GameSettings.boostValue
-                            chosen!.pushVector = GameSettings.moveDirections[0]
-                        }
-                    case UISwipeGestureRecognizerDirection.Down:
-                        if chosen!.pushVector.dy != 0 {
-                            chosen!.boost = GameSettings.boostValue
-                            chosen!.pushVector = GameSettings.moveDirections[1]
-                        }
-                    case UISwipeGestureRecognizerDirection.Right:
-                        if chosen!.pushVector.dx != 0 {
-                            chosen!.boost = GameSettings.boostValue
-                            chosen!.pushVector = GameSettings.moveDirections[2]
-                        }
-                    case UISwipeGestureRecognizerDirection.Left:
-                        if chosen!.pushVector.dx != 0 {
-                            chosen!.boost = GameSettings.boostValue
-                            chosen!.pushVector = GameSettings.moveDirections[3]
-                        }
-                    default:
-                        break
-                    }
-                }else{
-                    switch direction {
-                    case UISwipeGestureRecognizerDirection.Up:
+            if chosen!.type == .standart{
+                switch direction {
+                case UISwipeGestureRecognizerDirection.Up:
+                    if chosen!.pushVector.dy != 0 {
                         chosen!.boost = GameSettings.boostValue
                         chosen!.pushVector = GameSettings.moveDirections[0]
-                    case UISwipeGestureRecognizerDirection.Down:
+                    }
+                case UISwipeGestureRecognizerDirection.Down:
+                    if chosen!.pushVector.dy != 0 {
                         chosen!.boost = GameSettings.boostValue
                         chosen!.pushVector = GameSettings.moveDirections[1]
-                    case UISwipeGestureRecognizerDirection.Right:
+                    }
+                case UISwipeGestureRecognizerDirection.Right:
+                    if chosen!.pushVector.dx != 0 {
                         chosen!.boost = GameSettings.boostValue
                         chosen!.pushVector = GameSettings.moveDirections[2]
-                    case UISwipeGestureRecognizerDirection.Left:
+                    }
+                case UISwipeGestureRecognizerDirection.Left:
+                    if chosen!.pushVector.dx != 0 {
                         chosen!.boost = GameSettings.boostValue
                         chosen!.pushVector = GameSettings.moveDirections[3]
-                    default:
-                        break
                     }
+                default:
+                    break
+                }
+            }else if chosen!.type == .swipeable{
+                switch direction {
+                case UISwipeGestureRecognizerDirection.Up:
+                    chosen!.boost = GameSettings.boostValue
+                    chosen!.pushVector = GameSettings.moveDirections[0]
+                case UISwipeGestureRecognizerDirection.Down:
+                    chosen!.boost = GameSettings.boostValue
+                    chosen!.pushVector = GameSettings.moveDirections[1]
+                case UISwipeGestureRecognizerDirection.Right:
+                    chosen!.boost = GameSettings.boostValue
+                    chosen!.pushVector = GameSettings.moveDirections[2]
+                case UISwipeGestureRecognizerDirection.Left:
+                    chosen!.boost = GameSettings.boostValue
+                    chosen!.pushVector = GameSettings.moveDirections[3]
+                default:
+                    break
                 }
             }
         }
@@ -650,7 +652,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for node in children{
             if let block = node as? Block{
                 if !block.pushed{
-                    if intersectsNode(block) && block.originalSize.height >= block.size.height && block.originalSize.width >= block.size.width{
+                    if gameMode == .Free || intersectsNode(block) && block.originalSize.height >= block.size.height && block.originalSize.width >= block.size.width{
                         block.pushed = true
                     }else{
                         isThereUnpushedBlocks = true

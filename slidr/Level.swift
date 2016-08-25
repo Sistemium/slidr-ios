@@ -11,4 +11,5 @@ struct Level{
     var priority:Float?
     var timeout:Double?
     var blocks = [Block]()
+    var completionTime:Double?
 }
