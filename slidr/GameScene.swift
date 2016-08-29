@@ -404,7 +404,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for node in children{
                 if let block = node as? Block{
                     let location = convertPoint(location, toNode: block)
-                    if block.type == .swipeable || block.type == .standart || block.type == .bomb{
+                    if block.physicsBody != nil && (block.type == .swipeable || block.type == .standart || block.type == .bomb){
                         candidatesToGesture[location.distance(block.anchorPoint)] = block
                     }
                 }
@@ -489,7 +489,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for node in children{
             if let block = node as? Block{
                 let touchLocation = convertPoint(touchLocation, toNode: block)
-                if block.type == .swipeable || block.type == .standart{
+                if block.physicsBody != nil && (block.type == .swipeable || block.type == .standart){
                     candidatesToGesture[touchLocation.distance(block.anchorPoint)] = block
                 }
             }
