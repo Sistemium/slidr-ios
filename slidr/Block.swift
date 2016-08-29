@@ -16,9 +16,9 @@ enum BlockType{
 class Block: SKSpriteNode {
     
     var originalSize = CGSize()
-    private var change:CGFloat = 1
-    private var innerShapes:[SKShapeNode]!
-    private var mask:CaterpillarMask!
+    var change:CGFloat = 1
+    var innerShapes:[SKShapeNode]!
+    var mask:CaterpillarMask!
     var type = BlockType.standart{
         didSet{
             switch type {
@@ -40,7 +40,7 @@ class Block: SKSpriteNode {
                 innerShapes[1].yScale = 0.5
                 let blur = SKEffectNode()
                 blur.shouldRasterize = true
-                blur.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:10.0)])!
+                blur.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:GameSettings.blurValue)])!
                 addChild(blur)
                 blur.addChild(innerShapes[0])
                 blur.addChild(innerShapes[1])
@@ -51,22 +51,22 @@ class Block: SKSpriteNode {
         }
     }
     
-    private var maxWidth:CGFloat{
+    var maxWidth:CGFloat{
         get{
             return pushVector.dx != 0 ? originalSize.width * (1 + GameSettings.caterpillarDeepth) : originalSize.width
         }
     }
-    private var maxHeight:CGFloat{
+    var maxHeight:CGFloat{
         get{
             return pushVector.dy != 0 ? originalSize.height * (1 + GameSettings.caterpillarDeepth) : originalSize.height
         }
     }
-    private var minWidth:CGFloat{
+    var minWidth:CGFloat{
         get{
             return pushVector.dx != 0 ? originalSize.width * (1 - GameSettings.caterpillarDeepth) : originalSize.width
         }
     }
-    private var minHeight:CGFloat{
+    var minHeight:CGFloat{
         get{
             return pushVector.dy != 0 ? originalSize.height * (1 - GameSettings.caterpillarDeepth) : originalSize.height
         }
@@ -173,9 +173,9 @@ class Block: SKSpriteNode {
         }
     }
     
-    private var lastPushVector:CGVector?
+    var lastPushVector:CGVector?
     
-    private func updateHitSide(){
+    func updateHitSide(){
         if pushVector != lastPushVector {
             hitSide?.stopAnimation()
         }
@@ -240,7 +240,7 @@ class Block: SKSpriteNode {
     
     var pushed = false
     
-    private var speedModifier:CGFloat = 1
+    var speedModifier:CGFloat = 1
     
     var boost:CGFloat = 1
     

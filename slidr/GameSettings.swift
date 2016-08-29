@@ -132,4 +132,9 @@ struct GameSettings{
             return 15 * rezolutionNormalizationValue
         }
     }
+    static var touchRegion:CGFloat{
+        return 90 * rezolutionNormalizationValue
+    }
+    
+    static var blurValue:Double = 10.0
 }

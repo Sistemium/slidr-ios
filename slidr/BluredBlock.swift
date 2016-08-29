@@ -11,7 +11,7 @@ import SpriteKit
 class BluredBlock: Block {
     var skEffectNode:SKEffectNode!{
         didSet{
-            skEffectNode.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:35.0)])!
+            skEffectNode.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:GameSettings.blurValue * 4)])!
             skEffectNode.shouldRasterize = true
         }
     }
@@ -50,5 +50,30 @@ class BluredBlock: Block {
         super.addChild(skEffectNode)
         addChild(blockView)
         super.color = UIColor.clearColor()
+    }
+    
+    override func updateHitSide() {
+        
+    }
+    
+    override func animate() {
+        if type == .bomb{
+            for innerShape in innerShapes{
+                innerShape.lineWidth = 20
+                innerShape.xScale -= 0.02
+                innerShape.yScale -= 0.02
+                if innerShape.xScale <= 0{
+                    innerShape.xScale = 1.0
+                    innerShape.yScale = 1.0
+                }
+                innerShape.strokeColor = UIColor(red: 1.0, green: 0, blue: 0, alpha: 1 - innerShape.xScale)
+                innerShape.position = CGPoint(x: 0,y: 0)
+            }
+        }else{
+            updateHitSide()
+            if mask?.size != self.size && pushVector != lastPushVector{
+                mask?.size = self.size
+            }
+        }
     }
 }
