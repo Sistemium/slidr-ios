@@ -96,6 +96,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func destroyBlock(block:Block,withTime time:Double, withReward reward:Double? = nil){
+        var time = time
         if reward != nil && gameMode == .Free{
             let score = SKLabelNode(fontNamed:"Chalkduster")
             addChild(score)
@@ -109,6 +110,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 score.removeFromParent()
             }
             freeModeTimer += reward!
+        }
+        if gameMode == .Menu && time == 0{
+            time = GameSettings.blockFadeoutTime
+        }
+        if block.type == .bomb && time == 0{
+            let ripple = RippleCircle(radius: GameSettings.rippleRadius, position: block.position)
+            ripple.strokeColor = UIColor.yellowColor()
+            ripple.lineWidth = GameSettings.rippleLineWidth
+            addChild(ripple)
+            ripple.ripple(GameSettings.rippleRadius, duration: 1.0)
+            ripple.removeFromParent()
         }
         block.runAction(SKAction.fadeOutWithDuration(time)){
             block.removeFromParent()
@@ -214,8 +226,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         destroyBlock(block2,withTime: GameSettings.blockFadeoutTime, withReward:GameSettings.blueBlockReward)
                     }
                     if block1.type == .bomb{
-                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
-                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
+                        destroyBlock(block1,withTime: 0)
+                        destroyBlock(block2,withTime: 0)
                     }
                 }else{
                     block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
@@ -235,6 +247,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
                     }else{
                         block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
+                    }
+                    if block1.type == .bomb && block2.type == .bomb{
+                        block2.physicsBody = nil
+                        destroyBlock(block2,withTime: 0)
+                        block1.physicsBody = nil
+                        destroyBlock(block1,withTime: 0)
+                        return
                     }
                     if block1.type == .bomb{
                         block1.physicsBody = nil
@@ -265,6 +284,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         block1.pushVector = CGVector(dx: block2.pushVector.dx, dy: block2.pushVector.dy)
                         block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
                     }
+                    if block1.type == .bomb && block2.type == .bomb{
+                        block2.physicsBody = nil
+                        destroyBlock(block2,withTime: 0)
+                        block1.physicsBody = nil
+                        destroyBlock(block1,withTime: 0)
+                        return
+                    }
                     if block1.type == .bomb{
                         block1.physicsBody = nil
                         destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
@@ -280,12 +306,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if block.type == .bomb && block.physicsBody != nil{
                     block.physicsBody = nil
                     destroyBlock(block,withTime: 0)
-                    let ripple = RippleCircle(radius: GameSettings.rippleRadius, position: block.position)
-                    ripple.strokeColor = UIColor.yellowColor()
-                    ripple.lineWidth = GameSettings.rippleLineWidth
-                    addChild(ripple)
-                    ripple.ripple(GameSettings.rippleRadius, duration: 1.0)
-                    ripple.removeFromParent()
                     return
                 }else{
                     block.physicsBody = nil
@@ -364,12 +384,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if block.type == .bomb && block.physicsBody != nil{
                     block.physicsBody = nil
                     destroyBlock(block,withTime: 0)
-                    let ripple = RippleCircle(radius: GameSettings.rippleRadius, position: block.position)
-                    ripple.strokeColor = UIColor.yellowColor()
-                    ripple.lineWidth = GameSettings.rippleLineWidth
-                    addChild(ripple)
-                    ripple.ripple(GameSettings.rippleRadius, duration: 1.0)
-                    ripple.removeFromParent()
                     continue
                 }
                 if block.physicsBody != nil && (block.numberOfActions == nil || block.numberOfActions! > 0){
@@ -403,12 +417,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     if chosen!.type == .bomb && chosen!.physicsBody != nil{
                         chosen!.physicsBody = nil
                         destroyBlock(chosen!,withTime: 0)
-                        let ripple = RippleCircle(radius: GameSettings.rippleRadius, position: chosen!.position)
-                        ripple.strokeColor = UIColor.yellowColor()
-                        ripple.lineWidth = GameSettings.rippleLineWidth
-                        addChild(ripple)
-                        ripple.ripple(GameSettings.rippleRadius, duration: 1.0)
-                        ripple.removeFromParent()
                         continue tochesCycle
                     }
                     if chosen!.physicsBody != nil && (chosen!.numberOfActions == nil || chosen!.numberOfActions! > 0){
