@@ -53,7 +53,7 @@ class Head:SKSpriteNode {
         copy?.position = position
         hidden = true
         position = newValue
-        copy?.runAction(SKAction.moveTo(newValue, duration: 0.2)){[unowned self] in
+        copy?.runAction(SKAction.moveTo(newValue, duration: 0.15)){[unowned self] in
             self.hidden = false
             self.copy?.removeFromParent()
         }
@@ -64,4 +64,5 @@ class Head:SKSpriteNode {
         copy?.removeFromParent()
         hidden = false
     }
+    
 }
