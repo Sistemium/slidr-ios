@@ -95,5 +95,6 @@
               ],
     "timeout":25,
     "priority":9,
-    "name":"Level 9"
+    "name":"Level 9",
+    "type":"Puzzle"
 }

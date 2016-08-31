@@ -47,5 +47,6 @@
               ],
     "timeout":10,
     "priority":8,
-    "name":"Level 8"
+    "name":"Level 8",
+    "type":"Puzzle"
 }

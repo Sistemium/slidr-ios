@@ -84,7 +84,6 @@ class ChallangeLevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         scene.scaleMode = .Fill
         scene.level = levels[indexPath.row]
         scene.previousScene = ChallangeLevelScene()
-        scene.puzzleRules = false
         view!.presentScene(scene)
     }
     

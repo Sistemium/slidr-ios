@@ -9,10 +9,11 @@
 import SpriteKit
 
 enum GameMode{
-    case Free,Level,Menu
+    case Free,Level,Menu,Challenge
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
     var timeSinceLastUpdate:CFTimeInterval?
     
     var startTime:CFTimeInterval?
@@ -26,6 +27,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         didSet{
             switch gameMode{
             case .Level:
+                addChild(toolbarNode)
+                toolbarNode.leftLabelText = level?.name ?? ""
+                toolbarNode.rightButton = toolbarNode.backButton
+            case .Challenge:
                 addChild(toolbarNode)
                 toolbarNode.leftLabelText = level?.name ?? ""
                 toolbarNode.rightButton = toolbarNode.backButton
@@ -44,7 +49,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var level: Level?{
         didSet{
             if (level != nil){
-                gameMode = .Level
+                if level!.type == .Puzzle{
+                    gameMode = .Level
+                }else{
+                    gameMode = .Challenge
+                }
             }else{
                 gameMode = .Free
             }
@@ -55,8 +64,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var blockLeftGameArea = false
     
-    var puzzleRules = true
-    
     var isThereUnpushedBlocks = false
     
     var freeModeTimer = GameSettings.freeModeTimer
@@ -64,18 +71,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func checkResult(currentTime: CFTimeInterval){
         switch gameMode{
         case .Level:
-            if blockLeftGameArea && puzzleRules {
+            if blockLeftGameArea {
                 presentResultScene(.Lose, infoText: "Block left game area!")
             }
             else if level?.timeout<=0 {
                 presentResultScene(.Lose, infoText: "Time's Up!")
             }
-            else if !isThereUnpushedBlocks && dynamicChildren.count == 0 && puzzleRules{
+            else if !isThereUnpushedBlocks && dynamicChildren.count == 0{
                 presentResultScene(.Win, infoText: "")
             }
         case .Free:
             if freeModeTimer <= 0 {
                 presentResultScene(.Lose, infoText: "Time's Up!",score: currentTime - startTime!)
+            }
+        case .Challenge:
+            if level?.timeout<=0 {
+                presentResultScene(.Lose, infoText: "Time's Up!")
+            }
+            else if (currentTime - startTime!) > level!.completionTime{
+                presentResultScene(.Win, infoText: "")
             }
         default:
             break
@@ -97,7 +111,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func destroyBlock(block:Block,withTime time:Double, withReward reward:Double? = nil){
         var time = time
-        if reward != nil && gameMode == .Free{
+        if reward != nil && (gameMode == .Free || gameMode == .Challenge){
             let score = SKLabelNode(fontNamed:"Chalkduster")
             addChild(score)
             score.position = block.position
@@ -110,6 +124,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 score.removeFromParent()
             }
             freeModeTimer += reward!
+            level?.timeout! += reward!
         }
         if gameMode == .Menu && time == 0{
             time = GameSettings.blockFadeoutTime
@@ -591,7 +606,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: CFTimeInterval) {
-        if gameMode == .Level{
+        if gameMode == .Level || gameMode == .Challenge{
             if let oldTime = timeSinceLastUpdate{
                 level!.timeout! -= currentTime - oldTime
                 toolbarNode.centerLabelText = level!.timeout!.fixedFractionDigits(1)
@@ -612,7 +627,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        if gameMode == .Level {
+        if gameMode == .Level || gameMode == .Challenge{
             if let oldTime = timeSinceLastUpdate{
                 for block in level!.blocks{
                     block.preferedPushTime! -= currentTime - oldTime

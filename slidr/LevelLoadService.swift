@@ -60,6 +60,7 @@ class LevelLoadService{
         level.name = jsonResult["name"] as? String
         level.priority = jsonResult["priority"] as? Float
         level.timeout = jsonResult["timeout"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.baseSpeed))
+        level.type = LevelType(rawValue: jsonResult["type"] as! String)
         if jsonResult["completionTime"] != nil{
             level.completionTime = jsonResult["completionTime"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.baseSpeed))
         }
@@ -68,6 +69,12 @@ class LevelLoadService{
             level.blocks.append(Block(blockData: blockData))
         }
         return level
+    }
+    
+    func updateCompletedLevelsByPriority(priority:Float){
+        if Int(priority) > GameSettings.completedLevels{
+            GameSettings.completedLevels = Int(priority)
+        }
     }
     
     func levelByPriority(priority:Float)->Level?{
@@ -79,14 +86,26 @@ class LevelLoadService{
         return nil
     }
     
-    func updateCompletedLevelsByPriority(priority:Float){
-        if Int(priority) > GameSettings.completedLevels{
-            GameSettings.completedLevels = Int(priority)
-        }
-    }
-    
     func nextLevelByPriority(priority:Float)->Level?{
         for level in levels{
+            if level.priority > priority{
+                return level
+            }
+        }
+        return nil
+    }
+    
+    func challangeByPriority(priority:Float)->Level?{
+        for level in challanges{
+            if level.priority == priority{
+                return level
+            }
+        }
+        return nil
+    }
+    
+    func nextChallangeByPriority(priority:Float)->Level?{
+        for level in challanges{
             if level.priority > priority{
                 return level
             }

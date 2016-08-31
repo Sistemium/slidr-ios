@@ -10,23 +10,52 @@
               "positionY":1.1,
               "pushTime":0,
               "rotation":0,
-              "speedModifier":2
+              "speedModifier":1
               },
               {
               "type":"swipeable",
-              "height":150,
-              "width":150,
+              "height":200,
+              "width":200,
               "pushVectorX":0,
               "pushVectorY":-1,
               "positionX":0.5,
               "positionY":1.4,
               "pushTime":0,
               "rotation":0,
-              "speedModifier":2
+              "speedModifier":1
+              },
+              
+              
+              
+              {
+              "type":"swipeable",
+              "height":200,
+              "width":200,
+              "pushVectorX":1,
+              "pushVectorY":0,
+              "positionX":-0.1,
+              "positionY":0.5,
+              "pushTime":1,
+              "rotation":0,
+              "speedModifier":1.01
+              },
+              {
+              "type":"swipeable",
+              "height":200,
+              "width":200,
+              "pushVectorX":0,
+              "pushVectorY":-1,
+              "positionX":0.5,
+              "positionY":1.4,
+              "pushTime":1,
+              "rotation":0,
+              "speedModifier":1.01
               }
+              
               ],
-    "timeout":91,
+    "timeout":10,
     "completionTime":90,
     "priority":1,
-    "name":"Challenge 1"
+    "name":"Challenge 1",
+    "type":"Challenge"
 }

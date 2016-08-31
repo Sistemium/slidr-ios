@@ -125,5 +125,6 @@
               ],
     "timeout":20,
     "priority":11,
-    "name":"Level 11"
+    "name":"Level 11",
+    "type":"Puzzle"
 }

@@ -143,11 +143,19 @@ class GameResultScene: SKScene{
         switch node {
         case returnButton:
             if finishedLevel != nil {
-                let scene = LevelScene()
-                scene.size = GameSettings.playableAreaSize
-                scene.scaleMode = .Fill
-                scene.previousScene = MenuScene()
-                view!.presentScene(scene)
+                if finishedLevel?.type == .Puzzle{
+                    let scene = LevelScene()
+                    scene.size = GameSettings.playableAreaSize
+                    scene.scaleMode = .Fill
+                    scene.previousScene = MenuScene()
+                    view!.presentScene(scene)
+                }else{
+                    let scene = ChallangeLevelScene()
+                    scene.size = GameSettings.playableAreaSize
+                    scene.scaleMode = .Fill
+                    scene.previousScene = MenuScene()
+                    view!.presentScene(scene)
+                }
             }else{
                 let scene = MenuScene()
                 scene.size = GameSettings.playableAreaSize
@@ -155,7 +163,24 @@ class GameResultScene: SKScene{
                 view!.presentScene(scene)
             }
         case actionButton:
-            if result == .Win{
+            if finishedLevel?.type == .Challenge{
+                if result == .Win{
+                    let scene = GameScene()
+                    scene.size = GameSettings.playableAreaSize
+                    scene.scaleMode = .Fill
+                    scene.level = LevelLoadService.sharedInstance.nextChallangeByPriority(finishedLevel!.priority!)
+                    scene.previousScene = ChallangeLevelScene()
+                    view?.presentScene(scene)
+                }else{
+                    let scene = GameScene()
+                    scene.size = GameSettings.playableAreaSize
+                    scene.scaleMode = .Fill
+                    scene.level = LevelLoadService.sharedInstance.challangeByPriority(finishedLevel!.priority!)
+                    scene.previousScene = ChallangeLevelScene()
+                    view?.presentScene(scene)
+                }
+            }
+            else if result == .Win{
                 let scene = GameScene()
                 scene.size = GameSettings.playableAreaSize
                 scene.scaleMode = .Fill

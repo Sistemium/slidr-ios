@@ -51,5 +51,6 @@
               ],
     "timeout":10,
     "priority":3,
-    "name":"Level 3"
+    "name":"Level 3",
+    "type":"Puzzle"
 }

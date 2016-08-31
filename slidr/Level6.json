@@ -25,5 +25,6 @@
               ],
     "timeout":10,
     "priority":6,
-    "name":"Level 6"
+    "name":"Level 6",
+    "type":"Puzzle"
 }

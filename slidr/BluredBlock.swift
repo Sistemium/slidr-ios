@@ -70,6 +70,10 @@ class BluredBlock: Block {
                 innerShape.position = CGPoint(x: 0,y: 0)
             }
         }else{
+            if self.physicsBody != nil{
+                self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width, height: self.size.height))
+            }
+            self.physicsBody?.velocity = self.velocity
             updateHitSide()
             if mask?.size != self.size && pushVector != lastPushVector{
                 mask?.size = self.size

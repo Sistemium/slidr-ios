@@ -143,5 +143,6 @@
               ],
     "timeout":20,
     "priority":10,
-    "name":"Level 10"
+    "name":"Level 10",
+    "type":"Puzzle"
 }

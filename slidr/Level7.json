@@ -47,5 +47,6 @@
               ],
     "timeout":10,
     "priority":7,
-    "name":"Level 7"
+    "name":"Level 7",
+    "type":"Puzzle"
 }
