@@ -19,17 +19,10 @@ class ToolbarNode: SKSpriteNode {
         position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height - GameSettings.toolbarHeight/2)
         zPosition = 22
         alpha = 0.97
-        leftLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
-        centerLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
-        addChild(leftLabel)
-        addChild(centerLabel)
-        addChild(leftLabel.outlineLabel)
-        addChild(centerLabel.outlineLabel)
-        leftLabel.fontSize = GameSettings.toolbarHeight / 1.5
-        leftLabel.zPosition = 33
-        centerLabel.fontSize = GameSettings.toolbarHeight / 1.5
-        centerLabel.zPosition = 33
-        backButton.zPosition = 33
+        ({leftLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")})()
+        ({centerLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")})()
+        ({backButton = SKSpriteNode(texture: SKTexture(imageNamed: "Back"), size: CGSize(width: GameSettings.toolbarHeight, height: GameSettings.toolbarHeight))})()
+        ({progressBar = SKSpriteNode()})()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,13 +31,13 @@ class ToolbarNode: SKSpriteNode {
     
     var centerLabelColor = UIColor.whiteColor(){
         didSet{
-            centerLabel.fontColor = centerLabelColor
+            centerLabel?.fontColor = centerLabelColor
         }
     }
     
     var leftLabelColor = UIColor.whiteColor(){
         didSet{
-            leftLabel.fontColor = leftLabelColor
+            leftLabel?.fontColor = leftLabelColor
         }
     }
     
@@ -74,6 +67,12 @@ class ToolbarNode: SKSpriteNode {
         }
     }
     
+    var progressBarEnabled: Bool = true{
+        didSet{
+            progressBar.hidden = !progressBarEnabled
+        }
+    }
+    
     private var leftAlignment:CGPoint{
         get{
             return CGPoint(x: -GameSettings.playableAreaSize.width/2 + leftLabel.frame.size.width/2 , y: -GameSettings.toolbarHeight/4)
@@ -86,11 +85,31 @@ class ToolbarNode: SKSpriteNode {
         }
     }
     
-    private var leftLabel : OutlineSKLabelNode!
+    private var leftLabel : OutlineSKLabelNode!{
+        didSet{
+            oldValue?.removeFromParent()
+            addChild(leftLabel)
+            addChild(leftLabel.outlineLabel)
+            leftLabel.fontSize = GameSettings.toolbarHeight / 1.5
+            leftLabel.zPosition = 23
+        }
+    }
     
-    private var centerLabel : OutlineSKLabelNode!
+    private var centerLabel : OutlineSKLabelNode!{
+        didSet{
+            oldValue?.removeFromParent()
+            addChild(centerLabel)
+            addChild(centerLabel.outlineLabel)
+            centerLabel.fontSize = GameSettings.toolbarHeight / 1.5
+            centerLabel.zPosition = 23
+        }
+    }
     
-    var backButton : SKSpriteNode = SKSpriteNode(texture: SKTexture(imageNamed: "Back"), size: CGSize(width: GameSettings.toolbarHeight, height: GameSettings.toolbarHeight))
+    var backButton : SKSpriteNode!{
+        didSet{
+            backButton.zPosition = 33
+        }
+    }
     
     var rightButton : SKSpriteNode!{
         willSet{
@@ -102,4 +121,22 @@ class ToolbarNode: SKSpriteNode {
         }
     }
     
+    private var progressBar : SKSpriteNode!{
+        didSet{
+            oldValue?.removeFromParent()
+            progressBarEnabled = false
+            progressBar.size = CGSize(width: size.width, height: 3)
+            progressBar.color = UIColor.greenColor()
+            progressBar.zPosition = 23
+            addChild(progressBar)
+            progressBarCompletion = 0.0
+        }
+    }
+    
+    var progressBarCompletion:CGFloat?{
+        didSet{
+            progressBar.size.width = GameSettings.playableAreaSize.width * (progressBarCompletion ?? 0)
+            progressBar.position = CGPoint(x: -GameSettings.playableAreaSize.width/2 + progressBar.size.width/2 * (progressBarCompletion ?? 0), y: -self.size.height/2 - progressBar.size.height/2)
+        }
+    }
 }

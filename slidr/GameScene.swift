@@ -34,6 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 addChild(toolbarNode)
                 toolbarNode.leftLabelText = level?.name ?? ""
                 toolbarNode.rightButton = toolbarNode.backButton
+                toolbarNode.progressBarEnabled = true
             case .Free:
                 addChild(toolbarNode)
                 toolbarNode.leftLabelText = "Free mode"
@@ -90,6 +91,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             else if (currentTime - startTime!) > level!.completionTime{
                 presentResultScene(.Win, infoText: "")
+            }else{
+                toolbarNode.progressBarCompletion = CGFloat((currentTime - startTime!) / level!.completionTime!)
             }
         default:
             break
