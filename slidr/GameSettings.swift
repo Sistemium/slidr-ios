@@ -33,7 +33,7 @@ struct GameSettings{
     static let pushBlockInterval = 0.4
     static var defaultSpeed:CGFloat{
         get{
-            return 85000 * rezolutionNormalizationValue
+            return 80000 * rezolutionNormalizationValue
         }
     }
     static var baseSpeed:CGFloat{
@@ -77,7 +77,7 @@ struct GameSettings{
     }
     static let freeModeTimer = 10000.0
     static let redBlockReward = 1.5
-    static let blueBlockReward = 1.5
+    static let blueBlockReward = 0.8
     static var lockOrientationInGameEnabled:Bool{
         get{
             if NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys.contains("LockOrientationInGameEnabled"){
