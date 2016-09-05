@@ -655,7 +655,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        else if dynamicChildren.count < GameSettings.maxNumberOfBlocks{
+        else if dynamicChildren.count < (gameMode == .Free ? GameSettings.maxNumberOfBlocks : 1) {
             if let oldTime = timeSinceLastUpdate{
                 timeToNextBlockPush -= currentTime - oldTime
                 if timeToNextBlockPush < 0 {
