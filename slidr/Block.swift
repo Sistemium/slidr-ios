@@ -227,7 +227,7 @@ class Block: SKSpriteNode {
                 }else{
                     boost = 1
                 }
-                return CGVectorMake(GameSettings.rezolutionNormalizationValue * pushVector.dx / size.height * speedModifier * boost,GameSettings.rezolutionNormalizationValue * pushVector.dy / size.width * speedModifier * boost)
+                return CGVectorMake(pushVector.dx * speedModifier * boost,pushVector.dy * speedModifier * boost)
             }else{
                 return CGVectorMake(0, 0)
             }
@@ -285,7 +285,7 @@ class Block: SKSpriteNode {
     
     func loadBlock(blockData:NSDictionary){
         speedModifier = blockData["speedModifier"] as? CGFloat ?? 1
-        pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.baseSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.baseSpeed)
+        pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.defaultSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.defaultSpeed)
         position = CGPoint(x: blockData["positionX"] as! CGFloat, y: blockData["positionY"] as! CGFloat)
         preferedPushTime = blockData["pushTime"] as? Double
         rotation = blockData["rotation"] as? Int

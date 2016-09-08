@@ -52,48 +52,6 @@ class BluredBlock: Block {
         super.color = UIColor.clearColor()
     }
     
-    override func updateHitSide() {
-        if pushVector != lastPushVector {
-            hitSide?.stopAnimation()
-        }
-        if pushVector == lastPushVector?.inverted{
-            switch pushVector{
-            case GameSettings.moveDirections[3]:
-                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
-                hitSide?.animateNewPosition(CGPoint(x: -size.width / 2 + caterpillarPartSize.width / 2, y: 0))
-            case GameSettings.moveDirections[2]:
-                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
-                hitSide?.animateNewPosition(CGPoint(x: size.width / 2 - caterpillarPartSize.width / 2, y: 0))
-            case GameSettings.moveDirections[1]:
-                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
-                hitSide?.animateNewPosition(CGPoint(x: 0, y: -size.height / 2 + caterpillarPartSize.height / 2))
-            case GameSettings.moveDirections[0]:
-                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
-                hitSide?.animateNewPosition(CGPoint(x: 0, y: size.height / 2 - caterpillarPartSize.height / 2))
-            default:
-                break
-            }
-        }else{
-            switch pushVector{
-            case GameSettings.moveDirections[3]:
-                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
-                hitSide?.position = CGPoint(x: -size.width / 2 + caterpillarPartSize.width / 2, y: 0)
-            case GameSettings.moveDirections[2]:
-                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
-                hitSide?.position = CGPoint(x: size.width / 2 - caterpillarPartSize.width / 2, y: 0)
-            case GameSettings.moveDirections[1]:
-                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
-                hitSide?.position = CGPoint(x: 0, y: -size.height / 2 + caterpillarPartSize.height / 2)
-            case GameSettings.moveDirections[0]:
-                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
-                hitSide?.position = CGPoint(x: 0, y: size.height / 2 - caterpillarPartSize.height / 2)
-            default:
-                break
-            }
-        }
-        lastPushVector = pushVector
-    }
-    
     override func animate() {
         if type == .bomb{
             for innerShape in innerShapes{
@@ -108,38 +66,7 @@ class BluredBlock: Block {
                 innerShape.position = CGPoint(x: 0,y: 0)
             }
         }else{
-            if change<0{
-                change = (-abs(self.velocity.dx + self.velocity.dy)) * GameSettings.caterpillarSpeed
-            }else{
-                change = abs(self.velocity.dx + self.velocity.dy) * GameSettings.caterpillarSpeed
-            }
-            if self.pushVector == GameSettings.moveDirections[0] || self.pushVector == GameSettings.moveDirections[1]{
-                self.size = CGSize(width: self.size.width, height: self.size.height + change)
-                if self.size.height < self.minHeight {
-                    self.size = CGSize(width: self.size.width, height: self.minHeight)
-                    change = -change
-                }
-                if self.size.height > self.maxHeight {
-                    self.size = CGSize(width: self.size.width, height: self.maxHeight)
-                    change = -change
-                }
-            }else{
-                self.size = CGSize(width: self.size.width + change, height: self.size.height)
-                if self.size.width < self.minWidth {
-                    self.size = CGSize(width: self.minWidth, height: self.size.height)
-                    change = -change
-                }
-                if self.size.width > self.maxWidth {
-                    self.size = CGSize(width: self.maxWidth, height: self.size.height)
-                    change = -change
-                }
-            }
-            if self.physicsBody != nil{
-                self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: self.size.width, height: self.size.height))
-            }
             self.physicsBody?.velocity = self.velocity
-            updateHitSide()
-            mask?.size = self.size
         }
     }
 }

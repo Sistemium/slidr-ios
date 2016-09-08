@@ -150,7 +150,7 @@ class GameResultScene: SKScene{
                     scene.previousScene = MenuScene()
                     view!.presentScene(scene)
                 }else{
-                    let scene = ChallangeLevelScene()
+                    let scene = ChallengeLevelScene()
                     scene.size = GameSettings.playableAreaSize
                     scene.scaleMode = .Fill
                     scene.previousScene = MenuScene()
@@ -168,15 +168,15 @@ class GameResultScene: SKScene{
                     let scene = GameScene()
                     scene.size = GameSettings.playableAreaSize
                     scene.scaleMode = .Fill
-                    scene.level = LevelLoadService.sharedInstance.nextChallangeByPriority(finishedLevel!.priority!)
-                    scene.previousScene = ChallangeLevelScene()
+                    scene.level = LevelLoadService.sharedInstance.nextChallengeByPriority(finishedLevel!.priority!)
+                    scene.previousScene = ChallengeLevelScene()
                     view?.presentScene(scene)
                 }else{
                     let scene = GameScene()
                     scene.size = GameSettings.playableAreaSize
                     scene.scaleMode = .Fill
-                    scene.level = LevelLoadService.sharedInstance.challangeByPriority(finishedLevel!.priority!)
-                    scene.previousScene = ChallangeLevelScene()
+                    scene.level = LevelLoadService.sharedInstance.challengeByPriority(finishedLevel!.priority!)
+                    scene.previousScene = ChallengeLevelScene()
                     view?.presentScene(scene)
                 }
             }

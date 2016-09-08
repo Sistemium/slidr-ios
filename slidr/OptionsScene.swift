@@ -84,16 +84,12 @@ class OptionsScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch (indexPath.row){
         case 0:
-            let cell =  NSBundle.mainBundle().loadNibNamed("GameSpeedSliderTableViewCell", owner: self, options: nil)[0] as! GameSpeedSliderTableViewCell
-            cell.backgroundColor = UIColor.clearColor()
-            return cell
-        case 1:
             let cell = UITableViewCell()
             cell.textLabel?.text = "Shake to reset:"
             cell.accessoryView = shakeSwitcher

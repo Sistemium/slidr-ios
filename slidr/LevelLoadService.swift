@@ -17,9 +17,9 @@ class LevelLoadService{
         }
     }
     
-    var challanges : [Level]{
+    var challenges : [Level]{
         get{
-            return loadChallanges()
+            return loadChallenges()
         }
     }
     
@@ -39,17 +39,17 @@ class LevelLoadService{
         return levels
     }
     
-    private func loadChallanges() -> [Level]{
-        var challanges = [Level]()
+    private func loadChallenges() -> [Level]{
+        var challenges = [Level]()
         let fileManager = NSFileManager.defaultManager()
         let enumerator = fileManager.enumeratorAtPath(NSBundle.mainBundle().bundlePath)
         while let element = enumerator?.nextObject() as? String {
             if element.hasSuffix(".json") && element.hasPrefix("Challenge"){
-                challanges.append(readJson(element.substringToIndex(element.characters.indexOf(".")!)))
+                challenges.append(readJson(element.substringToIndex(element.characters.indexOf(".")!)))
             }
         }
-        challanges.sortInPlace({ $0.priority < $1.priority })
-        return challanges
+        challenges.sortInPlace({ $0.priority < $1.priority })
+        return challenges
     }
     
     private func readJson(json:String) ->Level{
@@ -59,10 +59,10 @@ class LevelLoadService{
         var level = Level()
         level.name = jsonResult["name"] as? String
         level.priority = jsonResult["priority"] as? Float
-        level.timeout = jsonResult["timeout"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.baseSpeed))
+        level.timeout = jsonResult["timeout"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.defaultSpeed))
         level.type = LevelType(rawValue: jsonResult["type"] as! String)
         if jsonResult["completionTime"] != nil{
-            level.completionTime = jsonResult["completionTime"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.baseSpeed))
+            level.completionTime = jsonResult["completionTime"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.defaultSpeed))
         }
         for element in jsonResult["blocks"] as! NSArray{
             let blockData = element as! NSDictionary
@@ -95,8 +95,8 @@ class LevelLoadService{
         return nil
     }
     
-    func challangeByPriority(priority:Float)->Level?{
-        for level in challanges{
+    func challengeByPriority(priority:Float)->Level?{
+        for level in challenges{
             if level.priority == priority{
                 return level
             }
@@ -104,8 +104,8 @@ class LevelLoadService{
         return nil
     }
     
-    func nextChallangeByPriority(priority:Float)->Level?{
-        for level in challanges{
+    func nextChallengeByPriority(priority:Float)->Level?{
+        for level in challenges{
             if level.priority > priority{
                 return level
             }

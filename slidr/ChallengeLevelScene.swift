@@ -1,5 +1,5 @@
 //
-//  ChallangeLevelScene.swift
+//  ChallengeLevelScene.swift
 //  slidr
 //
 //  Created by Edgar Jan Vuicik on 23/08/16.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class ChallangeLevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
+class ChallengeLevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     
     var levels:[Level]!
     
@@ -44,10 +44,10 @@ class ChallangeLevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
     override func didMoveToView(view: SKView) {
         viewScale = self.view!.frame.size.width / GameSettings.playableAreaSize.width
         backgroundColor = UIColor.lightGrayColor()
-        levels = LevelLoadService.sharedInstance.challanges
+        levels = LevelLoadService.sharedInstance.challenges
         tableview = UITableView()
         toolbarNode  = ToolbarNode()
-        toolbarNode.centerLabelText = "Select Challange"
+        toolbarNode.centerLabelText = "Select Challenge"
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -83,7 +83,7 @@ class ChallangeLevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
         scene.size = GameSettings.playableAreaSize
         scene.scaleMode = .Fill
         scene.level = levels[indexPath.row]
-        scene.previousScene = ChallangeLevelScene()
+        scene.previousScene = ChallengeLevelScene()
         view!.presentScene(scene)
     }
     
@@ -94,7 +94,7 @@ class ChallangeLevelScene: SKScene,UITableViewDelegate,UITableViewDataSource{
             tableview = UITableView()
             backgroundColor = UIColor.lightGrayColor()
             toolbarNode = ToolbarNode()
-            toolbarNode.centerLabelText = "Select Challange"
+            toolbarNode.centerLabelText = "Select Challenge"
         }
         
     }

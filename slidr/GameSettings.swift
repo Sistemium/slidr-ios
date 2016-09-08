@@ -22,7 +22,7 @@ struct GameSettings{
     }
     static var moveDirections:[CGVector]{
         get{
-            return [CGVectorMake(0, baseSpeed),CGVectorMake(0, -baseSpeed),CGVectorMake(baseSpeed, 0),CGVectorMake(-baseSpeed, 0)]
+            return [CGVectorMake(0, defaultSpeed),CGVectorMake(0, -defaultSpeed),CGVectorMake(defaultSpeed, 0),CGVectorMake(-defaultSpeed, 0)]
         }
     }
     static var toolbarHeight:CGFloat{
@@ -33,18 +33,10 @@ struct GameSettings{
     static let pushBlockInterval = 0.4
     static var defaultSpeed:CGFloat{
         get{
-            return 80000 * rezolutionNormalizationValue
+            return 350 * rezolutionNormalizationValue
         }
     }
-    static var baseSpeed:CGFloat{
-        get{
-            return NSUserDefaults.standardUserDefaults().valueForKey("baseSpeed") as? CGFloat ?? defaultSpeed
-        }
-        
-        set{
-            NSUserDefaults.standardUserDefaults().setValue(newValue, forKey: "baseSpeed")
-        }
-    }
+    
     static var minBlockSize:UInt32{
         get{
             return UInt32(100.0 * rezolutionNormalizationValue)

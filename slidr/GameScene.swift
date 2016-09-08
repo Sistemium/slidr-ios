@@ -112,16 +112,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         view!.presentScene(scene)
     }
     
+    func randomizeReward(reward:Double)->Double{
+        return ((reward - reward / 2)...(reward + reward / 2)).random()
+    }
+    
     private func destroyBlock(block:Block,withTime time:Double, withReward reward:Double? = nil){
         var time = time
+        var reward = reward
         if reward != nil && (gameMode == .Free || gameMode == .Challenge){
+            reward = randomizeReward(reward!)
             let score = SKLabelNode(fontNamed:"Chalkduster")
             addChild(score)
             score.position = block.position
             score.fontSize = GameSettings.toolbarHeight / 1.5
             score.zPosition = 1.5
             score.fontColor = UIColor.greenColor()
-            score.text = "+" + reward!.description
+            score.text = "+" + reward!.fixedFractionDigits(1)
             let group = SKAction.group([SKAction.fadeOutWithDuration(time * 2),SKAction.moveByY(200, duration: time * 2)])
             score.runAction(group){
                 score.removeFromParent()
@@ -209,6 +215,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return false
     }
     
+    func backToBackCollisionOccuredWith(block1:Block,block2:Block) -> Bool{
+        if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
+            if block1.pushVector.dx > 0 && max(block1.position.x,block2.position.x) == block1.position.x{
+                return true
+            }
+            if block1.pushVector.dx < 0 && min(block1.position.x,block2.position.x) == block1.position.x{
+                return true
+            }
+            if block1.pushVector.dy > 0 && max(block1.position.y,block2.position.y) == block1.position.y{
+                return true
+            }
+            if block1.pushVector.dy < 0 && min(block1.position.y,block2.position.y) == block1.position.y{
+                return true
+            }
+        }
+        return false
+    }
+    
     func didBeginContact(contact: SKPhysicsContact) {
         if contact.bodyA.node == nil || contact.bodyB.node == nil {
             return
@@ -230,6 +254,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             else if block1.pushVector.dx == -block2.pushVector.dx && block1.pushVector.dy == -block2.pushVector.dy{
                 if nullVelocityCollisionOccuredWith(block1,block2: block2) {
+                    return
+                }
+                if backToBackCollisionOccuredWith(block1,block2: block2) {
                     return
                 }
                 if block1.type == block2.type {

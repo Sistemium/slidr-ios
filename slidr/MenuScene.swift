@@ -15,27 +15,27 @@ class MenuScene: GameScene {
         super.didMoveToView(view)
     }
     
-    private var startGameLabel: OutlineSKLabelNode!{
+    private var levelsLabel: OutlineSKLabelNode!{
         didSet{
-            startGameLabel.text = "Start game"
-            startGameLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 1.8)
-            startGameLabel.fontSize = GameSettings.labelSize
-            startGameLabel.zPosition = 2.0
-            startGameLabel.fontColor = .whiteColor()
-            addChild(startGameLabel)
-            addChild(startGameLabel.outlineLabel)
+            levelsLabel.text = "Puzzle levels"
+            levelsLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 1.8)
+            levelsLabel.fontSize = GameSettings.labelSize
+            levelsLabel.zPosition = 2.0
+            levelsLabel.fontColor = .whiteColor()
+            addChild(levelsLabel)
+            addChild(levelsLabel.outlineLabel)
         }
     }
     
-    private var challangeGameLabel: OutlineSKLabelNode!{
+    private var challengeGameLabel: OutlineSKLabelNode!{
         didSet{
-            challangeGameLabel.text = "Challange"
-            challangeGameLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 0.6)
-            challangeGameLabel.fontSize = GameSettings.labelSize
-            challangeGameLabel.zPosition = 2.0
-            challangeGameLabel.fontColor = .whiteColor()
-            addChild(challangeGameLabel)
-            addChild(challangeGameLabel.outlineLabel)
+            challengeGameLabel.text = "Challenge"
+            challengeGameLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 0.6)
+            challengeGameLabel.fontSize = GameSettings.labelSize
+            challengeGameLabel.zPosition = 2.0
+            challengeGameLabel.fontColor = .whiteColor()
+            addChild(challengeGameLabel)
+            addChild(challengeGameLabel.outlineLabel)
         }
     }
     
@@ -69,14 +69,14 @@ class MenuScene: GameScene {
             if node.containsPoint(location){
                 if let button = node as? OutlineSKLabelNode{
                     switch button {
-                    case startGameLabel:
+                    case levelsLabel:
                         let scene = LevelScene()
                         scene.size = GameSettings.playableAreaSize
                         scene.scaleMode = .Fill
                         scene.previousScene = MenuScene()
                         view!.presentScene(scene)
-                    case challangeGameLabel:
-                        let scene = ChallangeLevelScene()
+                    case challengeGameLabel:
+                        let scene = ChallengeLevelScene()
                         scene.size = GameSettings.playableAreaSize
                         scene.scaleMode = .Fill
                         scene.previousScene = MenuScene()
@@ -108,9 +108,9 @@ class MenuScene: GameScene {
             child.removeFromParent()
         }
         backgroundColor = UIColor.lightGrayColor()
-        startGameLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        levelsLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         freeModeLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         optionsLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
-        challangeGameLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
+        challengeGameLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
     }
 }
