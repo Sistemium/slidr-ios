@@ -2,8 +2,8 @@
     "blocks":[
               {
               "type":"swipeable",
-              "height":220,
-              "width":100,
+              "height":250,
+              "width":150,
               "pushVectorX":1,
               "pushVectorY":0,
               "positionX":-0.1,
@@ -13,8 +13,8 @@
               },
               {
               "type":"swipeable",
-              "height":220,
-              "width":100,
+              "height":250,
+              "width":150,
               "pushVectorX":-1,
               "pushVectorY":0,
               "positionX":1.1,

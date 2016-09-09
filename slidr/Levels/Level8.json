@@ -2,8 +2,8 @@
     "blocks":[
               {
               "type":"swipeable",
-              "height":160,
-              "width":160,
+              "height":200,
+              "width":200,
               "pushVectorX":-1,
               "pushVectorY":0,
               "positionX":1.1,
@@ -13,8 +13,8 @@
               },
               {
               "type":"standart",
-              "height":160,
-              "width":160,
+              "height":200,
+              "width":200,
               "pushVectorX":-1,
               "pushVectorY":0,
               "positionX":1.1,
@@ -24,8 +24,8 @@
               },
               {
               "type":"standart",
-              "height":160,
-              "width":160,
+              "height":200,
+              "width":200,
               "pushVectorX":-1,
               "pushVectorY":0,
               "positionX":1.1,
@@ -35,8 +35,8 @@
               },
               {
               "type":"swipeable",
-              "height":160,
-              "width":160,
+              "height":200,
+              "width":200,
               "pushVectorX":-1,
               "pushVectorY":0,
               "positionX":1.1,

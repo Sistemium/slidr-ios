@@ -46,7 +46,7 @@
               },
               {
               "type":"standart",
-              "height":150,
+              "height":200,
               "width":100,
               "pushVectorX":0,
               "pushVectorY":1,
@@ -58,7 +58,7 @@
               },
               {
               "type":"swipeable",
-              "height":150,
+              "height":200,
               "width":100,
               "pushVectorX":0,
               "pushVectorY":1,
@@ -70,7 +70,7 @@
               },
               {
               "type":"swipeable",
-              "height":150,
+              "height":200,
               "width":100,
               "pushVectorX":0,
               "pushVectorY":-1,
@@ -82,7 +82,7 @@
               },
               {
               "type":"standart",
-              "height":150,
+              "height":200,
               "width":100,
               "pushVectorX":0,
               "pushVectorY":-1,
@@ -94,7 +94,7 @@
               },
               {
               "type":"swipeable",
-              "height":150,
+              "height":200,
               "width":100,
               "pushVectorX":1,
               "pushVectorY":0,
@@ -106,7 +106,7 @@
               },
               {
               "type":"standart",
-              "height":150,
+              "height":200,
               "width":100,
               "pushVectorX":1,
               "pushVectorY":0,
@@ -118,7 +118,7 @@
               },
               {
               "type":"swipeable",
-              "height":150,
+              "height":200,
               "width":100,
               "pushVectorX":-1,
               "pushVectorY":0,
@@ -130,7 +130,7 @@
               },
               {
               "type":"standart",
-              "height":150,
+              "height":200,
               "width":100,
               "pushVectorX":-1,
               "pushVectorY":0,
