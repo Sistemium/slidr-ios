@@ -153,7 +153,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func repulseBlock(block:Block,fromWall wall:Block,withContactPoint point:CGPoint){
         if wall.rotation != 0{
-            if convertPoint(point, toNode: block).distance(block.corners[0]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
+            if convertPoint(point, toNode: block).distance(block.corners[0]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/10{
                 if block.pushVector.dy != 0{
                     block.pushVector = CGVector(dx: -abs(block.pushVector.dy), dy: 0)
                 }else{
@@ -161,7 +161,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 return
             }
-            if convertPoint(point, toNode: block).distance(block.corners[1]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
+            if convertPoint(point, toNode: block).distance(block.corners[1]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/10{
                 if block.pushVector.dy != 0{
                     block.pushVector = CGVector(dx: -abs(block.pushVector.dy), dy: 0)
                 }else{
@@ -169,7 +169,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 return
             }
-            if convertPoint(point, toNode: block).distance(block.corners[2]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
+            if convertPoint(point, toNode: block).distance(block.corners[2]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/10{
                 if block.pushVector.dy != 0{
                     block.pushVector = CGVector(dx: abs(block.pushVector.dy), dy: 0)
                 }else{
@@ -177,7 +177,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 return
             }
-            if convertPoint(point, toNode: block).distance(block.corners[3]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/1000{
+            if convertPoint(point, toNode: block).distance(block.corners[3]) <= (abs(block.pushVector.dy) + abs(block.pushVector.dx))/10{
                 if block.pushVector.dy != 0{
                     block.pushVector = CGVector(dx: abs(block.pushVector.dy), dy: 0)
                 }else{
