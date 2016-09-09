@@ -67,7 +67,7 @@ struct GameSettings{
             NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "ShakeToResetEnabled")
         }
     }
-    static let freeModeTimer = 10000.0
+    static let freeModeTimer = 10.0
     static let redBlockReward = 1.5
     static let blueBlockReward = 0.8
     static var lockOrientationInGameEnabled:Bool{

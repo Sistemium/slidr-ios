@@ -64,7 +64,7 @@ class GameViewController: UIViewController {
     func resetLevel(){
         let skView = view as! SKView
         if let game = skView.scene as? GameScene{
-            if game.gameMode == .Level{
+            if game.gameMode == .Level || game.gameMode == .Challenge{
                 game.timeSinceLastUpdate = nil
                 game.timeToNextBlockPush = GameSettings.pushBlockInterval
                 for node in game.children{
@@ -72,8 +72,13 @@ class GameViewController: UIViewController {
                         block.removeFromParent()
                     }
                 }
-                if let _ = game.level{
+                game.startTime = nil
+                if game.level?.type == .Puzzle{
                     game.level = LevelLoadService.sharedInstance.levelByPriority(game.level!.priority!)
+                }
+                if game.level?.type == .Challenge{
+                    
+                    game.level = LevelLoadService.sharedInstance.challengeByPriority(game.level!.priority!)
                 }
             }
         }
