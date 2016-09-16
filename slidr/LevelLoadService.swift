@@ -7,6 +7,26 @@
 //
 
 import Foundation
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class LevelLoadService{
     static let sharedInstance = LevelLoadService()
@@ -23,39 +43,39 @@ class LevelLoadService{
         }
     }
     
-    private init() {
+    fileprivate init() {
     }
     
-    private func loadLevels() -> [Level]{
+    fileprivate func loadLevels() -> [Level]{
         var levels = [Level]()
-        let fileManager = NSFileManager.defaultManager()
-        let enumerator = fileManager.enumeratorAtPath(NSBundle.mainBundle().bundlePath)
+        let fileManager = FileManager.default
+        let enumerator = fileManager.enumerator(atPath: Bundle.main.bundlePath)
         while let element = enumerator?.nextObject() as? String {
             if element.hasSuffix(".json") && element.hasPrefix("Level"){
-                levels.append(readJson(element.substringToIndex(element.characters.indexOf(".")!)))
+                levels.append(readJson(element.substring(to: element.characters.index(of: ".")!)))
             }
         }
-        levels.sortInPlace({ $0.priority < $1.priority })
+        levels.sort(by: { $0.priority < $1.priority })
         return levels
     }
     
-    private func loadChallenges() -> [Level]{
+    fileprivate func loadChallenges() -> [Level]{
         var challenges = [Level]()
-        let fileManager = NSFileManager.defaultManager()
-        let enumerator = fileManager.enumeratorAtPath(NSBundle.mainBundle().bundlePath)
+        let fileManager = FileManager.default
+        let enumerator = fileManager.enumerator(atPath: Bundle.main.bundlePath)
         while let element = enumerator?.nextObject() as? String {
             if element.hasSuffix(".json") && element.hasPrefix("Challenge"){
-                challenges.append(readJson(element.substringToIndex(element.characters.indexOf(".")!)))
+                challenges.append(readJson(element.substring(to: element.characters.index(of: ".")!)))
             }
         }
-        challenges.sortInPlace({ $0.priority < $1.priority })
+        challenges.sort(by: { $0.priority < $1.priority })
         return challenges
     }
     
-    private func readJson(json:String) ->Level{
-        let jsonPath:String? = NSBundle.mainBundle().pathForResource(json, ofType: "json")!
-        let jsonData = try? NSData(contentsOfFile: jsonPath!, options: NSDataReadingOptions.DataReadingMappedIfSafe)
-        let jsonResult: NSDictionary = try! NSJSONSerialization.JSONObjectWithData(jsonData!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+    fileprivate func readJson(_ json:String) ->Level{
+        let jsonPath:String? = Bundle.main.path(forResource: json, ofType: "json")!
+        let jsonData = try? Data(contentsOf: URL(fileURLWithPath: jsonPath!), options: NSData.ReadingOptions.mappedIfSafe)
+        let jsonResult: NSDictionary = try! JSONSerialization.jsonObject(with: jsonData!, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
         var level = Level()
         level.name = jsonResult["name"] as? String
         level.priority = jsonResult["priority"] as? Float
@@ -64,20 +84,66 @@ class LevelLoadService{
         if jsonResult["completionTime"] != nil{
             level.completionTime = jsonResult["completionTime"] as! Double * (Double(GameSettings.defaultSpeed) / Double(GameSettings.defaultSpeed))
         }
-        for element in jsonResult["blocks"] as! NSArray{
-            let blockData = element as! NSDictionary
-            level.blocks.append(Block(blockData: blockData))
+        if let blocks = jsonResult["blocks"] as? NSArray{
+            for element in blocks{
+                let blockData = element as! NSDictionary
+                level.blocks.append(Block(blockData: blockData))
+            }
         }
+        
+        if let scenarioArray = jsonResult["scenario"] as? NSArray{
+            for scen in scenarioArray{
+                if let scenario = scen as? NSDictionary{
+                    let numberOfBlocks = scenario["numberOfBlocks"] as! Int
+                    for i in 0..<numberOfBlocks{
+                        let blockData = NSMutableDictionary()
+                        blockData["type"] = scenario["type"]
+                        blockData["pushTime"] = Double(i) * (scenario["pushTimeInterval"] as! Double)
+                        blockData["speedModifier"] = 1 + Double(i) * (scenario["speedIncreasingInterval"] as! Double)
+                        blockData["width"] = (scenario["size"] as! NSDictionary)["width"]
+                        blockData["height"] = (scenario["size"] as! NSDictionary)["height"]
+                        for j in scenario["position"] as! NSArray{
+                            if let position = j as? NSDictionary{
+                                if i < position["indexes"] as! Int{
+                                    blockData["positionX"] = position["x"]
+                                    blockData["positionY"] = position["y"]
+                                    switch (blockData["positionX"] as! Double,blockData["positionY"] as! Double) {
+                                    case let (_,y) where y<0:
+                                        blockData["pushVectorX"] = 0
+                                        blockData["pushVectorY"] = 1
+                                    case  let (_,y) where y>1:
+                                        blockData["pushVectorX"] = 0
+                                        blockData["pushVectorY"] = -1
+                                    case let (x,_) where x > 1:
+                                        blockData["pushVectorX"] = -1
+                                        blockData["pushVectorY"] = 0
+                                    case let (x,_) where x < 0:
+                                        blockData["pushVectorX"] = 1
+                                        blockData["pushVectorY"] = 0
+                                    default:
+                                        blockData["pushVectorX"] = 0
+                                        blockData["pushVectorY"] = 0
+                                    }
+                                    break
+                                }
+                            }
+                        }
+                        level.blocks.append(Block(blockData: blockData))
+                    }
+                }
+            }
+        }
+        
         return level
     }
     
-    func updateCompletedLevelsByPriority(priority:Float){
+    func updateCompletedLevelsByPriority(_ priority:Float){
         if Int(priority) > GameSettings.completedLevels{
             GameSettings.completedLevels = Int(priority)
         }
     }
     
-    func levelByPriority(priority:Float)->Level?{
+    func levelByPriority(_ priority:Float)->Level?{
         for level in levels{
             if level.priority == priority{
                 return level
@@ -86,7 +152,7 @@ class LevelLoadService{
         return nil
     }
     
-    func nextLevelByPriority(priority:Float)->Level?{
+    func nextLevelByPriority(_ priority:Float)->Level?{
         for level in levels{
             if level.priority > priority{
                 return level
@@ -95,7 +161,7 @@ class LevelLoadService{
         return nil
     }
     
-    func challengeByPriority(priority:Float)->Level?{
+    func challengeByPriority(_ priority:Float)->Level?{
         for level in challenges{
             if level.priority == priority{
                 return level
@@ -104,7 +170,7 @@ class LevelLoadService{
         return nil
     }
     
-    func nextChallengeByPriority(priority:Float)->Level?{
+    func nextChallengeByPriority(_ priority:Float)->Level?{
         for level in challenges{
             if level.priority > priority{
                 return level

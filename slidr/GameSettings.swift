@@ -68,8 +68,8 @@ struct GameSettings{
         }
     }
     static let freeModeTimer = 10.0
-    static let redBlockReward = 0.8
-    static let blueBlockReward = 0.8
+    static let redBlockReward = 1.5
+    static let blueBlockReward = 1.5
     static var lockOrientationInGameEnabled:Bool{
         get{
             if UserDefaults.standard.dictionaryRepresentation().keys.contains("LockOrientationInGameEnabled"){
