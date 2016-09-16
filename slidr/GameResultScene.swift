@@ -9,68 +9,68 @@
 import SpriteKit
 
 enum Result{
-    case Win,Lose
+    case win,lose
 }
 
 class GameResultScene: SKScene{
     
     var scoreTime:CFTimeInterval?
     
-    var result:Result = Result.Win
+    var result:Result = Result.win
     
     var finishedLevel :Level?
     
     var infoText = ""
     
-    private var resultLabel: OutlineSKLabelNode!{
+    fileprivate var resultLabel: OutlineSKLabelNode!{
         didSet{
-            resultLabel.text = result == .Win ? "You Win" : "You Lose"
+            resultLabel.text = result == .win ? "You Win" : "You Lose"
             resultLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 1.3)
             resultLabel.fontSize = GameSettings.labelSize
             resultLabel.zPosition = 1.0
-            resultLabel.fontColor = result == .Win ? UIColor.greenColor() : UIColor.redColor()
+            resultLabel.fontColor = result == .win ? UIColor.green : UIColor.red
             addChild(resultLabel)
             addChild(resultLabel.outlineLabel)
         }
     }
     
-    private var questionLabel: OutlineSKLabelNode!{
+    fileprivate var questionLabel: OutlineSKLabelNode!{
         didSet{
-            questionLabel.text = result == .Win ? "Play next level?" : "Play again?"
+            questionLabel.text = result == .win ? "Play next level?" : "Play again?"
             questionLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2)
             questionLabel.fontSize = GameSettings.labelSize
             questionLabel.zPosition = 1.0
-            questionLabel.fontColor = UIColor.whiteColor()
+            questionLabel.fontColor = UIColor.white
             addChild(questionLabel)
             addChild(questionLabel.outlineLabel)
         }
     }
     
-    private var returnButton: OutlineSKLabelNode!{
+    fileprivate var returnButton: OutlineSKLabelNode!{
         didSet{
             returnButton.text = "No"
             returnButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 - GameSettings.labelSize * 1.3, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 1.3)
             returnButton.fontSize = GameSettings.labelSize
             returnButton.zPosition = 1.0
-            returnButton.fontColor = UIColor.whiteColor()
+            returnButton.fontColor = UIColor.white
             addChild(returnButton)
             addChild(returnButton.outlineLabel)
         }
     }
     
-    private var actionButton: OutlineSKLabelNode!{
+    fileprivate var actionButton: OutlineSKLabelNode!{
         didSet{
             actionButton.text = "Yes"
             actionButton.position = CGPoint(x: GameSettings.playableAreaSize.width/2 + GameSettings.labelSize * 1.3, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 1.3)
             actionButton.fontSize = GameSettings.labelSize
             actionButton.zPosition = 1.0
-            actionButton.fontColor = UIColor.whiteColor()
+            actionButton.fontColor = UIColor.white
             addChild(actionButton)
             addChild(actionButton.outlineLabel)
         }
     }
     
-    private var scoreLabel: OutlineSKLabelNode!{
+    fileprivate var scoreLabel: OutlineSKLabelNode!{
         didSet{
             scoreLabel.text = scoreTime == nil ? "" : "You survived \(scoreTime!.fixedFractionDigits(0)) second"
             if scoreTime != nil && scoreTime != 1.0 {
@@ -79,22 +79,22 @@ class GameResultScene: SKScene{
             scoreLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 2.4)
             scoreLabel.fontSize = GameSettings.labelSize * 0.5
             scoreLabel.zPosition = 1.0
-            scoreLabel.fontColor = UIColor.blackColor()
+            scoreLabel.fontColor = UIColor.black
             addChild(scoreLabel)
             addChild(scoreLabel.outlineLabel)
         }
     }
     
-    private var recordLabel: OutlineSKLabelNode!{
+    fileprivate var recordLabel: OutlineSKLabelNode!{
         didSet{
             if scoreTime != nil{
-                let record = NSUserDefaults.standardUserDefaults().integerForKey("record")
+                let record = UserDefaults.standard.integer(forKey: "record")
                 if record < Int(scoreTime!){
                     recordLabel.text = "It's your new record!"
-                    NSUserDefaults.standardUserDefaults().setValue(Int(scoreTime!), forKey: "record")
+                    UserDefaults.standard.setValue(Int(scoreTime!), forKey: "record")
                 }else{
                     recordLabel.text = "Your best time was \(record) second"
-                    if scoreTime != nil && recordLabel != 1.0 {
+                    if scoreTime != nil && record != 1 {
                         recordLabel.text! += "s"
                     }
                 }
@@ -102,29 +102,29 @@ class GameResultScene: SKScene{
             recordLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 3.5)
             recordLabel.fontSize = GameSettings.labelSize * 0.5
             recordLabel.zPosition = 1.0
-            recordLabel.fontColor = UIColor.blackColor()
+            recordLabel.fontColor = UIColor.black
             addChild(recordLabel)
             addChild(recordLabel.outlineLabel)
         }
     }
     
-    private var infoLabel: OutlineSKLabelNode!{
+    fileprivate var infoLabel: OutlineSKLabelNode!{
         didSet{
             infoLabel.text = infoText
             infoLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 + GameSettings.labelSize * 2.6)
             infoLabel.fontSize = GameSettings.labelSize * 0.5
             infoLabel.zPosition = 1.0
-            infoLabel.fontColor = UIColor.blackColor()
+            infoLabel.fontColor = UIColor.black
             addChild(infoLabel)
             addChild(infoLabel.outlineLabel)
         }
     }
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         for child in children{
             child.removeFromParent()
         }
-        backgroundColor = UIColor.lightGrayColor()
+        backgroundColor = UIColor.lightGray
         resultLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         questionLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         returnButton = OutlineSKLabelNode(fontNamed:"Chalkduster")
@@ -132,65 +132,65 @@ class GameResultScene: SKScene{
         scoreLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         recordLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         infoLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
-        if result == .Win{
+        if result == .win{
             LevelLoadService.sharedInstance.updateCompletedLevelsByPriority(finishedLevel!.priority!)
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        let location = touches.first!.locationInNode(self)
-        let node = nodeAtPoint(location)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let location = touches.first!.location(in: self)
+        let node = atPoint(location)
         switch node {
         case returnButton:
             if finishedLevel != nil {
                 if finishedLevel?.type == .Puzzle{
                     let scene = LevelScene()
                     scene.size = GameSettings.playableAreaSize
-                    scene.scaleMode = .Fill
+                    scene.scaleMode = .fill
                     scene.previousScene = MenuScene()
                     view!.presentScene(scene)
                 }else{
                     let scene = ChallengeLevelScene()
                     scene.size = GameSettings.playableAreaSize
-                    scene.scaleMode = .Fill
+                    scene.scaleMode = .fill
                     scene.previousScene = MenuScene()
                     view!.presentScene(scene)
                 }
             }else{
                 let scene = MenuScene()
                 scene.size = GameSettings.playableAreaSize
-                scene.scaleMode = .Fill
+                scene.scaleMode = .fill
                 view!.presentScene(scene)
             }
         case actionButton:
             if finishedLevel?.type == .Challenge{
-                if result == .Win{
+                if result == .win{
                     let scene = GameScene()
                     scene.size = GameSettings.playableAreaSize
-                    scene.scaleMode = .Fill
+                    scene.scaleMode = .fill
                     scene.level = LevelLoadService.sharedInstance.nextChallengeByPriority(finishedLevel!.priority!)
                     scene.previousScene = ChallengeLevelScene()
                     view?.presentScene(scene)
                 }else{
                     let scene = GameScene()
                     scene.size = GameSettings.playableAreaSize
-                    scene.scaleMode = .Fill
+                    scene.scaleMode = .fill
                     scene.level = LevelLoadService.sharedInstance.challengeByPriority(finishedLevel!.priority!)
                     scene.previousScene = ChallengeLevelScene()
                     view?.presentScene(scene)
                 }
             }
-            else if result == .Win{
+            else if result == .win{
                 let scene = GameScene()
                 scene.size = GameSettings.playableAreaSize
-                scene.scaleMode = .Fill
+                scene.scaleMode = .fill
                 scene.level = LevelLoadService.sharedInstance.nextLevelByPriority(finishedLevel!.priority!)
                 scene.previousScene = LevelScene()
                 view?.presentScene(scene)
             }else{
                 let scene = GameScene()
                 scene.size = GameSettings.playableAreaSize
-                scene.scaleMode = .Fill
+                scene.scaleMode = .fill
                 if finishedLevel != nil {
                     scene.level = LevelLoadService.sharedInstance.levelByPriority(finishedLevel!.priority!)
                     scene.previousScene = LevelScene()
@@ -204,11 +204,11 @@ class GameResultScene: SKScene{
         }
     }
     
-    override func didChangeSize(oldSize: CGSize) {
+    override func didChangeSize(_ oldSize: CGSize) {
         for child in children{
             child.removeFromParent()
         }
-        backgroundColor = UIColor.lightGrayColor()
+        backgroundColor = UIColor.lightGray
         resultLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         questionLabel = OutlineSKLabelNode(fontNamed:"Chalkduster")
         returnButton = OutlineSKLabelNode(fontNamed:"Chalkduster")

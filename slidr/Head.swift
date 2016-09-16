@@ -11,7 +11,7 @@ import SpriteKit
 class Head:SKSpriteNode {
     
     convenience init(){
-        self.init(texture: nil, color: UIColor.clearColor(), size: CGSize())
+        self.init(texture: nil, color: UIColor.clear, size: CGSize())
         customInit()
     }
     
@@ -25,45 +25,45 @@ class Head:SKSpriteNode {
     
     override var size: CGSize{
         didSet{
-            shape = SKShapeNode(ellipseOfSize: size)
+            shape = SKShapeNode(ellipseOf: size)
         }
     }
     
     var shape:SKShapeNode!{
         didSet{
             oldValue?.removeFromParent()
-            shape.strokeColor = UIColor.blackColor()
-            shape.fillColor = UIColor.blackColor()
+            shape.strokeColor = UIColor.black
+            shape.fillColor = UIColor.black
             shape.zPosition = zPosition
             addChild(shape)
         }
     }
     
-    private func customInit(){
-        shape = SKShapeNode(ellipseOfSize: size)
+    fileprivate func customInit(){
+        shape = SKShapeNode(ellipseOf: size)
         zPosition = 1.5
     }
     
-    private var copy : SKSpriteNode?
+    fileprivate var copy : SKSpriteNode?
     
-    func animateNewPosition(newValue:CGPoint){
+    func animateNewPosition(_ newValue:CGPoint){
         copy = SKSpriteNode()
         copy?.addChild(shape.copy() as! SKNode)
         parent?.addChild(copy!)
         copy?.position = position
-        hidden = true
+        isHidden = true
         position = newValue
         copy?.zPosition = zPosition + 0.1
-        copy?.runAction(SKAction.moveTo(newValue, duration: 0.15)){[unowned self] in
-            self.hidden = false
+        copy?.run(SKAction.move(to: newValue, duration: 0.15), completion: {[unowned self] in
+            self.isHidden = false
             self.copy?.removeFromParent()
-        }
+        })
     }
     
     func stopAnimation(){
         copy?.removeAllActions()
         copy?.removeFromParent()
-        hidden = false
+        isHidden = false
     }
     
 }

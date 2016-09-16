@@ -10,32 +10,32 @@ import UIKit
 import SpriteKit
 
 extension Double {
-    func fixedFractionDigits(digits: Int) -> String {
+    func fixedFractionDigits(_ digits: Int) -> String {
         return String(format: "%.\(digits)f", self)
     }
 }
 
 extension Float {
-    func fixedFractionDigits(digits: Int) -> String {
+    func fixedFractionDigits(_ digits: Int) -> String {
         return String(format: "%.\(digits)f", self)
     }
 }
 
 extension CGFloat {
-    func fixedFractionDigits(digits: Int) -> String {
+    func fixedFractionDigits(_ digits: Int) -> String {
         return String(format: "%.\(digits)f", self)
     }
 }
 
 extension CGPoint {
-    func distance(point: CGPoint) -> CGFloat {
+    func distance(_ point: CGPoint) -> CGFloat {
         return abs(CGFloat(hypotf(Float(point.x - x), Float(point.y - y))))
     }
 }
 
 extension CGSize{
     func reversed() -> CGSize {
-        return CGSizeMake(height, width)
+        return CGSize(width: height, height: width)
     }
 }
 
@@ -43,7 +43,7 @@ extension SKScene{
     var dynamicChildren:[SKNode]{
         var dynamicChildren:[SKNode] = []
         for node in children{
-            if node.physicsBody?.dynamic ?? false{
+            if node.physicsBody?.isDynamic ?? false{
                 dynamicChildren.append(node)
             }
         }
@@ -93,8 +93,8 @@ extension CGFloat{
 }
 
 extension SKAction {
-    class func moveByY (deltaY: CGFloat, duration: NSTimeInterval) -> SKAction! {
-        return SKAction.moveBy(CGVectorMake(0, deltaY), duration: duration)
+    class func moveByY (_ deltaY: CGFloat, duration: TimeInterval) -> SKAction! {
+        return SKAction.move(by: CGVector(dx: 0, dy: deltaY), duration: duration)
     }
 }
 
@@ -114,10 +114,10 @@ extension CGVector{
     }
 }
 
-extension IntervalType {
+extension Range {
     public func random() -> Bound {
-        let range = (self.end as! Double) - (self.start as! Double)
-        let randomValue = (Double(arc4random_uniform(UINT32_MAX)) / Double(UINT32_MAX)) * range + (self.start as! Double)
+        let range = (self.upperBound as! Double) - (self.lowerBound as! Double)
+        let randomValue = (Double(arc4random_uniform(UINT32_MAX)) / Double(UINT32_MAX)) * range + (self.lowerBound as! Double)
         return randomValue as! Bound
     }
 }

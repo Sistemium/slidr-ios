@@ -14,21 +14,21 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let skView = view as! SKView
-        if max(UIScreen.mainScreen().bounds.height,UIScreen.mainScreen().bounds.width) / min(UIScreen.mainScreen().bounds.width,UIScreen.mainScreen().bounds.height) > 1.5{
+        if max(UIScreen.main.bounds.height,UIScreen.main.bounds.width) / min(UIScreen.main.bounds.width,UIScreen.main.bounds.height) > 1.5{
             GameSettings.playableAreaSize = CGSize(width: 768.375, height: 1366)
-        }else if UIScreen.mainScreen().bounds.height / UIScreen.mainScreen().bounds.width < 1.5{
+        }else if UIScreen.main.bounds.height / UIScreen.main.bounds.width < 1.5{
             GameSettings.playableAreaSize = CGSize(width: 1024.5, height: 1366)
         } else{
             GameSettings.playableAreaSize = CGSize(width: 910.666, height: 1366)
         }
-        if !UIApplication.sharedApplication().statusBarOrientation.isPortrait{
+        if !UIApplication.shared.statusBarOrientation.isPortrait{
             GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()
         }
-        GameSettings.rezolutionNormalizationValue = max(UIScreen.mainScreen().bounds.height,UIScreen.mainScreen().bounds.width) / 1366
+        GameSettings.rezolutionNormalizationValue = max(UIScreen.main.bounds.height,UIScreen.main.bounds.width) / 1366
         let scene = MenuScene()
         scene.size = GameSettings.playableAreaSize
         skView.ignoresSiblingOrder = true
-        scene.scaleMode = .Fill
+        scene.scaleMode = .fill
         skView.showsFPS = true
         skView.presentScene(scene)
     }
@@ -37,24 +37,24 @@ class GameViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         let skView = view as! SKView
-        if (skView.scene!.dynamicType == GameScene.self || skView.scene! is GameResultScene) && GameSettings.lockOrientationInGameEnabled{
+        if (type(of: skView.scene!) == GameScene.self || skView.scene! is GameResultScene) && GameSettings.lockOrientationInGameEnabled{
             return false
         }
         return true
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return [.Portrait, .PortraitUpsideDown, .LandscapeRight, .LandscapeLeft]
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return [.portrait, .portraitUpsideDown, .landscapeRight, .landscapeLeft]
     }
     
-    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
-        if motion == .MotionShake {
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
             if GameSettings.shakeToResetEnabled{
                 resetLevel()
             }
@@ -64,7 +64,7 @@ class GameViewController: UIViewController {
     func resetLevel(){
         let skView = view as! SKView
         if let game = skView.scene as? GameScene{
-            if game.gameMode == .Level || game.gameMode == .Challenge{
+            if game.gameMode == .level || game.gameMode == .challenge{
                 game.timeSinceLastUpdate = nil
                 game.timeToNextBlockPush = GameSettings.pushBlockInterval
                 for node in game.children{
@@ -85,11 +85,11 @@ class GameViewController: UIViewController {
         
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        coordinator.animateAlongsideTransition(nil, completion:
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil, completion:
             {_ in
-                NSNotificationCenter.defaultCenter().postNotificationName("RotationEnded", object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "RotationEnded"), object: nil)
         })
         if size.width > size.height && GameSettings.playableAreaSize.width < GameSettings.playableAreaSize.height || size.width < size.height && GameSettings.playableAreaSize.width > GameSettings.playableAreaSize.height{
             GameSettings.playableAreaSize = GameSettings.playableAreaSize.reversed()

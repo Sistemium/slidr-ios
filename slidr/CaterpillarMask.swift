@@ -31,7 +31,7 @@ class CaterpillarMask: SKSpriteNode {
     var textures_X = Dict2D<CGFloat,CGFloat,SKTexture>()
     
     init(block:Block,color:UIColor) {
-        super.init(texture: nil, color: UIColor.clearColor(), size: block.size)
+        super.init(texture: nil, color: UIColor.clear, size: block.size)
         self.block = block
         _color = color
     }
@@ -40,15 +40,23 @@ class CaterpillarMask: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
-    private func normalizeY(y:CGFloat,height:CGFloat,newHeight:CGFloat)->CGFloat{
-        return (y > 0 ? size.height / 2  - newHeight / 2: -size.height / 2 + newHeight / 2)
+    fileprivate func normalizeY(_ y:CGFloat,height:CGFloat,newHeight:CGFloat)->CGFloat{
+        if y > 0 {
+            return size.height / 2  - newHeight / 2
+        }else{
+            return -size.height / 2 + newHeight / 2
+        }
     }
     
-    private func normalizeX(x:CGFloat,width:CGFloat,newWidth:CGFloat)->CGFloat{
-        return (x > 0 ? size.width / 2 - newWidth / 2: -size.width / 2 + newWidth / 2)
+    fileprivate func normalizeX(_ x:CGFloat,width:CGFloat,newWidth:CGFloat)->CGFloat{
+        if x > 0{
+            return size.width / 2 - newWidth / 2
+        }else{
+            return -size.width / 2 + newWidth / 2
+        }
     }
     
-    private func render(){
+    fileprivate func render(){
         
         switch block.pushVector{
         case GameSettings.moveDirections[0]:
@@ -97,7 +105,7 @@ class CaterpillarMask: SKSpriteNode {
             }
             if block.heightCaterpillarPartsCount > 0{
                 for ii in 1...block.heightCaterpillarPartsCount{
-                    let mask = SKShapeNode.init(ellipseOfSize: CGSize(width: width, height: height + differenceInHeight))
+                    let mask = SKShapeNode.init(ellipseOf: CGSize(width: width, height: height + differenceInHeight))
                     mask.position = CGPoint(x: block.hitSide.position.x, y:normalizeY(block.hitSide.position.y,height: block.hitSide.size.height,newHeight: block.caterpillarPartSize.height + differenceInHeight) + CGFloat(ii) * spaceBetweenParts)
                     mask.strokeColor = _color
                     mask.fillColor = _color
@@ -115,7 +123,7 @@ class CaterpillarMask: SKSpriteNode {
             }
             if block.widthCaterpillarPartsCount>0{
                 for ii in 1...block.widthCaterpillarPartsCount{
-                    let mask = SKShapeNode.init(ellipseOfSize: CGSize(width: width + differenceInWidth, height: height))
+                    let mask = SKShapeNode.init(ellipseOf: CGSize(width: width + differenceInWidth, height: height))
                     mask.strokeColor = _color
                     mask.fillColor = _color
                     mask.position = CGPoint(x: normalizeX(block.hitSide.position.x, width: block.hitSide.size.width, newWidth: block.caterpillarPartSize.width + differenceInWidth) + CGFloat(ii) * spaceBetweenParts, y: block.hitSide.position.y)
@@ -125,7 +133,7 @@ class CaterpillarMask: SKSpriteNode {
         }
         
         if let view = parent?.scene?.view{
-            texture = view.textureFromNode(self,crop: frame)
+            texture = view.texture(from: self,crop: frame)
             switch block.pushVector{
             case GameSettings.moveDirections[0]:
                 texturesY[block.size.width,block.size.height] = texture
@@ -142,7 +150,7 @@ class CaterpillarMask: SKSpriteNode {
         }
     }
     
-    private var _color:UIColor!
+    fileprivate var _color:UIColor!
     
     override var size: CGSize{
         didSet{

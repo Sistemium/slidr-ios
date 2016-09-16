@@ -11,12 +11,12 @@ import SpriteKit
 class BluredBlock: Block {
     var skEffectNode:SKEffectNode!{
         didSet{
-            skEffectNode.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:GameSettings.blurValue * 4)])!
+            skEffectNode.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(value: GameSettings.blurValue * 4 as Double)])!
             skEffectNode.shouldRasterize = true
         }
     }
     
-    private var blockView = SKSpriteNode()
+    fileprivate var blockView = SKSpriteNode()
     
     override var size: CGSize{
         didSet{
@@ -40,7 +40,7 @@ class BluredBlock: Block {
         }
     }
     
-    override func addChild(node: SKNode) {
+    override func addChild(_ node: SKNode) {
         skEffectNode.addChild(node)
     }
     
@@ -49,24 +49,13 @@ class BluredBlock: Block {
         skEffectNode = SKEffectNode()
         super.addChild(skEffectNode)
         addChild(blockView)
-        super.color = UIColor.clearColor()
+        super.color = UIColor.clear
     }
     
-    override func animate() {
-        if type == .bomb{
-            for innerShape in innerShapes{
-                innerShape.lineWidth = 20
-                innerShape.xScale -= 0.02
-                innerShape.yScale -= 0.02
-                if innerShape.xScale <= 0{
-                    innerShape.xScale = 1.0
-                    innerShape.yScale = 1.0
-                }
-                innerShape.strokeColor = UIColor(red: 1.0, green: 0, blue: 0, alpha: 1 - innerShape.xScale)
-                innerShape.position = CGPoint(x: 0,y: 0)
-            }
-        }else{
-            self.physicsBody?.velocity = self.velocity
-        }
-    }
+//    override func animate() {
+//        if type == .bomb{
+//        }else{
+//            self.physicsBody?.velocity = self.velocity
+//        }
+//    }
 }

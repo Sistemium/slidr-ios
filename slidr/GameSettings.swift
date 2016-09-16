@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 struct GameSettings{
-    static var lastKnownOrientation:UIDeviceOrientation = .Portrait
-    private static var _playableAreaSize = CGSize()
+    static var lastKnownOrientation:UIDeviceOrientation = .portrait
+    fileprivate static var _playableAreaSize = CGSize()
     static var playableAreaSize:CGSize{
         get{
             return CGSize(width: _playableAreaSize.width * rezolutionNormalizationValue, height: _playableAreaSize.height * rezolutionNormalizationValue)
@@ -22,7 +22,7 @@ struct GameSettings{
     }
     static var moveDirections:[CGVector]{
         get{
-            return [CGVectorMake(0, defaultSpeed),CGVectorMake(0, -defaultSpeed),CGVectorMake(defaultSpeed, 0),CGVectorMake(-defaultSpeed, 0)]
+            return [CGVector(dx: 0, dy: defaultSpeed),CGVector(dx: 0, dy: -defaultSpeed),CGVector(dx: defaultSpeed, dy: 0),CGVector(dx: -defaultSpeed, dy: 0)]
         }
     }
     static var toolbarHeight:CGFloat{
@@ -56,45 +56,45 @@ struct GameSettings{
     static let timeUntilWarning = 3.0
     static var shakeToResetEnabled:Bool{
         get{
-            if NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys.contains("ShakeToResetEnabled"){
-                return NSUserDefaults.standardUserDefaults().boolForKey("ShakeToResetEnabled")
+            if UserDefaults.standard.dictionaryRepresentation().keys.contains("ShakeToResetEnabled"){
+                return UserDefaults.standard.bool(forKey: "ShakeToResetEnabled")
             }
             else{
                 return true
             }
         }
         set{
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "ShakeToResetEnabled")
+            UserDefaults.standard.set(newValue, forKey: "ShakeToResetEnabled")
         }
     }
     static let freeModeTimer = 10.0
-    static let redBlockReward = 1.5
+    static let redBlockReward = 0.8
     static let blueBlockReward = 0.8
     static var lockOrientationInGameEnabled:Bool{
         get{
-            if NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys.contains("LockOrientationInGameEnabled"){
-                return NSUserDefaults.standardUserDefaults().boolForKey("LockOrientationInGameEnabled")
+            if UserDefaults.standard.dictionaryRepresentation().keys.contains("LockOrientationInGameEnabled"){
+                return UserDefaults.standard.bool(forKey: "LockOrientationInGameEnabled")
             }
             else{
                 return false
             }
         }
         set{
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "LockOrientationInGameEnabled")
+            UserDefaults.standard.set(newValue, forKey: "LockOrientationInGameEnabled")
         }
     }
     
     static var completedLevels:Int{
         get{
-            if NSUserDefaults.standardUserDefaults().dictionaryRepresentation().keys.contains("completedLevels"){
-                return NSUserDefaults.standardUserDefaults().integerForKey("completedLevels")
+            if UserDefaults.standard.dictionaryRepresentation().keys.contains("completedLevels"){
+                return UserDefaults.standard.integer(forKey: "completedLevels")
             }
             else{
                 return 0
             }
         }
         set{
-            NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "completedLevels")
+            UserDefaults.standard.set(newValue, forKey: "completedLevels")
         }
     }
     static let blockFadeoutTime = 0.5
