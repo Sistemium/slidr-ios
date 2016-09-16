@@ -10,17 +10,17 @@ import SpriteKit
 
 class OutlineSKLabelNode:SKLabelNode{
     
-    private let offSetX:CGFloat = GameSettings.labelOffset
-    private let offSetY:CGFloat = GameSettings.labelOffset
+    fileprivate let offSetX:CGFloat = GameSettings.labelOffset
+    fileprivate let offSetY:CGFloat = GameSettings.labelOffset
     
     lazy var outlineLabel : SKLabelNode = {[unowned self] in
         let _outlineLabel = SKLabelNode()
         _outlineLabel.fontName = self.fontName
         _outlineLabel.fontSize = self.fontSize
-        _outlineLabel.fontColor = UIColor.blackColor()
+        _outlineLabel.fontColor = UIColor.black
         _outlineLabel.text = self.text
         _outlineLabel.zPosition = self.zPosition - 0.1
-        _outlineLabel.position = CGPointMake(self.position.x - self.offSetX, self.position.y - self.offSetY)
+        _outlineLabel.position = CGPoint(x: self.position.x - self.offSetX, y: self.position.y - self.offSetY)
         return _outlineLabel
     }()
     
@@ -50,7 +50,7 @@ class OutlineSKLabelNode:SKLabelNode{
     
     override var position: CGPoint{
         didSet{
-            outlineLabel.position = CGPointMake(position.x - offSetX, position.y - offSetY)
+            outlineLabel.position = CGPoint(x: position.x - offSetX, y: position.y - offSetY)
         }
     }
     

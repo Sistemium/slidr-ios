@@ -11,7 +11,7 @@ import SpriteKit
 class ToolbarNode: SKSpriteNode {
     
     convenience init(){
-        self.init(texture: nil, color: UIColor.darkGrayColor(), size: CGSize(width: GameSettings.playableAreaSize.width, height: GameSettings.toolbarHeight))
+        self.init(texture: nil, color: UIColor.darkGray, size: CGSize(width: GameSettings.playableAreaSize.width, height: GameSettings.toolbarHeight))
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -29,13 +29,13 @@ class ToolbarNode: SKSpriteNode {
         super.init(coder: aDecoder)
     }
     
-    var centerLabelColor = UIColor.whiteColor(){
+    var centerLabelColor = UIColor.white{
         didSet{
             centerLabel?.fontColor = centerLabelColor
         }
     }
     
-    var leftLabelColor = UIColor.whiteColor(){
+    var leftLabelColor = UIColor.white{
         didSet{
             leftLabel?.fontColor = leftLabelColor
         }
@@ -57,35 +57,35 @@ class ToolbarNode: SKSpriteNode {
     
     var leftLabelEnabled: Bool = true{
         didSet{
-            leftLabel.hidden = !leftLabelEnabled
+            leftLabel.isHidden = !leftLabelEnabled
         }
     }
     
     var centerLabelEnabled: Bool = true{
         didSet{
-            centerLabel.hidden = !centerLabelEnabled
+            centerLabel.isHidden = !centerLabelEnabled
         }
     }
     
     var progressBarEnabled: Bool = true{
         didSet{
-            progressBar.hidden = !progressBarEnabled
+            progressBar.isHidden = !progressBarEnabled
         }
     }
     
-    private var leftAlignment:CGPoint{
+    fileprivate var leftAlignment:CGPoint{
         get{
             return CGPoint(x: -GameSettings.playableAreaSize.width/2 + leftLabel.frame.size.width/2 , y: -GameSettings.toolbarHeight/4)
         }
     }
     
-    private var centerAlignment:CGPoint{
+    fileprivate var centerAlignment:CGPoint{
         get{
             return CGPoint(x: 0 , y: -GameSettings.toolbarHeight/4)
         }
     }
     
-    private var leftLabel : OutlineSKLabelNode!{
+    fileprivate var leftLabel : OutlineSKLabelNode!{
         didSet{
             oldValue?.removeFromParent()
             addChild(leftLabel)
@@ -95,7 +95,7 @@ class ToolbarNode: SKSpriteNode {
         }
     }
     
-    private var centerLabel : OutlineSKLabelNode!{
+    fileprivate var centerLabel : OutlineSKLabelNode!{
         didSet{
             oldValue?.removeFromParent()
             addChild(centerLabel)
@@ -121,12 +121,12 @@ class ToolbarNode: SKSpriteNode {
         }
     }
     
-    private var progressBar : SKSpriteNode!{
+    fileprivate var progressBar : SKSpriteNode!{
         didSet{
             oldValue?.removeFromParent()
             progressBarEnabled = false
             progressBar.size = CGSize(width: size.width, height: 3)
-            progressBar.color = UIColor.greenColor()
+            progressBar.color = UIColor.green
             progressBar.zPosition = 23
             addChild(progressBar)
             progressBarCompletion = 0.0
