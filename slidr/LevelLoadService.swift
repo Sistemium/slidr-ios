@@ -100,8 +100,8 @@ class LevelLoadService{
                         blockData["type"] = scenario["type"]
                         blockData["pushTime"] = Double(i) * (scenario["pushTimeInterval"] as! Double)
                         blockData["speedModifier"] = 1 + Double(i) * (scenario["speedIncreasingInterval"] as! Double)
-                        blockData["width"] = (scenario["size"] as! NSDictionary)["width"]
-                        blockData["height"] = (scenario["size"] as! NSDictionary)["height"]
+                        blockData["width"] = (scenario["size"] as? NSDictionary)?["width"] ?? 1
+                        blockData["height"] = (scenario["size"] as? NSDictionary)?["height"] ?? 1
                         for j in scenario["position"] as! NSArray{
                             if let position = j as? NSDictionary{
                                 if i < position["indexes"] as! Int{
@@ -128,12 +128,21 @@ class LevelLoadService{
                                 }
                             }
                         }
+                        for j in jsonResult["scenarioSizes"] as! NSArray{
+                            if let size = j as? NSDictionary{
+                                if (blockData["pushTime"] as! Double) <= (size["time"] as! Double){
+                                    blockData["width"] = size["width"] as! Double
+                                    blockData["height"] = size["height"] as! Double
+                                    break
+                                }
+                            }
+                        }
                         level.blocks.append(Block(blockData: blockData))
                     }
                 }
             }
         }
-        
+    
         return level
     }
     
