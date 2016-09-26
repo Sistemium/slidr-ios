@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		350E4E851D900A7300B98535 /* Challenge2.json in Resources */ = {isa = PBXBuildFile; fileRef = 350E4E841D900A7300B98535 /* Challenge2.json */; };
 		3527780F1D5C95CB006C9B16 /* Level10.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778031D5C95CB006C9B16 /* Level10.json */; };
 		352778101D5C95CB006C9B16 /* Level2.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778041D5C95CB006C9B16 /* Level2.json */; };
 		352778111D5C95CB006C9B16 /* Level3.json in Resources */ = {isa = PBXBuildFile; fileRef = 352778051D5C95CB006C9B16 /* Level3.json */; };
@@ -20,6 +21,7 @@
 		355282BB1D59E5C500AE6413 /* Head.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355282BA1D59E5C500AE6413 /* Head.swift */; };
 		355282E81D5B7DF700AE6413 /* CaterpillarMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355282E71D5B7DF700AE6413 /* CaterpillarMask.swift */; };
 		3565CFF51D362B0900C1324E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3565CFF41D362B0900C1324E /* Crashlytics.framework */; };
+		356C61671D93EF7D000E9B18 /* Challenge3.json in Resources */ = {isa = PBXBuildFile; fileRef = 356C61661D93EF7D000E9B18 /* Challenge3.json */; };
 		35813E8D1D6C6FD000016784 /* ChallengeLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35813E8C1D6C6FD000016784 /* ChallengeLevelScene.swift */; };
 		35813E901D6C7C2100016784 /* Challenge1.json in Resources */ = {isa = PBXBuildFile; fileRef = 35813E8F1D6C7C2100016784 /* Challenge1.json */; };
 		358FAF581D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358FAF571D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift */; };
@@ -46,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		350E4E841D900A7300B98535 /* Challenge2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Challenge2.json; sourceTree = "<group>"; };
 		352778031D5C95CB006C9B16 /* Level10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level10.json; sourceTree = "<group>"; };
 		352778041D5C95CB006C9B16 /* Level2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level2.json; sourceTree = "<group>"; };
 		352778051D5C95CB006C9B16 /* Level3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level3.json; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 		355282BA1D59E5C500AE6413 /* Head.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Head.swift; sourceTree = "<group>"; };
 		355282E71D5B7DF700AE6413 /* CaterpillarMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaterpillarMask.swift; sourceTree = "<group>"; };
 		3565CFF41D362B0900C1324E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		356C61661D93EF7D000E9B18 /* Challenge3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Challenge3.json; sourceTree = "<group>"; };
 		35813E8C1D6C6FD000016784 /* ChallengeLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeLevelScene.swift; sourceTree = "<group>"; };
 		35813E8F1D6C7C2100016784 /* Challenge1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Challenge1.json; sourceTree = "<group>"; };
 		358FAF571D3F8EF8003BCAE6 /* OutlineSKLabelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineSKLabelNode.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				35813E8F1D6C7C2100016784 /* Challenge1.json */,
+				350E4E841D900A7300B98535 /* Challenge2.json */,
+				356C61661D93EF7D000E9B18 /* Challenge3.json */,
 			);
 			path = Challenges;
 			sourceTree = "<group>";
@@ -250,6 +256,7 @@
 				352778111D5C95CB006C9B16 /* Level3.json in Resources */,
 				352778161D5C95CB006C9B16 /* Level6.json in Resources */,
 				6DC0CCD21CD8C0C20019D466 /* Assets.xcassets in Resources */,
+				356C61671D93EF7D000E9B18 /* Challenge3.json in Resources */,
 				3527780F1D5C95CB006C9B16 /* Level10.json in Resources */,
 				352778181D5C95CB006C9B16 /* Level8.json in Resources */,
 				6D42E7B41CF460DE00740131 /* GameSpeedSliderTableViewCell.xib in Resources */,
@@ -259,6 +266,7 @@
 				352778171D5C95CB006C9B16 /* Level7.json in Resources */,
 				5BE495CC43837A4961D6D2D0 /* Level1.json in Resources */,
 				352778121D5C95CB006C9B16 /* Level4.json in Resources */,
+				350E4E851D900A7300B98535 /* Challenge2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
