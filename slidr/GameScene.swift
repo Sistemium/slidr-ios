@@ -172,7 +172,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ripple.strokeColor = UIColor.yellow
             ripple.lineWidth = GameSettings.rippleLineWidth
             addChild(ripple)
-            ripple.ripple(GameSettings.rippleRadius, duration: 1.0)
+            ripple.ripple(GameSettings.rippleRadius, duration: 0.75)
             ripple.removeFromParent()
         }
         block.run(SKAction.fadeOut(withDuration: time), completion: {
@@ -292,12 +292,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     block1.physicsBody = nil
                     block2.physicsBody = nil
                     if block1.type == .standart{
-                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime, withReward:GameSettings.redBlockReward)
-                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime, withReward:GameSettings.redBlockReward)
+                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime, withReward:Double(GameSettings.rewardValue * block1.originalSize.height * block1.originalSize.width))
+                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime, withReward:Double(GameSettings.rewardValue * block2.originalSize.height * block2.originalSize.width))
                     }
                     if block1.type == .swipeable{
-                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime, withReward:GameSettings.blueBlockReward)
-                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime, withReward:GameSettings.blueBlockReward)
+                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime, withReward:Double(GameSettings.rewardValue * block1.originalSize.height * block1.originalSize.width))
+                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime, withReward:Double(GameSettings.rewardValue * block2.originalSize.height * block2.originalSize.width))
                     }
                     if block1.type == .bomb{
                         destroyBlock(block1,withTime: 0)
@@ -384,14 +384,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }else{
                     block.physicsBody = nil
                     var reward:Double? = nil
-                    if block.type == .standart{
-                        freeModeTimer += GameSettings.redBlockReward
-                        reward = GameSettings.redBlockReward
-                    }
-                    if block.type == .swipeable{
-                        freeModeTimer += GameSettings.blueBlockReward
-                        reward = GameSettings.blueBlockReward
-                    }
+                    freeModeTimer += Double(GameSettings.rewardValue * block.originalSize.height * block.originalSize.width)
+                    reward = Double(GameSettings.rewardValue * block.originalSize.height * block.originalSize.width)
                     destroyBlock(block,withTime: GameSettings.blockFadeoutTime, withReward:reward)
                 }
             }
@@ -707,11 +701,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         block.position.x *= GameSettings.playableAreaSize.width
                         block.position.y *= GameSettings.playableAreaSize.height
                         var testPassed = true
-                        for node in children{
-                            if let comparableNode = node as? Block{
-                                if block.intersects(comparableNode){
-                                    testPassed = false
-                                    break
+                        if block.type != .wall{
+                            for node in children{
+                                if let comparableNode = node as? Block{
+                                    if block.intersects(comparableNode){
+                                        testPassed = false
+                                        break
+                                    }
                                 }
                             }
                         }
@@ -733,11 +729,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     testNode.size = CGSize(width: block.frame.width * 2, height:block.frame.height * 2)
                     testNode.position = block.position
                     var testPassed = true
-                    for node in children{
-                        if let comparableNode = node as? Block{
-                            if testNode.intersects(comparableNode){
-                                testPassed = false
-                                break
+                    if block.type != .wall{
+                        for node in children{
+                            if let comparableNode = node as? Block{
+                                if testNode.intersects(comparableNode){
+                                    testPassed = false
+                                    break
+                                }
                             }
                         }
                     }
@@ -745,6 +743,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         timeToNextBlockPush += GameSettings.pushBlockInterval
                         addChild(block)
                     }
+                    
                 }
             }
         }

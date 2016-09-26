@@ -68,8 +68,7 @@ struct GameSettings{
         }
     }
     static let freeModeTimer = 10.0
-    static let redBlockReward = 1.5
-    static let blueBlockReward = 1.5
+    static let rewardValue:CGFloat = 0.0001 * rezolutionNormalizationValue
     static var lockOrientationInGameEnabled:Bool{
         get{
             if UserDefaults.standard.dictionaryRepresentation().keys.contains("LockOrientationInGameEnabled"){
@@ -104,7 +103,7 @@ struct GameSettings{
     static var rezolutionNormalizationValue:CGFloat = 1
     static var rippleRadius:CGFloat{
         get{
-            return 30 * rezolutionNormalizationValue
+            return 25 * rezolutionNormalizationValue
         }
     }
     static var labelOffset:CGFloat{
