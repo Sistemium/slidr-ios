@@ -95,16 +95,16 @@ class LevelLoadService{
             for scen in scenarioArray{
                 if let scenario = scen as? NSDictionary{
                     let numberOfBlocks = scenario["numberOfBlocks"] as! Int
-                    for i in 0..<numberOfBlocks{
+                    for i in 1...numberOfBlocks{
                         let blockData = NSMutableDictionary()
                         blockData["type"] = scenario["type"]
                         blockData["pushTime"] = Double(i) * (scenario["pushTimeInterval"] as! Double)
                         blockData["speedModifier"] = 1 + Double(i) * (scenario["speedIncreasingInterval"] as! Double)
-                        blockData["width"] = (scenario["size"] as? NSDictionary)?["width"] ?? 1
-                        blockData["height"] = (scenario["size"] as? NSDictionary)?["height"] ?? 1
+                        blockData["width"] = (scenario["size"] as? NSDictionary)?["width"]
+                        blockData["height"] = (scenario["size"] as? NSDictionary)?["height"]
                         for j in scenario["position"] as! NSArray{
                             if let position = j as? NSDictionary{
-                                if i < position["indexes"] as! Int{
+                                if i <= position["indexes"] as! Int{
                                     blockData["positionX"] = position["x"]
                                     blockData["positionY"] = position["y"]
                                     switch (blockData["positionX"] as! Double,blockData["positionY"] as! Double) {
@@ -128,12 +128,35 @@ class LevelLoadService{
                                 }
                             }
                         }
-                        for j in jsonResult["scenarioSizes"] as! NSArray{
-                            if let size = j as? NSDictionary{
-                                if (blockData["pushTime"] as! Double) <= (size["time"] as! Double){
-                                    blockData["width"] = size["width"] as! Double
-                                    blockData["height"] = size["height"] as! Double
-                                    break
+                        if let sizes = scenario["size"] as? NSArray{
+                            for j in sizes{
+                                if let size = j as? NSDictionary{
+                                    if i <= size["indexes"] as! Int{
+                                        blockData["width"] = size["width"]
+                                        blockData["height"] = size["height"]
+                                        break
+                                    }
+                                }
+                            }
+                        }
+                        if scenario["size"] == nil{
+                            for j in jsonResult["scenarioSizes"] as! NSArray{
+                                if let size = j as? NSDictionary{
+                                    if (blockData["pushTime"] as! Double) <= (size["time"] as! Double){
+                                        blockData["width"] = size["width"]
+                                        blockData["height"] = size["height"]
+                                        break
+                                    }
+                                }
+                            }
+                        }
+                        if let rotation = scenario["rotation"] as? NSArray{
+                            for j in rotation{
+                                if let angle = j as? NSDictionary{
+                                    if i <= angle["indexes"] as! Int{
+                                        blockData["rotation"] = angle["angle"]
+                                        break
+                                    }
                                 }
                             }
                         }
