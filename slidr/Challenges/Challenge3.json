@@ -184,7 +184,7 @@
                      {"time":90,"width": 160, "height": 116},
                      {"time":110,"width": 244, "height": 292}
                      ],
-    "timeout": 10,
+    "timeout": 20,
     "completionTime": 90,
     "priority": 3,
     "name": "Challenge 3",

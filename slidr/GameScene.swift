@@ -732,7 +732,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             }
                         }
                         if testPassed{
-                            addChild(block)
+                            if block.type == .wall{
+                                addChild(block)
+                                block.run(SKAction.fadeOut(withDuration: 0))
+                                block.run(SKAction.fadeIn(withDuration: GameSettings.blockFadeoutTime))
+                            }else{
+                                addChild(block)
+                            }
                         }else{
                             print(currentTime - startTime!)
                         }
