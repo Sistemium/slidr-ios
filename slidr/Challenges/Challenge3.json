@@ -127,15 +127,16 @@
                       ]
                  },
                  {
-                 "numberOfBlocks": 26,
+                 "numberOfBlocks": 35,
                  "type": "bomb",
-                 "pushTimeInterval": 3.46,
-                 "speedIncreasingInterval": 0.08,
+                 "pushTimeInterval": 7.5,
+                 "speedIncreasingInterval": 0.17,
                  "size":{"width":211,"height":211},
                  "position": [
-                              {"indexes":2,"x": 0.5, "y": -0.1},
-                              {"indexes":21,"x": 1.1, "y": 0.5},
-                              {"indexes":26,"x": 0.5, "y": -0.1}
+                              {"indexes":10,"x": 0.7, "y": -0.1},
+                              {"indexes":30,"x": 1.1, "y": 0.4},
+                              {"indexes":32,"x": -0.1, "y": 0.4},
+                              {"indexes":35,"x": 0.5, "y": -0.1}
                               ]
                  },
                  {
@@ -158,17 +159,30 @@
                  "pushTimeInterval": 0,
                  "speedIncreasingInterval": 0,
                  "position": [
+                              {"indexes":1,"y": 0.4, "x": 1.1},
+                              {"indexes":2,"y": -0.1, "x": 0.4},
+                              {"indexes":3,"y": 0.3, "x": 1.1}
+                              ]
+                 },
+                 {
+                 "numberOfBlocks": 32,
+                 "type": "swipeable",
+                 "pushTimeInterval": 2.8125,
+                 "speedIncreasingInterval": 0.0625,
+                 "position": [
                               {"indexes":1,"y": 1.1, "x": 0.6},
-                              {"indexes":2,"y": 1.1, "x": 0.6},
-                              {"indexes":3,"y": 0.5, "x": 1.1}
+                              {"indexes":5,"y": 1.1, "x": 0.4},
+                              {"indexes":12,"y": 0.6, "x": 1.1},
+                              {"indexes":31,"y": 0.4, "x": 1.1},
+                              {"indexes":32,"y": 0.2, "x": 1.1}
                               ]
                  }
                  ],
     "scenarioSizes":[
-                     {"time":46,"width": 102, "height": 57},
-                     {"time":85,"width": 108, "height": 83},
-                     {"time":90,"width": 175, "height": 93},
-                     {"time":110,"width": 53, "height": 30}
+                     {"time":46,"width": 184, "height": 164},
+                     {"time":85,"width": 101, "height": 182},
+                     {"time":90,"width": 160, "height": 116},
+                     {"time":110,"width": 244, "height": 292}
                      ],
     "timeout": 10,
     "completionTime": 90,
