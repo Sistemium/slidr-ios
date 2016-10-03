@@ -262,6 +262,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return false
     }
     
+    func whoHitted(_ block1:Block,block2:Block) -> Block?{
+        if block1.pushVector.dx > 0 && block2.pushVector.dy != 0{
+            if block1.position.x<block2.position.x && (block2.position.x - block1.position.x) >= block1.size.width/2 + block2.size.width/2{
+                return block1
+            }else{
+                return block2
+            }
+        }
+        if block2.pushVector.dx > 0 && block1.pushVector.dy != 0{
+            if block2.position.x<block1.position.x && (block1.position.x - block2.position.x) >= block2.size.width/2 + block1.size.width/2{
+                return block2
+            }else{
+                return block1
+            }
+        }
+        if block1.pushVector.dx < 0 && block2.pushVector.dy != 0{
+            if block1.position.x>block2.position.x && (block1.position.x - block2.position.x) >= block1.size.width/2 + block2.size.width/2{
+                return block1
+            }else{
+                return block2
+            }
+        }
+        if block2.pushVector.dx < 0 && block1.pushVector.dy != 0{
+            if block2.position.x>block1.position.x && (block2.position.x - block1.position.x) >= block2.size.width/2 + block1.size.width/2{
+                return block2
+            }else{
+                return block1
+            }
+        }
+        return nil
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.node == nil || contact.bodyB.node == nil {
             return
@@ -339,19 +371,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }
                 else{
-                    let loseOfSpeedOfBlock1:CGFloat
-                    if block1.pushVector.dx != 0{
-                        loseOfSpeedOfBlock1 = block1.velocity.dx / block1.physicsBody!.velocity.dx
-                    }else{
-                        loseOfSpeedOfBlock1 = block1.velocity.dy / block1.physicsBody!.velocity.dy
-                    }
-                    let loseOfSpeedOfBlock2:CGFloat
-                    if block2.pushVector.dx != 0{
-                        loseOfSpeedOfBlock2 = block2.velocity.dx / block2.physicsBody!.velocity.dx
-                    }else{
-                        loseOfSpeedOfBlock2 = block2.velocity.dy / block2.physicsBody!.velocity.dy
-                    }
-                    if abs(loseOfSpeedOfBlock1) > abs(loseOfSpeedOfBlock2){
+                    if whoHitted(block1,block2: block2) == block1{
                         block2.pushVector = CGVector(dx: block1.pushVector.dx, dy: block1.pushVector.dy)
                         block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
                     }else{
