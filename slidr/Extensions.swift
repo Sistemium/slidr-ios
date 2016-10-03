@@ -90,6 +90,14 @@ extension CGFloat{
     var deg2Rad : CGFloat{
         return CGFloat(self) * CGFloat(M_PI) / 180.0
     }
+    
+    func toInt() -> Int? {
+        if self > CGFloat(Int.min) && self < CGFloat(Int.max) {
+            return Int(self)
+        } else {
+            return nil
+        }
+    }
 }
 
 extension SKAction {

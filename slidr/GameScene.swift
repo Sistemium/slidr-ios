@@ -238,7 +238,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if loseOfSpeedOfBlock2.isNaN || loseOfSpeedOfBlock2.isInfinite{
             loseOfSpeedOfBlock2 = 1
         }
-        if Int(loseOfSpeedOfBlock1) == 1 && Int(loseOfSpeedOfBlock2) == 1{
+        if (loseOfSpeedOfBlock1.toInt() ?? 1) == 1 && (loseOfSpeedOfBlock2.toInt() ?? 1) == 1{
             return true
         }
         return false
