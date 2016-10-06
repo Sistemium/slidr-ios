@@ -20,7 +20,6 @@
 		3527781A1D5C95CB006C9B16 /* Level11.json in Resources */ = {isa = PBXBuildFile; fileRef = 3527780E1D5C95CB006C9B16 /* Level11.json */; };
 		355282BB1D59E5C500AE6413 /* Head.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355282BA1D59E5C500AE6413 /* Head.swift */; };
 		355282E81D5B7DF700AE6413 /* CaterpillarMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355282E71D5B7DF700AE6413 /* CaterpillarMask.swift */; };
-		3565CFF51D362B0900C1324E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3565CFF41D362B0900C1324E /* Crashlytics.framework */; };
 		356C61671D93EF7D000E9B18 /* Challenge3.json in Resources */ = {isa = PBXBuildFile; fileRef = 356C61661D93EF7D000E9B18 /* Challenge3.json */; };
 		35813E8D1D6C6FD000016784 /* ChallengeLevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35813E8C1D6C6FD000016784 /* ChallengeLevelScene.swift */; };
 		35813E901D6C7C2100016784 /* Challenge1.json in Resources */ = {isa = PBXBuildFile; fileRef = 35813E8F1D6C7C2100016784 /* Challenge1.json */; };
@@ -33,7 +32,6 @@
 		6D42E7B21CF45B3300740131 /* OptionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D42E7B11CF45B3300740131 /* OptionsScene.swift */; };
 		6D42E7B41CF460DE00740131 /* GameSpeedSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D42E7B31CF460DE00740131 /* GameSpeedSliderTableViewCell.xib */; };
 		6D538BA31CDC9E8100B0F780 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D538BA21CDC9E8100B0F780 /* GameSettings.swift */; };
-		6D538BA71CDCC8D500B0F780 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D538BA51CDCC8D500B0F780 /* Fabric.framework */; };
 		6D56F3C81CEB2EDF00CD3D3A /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D56F3C71CEB2EDF00CD3D3A /* LevelScene.swift */; };
 		6D56F3CA1CEB430E00CD3D3A /* ToolbarNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D56F3C91CEB430E00CD3D3A /* ToolbarNode.swift */; };
 		6D6346571CEDDAD40067A1AF /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6346561CEDDAD40067A1AF /* Level.swift */; };
@@ -45,9 +43,12 @@
 		6DC0CCD01CD8C0C20019D466 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DC0CCCE1CD8C0C20019D466 /* Main.storyboard */; };
 		6DC0CCD21CD8C0C20019D466 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DC0CCD11CD8C0C20019D466 /* Assets.xcassets */; };
 		6DFB18221D2E61A30029DB56 /* RippleCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFB18211D2E61A30029DB56 /* RippleCircle.swift */; };
+		CF7A2A46656B50BF7961E8F0 /* libPods-slidr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00381DF4F3FF925A5E5955A3 /* libPods-slidr.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00381DF4F3FF925A5E5955A3 /* libPods-slidr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-slidr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B88B78B6FF741F2E9FFB98C /* Pods-slidr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-slidr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-slidr/Pods-slidr.debug.xcconfig"; sourceTree = "<group>"; };
 		350E4E841D900A7300B98535 /* Challenge2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Challenge2.json; sourceTree = "<group>"; };
 		352778031D5C95CB006C9B16 /* Level10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level10.json; sourceTree = "<group>"; };
 		352778041D5C95CB006C9B16 /* Level2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level2.json; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		3527780E1D5C95CB006C9B16 /* Level11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level11.json; sourceTree = "<group>"; };
 		355282BA1D59E5C500AE6413 /* Head.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Head.swift; sourceTree = "<group>"; };
 		355282E71D5B7DF700AE6413 /* CaterpillarMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaterpillarMask.swift; sourceTree = "<group>"; };
-		3565CFF41D362B0900C1324E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		356C61661D93EF7D000E9B18 /* Challenge3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Challenge3.json; sourceTree = "<group>"; };
 		35813E8C1D6C6FD000016784 /* ChallengeLevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeLevelScene.swift; sourceTree = "<group>"; };
 		35813E8F1D6C7C2100016784 /* Challenge1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Challenge1.json; sourceTree = "<group>"; };
@@ -74,7 +74,6 @@
 		6D42E7B11CF45B3300740131 /* OptionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsScene.swift; sourceTree = "<group>"; };
 		6D42E7B31CF460DE00740131 /* GameSpeedSliderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameSpeedSliderTableViewCell.xib; sourceTree = "<group>"; };
 		6D538BA21CDC9E8100B0F780 /* GameSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
-		6D538BA51CDCC8D500B0F780 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		6D56F3C71CEB2EDF00CD3D3A /* LevelScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		6D56F3C91CEB430E00CD3D3A /* ToolbarNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarNode.swift; sourceTree = "<group>"; };
 		6D6346561CEDDAD40067A1AF /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
@@ -88,6 +87,7 @@
 		6DC0CCD11CD8C0C20019D466 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DC0CCD61CD8C0C20019D466 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DFB18211D2E61A30029DB56 /* RippleCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RippleCircle.swift; sourceTree = "<group>"; };
+		E590C75EF5F5D2847B9EE156 /* Pods-slidr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-slidr.release.xcconfig"; path = "Pods/Target Support Files/Pods-slidr/Pods-slidr.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3565CFF51D362B0900C1324E /* Crashlytics.framework in Frameworks */,
-				6D538BA71CDCC8D500B0F780 /* Fabric.framework in Frameworks */,
+				CF7A2A46656B50BF7961E8F0 /* libPods-slidr.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,8 +145,8 @@
 			children = (
 				6DC0CCC41CD8C0C20019D466 /* Products */,
 				6DC0CCC51CD8C0C20019D466 /* slidr */,
-				3565CFF41D362B0900C1324E /* Crashlytics.framework */,
-				6D538BA51CDCC8D500B0F780 /* Fabric.framework */,
+				98F07FC2FE11BC9F483FD5D6 /* Pods */,
+				B9DE1049F56E104F0F589744 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,6 +188,23 @@
 			path = slidr;
 			sourceTree = "<group>";
 		};
+		98F07FC2FE11BC9F483FD5D6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0B88B78B6FF741F2E9FFB98C /* Pods-slidr.debug.xcconfig */,
+				E590C75EF5F5D2847B9EE156 /* Pods-slidr.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B9DE1049F56E104F0F589744 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				00381DF4F3FF925A5E5955A3 /* libPods-slidr.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -196,10 +212,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6DC0CCD91CD8C0C20019D466 /* Build configuration list for PBXNativeTarget "slidr" */;
 			buildPhases = (
+				B6F62668ED8F99C16B66A426 /* Check Pods Manifest.lock */,
 				6DC0CCBF1CD8C0C20019D466 /* Sources */,
 				6DC0CCC01CD8C0C20019D466 /* Frameworks */,
 				6DC0CCC11CD8C0C20019D466 /* Resources */,
 				6D538BA41CDCC88D00B0F780 /* Run Script */,
+				3E6210679D1B77C622386495 /* Embed Pods Frameworks */,
+				55347F424042C9040DB908FF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -273,6 +292,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3E6210679D1B77C622386495 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-slidr/Pods-slidr-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		55347F424042C9040DB908FF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-slidr/Pods-slidr-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6D538BA41CDCC88D00B0F780 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -285,7 +334,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 035bda92bd5b13402aaf2c6cb5f66b8ff23f2166 2f4e5b60c0ad0f13a7f33d51e0639f4cef9c806cf7147b97c015dc085d89d1c3";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 035bda92bd5b13402aaf2c6cb5f66b8ff23f2166 2f4e5b60c0ad0f13a7f33d51e0639f4cef9c806cf7147b97c015dc085d89d1c3";
+		};
+		B6F62668ED8F99C16B66A426 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -423,6 +487,7 @@
 		};
 		6DC0CCDA1CD8C0C20019D466 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B88B78B6FF741F2E9FFB98C /* Pods-slidr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -441,6 +506,7 @@
 		};
 		6DC0CCDB1CD8C0C20019D466 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E590C75EF5F5D2847B9EE156 /* Pods-slidr.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
