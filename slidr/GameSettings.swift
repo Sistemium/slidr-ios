@@ -68,7 +68,7 @@ struct GameSettings{
         }
     }
     static let freeModeTimer = 10.0
-    static let rewardValue:CGFloat = 0.0001 * rezolutionNormalizationValue
+    static let rewardValue:CGFloat = 0.00005 / (rezolutionNormalizationValue * rezolutionNormalizationValue)
     static var lockOrientationInGameEnabled:Bool{
         get{
             if UserDefaults.standard.dictionaryRepresentation().keys.contains("LockOrientationInGameEnabled"){
