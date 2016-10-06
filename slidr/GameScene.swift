@@ -338,14 +338,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }else{
                     block1.pushVector = CGVector(dx: -block1.pushVector.dx, dy: -block1.pushVector.dy)
                     block2.pushVector = CGVector(dx: -block2.pushVector.dx, dy: -block2.pushVector.dy)
-                    if block1.type == .bomb{
-                        block1.physicsBody = nil
-                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
-                    }
-                    if block2.type == .bomb{
-                        block2.physicsBody = nil
-                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
-                    }
+//                    if block1.type == .bomb{
+//                        block1.physicsBody = nil
+//                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
+//                    }
+//                    if block2.type == .bomb{
+//                        block2.physicsBody = nil
+//                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
+//                    }
                 }
             }else{
                 if block1.pushVector.dx == block2.pushVector.dx && block1.pushVector.dy == block2.pushVector.dy{
@@ -361,14 +361,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         destroyBlock(block1,withTime: 0)
                         return
                     }
-                    if block1.type == .bomb{
-                        block1.physicsBody = nil
-                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
-                    }
-                    if block2.type == .bomb{
-                        block2.physicsBody = nil
-                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
-                    }
+//                    if block1.type == .bomb{
+//                        block1.physicsBody = nil
+//                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
+//                    }
+//                    if block2.type == .bomb{
+//                        block2.physicsBody = nil
+//                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
+//                    }
                 }
                 else{
                     if whoHitted(block1,block2: block2) == block1{
@@ -385,14 +385,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         destroyBlock(block1,withTime: 0)
                         return
                     }
-                    if block1.type == .bomb{
-                        block1.physicsBody = nil
-                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
-                    }
-                    if block2.type == .bomb{
-                        block2.physicsBody = nil
-                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
-                    }
+//                    if block1.type == .bomb{
+//                        block1.physicsBody = nil
+//                        destroyBlock(block1,withTime: GameSettings.blockFadeoutTime)
+//                    }
+//                    if block2.type == .bomb{
+//                        block2.physicsBody = nil
+//                        destroyBlock(block2,withTime: GameSettings.blockFadeoutTime)
+//                    }
                 }
             }
         }else{
@@ -500,7 +500,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if candidatesToGesture.keys.min() != nil {
                 let chosen = candidatesToGesture[candidatesToGesture.keys.min()!]
                 let touchLocation = convert(location, to: chosen!)
-                let region = SKRegion(size: CGSize(width: chosen!.size.width + GameSettings.touchRegion, height: chosen!.size.height  * GameSettings.touchRegion))
+                let region = SKRegion(size: CGSize(width: chosen!.size.width + GameSettings.touchRegion, height: chosen!.size.height + GameSettings.touchRegion))
                 if region.contains(touchLocation){
                     if chosen!.type == .bomb && chosen!.physicsBody != nil{
                         chosen!.physicsBody = nil
@@ -585,7 +585,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if candidatesToGesture.keys.min() != nil {
             let chosen = candidatesToGesture[candidatesToGesture.keys.min()!]
             let touchLocation = convert(touchLocation, to: chosen!)
-            let region = SKRegion(size: CGSize(width: chosen!.size.width + GameSettings.touchRegion, height: chosen!.size.height  * GameSettings.touchRegion))
+            let region = SKRegion(size: CGSize(width: chosen!.size.width + GameSettings.touchRegion, height: chosen!.size.height + GameSettings.touchRegion))
             if region.contains(touchLocation){
                 if chosen!.type == .standart{
                     switch direction {
