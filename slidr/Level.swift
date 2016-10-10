@@ -6,9 +6,15 @@
 //  Copyright © 2016 Edgar Jan Vuicik. All rights reserved.
 //
 
-class Level{
+enum LevelType:String{
+    case Challenge = "Challenge",Puzzle = "Puzzle"
+}
+
+struct Level{
+    var type:LevelType?
     var name:String?
     var priority:Float?
     var timeout:Double?
     var blocks = [Block]()
+    var completionTime:Double?
 }

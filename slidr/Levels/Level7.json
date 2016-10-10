@@ -2,8 +2,8 @@
     "blocks":[
               {
               "type":"standart",
-              "height":150,
-              "width":150,
+              "height":180,
+              "width":180,
               "pushVectorX":0,
               "pushVectorY":-1,
               "positionX":0.5,
@@ -13,39 +13,40 @@
               },
               {
               "type":"swipeable",
-              "height":150,
-              "width":150,
+              "height":180,
+              "width":180,
               "pushVectorX":0,
               "pushVectorY":-1,
               "positionX":0.5,
-              "positionY":1.35,
+              "positionY":1.4,
               "pushTime":0,
               "rotation":0
               },
               {
               "type":"standart",
-              "height":150,
-              "width":150,
+              "height":180,
+              "width":180,
               "pushVectorX":0,
               "pushVectorY":-1,
               "positionX":0.5,
-              "positionY":1.6,
+              "positionY":1.7,
               "pushTime":0,
               "rotation":0
               },
               {
               "type":"swipeable",
-              "height":150,
-              "width":150,
+              "height":180,
+              "width":180,
               "pushVectorX":0,
               "pushVectorY":-1,
               "positionX":0.5,
-              "positionY":1.85,
+              "positionY":2,
               "pushTime":0,
               "rotation":0
               }
               ],
     "timeout":10,
-    "priority":9,
-    "name":"Level 9"
+    "priority":7,
+    "name":"Level 7",
+    "type":"Puzzle"
 }

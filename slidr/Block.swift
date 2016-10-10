@@ -15,81 +15,207 @@ enum BlockType{
 
 class Block: SKSpriteNode {
     
-    var actions:[SKAction] = []
-    
-    var blockType = BlockType.standart{
+    var originalSize = CGSize()
+    var change:CGFloat = 1
+    var innerShapes:[SKShapeNode]!
+    var mask:CaterpillarMask!
+    var type = BlockType.standart{
         didSet{
-            switch blockType {
+            switch type {
             case .standart:
-                self.color = UIColor.redColor()
-                hitSide.color = UIColor.blackColor()
-                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
-                self.physicsBody!.dynamic = true
+                makeCaterpillarWithColor(UIColor.red)
             case .swipeable:
-                self.color = UIColor.blueColor()
-                hitSide.color = UIColor.blackColor()
-                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
-                self.physicsBody!.dynamic = true
+                makeCaterpillarWithColor(UIColor.blue)
             case .wall:
-                self.color = UIColor.blackColor()
-                hitSide.color = UIColor.blackColor()
-                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
-                self.physicsBody!.dynamic = false
+                color = UIColor.black
+                physicsBody = SKPhysicsBody(rectangleOf: size)
             case .bomb:
-                self.color = UIColor.clearColor()
-                hitSide.color = UIColor.clearColor()
-                self.size = CGSize(width: self.size.width/3, height: self.size.width/3)
-                self.physicsBody = SKPhysicsBody(rectangleOfSize: size)
-                self.physicsBody!.dynamic = true
-                let shape = SKShapeNode(rectOfSize: self.size)
-                shape.position = CGPoint(x: 0,y: 0)
-                self.addChild(shape)
-                let innerShapes:[SKShapeNode] = [SKShapeNode(circleOfRadius: self.size.width / 2),SKShapeNode(circleOfRadius: self.size.width / 2)]
+                color = UIColor.clear
+                size = CGSize(width: size.width/2.5, height: size.width/2.5)
+                texture = SKTexture(imageNamed: "Bomb")
+                physicsBody = SKPhysicsBody(rectangleOf: size)
+                physicsBody!.isDynamic = true
+                innerShapes = [SKShapeNode(circleOfRadius: size.width / 2),SKShapeNode(circleOfRadius: size.width / 2)]
                 innerShapes[1].xScale = 0.5
                 innerShapes[1].yScale = 0.5
-                shape.fillTexture = SKTexture.init(image: UIImage(named: "Bomb")!)
-                shape.fillColor = UIColor.yellowColor()
-                shape.strokeColor = UIColor.clearColor()
                 let blur = SKEffectNode()
                 blur.shouldRasterize = true
-                blur.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(double:10.0)])!
-                shape.addChild(blur)
+                blur.filter = CIFilter(name: "CIGaussianBlur", withInputParameters: ["inputRadius" : NSNumber(value: GameSettings.blurValue as Double)])!
+                addChild(blur)
                 blur.addChild(innerShapes[0])
                 blur.addChild(innerShapes[1])
-                actions.append(SKAction.runBlock({
-                    for innerShape in innerShapes{
-                        innerShape.lineWidth = 20
-                        innerShape.xScale -= 0.02
-                        innerShape.yScale -= 0.02
-                        if innerShape.xScale <= 0{
-                            innerShape.xScale = 1.0
-                            innerShape.yScale = 1.0
-                        }
-                        innerShape.strokeColor = UIColor(red: 1.0, green: 0, blue: 0, alpha: 1 - innerShape.xScale)
-                        innerShape.position = CGPoint(x: 0,y: 0)
-                    }
-                }))
+                blur.zPosition = 1.5
+                innerShapes[0].zPosition = 1.5
+                innerShapes[1].zPosition = 1.5
             }
+        }
+    }
+    
+    var maxWidth:CGFloat{
+        get{
+            return pushVector.dx != 0 ? originalSize.width * (1 + GameSettings.caterpillarDeepth) : originalSize.width
+        }
+    }
+    var maxHeight:CGFloat{
+        get{
+            return pushVector.dy != 0 ? originalSize.height * (1 + GameSettings.caterpillarDeepth) : originalSize.height
+        }
+    }
+    var minWidth:CGFloat{
+        get{
+            return pushVector.dx != 0 ? originalSize.width * (1 - GameSettings.caterpillarDeepth) : originalSize.width
+        }
+    }
+    var minHeight:CGFloat{
+        get{
+            return pushVector.dy != 0 ? originalSize.height * (1 - GameSettings.caterpillarDeepth) : originalSize.height
+        }
+    }
+    
+    lazy var caterpillarPartSize:CGSize = {[unowned self] in
+        let partsCount:CGFloat = round(2 + min(self.originalSize.width,self.originalSize.height) / GameSettings.caterpillarPartSize)
+        return CGSize(width:self.originalSize.width / partsCount,height:self.originalSize.height / partsCount)
+    }()
+    
+    var widthCaterpillarPartsCount:Int{
+        return (Int(originalSize.width / caterpillarPartSize.width) - 1) * 2
+    }
+    
+    var heightCaterpillarPartsCount:Int{
+        return (Int(originalSize.height / caterpillarPartSize.height) - 1) * 2
+    }
+    
+    fileprivate func makeCaterpillarWithColor(_ color:UIColor){
+        physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: size.width, height: size.height))
+        self.color = UIColor.clear
+        hitSide = Head()
+        mask = CaterpillarMask(block: self,color: color)
+        mask.size = size
+        mask.zPosition = 1.5
+        addChild(hitSide)
+        addChild(mask)
+    }
+    
+    func animate(){
+        if type == .bomb{
+            for innerShape in innerShapes{
+                innerShape.lineWidth = 20
+                innerShape.xScale -= 0.02
+                innerShape.yScale -= 0.02
+                if innerShape.xScale <= 0{
+                    innerShape.xScale = 1.0
+                    innerShape.yScale = 1.0
+                }
+                innerShape.strokeColor = UIColor(red: 1.0, green: 0, blue: 0, alpha: 1 - innerShape.xScale)
+                innerShape.position = CGPoint(x: 0,y: 0)
+            }
+        }else{
+            if change<0{
+                change = (-abs(self.velocity.dx + self.velocity.dy)) * GameSettings.caterpillarSpeed
+            }else{
+                change = abs(self.velocity.dx + self.velocity.dy) * GameSettings.caterpillarSpeed
+            }
+            if self.pushVector == GameSettings.moveDirections[0] || self.pushVector == GameSettings.moveDirections[1]{
+                self.size = CGSize(width: self.size.width, height: self.size.height + change)
+                if self.size.height < self.minHeight {
+                    self.size = CGSize(width: self.size.width, height: self.minHeight)
+                    change = -change
+                }
+                if self.size.height > self.maxHeight {
+                    self.size = CGSize(width: self.size.width, height: self.maxHeight)
+                    change = -change
+                }
+            }else{
+                self.size = CGSize(width: self.size.width + change, height: self.size.height)
+                if self.size.width < self.minWidth {
+                    self.size = CGSize(width: self.minWidth, height: self.size.height)
+                    change = -change
+                }
+                if self.size.width > self.maxWidth {
+                    self.size = CGSize(width: self.maxWidth, height: self.size.height)
+                    change = -change
+                }
+            }
+            if self.physicsBody != nil{
+                self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width, height: self.size.height))
+            }
+            self.physicsBody?.velocity = self.velocity
+            updateHitSide()
+            mask?.size = self.size
         }
     }
     
     override var physicsBody: SKPhysicsBody?{
         didSet{
-            self.physicsBody?.allowsRotation = false
-            self.physicsBody?.affectedByGravity = false
-            self.physicsBody?.contactTestBitMask = Block.blockId
-        }
-    }
-    
-    var rotation:Double? = 0{
-        didSet{
-            if rotation != nil{
-                self.zRotation = CGFloat(M_PI/(360/rotation!))
+            physicsBody?.allowsRotation = false
+            physicsBody?.affectedByGravity = false
+            physicsBody?.contactTestBitMask = Block.blockId
+            if type == .wall{
+                physicsBody?.isDynamic = false
+            }else{
+                physicsBody?.isDynamic = true
             }
         }
     }
     
-    var hitSide = SKSpriteNode()
+    var rotation:Int? = 0{
+        didSet{
+            if rotation != nil{
+                zRotation = rotation!.deg2Rad
+            }
+        }
+    }
+    
+    var hitSide:Head!{
+        didSet{
+            
+            updateHitSide()
+        }
+    }
+    
+    var lastPushVector:CGVector?
+    
+    func updateHitSide(){
+        if pushVector != lastPushVector {
+            hitSide?.stopAnimation()
+        }
+        if pushVector == lastPushVector?.inverted{
+            switch pushVector{
+            case GameSettings.moveDirections[3]:
+                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
+                hitSide?.animateNewPosition(CGPoint(x: -size.width / 2 + caterpillarPartSize.width / 2, y: 0))
+            case GameSettings.moveDirections[2]:
+                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
+                hitSide?.animateNewPosition(CGPoint(x: size.width / 2 - caterpillarPartSize.width / 2, y: 0))
+            case GameSettings.moveDirections[1]:
+                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
+                hitSide?.animateNewPosition(CGPoint(x: 0, y: -size.height / 2 + caterpillarPartSize.height / 2))
+            case GameSettings.moveDirections[0]:
+                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
+                hitSide?.animateNewPosition(CGPoint(x: 0, y: size.height / 2 - caterpillarPartSize.height / 2))
+            default:
+                break
+            }
+        }else{
+            switch pushVector{
+            case GameSettings.moveDirections[3]:
+                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
+                hitSide?.position = CGPoint(x: -size.width / 2 + caterpillarPartSize.width / 2, y: 0)
+            case GameSettings.moveDirections[2]:
+                hitSide?.size = CGSize(width: caterpillarPartSize.width, height: size.height)
+                hitSide?.position = CGPoint(x: size.width / 2 - caterpillarPartSize.width / 2, y: 0)
+            case GameSettings.moveDirections[1]:
+                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
+                hitSide?.position = CGPoint(x: 0, y: -size.height / 2 + caterpillarPartSize.height / 2)
+            case GameSettings.moveDirections[0]:
+                hitSide?.size = CGSize(width: size.width, height: caterpillarPartSize.height)
+                hitSide?.position = CGPoint(x: 0, y: size.height / 2 - caterpillarPartSize.height / 2)
+            default:
+                break
+            }
+        }
+        lastPushVector = pushVector
+    }
     
     var movementEnabled = true
     
@@ -101,9 +227,9 @@ class Block: SKSpriteNode {
                 }else{
                     boost = 1
                 }
-                return CGVectorMake(pushVector.dx / self.size.height * speedModifier * boost, pushVector.dy / self.size.width * speedModifier * boost)
+                return CGVector(dx: pushVector.dx * speedModifier * boost,dy: pushVector.dy * speedModifier * boost)
             }else{
-                return CGVectorMake(0, 0)
+                return CGVector(dx: 0, dy: 0)
             }
         }
     }
@@ -114,28 +240,13 @@ class Block: SKSpriteNode {
     
     var pushed = false
     
-    private var speedModifier:CGFloat = 1
+    var speedModifier:CGFloat = 1
     
     var boost:CGFloat = 1
     
     var pushVector : CGVector!{
         didSet{
-            switch (pushVector.dx, pushVector.dy) {
-            case (let x,_) where x<0:
-                hitSide.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
-                hitSide.position = CGPoint(x: -self.size.width / 2 + GameSettings.hitSideWidth / 2, y: 0)
-            case (let x,_) where x>0:
-                hitSide.size = CGSize(width: GameSettings.hitSideWidth, height: self.size.height)
-                hitSide.position = CGPoint(x: self.size.width / 2 - GameSettings.hitSideWidth / 2, y: 0)
-            case (_,let y) where y<0:
-                hitSide.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
-                hitSide.position = CGPoint(x: 0, y: -self.size.height / 2 + GameSettings.hitSideWidth / 2)
-            case (_,let y) where y>0:
-                hitSide.size = CGSize(width: self.size.width, height: GameSettings.hitSideWidth)
-                hitSide.position = CGPoint(x: 0, y: self.size.height / 2 - GameSettings.hitSideWidth / 2)
-            default:
-                break
-            }
+            animate()
         }
     }
     
@@ -143,25 +254,23 @@ class Block: SKSpriteNode {
     
     var corners:[CGPoint]{
         get{
-            return [CGPoint(x:  self.size.width / 2 , y: self.size.height / 2 ),CGPoint(x:  self.size.width / 2 , y: -self.size.height / 2 ),CGPoint(x:  -self.size.width / 2 , y: -self.size.height / 2 ),CGPoint(x:  -self.size.width / 2 , y: self.size.height / 2 )]
+            return [CGPoint(x:  size.width / 2 , y: size.height / 2 ),CGPoint(x:  size.width / 2 , y: -size.height / 2 ),CGPoint(x:  -size.width / 2 , y: -size.height / 2 ),CGPoint(x:  -size.width / 2 , y: size.height / 2 )]
         }
     }
     
     convenience init(){
-        self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
-        customInit()
+        self.init(texture: nil, color: UIColor.red, size: CGSize(width: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize), height: CGFloat(arc4random_uniform(GameSettings.maxBlockSize) + GameSettings.minBlockSize) ))
         randomizeData()
     }
     
     convenience init(blockData:NSDictionary){
-        self.init(texture: nil, color: UIColor.redColor(), size: CGSize(width: blockData["width"] as! CGFloat, height: blockData["height"] as! CGFloat ))
+        self.init(texture: nil, color: UIColor.red, size: CGSize(width: blockData["width"] as! CGFloat * GameSettings.rezolutionNormalizationValue, height: blockData["height"] as! CGFloat * GameSettings.rezolutionNormalizationValue))
         loadBlock(blockData)
-        customInit()
     }
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        
+        customInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -170,80 +279,78 @@ class Block: SKSpriteNode {
     
     func customInit(){
         Block.blockId += 1
-        self.addChild(hitSide)
+        zPosition = 1
+        originalSize = size
     }
     
-    func loadBlock(blockData:NSDictionary){
+    func loadBlock(_ blockData:NSDictionary){
         speedModifier = blockData["speedModifier"] as? CGFloat ?? 1
-        pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.baseSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.baseSpeed)
+        pushVector = CGVector(dx: blockData["pushVectorX"] as! CGFloat * GameSettings.defaultSpeed, dy: blockData["pushVectorY"] as! CGFloat  * GameSettings.defaultSpeed)
         position = CGPoint(x: blockData["positionX"] as! CGFloat, y: blockData["positionY"] as! CGFloat)
         preferedPushTime = blockData["pushTime"] as? Double
-        self.rotation = blockData["rotation"] as? Double
-        self.numberOfActions = blockData["numberOfActions"] as? Int
+        rotation = blockData["rotation"] as? Int
+        numberOfActions = blockData["numberOfActions"] as? Int
         switch blockData["type"] as! String {
         case "standart":
-            blockType = .standart
+            type = .standart
         case "swipeable":
-            self.blockType = .swipeable
+            type = .swipeable
         case "wall":
-            self.blockType = .wall
+            type = .wall
         case "bomb":
-            self.blockType = .bomb
+            type = .bomb
         default:
             break
+        }
+        if blockData["name"] as? String == "test" {
+            color = UIColor.green
         }
     }
     
     func randomizeData() {
+        pushVector = GameSettings.moveDirections[Int(arc4random_uniform(4))]
         switch arc4random_uniform(7) {
         case 0,1,2:
-            self.blockType = .standart
+            type = .standart
         case 3,4,5:
-            self.blockType = .swipeable
+            type = .swipeable
         default:
-            self.blockType = .bomb
+            type = .bomb
         }
-        pushVector = GameSettings.moveDirections[Int(arc4random_uniform(4))]
         if pushVector.dx == 0{
             if pushVector.dy > 0{
-                position = CGPointMake(CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.width - size.width ))) + size.width/2, -size.height/2)
+                position = CGPoint(x: CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.width - size.width ))) + size.width/2, y: -size.height/2)
             }else{
-                position = CGPointMake(CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.width - size.width ))) + size.width/2, GameSettings.playableAreaSize.height + size.height/2)
+                position = CGPoint(x: CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.width - size.width ))) + size.width/2, y: GameSettings.playableAreaSize.height + size.height/2)
             }
         }else{
             if pushVector.dx > 0 {
-                position = CGPointMake(-size.width/2, CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.height - size.height ))) + size.height/2)
+                position = CGPoint(x: -size.width/2, y: CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.height - size.height ))) + size.height/2)
             }else{
-                position = CGPointMake(GameSettings.playableAreaSize.width + size.width/2, CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.height - size.height ))) + size.height/2)
+                position = CGPoint(x: GameSettings.playableAreaSize.width + size.width/2, y: CGFloat(arc4random_uniform(UInt32(GameSettings.playableAreaSize.height - size.height ))) + size.height/2)
             }
         }
     }
     
     func switchOrientationToLeft(){
-        var t = self.position.x
-        self.position.x = (-self.position.y + 1)
-        self.position.y = t
-        t = self.size.height
-        self.size.height = self.size.width
-        self.size.width = t
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
-        if self.blockType == .wall{
-            self.physicsBody!.dynamic = false
-        }
-        self.pushVector = CGVectorMake(-self.pushVector.dy, self.pushVector.dx)
+        let t = position.x
+        position.x = (-position.y + 1)
+        position.y = t
+        size = size.reversed()
+        physicsBody = SKPhysicsBody(rectangleOf: size)
+        pushVector = CGVector(dx: -pushVector.dy, dy: pushVector.dx)
+        originalSize = originalSize.reversed()
+        caterpillarPartSize = caterpillarPartSize.reversed()
     }
     
     func switchOrientationToRight(){
-        var t = (-self.position.x + 1)
-        self.position.x = self.position.y
-        self.position.y = t
-        t = self.size.height
-        self.size.height = self.size.width
-        self.size.width = t
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: self.size)
-        if self.blockType == .wall{
-            self.physicsBody!.dynamic = false
-        }
-        self.pushVector = CGVectorMake(self.pushVector.dy, -self.pushVector.dx)
+        let t = (-position.x + 1)
+        position.x = position.y
+        position.y = t
+        size = size.reversed()
+        physicsBody = SKPhysicsBody(rectangleOf: size)
+        pushVector = CGVector(dx: pushVector.dy, dy: -pushVector.dx)
+        originalSize = originalSize.reversed()
+        caterpillarPartSize = caterpillarPartSize.reversed()
     }
 }

@@ -2,8 +2,8 @@
     "blocks":[
               {
               "type":"standart",
-              "height":160,
-              "width":160,
+              "height":200,
+              "width":200,
               "pushVectorX":0,
               "pushVectorY":-1,
               "positionX":0.3,
@@ -13,8 +13,8 @@
               },
               {
               "type":"standart",
-              "height":160,
-              "width":160,
+              "height":200,
+              "width":200,
               "pushVectorX":0,
               "pushVectorY":1,
               "positionX":0.7,
@@ -24,8 +24,8 @@
               },
               {
               "type":"standart",
-              "height":160,
-              "width":160,
+              "height":200,
+              "width":200,
               "pushVectorX":-1,
               "pushVectorY":0,
               "positionX":1.6,
@@ -35,8 +35,8 @@
               },
               {
               "type":"standart",
-              "height":160,
-              "width":160,
+              "height":200,
+              "width":200,
               "pushVectorX":1,
               "pushVectorY":0,
               "positionX":-0.6,
@@ -47,5 +47,6 @@
               ],
     "timeout":10,
     "priority":4,
-    "name":"Level 4"
+    "name":"Level 4",
+    "type":"Puzzle"
 }

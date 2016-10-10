@@ -2,8 +2,8 @@
     "blocks":[
               {
               "type":"standart",
-              "height":150,
-              "width":150,
+              "height":200,
+              "width":200,
               "pushVectorX":1,
               "pushVectorY":0,
               "positionX":-0.1,
@@ -14,8 +14,8 @@
               },
               {
               "type":"standart",
-              "height":150,
-              "width":150,
+              "height":200,
+              "width":200,
               "pushVectorX":0,
               "pushVectorY":-1,
               "positionX":0.5,
@@ -27,5 +27,6 @@
               ],
     "timeout":10,
     "priority":2,
-    "name":"Level 2"
+    "name":"Level 2",
+    "type":"Puzzle"
 }

@@ -9,7 +9,7 @@
               "positionX":0.15,
               "positionY":0.1,
               "pushTime":0,
-              "rotation":90
+              "rotation":45
               },
               {
               "type":"wall",
@@ -20,7 +20,7 @@
               "positionX":0.15,
               "positionY":0.45,
               "pushTime":0,
-              "rotation":-90
+              "rotation":-45
               },
               {
               "type":"wall",
@@ -31,7 +31,7 @@
               "positionX":0.5,
               "positionY":0.1,
               "pushTime":0,
-              "rotation":-90
+              "rotation":-45
               },
               {
               "type":"wall",
@@ -94,6 +94,7 @@
               }
               ],
     "timeout":25,
-    "priority":11,
-    "name":"Level 11"
+    "priority":9,
+    "name":"Level 9",
+    "type":"Puzzle"
 }

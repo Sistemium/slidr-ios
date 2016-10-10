@@ -12,16 +12,16 @@ class RippleCircle: SKShapeNode {
     
     var radius: CGFloat! {
         didSet {
-            self.path = RippleCircle.path(self.radius)
-            self.physicsBody = SKPhysicsBody(circleOfRadius: radius)
-            self.physicsBody!.collisionBitMask = 0
+            path = RippleCircle.path(radius)
+            physicsBody = SKPhysicsBody(circleOfRadius: radius)
+            physicsBody!.collisionBitMask = 0
         }
     }
     
     init(radius: CGFloat, position: CGPoint) {
         self.radius = radius
         super.init()
-        self.path = RippleCircle.path(self.radius)
+        path = RippleCircle.path(radius)
         self.position = position
     }
     
@@ -29,14 +29,14 @@ class RippleCircle: SKShapeNode {
         super.init(coder: aDecoder)
     }
     
-    static func path(radius: CGFloat) -> CGMutablePathRef {
-        let path: CGMutablePathRef = CGPathCreateMutable()
-        CGPathAddArc(path, nil, 0.0, 0.0, radius, 0.0, CGFloat(2.0 * M_PI), true)
+    static func path(_ radius: CGFloat) -> CGMutablePath {
+        let path: CGMutablePath = CGMutablePath()
+        path.addArc(center: CGPoint.zero, radius: radius, startAngle: 0.0, endAngle: CGFloat(2.0 * M_PI), clockwise: true)
         return path
     }
     
-    func ripple(scale: CGFloat, duration: NSTimeInterval) {
-        if let scene = self.scene {
+    func ripple(_ scale: CGFloat, duration: TimeInterval) {
+        if let scene = scene {
             let currentRadius = radius
             let finalRadius = radius * scale
             let circleNode = RippleCircle(radius: radius, position: position)
@@ -45,23 +45,23 @@ class RippleCircle: SKShapeNode {
             circleNode.position = position
             circleNode.zRotation = zRotation
             circleNode.lineWidth = lineWidth
-            circleNode.userInteractionEnabled = false
+            circleNode.isUserInteractionEnabled = false
             
-            if let index = scene.children.indexOf(self) {
-                scene.insertChild(circleNode, atIndex: index)
+            if let index = scene.children.index(of: self) {
+                scene.insertChild(circleNode, at: index)
                 
-                let scaleAction = SKAction.customActionWithDuration(duration, actionBlock: { node, elapsedTime in
+                let scaleAction = SKAction.customAction(withDuration: duration, actionBlock: { node, elapsedTime in
                     let circleNode = node as! RippleCircle
                     let fraction = elapsedTime / CGFloat(duration)
-                    circleNode.radius = currentRadius + (fraction * finalRadius)
+                    circleNode.radius = currentRadius! + (fraction * finalRadius)
                 })
                 
-                let fadeAction = SKAction.fadeAlphaTo(0, duration: duration)
-                fadeAction.timingMode = SKActionTimingMode.EaseOut
+                let fadeAction = SKAction.fadeAlpha(to: 0, duration: duration)
+                fadeAction.timingMode = SKActionTimingMode.easeOut
                 
                 let actionGroup = SKAction.group([scaleAction, fadeAction])
                 
-                circleNode.runAction(actionGroup, completion: {
+                circleNode.run(actionGroup, completion: {
                     circleNode.physicsBody = nil
                     circleNode.removeFromParent();
                 })
