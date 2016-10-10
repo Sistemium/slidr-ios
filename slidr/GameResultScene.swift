@@ -16,6 +16,8 @@ class GameResultScene: SKScene{
     
     var scoreTime:CFTimeInterval?
     
+    var scorePercent:Int?
+    
     var result:Result = Result.win
     
     var finishedLevel :Level?
@@ -76,22 +78,22 @@ class GameResultScene: SKScene{
             if scoreTime != nil && scoreTime != 1.0 {
                 scoreLabel.text! += "s"
             }
+            scoreLabel.text = scorePercent == nil ? "" : "You compleded \(scorePercent!) %"
             scoreLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 2.4)
             scoreLabel.fontSize = GameSettings.labelSize * 0.5
             scoreLabel.zPosition = 1.0
             scoreLabel.fontColor = UIColor.black
             addChild(scoreLabel)
-            addChild(scoreLabel.outlineLabel)
         }
     }
     
     fileprivate var recordLabel: OutlineSKLabelNode!{
         didSet{
             if scoreTime != nil{
-                let record = UserDefaults.standard.integer(forKey: "record")
+                let record = UserDefaults.standard.integer(forKey: "recordTime")
                 if record < Int(scoreTime!){
                     recordLabel.text = "It's your new record!"
-                    UserDefaults.standard.setValue(Int(scoreTime!), forKey: "record")
+                    UserDefaults.standard.setValue(Int(scoreTime!), forKey: "recordTime")
                 }else{
                     recordLabel.text = "Your best time was \(record) second"
                     if scoreTime != nil && record != 1 {
@@ -99,12 +101,20 @@ class GameResultScene: SKScene{
                     }
                 }
             }
+            if scorePercent != nil{
+                let record = UserDefaults.standard.integer(forKey: "recordPercent\(finishedLevel?.name)")
+                if record < Int(scorePercent!){
+                    recordLabel.text = "It's your new record!"
+                    UserDefaults.standard.setValue(Int(scorePercent!), forKey: "recordPercent\(finishedLevel?.name)")
+                }else{
+                    recordLabel.text = "Your best result was \(record) %"
+                }
+            }
             recordLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 3.5)
             recordLabel.fontSize = GameSettings.labelSize * 0.5
             recordLabel.zPosition = 1.0
             recordLabel.fontColor = UIColor.black
             addChild(recordLabel)
-            addChild(recordLabel.outlineLabel)
         }
     }
     

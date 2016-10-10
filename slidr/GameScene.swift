@@ -116,7 +116,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         case .challenge:
             if level?.timeout<=0 {
-                presentResultScene(.lose, infoText: "Time's Up!")
+                presentResultScene(.lose, infoText: "Time's Up!",completionPercent: Int((currentTime - startTime!) / level!.completionTime! * 100) )
             }
             else if (currentTime - startTime!) > level!.completionTime{
                 presentResultScene(.win, infoText: "")
@@ -128,15 +128,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    fileprivate func presentResultScene(_ result:Result,infoText:String,score:CFTimeInterval? = nil){
+    fileprivate func presentResultScene(_ result:Result,infoText:String,score:CFTimeInterval? = nil, completionPercent:Int? = nil){
         let scene = GameResultScene()
         scene.size = GameSettings.playableAreaSize
         scene.scaleMode = .fill
         scene.result = result
         scene.finishedLevel = level ?? nil
         scene.infoText = infoText
-        if let time = score{
-            scene.scoreTime = time
+        if let scoreTime = score{
+            scene.scoreTime = scoreTime
+        }
+        if let scorePercent = completionPercent{
+            scene.scorePercent = scorePercent
         }
         view!.presentScene(scene)
     }
