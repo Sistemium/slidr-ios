@@ -33,9 +33,17 @@ extension CGPoint {
     }
 }
 
-extension CGSize{
+extension CGSize : Hashable{
     func reversed() -> CGSize {
         return CGSize(width: height, height: width)
+    }
+    
+    public var hashValue: Int {
+        return "\(width,height)".hashValue
+    }
+    
+    static func ==(x: CGSize, y: CGSize) -> Bool {
+        return x.width == y.width && x.height == y.height
     }
 }
 
@@ -127,5 +135,18 @@ extension Range {
         let range = (self.upperBound as! Double) - (self.lowerBound as! Double)
         let randomValue = (Double(arc4random_uniform(UINT32_MAX)) / Double(UINT32_MAX)) * range + (self.lowerBound as! Double)
         return randomValue as! Bound
+    }
+}
+
+struct Dict2D<X:Hashable,Y:Hashable,V> {
+    var values = [X:[Y:V]]()
+    subscript (x:X, y:Y)->V? {
+        get { return values[x]?[y] }
+        set {
+            if values[x] == nil {
+                values[x] = [Y:V]()
+            }
+            values[x]![y] = newValue
+        }
     }
 }

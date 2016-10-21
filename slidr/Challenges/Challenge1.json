@@ -80,7 +80,7 @@
         {"time":89,"width": 121, "height": 176},
         {"time":110,"width": 248, "height": 249},
     ],
-    "timeout": 10,
+    "timeout": 1000,
     "completionTime": 90,
     "priority": 1,
     "name": "Challenge 1",

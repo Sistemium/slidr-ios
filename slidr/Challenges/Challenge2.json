@@ -133,7 +133,7 @@
                      {"time":90,"width": 53, "height": 30},
                      {"time":110,"width": 53, "height": 30}
                      ],
-    "timeout": 10,
+    "timeout": 1000,
     "completionTime": 90,
     "priority": 2,
     "name": "Challenge 2",

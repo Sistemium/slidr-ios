@@ -78,7 +78,7 @@ class GameResultScene: SKScene{
             if scoreTime != nil && scoreTime != 1.0 {
                 scoreLabel.text! += "s"
             }
-            scoreLabel.text = scorePercent == nil ? "" : "You compleded \(scorePercent!) %"
+            scoreLabel.text = scorePercent == nil ? "" : "You compleded \(scorePercent!)%"
             scoreLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 2.4)
             scoreLabel.fontSize = GameSettings.labelSize * 0.5
             scoreLabel.zPosition = 1.0
@@ -107,7 +107,7 @@ class GameResultScene: SKScene{
                     recordLabel.text = "It's your new record!"
                     UserDefaults.standard.setValue(Int(scorePercent!), forKey: "recordPercent\(finishedLevel?.name)")
                 }else{
-                    recordLabel.text = "Your best result was \(record) %"
+                    recordLabel.text = "Your best result was \(record)%"
                 }
             }
             recordLabel.position = CGPoint(x: GameSettings.playableAreaSize.width/2, y: GameSettings.playableAreaSize.height/2 - GameSettings.labelSize * 3.5)
