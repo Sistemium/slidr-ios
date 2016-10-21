@@ -39,7 +39,7 @@ extension CGSize : Hashable{
     }
     
     public var hashValue: Int {
-        return "\(width,height)".hashValue
+        return "\(width.rounded(),height.rounded())".hashValue
     }
     
     static func ==(x: CGSize, y: CGSize) -> Bool {

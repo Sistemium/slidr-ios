@@ -8,6 +8,16 @@
 
 import SpriteKit
 
+fileprivate func > (l: CGSize, r: CGSize) -> Bool {
+    if l.width != r.width{
+        return l.width > r.width
+    }
+    else{
+        return l.height > r.height
+    }
+}
+
+
 class CaterpillarMask: SKSpriteNode {
     
     weak var block:Block!
@@ -44,28 +54,28 @@ class CaterpillarMask: SKSpriteNode {
         if block.type == .swipeable{
         switch block.pushVector{
             case GameSettings.moveDirections[0]:
-                if let textur = GameCashe.sharedInstance.texturesY[block.size,block.heightCaterpillarPartsCount]{
+                if let textur = GameCashe.sharedInstance.texturesY[CGSize(width:block.size.width.rounded(),height:block.size.height.rounded()),block.heightCaterpillarPartsCount]{
                     if texture != textur{
                         texture = textur
                     }
                     return
                 }
             case GameSettings.moveDirections[1]:
-                if let textur = GameCashe.sharedInstance.textures_Y[block.size,block.heightCaterpillarPartsCount]{
+                if let textur = GameCashe.sharedInstance.texturesY[CGSize(width:block.size.width.rounded(),height:block.size.height.rounded()),block.heightCaterpillarPartsCount]{
                     if texture != textur{
                         texture = textur
                     }
                     return
                 }
             case GameSettings.moveDirections[2]:
-                if let textur = GameCashe.sharedInstance.texturesX[block.size,block.widthCaterpillarPartsCount]{
+                if let textur = GameCashe.sharedInstance.texturesX[CGSize(width:block.size.width.rounded(),height:block.size.height.rounded()),block.widthCaterpillarPartsCount]{
                     if texture != textur{
                         texture = textur
                     }
                     return
                 }
             case GameSettings.moveDirections[3]:
-                if let textur = GameCashe.sharedInstance.textures_X[block.size,block.widthCaterpillarPartsCount]{
+                if let textur = GameCashe.sharedInstance.texturesX[CGSize(width:block.size.width.rounded(),height:block.size.height.rounded()),block.widthCaterpillarPartsCount]{
                     if texture != textur{
                         texture = textur
                     }
@@ -86,7 +96,7 @@ class CaterpillarMask: SKSpriteNode {
                 spaceBetweenParts = -spaceBetweenParts
             }
             if block.heightCaterpillarPartsCount > 0{
-                for ii in 1...block.heightCaterpillarPartsCount{
+                for ii in 0...block.heightCaterpillarPartsCount{
                     let mask = SKShapeNode.init(ellipseOf: CGSize(width: width, height: height + differenceInHeight))
                     mask.position = CGPoint(x: block.hitSide.position.x, y:normalizeY(block.hitSide.position.y,height: block.hitSide.size.height,newHeight: block.caterpillarPartSize.height + differenceInHeight) + CGFloat(ii) * spaceBetweenParts)
                     mask.strokeColor = _color
@@ -104,7 +114,7 @@ class CaterpillarMask: SKSpriteNode {
                 spaceBetweenParts = -spaceBetweenParts
             }
             if block.widthCaterpillarPartsCount>0{
-                for ii in 1...block.widthCaterpillarPartsCount{
+                for ii in 0...block.widthCaterpillarPartsCount{
                     let mask = SKShapeNode.init(ellipseOf: CGSize(width: width + differenceInWidth, height: height))
                     mask.strokeColor = _color
                     mask.fillColor = _color
@@ -119,17 +129,30 @@ class CaterpillarMask: SKSpriteNode {
             if block.type == .swipeable{
                 switch block.pushVector{
                 case GameSettings.moveDirections[0]:
-                    GameCashe.sharedInstance.texturesY[block.size,block.heightCaterpillarPartsCount] = texture
+                    GameCashe.sharedInstance.texturesY[CGSize(width:block.size.width.rounded(),height:block.size.height.rounded()),block.heightCaterpillarPartsCount] = texture
                 case GameSettings.moveDirections[1]:
-                    GameCashe.sharedInstance.textures_Y[block.size,block.heightCaterpillarPartsCount] = texture
+                    GameCashe.sharedInstance.texturesY[CGSize(width:block.size.width.rounded(),height:block.size.height.rounded()),block.heightCaterpillarPartsCount] = view.texture(from: self,crop: frame)
                 case GameSettings.moveDirections[2]:
-                    GameCashe.sharedInstance.texturesX[block.size,block.widthCaterpillarPartsCount] = texture
+                    GameCashe.sharedInstance.texturesX[CGSize(width:block.size.width.rounded(),height:block.size.height.rounded()),block.widthCaterpillarPartsCount] = texture
                 case GameSettings.moveDirections[3]:
-                    GameCashe.sharedInstance.textures_X[block.size,block.widthCaterpillarPartsCount] = texture
+                    GameCashe.sharedInstance.texturesX[CGSize(width:block.size.width.rounded(),height:block.size.height.rounded()),block.heightCaterpillarPartsCount] = view.texture(from: self,crop: frame)
                 default:
                     break
                 }
-                print("textures: \(GameCashe.sharedInstance.texturesY.values.count + GameCashe.sharedInstance.textures_Y.values.count + GameCashe.sharedInstance.texturesX.values.count + GameCashe.sharedInstance.textures_X.values.count)")
+                print("textures: \(GameCashe.sharedInstance.texturesY.values.count + GameCashe.sharedInstance.texturesX.values.count)")
+                if GameCashe.sharedInstance.texturesY.values.count + GameCashe.sharedInstance.texturesX.values.count > 5000{
+                    let keysX = GameCashe.sharedInstance.texturesY.values.keys.sorted(by: {$0 > $1})
+                    let keysY = GameCashe.sharedInstance.texturesY.values.keys.sorted(by: {$0 > $1})
+                    for key in keysX{
+                        print("width: \(key.width) height: \(key.height)")
+                    }
+                    for key in keysY{
+                        print("width: \(key.width) height: \(key.height)")
+                    }
+                    GameCashe.sharedInstance.texturesY.values = [:]
+                    GameCashe.sharedInstance.texturesX.values = [:]
+
+                }
             }
             removeAllChildren()
         }

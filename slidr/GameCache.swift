@@ -13,6 +13,4 @@ class GameCashe{
     fileprivate init() {}
     var texturesY = Dict2D<CGSize,Int,SKTexture>()
     var texturesX = Dict2D<CGSize,Int,SKTexture>()
-    var textures_Y = Dict2D<CGSize,Int,SKTexture>()
-    var textures_X = Dict2D<CGSize,Int,SKTexture>()
 }
